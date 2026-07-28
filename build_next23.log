@@ -1,0 +1,169 @@
+Starting a Gradle Daemon, 3 stopped Daemons could not be reused, use --status for details
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+
+> Configure project :
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+
+> Task :preBuild UP-TO-DATE
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeDebugMetadata NO-SOURCE
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :generateNoQuickstepDebugBuildConfig UP-TO-DATE
+> Task :extractDebugProto UP-TO-DATE
+> Task :extractIncludeNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepProto UP-TO-DATE
+> Task :extractProto UP-TO-DATE
+> Task :generateNoQuickstepDebugProto UP-TO-DATE
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+> Task :mapNoQuickstepDebugSourceSetPaths UP-TO-DATE
+> Task :generateNoQuickstepDebugResources UP-TO-DATE
+> Task :mergeNoQuickstepDebugResources UP-TO-DATE
+> Task :packageNoQuickstepDebugResources UP-TO-DATE
+> Task :parseNoQuickstepDebugLocalResources UP-TO-DATE
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+> Task :processNoQuickstepDebugResources UP-TO-DATE
+> Task :javaPreCompileNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugShaders UP-TO-DATE
+> Task :compileNoQuickstepDebugShaders NO-SOURCE
+> Task :generateNoQuickstepDebugAssets UP-TO-DATE
+> Task :mergeNoQuickstepDebugAssets UP-TO-DATE
+> Task :compressNoQuickstepDebugAssets UP-TO-DATE
+> Task :checkNoQuickstepDebugDuplicateClasses UP-TO-DATE
+> Task :desugarNoQuickstepDebugFileDependencies UP-TO-DATE
+> Task :mergeExtDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeLibDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugJniLibFolders UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeLibs UP-TO-DATE
+> Task :stripNoQuickstepDebugDebugSymbols UP-TO-DATE
+> Task :validateSigningNoQuickstepDebug UP-TO-DATE
+> Task :writeNoQuickstepDebugAppMetadata UP-TO-DATE
+> Task :writeNoQuickstepDebugSigningConfigVersions UP-TO-DATE
+> Task :kspNoQuickstepDebugKotlin
+> Task :compileNoQuickstepDebugKotlin
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/cache/BaseIconCache.kt:403:25 'constructor(p0: Bitmap!): BitmapDrawable' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/cache/BaseIconCache.kt:408:42 Condition is always 'true'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:255:13 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:273:18 'fun hasSeenReconfigurableWidgetEducationTip(): Boolean' is deprecated. Will be removed as part of homeScreenEditImprovements flag.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:275:25 'fun showReconfigurableWidgetEducationTip(): ArrowTipView?' is deprecated. Will be removed as part of homeScreenEditImprovements flag.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:746:31 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:981:31 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/LauncherModel.kt:47:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:37:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:38:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:39:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:85:44 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:340:13 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:484:55 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:507:9 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:542:52 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:555:9 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:561:13 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:620:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:627:40 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:627:59 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:632:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:650:21 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:654:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:31:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:62:54 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:62:64 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:72:17 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:84:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:86:21 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:105:14 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:117:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:118:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:129:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayInfoContainer.kt:92:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:427:53 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:428:57 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:429:61 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:74:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:75:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:103:20 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:113:41 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:152:9 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:193:17 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:209:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:589:13 Condition is always 'false'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:53:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:117:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:127:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:55:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:56:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:57:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:122:28 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:133:50 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:148:17 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:156:78 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:208:48 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:38:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:52:45 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:257:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:309:28 'static field IS_DEBUG_DEVICE: Boolean' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:310:35 'static field IS_STUDIO_BUILD: Boolean' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:45:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:104:59 Unchecked cast of 'com.android.launcher3.popup.PopupContainerWithArrow<T>' to 'com.android.launcher3.popup.PopupContainerWithArrow<com.android.launcher3.Launcher>'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:200:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:210:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupControllerAppIcons.kt:59:68 Unchecked cast of '(com.android.launcher3.popup.SystemShortcut<com.android.launcher3.views.ActivityContext!>?..com.android.launcher3.popup.SystemShortcut<*>?)' to 'com.android.launcher3.popup.SystemShortcut<T>?'.
+
+> Task :compileNoQuickstepDebugJavaWithJavac
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:65: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
+                                           ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:75: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor ORDERED_BG_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:84: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor MAIN_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:99: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor UI_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:110: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor DATA_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:125: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static LooperExecutor getPackageExecutor(String packageName) {
+                                 ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:152: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static class SimpleThreadFactory implements ThreadFactory {
+                  ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+7 warnings
+
+> Task :dexBuilderNoQuickstepDebug
+> Task :mergeNoQuickstepDebugGlobalSynthetics UP-TO-DATE
+> Task :processNoQuickstepDebugJavaRes UP-TO-DATE
+> Task :mergeNoQuickstepDebugJavaResource UP-TO-DATE
+> Task :mergeProjectDexNoQuickstepDebug
+> Task :packageNoQuickstepDebug
+> Task :createNoQuickstepDebugApkListingFileRedirect UP-TO-DATE
+> Task :assembleNoQuickstepDebug
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2m 34s
+44 actionable tasks: 6 executed, 38 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.1/userguide/configuration_cache_enabling.html

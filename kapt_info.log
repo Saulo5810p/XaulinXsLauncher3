@@ -1,0 +1,297 @@
+Initialized native services in: /data/data/com.termux/files/home/.gradle/native
+Initialized jansi services in: /data/data/com.termux/files/home/.gradle/native
+The client will now receive all logging from the daemon (pid: 5075). The daemon log file: /data/data/com.termux/files/home/.gradle/daemon/9.6.1/daemon-5075.out.log
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+Starting 2nd build in daemon [uptime: 3 mins 17.095 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 4 GiB]
+Using 8 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, resilientModelBuilding=false, vintage=true}
+Watching the file system is configured to be enabled if available
+File system watching is inactive
+Starting Build
+Settings evaluated using settings file '/data/data/com.termux/files/home/Launcher3/settings.gradle'.
+Projects loaded. Root project using build file '/data/data/com.termux/files/home/Launcher3/build.gradle'.
+Included projects: [root project 'XaulinXs-Launcher3']
+
+> Configure project :
+Evaluating root project 'XaulinXs-Launcher3' using build file '/data/data/com.termux/files/home/Launcher3/build.gradle'.
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+Using default execution profile
+Using Kotlin Gradle Plugin gradle85 variant
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+All projects evaluated.
+Task path ':kaptGenerateStubsNoQuickstepDebugKotlin' matched project ':'
+Task name matched 'kaptGenerateStubsNoQuickstepDebugKotlin'
+Selected primary task 'kaptGenerateStubsNoQuickstepDebugKotlin' from project :
+Tasks to be executed: [task ':checkKotlinGradlePluginConfigurationErrors', task ':preBuild', task ':preNoQuickstepDebugBuild', task ':checkNoQuickstepDebugAarMetadata', task ':generateNoQuickstepDebugResValues', task ':mapNoQuickstepDebugSourceSetPaths', task ':generateNoQuickstepDebugResources', task ':mergeNoQuickstepDebugResources', task ':packageNoQuickstepDebugResources', task ':parseNoQuickstepDebugLocalResources', task ':createNoQuickstepDebugCompatibleScreenManifests', task ':extractDeepLinksNoQuickstepDebug', task ':processNoQuickstepDebugMainManifest', task ':processNoQuickstepDebugManifest', task ':processNoQuickstepDebugManifestForPackage', task ':processNoQuickstepDebugResources', task ':kaptGenerateStubsNoQuickstepDebugKotlin']
+Tasks that were excluded: []
+Resolve mutations for :checkKotlinGradlePluginConfigurationErrors (Thread[#108,Execution worker,5,main]) started.
+:checkKotlinGradlePluginConfigurationErrors (Thread[#108,Execution worker,5,main]) started.
+
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :preBuild (Thread[#108,Execution worker,5,main]) started.
+:preBuild (Thread[#108,Execution worker,5,main]) started.
+
+> Task :preBuild UP-TO-DATE
+Skipping task ':preBuild' as it has no actions.
+Resolve mutations for :preNoQuickstepDebugBuild (Thread[#108,Execution worker,5,main]) started.
+:preNoQuickstepDebugBuild (Thread[#108,Execution worker,5,main]) started.
+
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+Skipping task ':preNoQuickstepDebugBuild' as it has no actions.
+Resolve mutations for :checkNoQuickstepDebugAarMetadata (Thread[#108,Execution worker,5,main]) started.
+:checkNoQuickstepDebugAarMetadata (Thread[#108,Execution worker,5,main]) started.
+
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':checkNoQuickstepDebugAarMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':checkNoQuickstepDebugAarMetadata' as it is up-to-date.
+Resolve mutations for :generateNoQuickstepDebugResValues (Thread[#108,Execution worker,5,main]) started.
+:generateNoQuickstepDebugResValues (Thread[#108,Execution worker,5,main]) started.
+
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+Caching disabled for task ':generateNoQuickstepDebugResValues' because:
+  Build cache is disabled
+Skipping task ':generateNoQuickstepDebugResValues' as it is up-to-date.
+Resolve mutations for :mapNoQuickstepDebugSourceSetPaths (Thread[#108,Execution worker,5,main]) started.
+:mapNoQuickstepDebugSourceSetPaths (Thread[#108,Execution worker,5,main]) started.
+
+> Task :mapNoQuickstepDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':mapNoQuickstepDebugSourceSetPaths' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':mapNoQuickstepDebugSourceSetPaths' as it is up-to-date.
+Resolve mutations for :generateNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+:generateNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+
+> Task :generateNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':generateNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':generateNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :mergeNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+:mergeNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+
+> Task :mergeNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':mergeNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :packageNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+:packageNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+
+> Task :packageNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':packageNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':packageNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :parseNoQuickstepDebugLocalResources (Thread[#108,Execution worker,5,main]) started.
+:parseNoQuickstepDebugLocalResources (Thread[#108,Execution worker,5,main]) started.
+
+> Task :parseNoQuickstepDebugLocalResources UP-TO-DATE
+Caching disabled for task ':parseNoQuickstepDebugLocalResources' because:
+  Build cache is disabled
+Skipping task ':parseNoQuickstepDebugLocalResources' as it is up-to-date.
+Resolve mutations for :createNoQuickstepDebugCompatibleScreenManifests (Thread[#108,Execution worker,5,main]) started.
+:createNoQuickstepDebugCompatibleScreenManifests (Thread[#108,Execution worker,5,main]) started.
+
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':createNoQuickstepDebugCompatibleScreenManifests' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':createNoQuickstepDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :extractDeepLinksNoQuickstepDebug (Thread[#108,Execution worker,5,main]) started.
+:extractDeepLinksNoQuickstepDebug (Thread[#108,Execution worker,5,main]) started.
+
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':extractDeepLinksNoQuickstepDebug' because:
+  Build cache is disabled
+Skipping task ':extractDeepLinksNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugMainManifest (Thread[#108,Execution worker,5,main]) started.
+:processNoQuickstepDebugMainManifest (Thread[#108,Execution worker,5,main]) started.
+
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugMainManifest' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugMainManifest' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugManifest (Thread[#108,Execution worker,5,main]) started.
+:processNoQuickstepDebugManifest (Thread[#108,Execution worker,5,main]) started.
+
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugManifest' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugManifest' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugManifestForPackage (Thread[#108,Execution worker,5,main]) started.
+:processNoQuickstepDebugManifestForPackage (Thread[#108,Execution worker,5,main]) started.
+
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+Custom actions are attached to task ':processNoQuickstepDebugManifestForPackage'.
+Caching disabled for task ':processNoQuickstepDebugManifestForPackage' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugManifestForPackage' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+:processNoQuickstepDebugResources (Thread[#108,Execution worker,5,main]) started.
+
+> Task :processNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :kaptGenerateStubsNoQuickstepDebugKotlin (Thread[#108,Execution worker,5,main]) started.
+:kaptGenerateStubsNoQuickstepDebugKotlin (Thread[#108,Execution worker,5,main]) started.
+
+> Task :kaptGenerateStubsNoQuickstepDebugKotlin
+Caching disabled for task ':kaptGenerateStubsNoQuickstepDebugKotlin' because:
+  Build cache is disabled
+Task ':kaptGenerateStubsNoQuickstepDebugKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':kaptGenerateStubsNoQuickstepDebugKotlin'.
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: null
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), areFileChangesKnown=false, modifiedFiles=null, deletedFiles=null, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=/data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=/data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/local-state/build-history.bin, useModuleDetection=true), usePreciseJavaTracking=true, icFeatures=IncrementalCompilationFeatures(withAbiSnapshot=false, preciseCompilationResultsBackup=true, keepIncrementalCompilationCachesInMemory=true, enableUnsafeIncrementalCompilationForMultiplatform=false), outputFiles=[/data/data/com.termux/files/home/Launcher3/build/tmp/kapt3/incrementalData/noQuickstepDebug, /data/data/com.termux/files/home/Launcher3/build/tmp/kapt3/stubs/noQuickstepDebug, /data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/cacheable, /data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/local-state])
+w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
+e: Could not load module <Error module>
+Finished executing kotlin compiler using DAEMON strategy
+
+> Task :kaptGenerateStubsNoQuickstepDebugKotlin FAILED
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':kaptGenerateStubsNoQuickstepDebugKotlin' (registered by plugin 'org.jetbrains.kotlin.android').
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 29s
+14 actionable tasks: 1 executed, 13 up-to-date

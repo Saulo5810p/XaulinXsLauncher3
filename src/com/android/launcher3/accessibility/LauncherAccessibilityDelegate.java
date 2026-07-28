@@ -1,0 +1,538 @@
+package com.android.launcher3.accessibility;
+
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
+import static android.view.accessibility.AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS;
+import static android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK;
+
+import static com.android.launcher3.AbstractFloatingView.TYPE_WIDGET_RESIZE_FRAME;
+import static com.android.launcher3.LauncherState.NORMAL;
+import static com.android.launcher3.accessibility.WidgetResizePopupDataSource.decreaseHeightAction;
+import static com.android.launcher3.accessibility.WidgetResizePopupDataSource.decreaseWidthAction;
+import static com.android.launcher3.accessibility.WidgetResizePopupDataSource.increaseHeightAction;
+import static com.android.launcher3.accessibility.WidgetResizePopupDataSource.increaseWidthAction;
+import static com.android.launcher3.anim.AnimatorListeners.forEndCallback;
+import static com.android.launcher3.anim.AnimatorListeners.forSuccessCallback;
+import static com.android.launcher3.model.data.ItemInfoWithIcon.FLAG_NOT_PINNABLE;
+
+import android.animation.AnimatorSet;
+import android.appwidget.AppWidgetProviderInfo;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Handler;
+import android.util.Log;
+import android.util.Pair;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewParent;
+import android.view.accessibility.AccessibilityEvent;
+
+import androidx.annotation.Nullable;
+
+import com.android.launcher3.AbstractFloatingView;
+import com.android.launcher3.AppWidgetResizeFrameBase;
+import com.android.launcher3.BubbleTextView;
+import com.android.launcher3.ButtonDropTarget;
+import com.android.launcher3.CellLayout;
+import com.android.launcher3.Launcher;
+import com.android.launcher3.LauncherSettings;
+import com.android.launcher3.PendingAddItemInfo;
+import com.android.launcher3.R;
+import com.android.launcher3.ShortcutAndWidgetContainer;
+import com.android.launcher3.Workspace;
+import com.android.launcher3.apppairs.AppPairIcon;
+import com.android.launcher3.automation.AutomationRepository;
+import com.android.launcher3.dragndrop.DragOptions;
+import com.android.launcher3.dragndrop.DragView;
+import com.android.launcher3.folder.Folder;
+import com.android.launcher3.folder.FolderIcon;
+import com.android.launcher3.homescreenfiles.HomeScreenFilesUtilsKt;
+import com.android.launcher3.keyboard.KeyboardDragAndDropView;
+import com.android.launcher3.model.data.AppInfo;
+import com.android.launcher3.model.data.AppPairInfo;
+import com.android.launcher3.model.data.CollectionInfo;
+import com.android.launcher3.model.data.FolderInfo;
+import com.android.launcher3.model.data.ItemInfo;
+import com.android.launcher3.model.data.ItemInfoWithIcon;
+import com.android.launcher3.model.data.LauncherAppWidgetInfo;
+import com.android.launcher3.model.data.WorkspaceItemFactory;
+import com.android.launcher3.model.data.WorkspaceItemInfo;
+import com.android.launcher3.popup.Popup;
+import com.android.launcher3.popup.PopupContainer;
+import com.android.launcher3.popup.PopupController;
+import com.android.launcher3.popup.PopupData;
+import com.android.launcher3.shortcuts.DeepShortcutView;
+import com.android.launcher3.touch.ItemLongClickListener;
+import com.android.launcher3.util.IntArray;
+import com.android.launcher3.util.IntSet;
+import com.android.launcher3.util.ShortcutUtil;
+import com.android.launcher3.util.Thunk;
+import com.android.launcher3.views.BubbleTextHolder;
+import com.android.launcher3.widget.LauncherAppWidgetHostView;
+import com.android.launcher3.widget.NavigableAppWidgetHostView;
+import com.android.launcher3.widget.PendingAddWidgetInfo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Consumer;
+
+public class LauncherAccessibilityDelegate extends BaseAccessibilityDelegate<Launcher> {
+
+    private static final String TAG = "LauncherAccessibilityDelegate";
+
+    public static final int REMOVE = R.id.action_remove;
+    public static final int UNINSTALL = R.id.action_uninstall;
+    public static final int DISMISS_PREDICTION = R.id.action_dismiss_prediction;
+    public static final int PIN_PREDICTION = R.id.action_pin_prediction;
+    public static final int RECONFIGURE = R.id.action_reconfigure;
+    public static final int INVALID = -1;
+    protected static final int ADD_TO_WORKSPACE = R.id.action_add_to_workspace;
+    protected static final int MOVE = R.id.action_move;
+    protected static final int MOVE_TO_WORKSPACE = R.id.action_move_to_workspace;
+    protected static final int RESIZE = R.id.action_resize;
+    public static final int DEEP_SHORTCUTS = R.id.action_deep_shortcuts;
+    public static final int CLOSE = R.id.action_close;
+
+    public LauncherAccessibilityDelegate(Launcher launcher) {
+        super(launcher);
+
+        mActions.put(REMOVE, new LauncherAction(
+                REMOVE, R.string.remove_drop_target_label, KeyEvent.KEYCODE_X));
+        mActions.put(UNINSTALL, new LauncherAction(
+                UNINSTALL, R.string.uninstall_drop_target_label, KeyEvent.KEYCODE_U));
+        mActions.put(DISMISS_PREDICTION, new LauncherAction(DISMISS_PREDICTION,
+                R.string.dismiss_prediction_label, KeyEvent.KEYCODE_X));
+        mActions.put(RECONFIGURE, new LauncherAction(
+                RECONFIGURE, R.string.gadget_setup_text, KeyEvent.KEYCODE_E));
+        mActions.put(ADD_TO_WORKSPACE, new LauncherAction(
+                ADD_TO_WORKSPACE, R.string.action_add_to_workspace, KeyEvent.KEYCODE_P));
+        mActions.put(MOVE, new LauncherAction(
+                MOVE, R.string.action_move, KeyEvent.KEYCODE_M));
+        mActions.put(MOVE_TO_WORKSPACE, new LauncherAction(MOVE_TO_WORKSPACE,
+                R.string.action_move_to_workspace, KeyEvent.KEYCODE_P));
+        mActions.put(RESIZE, new LauncherAction(
+                RESIZE, R.string.action_resize, KeyEvent.KEYCODE_R));
+        mActions.put(DEEP_SHORTCUTS, new LauncherAction(DEEP_SHORTCUTS,
+                R.string.action_deep_shortcut, KeyEvent.KEYCODE_S));
+        mActions.put(CLOSE, new LauncherAction(CLOSE,
+                R.string.action_close, KeyEvent.KEYCODE_X));
+    }
+
+    private static boolean isNotInShortcutMenu(@Nullable View view) {
+        return view == null || !(view.getParent() instanceof DeepShortcutView);
+    }
+
+    @Override
+    protected void getSupportedActions(View host, ItemInfo item, List<LauncherAction> out) {
+        // If the request came from keyboard, do not add custom shortcuts as that is already
+        // exposed as a direct shortcut
+        if (isNotInShortcutMenu(host) && ShortcutUtil.supportsShortcuts(item)) {
+            out.add(mActions.get(DEEP_SHORTCUTS));
+        }
+
+        // Get all visible / non-visible drop targets so we can provide them as quick actions for
+        // users of accessibility services.
+        for (ButtonDropTarget target : mContext.getDropTargetBar().getDropTargets()) {
+            int dropTargetAction = target.getSupportedAccessibilityAction(item, host);
+            if (dropTargetAction != INVALID) {
+                out.add(mActions.get(dropTargetAction));
+            }
+        }
+
+        // Do not add move actions for keyboard request as this uses virtual nodes.
+        if (itemSupportsAccessibleDrag(item)) {
+            out.add(mActions.get(MOVE));
+
+            if (item.container >= 0) {
+                out.add(mActions.get(MOVE_TO_WORKSPACE));
+            } else if (item instanceof LauncherAppWidgetInfo) {
+                if (!getSupportedResizeActions(host, (LauncherAppWidgetInfo) item).isEmpty()) {
+                    out.add(mActions.get(RESIZE));
+                }
+            }
+        }
+
+        if (host instanceof AppWidgetResizeFrameBase) {
+            out.add(mActions.get(CLOSE));
+        }
+
+        if (supportAddToWorkSpace(item)) {
+            out.add(mActions.get(ADD_TO_WORKSPACE));
+        }
+    }
+
+    private boolean supportAddToWorkSpace(ItemInfo item) {
+        if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+            return false;
+        }
+        return ((item instanceof AppInfo)
+                    && (((AppInfo) item).runtimeStatusFlags & FLAG_NOT_PINNABLE) == 0)
+                || ((item instanceof WorkspaceItemInfo)
+                    && (((WorkspaceItemInfo) item).runtimeStatusFlags & FLAG_NOT_PINNABLE) == 0)
+                || ((item instanceof PendingAddItemInfo)
+                    && (((PendingAddItemInfo) item).runtimeStatusFlags & FLAG_NOT_PINNABLE) == 0);
+    }
+
+    /**
+     * Returns all the accessibility actions that can be handled by the host.
+     */
+    public static List<LauncherAction> getSupportedActions(Launcher launcher, View host) {
+        if (host == null || !(host.getTag() instanceof  ItemInfo)) {
+            return Collections.emptyList();
+        }
+        PopupContainer<?> container = PopupContainer.getOpen(launcher);
+        LauncherAccessibilityDelegate delegate = container != null
+                ? (LauncherAccessibilityDelegate) container.getAccessibilityDelegate()
+                : launcher.getAccessibilityDelegate();
+        List<LauncherAction> result = new ArrayList<>();
+        delegate.getSupportedActions(host, (ItemInfo) host.getTag(), result);
+        return result;
+    }
+
+    @Override
+    protected boolean performAction(final View host, final ItemInfo item, int action,
+            boolean fromKeyboard) {
+        if (action == ACTION_LONG_CLICK) {
+            PopupController<Launcher> popupController = null;
+            // Long press should be consumed for workspace items, and it should invoke the
+            // Shortcuts / Notifications / Actions pop-up menu, and not start a drag as the
+            // standard long press path does.
+            if (host instanceof BubbleTextView || (host instanceof BubbleTextHolder
+                    && ((BubbleTextHolder) host).getBubbleText() != null)) {
+                popupController = ShortcutUtil.supportsShortcuts(item)
+                        ? mContext.getPopupControllerForAppIcons()
+                        : mContext.getPopupControllerForHomeScreenItems();
+            } else if (host instanceof FolderIcon || host instanceof AppPairIcon
+                    || host instanceof NavigableAppWidgetHostView) {
+                popupController = mContext.getPopupControllerForHomeScreenItems();
+            }
+
+            if (popupController == null) {
+                return false;
+            }
+
+            Popup popup = popupController.show(host);
+            return popup != null && popup.createPreDragCondition() != null;
+        } else if (action == MOVE) {
+            final View itemView = (host instanceof AppWidgetResizeFrameBase)
+                    ? ((AppWidgetResizeFrameBase) host).getViewForAccessibility() : host;
+            return beginAccessibleDrag(itemView, item, fromKeyboard);
+        } else if (action == ADD_TO_WORKSPACE) {
+            return addToWorkspace(item, true /*accessibility*/, null /*finishCallback*/);
+        } else if (action == MOVE_TO_WORKSPACE) {
+            return moveToWorkspace(item);
+        } else if (action == RESIZE) {
+            final View itemView = (host instanceof AppWidgetResizeFrameBase)
+                    ? ((AppWidgetResizeFrameBase) host).getViewForAccessibility() : host;
+            final LauncherAppWidgetInfo info = (LauncherAppWidgetInfo) item;
+            List<PopupData> actions = getSupportedResizeActions(itemView, info);
+            var popup = PopupContainer.Companion.showForMenuItems(mContext, itemView, actions);
+            if (popup == null) {
+                return false;
+            }
+            popup.requestFocus();
+            popup.addOnCloseCallback(() -> {
+                itemView.requestFocus();
+                itemView.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
+                itemView.performAccessibilityAction(ACTION_ACCESSIBILITY_FOCUS, null);
+                AbstractFloatingView.closeOpenViews(mContext, /* animate= */ false,
+                        AbstractFloatingView.TYPE_WIDGET_RESIZE_FRAME);
+            });
+            return true;
+        } else if (action == DEEP_SHORTCUTS) {
+            BubbleTextView btv = host instanceof BubbleTextView ? (BubbleTextView) host
+                    : (host instanceof BubbleTextHolder
+                            ? ((BubbleTextHolder) host).getBubbleText() : null);
+
+            return btv != null
+                    && mContext.getPopupControllerForAppIcons()
+                    .show(btv) != null;
+        } else if (action == CLOSE) {
+            if (host instanceof AppWidgetResizeFrameBase) {
+                AbstractFloatingView.closeOpenViews(mContext, /* animate= */ false,
+                        TYPE_WIDGET_RESIZE_FRAME);
+            }
+        } else {
+            for (ButtonDropTarget dropTarget : mContext.getDropTargetBar().getDropTargets()) {
+                int dropTargetAction = dropTarget.getSupportedAccessibilityAction(item, host);
+                if (action == dropTargetAction) {
+                    dropTarget.onAccessibilityDrop(host, item, action);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private List<PopupData> getSupportedResizeActions(View host, LauncherAppWidgetInfo info) {
+        List<PopupData> actions = new ArrayList<>();
+        if (host instanceof AppWidgetResizeFrameBase) {
+            return getSupportedResizeActions(
+                    ((AppWidgetResizeFrameBase) host).getViewForAccessibility(), info);
+        }
+        AppWidgetProviderInfo providerInfo = ((LauncherAppWidgetHostView) host).getAppWidgetInfo();
+        if (providerInfo == null) {
+            return actions;
+        }
+
+        ViewParent contentParent = host.getParent() instanceof DragView dragView
+                ? dragView.getContentViewParent()
+                : host.getParent();
+        CellLayout layout;
+        if (contentParent instanceof ShortcutAndWidgetContainer
+                && contentParent.getParent() instanceof CellLayout cl) {
+            layout = cl;
+        } else {
+            return actions;
+        }
+        if ((providerInfo.resizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0) {
+            if (layout.isRegionVacant(info.cellX + info.spanX, info.cellY, 1, info.spanY) ||
+                    layout.isRegionVacant(info.cellX - 1, info.cellY, 1, info.spanY)) {
+                actions.add(increaseWidthAction());
+            }
+
+            if (info.spanX > info.minSpanX && info.spanX > 1) {
+                actions.add(decreaseWidthAction());
+            }
+        }
+
+        if ((providerInfo.resizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0) {
+            if (layout.isRegionVacant(info.cellX, info.cellY + info.spanY, info.spanX, 1) ||
+                    layout.isRegionVacant(info.cellX, info.cellY - 1, info.spanX, 1)) {
+                actions.add(increaseHeightAction());
+            }
+
+            if (info.spanY > info.minSpanY && info.spanY > 1) {
+                actions.add(decreaseHeightAction());
+            }
+        }
+        return actions;
+    }
+
+    @Thunk void announceConfirmation(int resId) {
+        announceConfirmation(mContext.getResources().getString(resId));
+    }
+
+    @Override
+    protected boolean beginAccessibleDrag(View item, ItemInfo info, boolean fromKeyboard) {
+        if (!itemSupportsAccessibleDrag(info)) {
+            return false;
+        }
+
+        mDragInfo = new DragInfo();
+        mDragInfo.info = info;
+        mDragInfo.item = item;
+        mDragInfo.dragType = DragType.ICON;
+        if (info instanceof FolderInfo) {
+            mDragInfo.dragType = DragType.FOLDER;
+        } else if (info instanceof AppPairInfo) {
+            mDragInfo.dragType = DragType.APP_PAIR;
+        } else if (info instanceof LauncherAppWidgetInfo) {
+            mDragInfo.dragType = DragType.WIDGET;
+        } else if (HomeScreenFilesUtilsKt.isFileSystemItem(info)) {
+            mDragInfo.dragType = DragType.FILESYSTEM_ICON;
+        }
+
+        Rect pos = new Rect();
+        mContext.getDragLayer().getDescendantRectRelativeToSelf(item, pos);
+        mContext.getDragController().addDragListener(this);
+
+        DragOptions options = new DragOptions();
+        options.isAccessibleDrag = true;
+        options.isKeyboardDrag = fromKeyboard;
+        options.simulatedDndStartPoint = new Point(pos.centerX(), pos.centerY());
+
+        if (fromKeyboard) {
+            KeyboardDragAndDropView popup = (KeyboardDragAndDropView) mContext.getLayoutInflater()
+                    .inflate(R.layout.keyboard_drag_and_drop, mContext.getDragLayer(), false);
+            popup.showForIcon(item, info, options);
+        } else {
+            ItemLongClickListener.beginDrag(item, mContext, info, options);
+        }
+        return true;
+    }
+
+    /**
+     * Find empty space on the workspace and returns the screenId.
+     */
+    protected int findSpaceOnWorkspace(ItemInfo info, int[] outCoordinates) {
+        Workspace<?> workspace = mContext.getWorkspace();
+        IntArray workspaceScreens = workspace.getScreenOrder();
+        int screenId;
+
+        // First check if there is space on the current screen.
+        int screenIndex = workspace.getCurrentPage();
+        screenId = workspaceScreens.get(screenIndex);
+        CellLayout layout = (CellLayout) workspace.getPageAt(screenIndex);
+
+        boolean found = layout.findCellForSpan(outCoordinates, info.spanX, info.spanY);
+        screenIndex = 0;
+        while (!found && screenIndex < workspaceScreens.size()) {
+            screenId = workspaceScreens.get(screenIndex);
+            layout = (CellLayout) workspace.getPageAt(screenIndex);
+            found = layout.findCellForSpan(outCoordinates, info.spanX, info.spanY);
+            screenIndex++;
+        }
+
+        if (found) {
+            return screenId;
+        }
+
+        workspace.addExtraEmptyScreens();
+        IntSet emptyScreenIds = workspace.commitExtraEmptyScreens();
+        if (emptyScreenIds.isEmpty()) {
+            // Couldn't create extra empty screens for some reason (e.g. Workspace is loading)
+            return -1;
+        }
+
+        screenId = emptyScreenIds.getArray().get(0);
+        layout = workspace.getScreenWithId(screenId);
+        found = layout.findCellForSpan(outCoordinates, info.spanX, info.spanY);
+
+        if (!found) {
+            Log.wtf(TAG, "Not enough space on an empty screen");
+        }
+        return screenId;
+    }
+
+    /**
+     * Functionality to add the item {@link ItemInfo} to the workspace
+     * @param item item to be added
+     * @param accessibility true if the first item to be added to the workspace
+     *     should be focused for accessibility.
+     * @param finishCallback Callback which will be run after this item has been added
+     *                       and the view has been transitioned to the workspace, or on failure.
+     *
+     * @return true if the item could be successfully added
+     */
+    public boolean addToWorkspace(ItemInfo item, boolean accessibility,
+            @Nullable Consumer<Boolean> finishCallback) {
+        // Dismiss widget resize frame if it is showing. The frame marks its cells as unoccupied
+        // while it is showing, so findSpaceOnWorkspace may try to use those cells.
+        AbstractFloatingView.closeOpenViews(mContext, /* animate= */ false,
+                AbstractFloatingView.TYPE_WIDGET_RESIZE_FRAME);
+
+        final int[] coordinates = new int[2];
+        final int screenId = findSpaceOnWorkspace(item, coordinates);
+        final CellLayout layout = mContext.getWorkspace().getScreenWithId(screenId);
+        if (screenId == -1 || layout == null) {
+            if (finishCallback != null) {
+                finishCallback.accept(false /*success*/);
+            }
+            return false;
+        }
+        layout.setDropPending(true);
+        @Nullable Consumer<Boolean> wrappedDropCallback = (success) -> {
+            layout.setDropPending(false);
+            if (finishCallback != null) {
+                finishCallback.accept(success);
+            }
+        };
+
+        Runnable itemBindLogic = () -> {
+            if (item instanceof WorkspaceItemFactory workspaceItemFactory) {
+                WorkspaceItemInfo info = workspaceItemFactory.makeWorkspaceItem(mContext);
+                info.checkAndApplyAutomationFlag(AutomationRepository.INSTANCE.get(mContext));
+                mContext.getModelWriter().addItemToDatabase(info,
+                        LauncherSettings.Favorites.CONTAINER_DESKTOP,
+                        screenId, coordinates[0], coordinates[1]);
+                bindItem(info, accessibility, wrappedDropCallback);
+            } else if (item instanceof PendingAddItemInfo info) {
+                if (info instanceof PendingAddWidgetInfo widgetInfo
+                        && widgetInfo.bindOptions == null) {
+                    widgetInfo.bindOptions = widgetInfo.getDefaultSizeOptions(mContext);
+                }
+                mContext.addPendingItem(info, LauncherSettings.Favorites.CONTAINER_DESKTOP,
+                        screenId, coordinates, info.spanX, info.spanY);
+                // For PendingAddItemInfo, the wrappedDropCallback should be called directly
+                // here as there is no subsequent bindItem call.
+                wrappedDropCallback.accept(/* success= */ true);
+            } else if (item instanceof WorkspaceItemInfo workspaceItemInfo) {
+                WorkspaceItemInfo info = workspaceItemInfo.clone();
+                info.checkAndApplyAutomationFlag(AutomationRepository.INSTANCE.get(mContext));
+                mContext.getModelWriter().addItemToDatabase(info,
+                        LauncherSettings.Favorites.CONTAINER_DESKTOP,
+                        screenId, coordinates[0], coordinates[1]);
+                bindItem(info, accessibility, wrappedDropCallback);
+            } else if (item instanceof CollectionInfo ci) {
+                mContext.getModelWriter().addItemToDatabase(ci,
+                        LauncherSettings.Favorites.CONTAINER_DESKTOP, screenId, coordinates[0],
+                        coordinates[1]);
+                AutomationRepository automationRepo =
+                        AutomationRepository.INSTANCE.get(mContext);
+                ci.getContents().forEach(member -> {
+                    if (member instanceof ItemInfoWithIcon iiwi) {
+                        iiwi.checkAndApplyAutomationFlag(automationRepo);
+                    }
+                    mContext.getModelWriter().addItemToDatabase(member, ci.id, -1, -1, -1);
+                });
+                bindItem(ci, accessibility, wrappedDropCallback);
+            }
+        };
+
+        mContext.getStateManager().goToState(NORMAL, true, forSuccessCallback(() -> {
+            Workspace<?> workspace = mContext.getWorkspace();
+            int pageIndex = workspace.getPageIndexForScreenId(screenId);
+            workspace.post(() -> {
+                if (workspace.getCurrentPage() == pageIndex) {
+                    itemBindLogic.run();
+                } else {
+                    workspace.snapToPage(pageIndex);
+                    workspace.setOnPageTransitionEndCallback(itemBindLogic);
+                }
+            });
+        }));
+        return true;
+    }
+
+    private void bindItem(ItemInfo item, boolean focusForAccessibility,
+            @Nullable Consumer<Boolean> finishCallback) {
+        View view = mContext.getItemInflater().inflateItem(item);
+        if (view == null) {
+            if (finishCallback != null) {
+                finishCallback.accept(false /*success*/);
+            }
+            return;
+        }
+        AnimatorSet anim = new AnimatorSet();
+        anim.addListener(forEndCallback((success) -> {
+            if (focusForAccessibility) {
+                view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+            }
+            if (finishCallback != null) {
+                finishCallback.accept(success);
+            }
+        }));
+        mContext.bindInflatedItems(Collections.singletonList(Pair.create(item, view)), anim);
+    }
+
+    /**
+     * Functionality to move the item {@link ItemInfo} to the workspace
+     * @param item item to be moved
+     *
+     * @return true if the item could be successfully added
+     */
+    public boolean moveToWorkspace(ItemInfo item) {
+        Folder folder = Folder.getOpen(mContext);
+        folder.close(true);
+        WorkspaceItemInfo info = (WorkspaceItemInfo) item;
+        folder.removeFolderContent(false, info);
+
+        final int[] coordinates = new int[2];
+        final int screenId = findSpaceOnWorkspace(item, coordinates);
+        if (screenId == -1) {
+            return false;
+        }
+        mContext.getModelWriter().moveItemInDatabase(info,
+                LauncherSettings.Favorites.CONTAINER_DESKTOP,
+                screenId, coordinates[0], coordinates[1]);
+
+        // Bind the item in next frame so that if a new workspace page was created,
+        // it will get laid out.
+        new Handler().post(() -> {
+            mContext.inflateAndBindItemWithAnimation(item);
+            announceConfirmation(R.string.item_moved);
+        });
+        return true;
+    }
+}

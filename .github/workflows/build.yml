@@ -1,0 +1,49 @@
+name: Build XaulinXs-Launcher3
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Não commitamos gradlew/gradle-wrapper.jar ainda: essa action baixa e
+      # cacheia o Gradle certo (mesma versão do build.gradle) sem precisar
+      # do wrapper no repo. Quando o wrapper do Termux for commitado, troque
+      # os passos abaixo por "./gradlew assembleDebug".
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.13
+
+      - name: Build (assembleDebug)
+        run: gradle assembleDebug --stacktrace
+        continue-on-error: true
+
+      - name: Upload log de build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: |
+            build/reports
+            **/build/outputs/logs
+          if-no-files-found: ignore
+
+      - name: Upload APK (se compilou)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Launcher3-debug-apk
+          path: '**/build/outputs/apk/**/*.apk'
+          if-no-files-found: ignore

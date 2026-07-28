@@ -1,0 +1,603 @@
+Initialized native services in: /data/data/com.termux/files/home/.gradle/native
+Initialized jansi services in: /data/data/com.termux/files/home/.gradle/native
+The client will now receive all logging from the daemon (pid: 5075). The daemon log file: /data/data/com.termux/files/home/.gradle/daemon/9.6.1/daemon-5075.out.log
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+Starting 3rd build in daemon [uptime: 11 mins 53.573 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 4 GiB]
+Using 8 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, resilientModelBuilding=false, vintage=true}
+Watching the file system is configured to be enabled if available
+File system watching is inactive
+Starting Build
+Settings evaluated using settings file '/data/data/com.termux/files/home/Launcher3/settings.gradle'.
+Projects loaded. Root project using build file '/data/data/com.termux/files/home/Launcher3/build.gradle'.
+Included projects: [root project 'XaulinXs-Launcher3']
+
+> Configure project :
+Evaluating root project 'XaulinXs-Launcher3' using build file '/data/data/com.termux/files/home/Launcher3/build.gradle'.
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+Using default execution profile
+Using Kotlin Gradle Plugin gradle85 variant
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+All projects evaluated.
+Task name matched 'assembleNoQuickstepDebug'
+Selected primary task 'assembleNoQuickstepDebug' from project :
+Tasks to be executed: [task ':preBuild', task ':preNoQuickstepDebugBuild', task ':mergeNoQuickstepDebugNativeDebugMetadata', task ':checkKotlinGradlePluginConfigurationErrors', task ':checkNoQuickstepDebugAarMetadata', task ':generateNoQuickstepDebugResValues', task ':mapNoQuickstepDebugSourceSetPaths', task ':generateNoQuickstepDebugResources', task ':mergeNoQuickstepDebugResources', task ':packageNoQuickstepDebugResources', task ':parseNoQuickstepDebugLocalResources', task ':createNoQuickstepDebugCompatibleScreenManifests', task ':extractDeepLinksNoQuickstepDebug', task ':processNoQuickstepDebugMainManifest', task ':processNoQuickstepDebugManifest', task ':processNoQuickstepDebugManifestForPackage', task ':processNoQuickstepDebugResources', task ':kaptGenerateStubsNoQuickstepDebugKotlin', task ':kaptNoQuickstepDebugKotlin', task ':compileNoQuickstepDebugKotlin', task ':javaPreCompileNoQuickstepDebug', task ':compileNoQuickstepDebugJavaWithJavac', task ':mergeNoQuickstepDebugShaders', task ':compileNoQuickstepDebugShaders', task ':generateNoQuickstepDebugAssets', task ':mergeNoQuickstepDebugAssets', task ':compressNoQuickstepDebugAssets', task ':checkNoQuickstepDebugDuplicateClasses', task ':desugarNoQuickstepDebugFileDependencies', task ':mergeExtDexNoQuickstepDebug', task ':mergeLibDexNoQuickstepDebug', task ':dexBuilderNoQuickstepDebug', task ':mergeNoQuickstepDebugGlobalSynthetics', task ':processNoQuickstepDebugJavaRes', task ':mergeNoQuickstepDebugJavaResource', task ':mergeProjectDexNoQuickstepDebug', task ':mergeNoQuickstepDebugJniLibFolders', task ':mergeNoQuickstepDebugNativeLibs', task ':stripNoQuickstepDebugDebugSymbols', task ':validateSigningNoQuickstepDebug', task ':writeNoQuickstepDebugAppMetadata', task ':writeNoQuickstepDebugSigningConfigVersions', task ':packageNoQuickstepDebug', task ':createNoQuickstepDebugApkListingFileRedirect', task ':assembleNoQuickstepDebug']
+Tasks that were excluded: []
+Resolve mutations for :preBuild (Thread[#145,Execution worker,5,main]) started.
+:preBuild (Thread[#145,Execution worker,5,main]) started.
+
+> Task :preBuild UP-TO-DATE
+Skipping task ':preBuild' as it has no actions.
+Resolve mutations for :preNoQuickstepDebugBuild (Thread[#144,included builds,5,main]) started.
+:preNoQuickstepDebugBuild (Thread[#144,included builds,5,main]) started.
+
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+Skipping task ':preNoQuickstepDebugBuild' as it has no actions.
+Resolve mutations for :mergeNoQuickstepDebugNativeDebugMetadata (Thread[#144,included builds,5,main]) started.
+:mergeNoQuickstepDebugNativeDebugMetadata (Thread[#144,included builds,5,main]) started.
+
+> Task :mergeNoQuickstepDebugNativeDebugMetadata NO-SOURCE
+Skipping task ':mergeNoQuickstepDebugNativeDebugMetadata' as it has no source files and no previous output files.
+Resolve mutations for :checkKotlinGradlePluginConfigurationErrors (Thread[#144,included builds,5,main]) started.
+:checkKotlinGradlePluginConfigurationErrors (Thread[#144,included builds,5,main]) started.
+
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :checkNoQuickstepDebugAarMetadata (Thread[#144,included builds,5,main]) started.
+:checkNoQuickstepDebugAarMetadata (Thread[#144,included builds,5,main]) started.
+
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':checkNoQuickstepDebugAarMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':checkNoQuickstepDebugAarMetadata' as it is up-to-date.
+Resolve mutations for :generateNoQuickstepDebugResValues (Thread[#144,included builds,5,main]) started.
+:generateNoQuickstepDebugResValues (Thread[#144,included builds,5,main]) started.
+
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+Caching disabled for task ':generateNoQuickstepDebugResValues' because:
+  Build cache is disabled
+Skipping task ':generateNoQuickstepDebugResValues' as it is up-to-date.
+Resolve mutations for :mapNoQuickstepDebugSourceSetPaths (Thread[#151,Execution worker Thread 7,5,main]) started.
+:mapNoQuickstepDebugSourceSetPaths (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :mapNoQuickstepDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':mapNoQuickstepDebugSourceSetPaths' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':mapNoQuickstepDebugSourceSetPaths' as it is up-to-date.
+Resolve mutations for :generateNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+:generateNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :generateNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':generateNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':generateNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :mergeNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+:mergeNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :mergeNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':mergeNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :packageNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+:packageNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :packageNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':packageNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':packageNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :parseNoQuickstepDebugLocalResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+:parseNoQuickstepDebugLocalResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :parseNoQuickstepDebugLocalResources UP-TO-DATE
+Caching disabled for task ':parseNoQuickstepDebugLocalResources' because:
+  Build cache is disabled
+Skipping task ':parseNoQuickstepDebugLocalResources' as it is up-to-date.
+Resolve mutations for :createNoQuickstepDebugCompatibleScreenManifests (Thread[#151,Execution worker Thread 7,5,main]) started.
+:createNoQuickstepDebugCompatibleScreenManifests (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':createNoQuickstepDebugCompatibleScreenManifests' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':createNoQuickstepDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :extractDeepLinksNoQuickstepDebug (Thread[#151,Execution worker Thread 7,5,main]) started.
+:extractDeepLinksNoQuickstepDebug (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':extractDeepLinksNoQuickstepDebug' because:
+  Build cache is disabled
+Skipping task ':extractDeepLinksNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugMainManifest (Thread[#151,Execution worker Thread 7,5,main]) started.
+:processNoQuickstepDebugMainManifest (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugMainManifest' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugMainManifest' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugManifest (Thread[#151,Execution worker Thread 7,5,main]) started.
+:processNoQuickstepDebugManifest (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugManifest' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugManifest' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugManifestForPackage (Thread[#151,Execution worker Thread 7,5,main]) started.
+:processNoQuickstepDebugManifestForPackage (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+Custom actions are attached to task ':processNoQuickstepDebugManifestForPackage'.
+Caching disabled for task ':processNoQuickstepDebugManifestForPackage' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugManifestForPackage' as it is up-to-date.
+Resolve mutations for :processNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+:processNoQuickstepDebugResources (Thread[#151,Execution worker Thread 7,5,main]) started.
+
+> Task :processNoQuickstepDebugResources UP-TO-DATE
+Caching disabled for task ':processNoQuickstepDebugResources' because:
+  Build cache is disabled
+Skipping task ':processNoQuickstepDebugResources' as it is up-to-date.
+Resolve mutations for :kaptGenerateStubsNoQuickstepDebugKotlin (Thread[#151,Execution worker Thread 7,5,main]) started.
+:kaptGenerateStubsNoQuickstepDebugKotlin (Thread[#151,Execution worker Thread 7,5,main]) started.
+Resolve mutations for :javaPreCompileNoQuickstepDebug (Thread[#147,Execution worker Thread 3,5,main]) started.
+:javaPreCompileNoQuickstepDebug (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :javaPreCompileNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':javaPreCompileNoQuickstepDebug' because:
+  Build cache is disabled
+Skipping task ':javaPreCompileNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :mergeNoQuickstepDebugShaders (Thread[#147,Execution worker Thread 3,5,main]) started.
+:mergeNoQuickstepDebugShaders (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :mergeNoQuickstepDebugShaders UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugShaders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':mergeNoQuickstepDebugShaders' as it is up-to-date.
+Resolve mutations for :compileNoQuickstepDebugShaders (Thread[#147,Execution worker Thread 3,5,main]) started.
+:compileNoQuickstepDebugShaders (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :compileNoQuickstepDebugShaders NO-SOURCE
+Skipping task ':compileNoQuickstepDebugShaders' as it has no source files and no previous output files.
+Resolve mutations for :generateNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+:generateNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :generateNoQuickstepDebugAssets UP-TO-DATE
+Skipping task ':generateNoQuickstepDebugAssets' as it has no actions.
+Resolve mutations for :mergeNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+:mergeNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :mergeNoQuickstepDebugAssets UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugAssets' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':mergeNoQuickstepDebugAssets' as it is up-to-date.
+Resolve mutations for :compressNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+:compressNoQuickstepDebugAssets (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :compressNoQuickstepDebugAssets UP-TO-DATE
+Caching disabled for task ':compressNoQuickstepDebugAssets' because:
+  Build cache is disabled
+Skipping task ':compressNoQuickstepDebugAssets' as it is up-to-date.
+Resolve mutations for :checkNoQuickstepDebugDuplicateClasses (Thread[#147,Execution worker Thread 3,5,main]) started.
+:checkNoQuickstepDebugDuplicateClasses (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :checkNoQuickstepDebugDuplicateClasses UP-TO-DATE
+Caching disabled for task ':checkNoQuickstepDebugDuplicateClasses' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':checkNoQuickstepDebugDuplicateClasses' as it is up-to-date.
+Resolve mutations for :desugarNoQuickstepDebugFileDependencies (Thread[#148,Execution worker Thread 4,5,main]) started.
+:desugarNoQuickstepDebugFileDependencies (Thread[#148,Execution worker Thread 4,5,main]) started.
+
+> Task :desugarNoQuickstepDebugFileDependencies UP-TO-DATE
+Caching disabled for task ':desugarNoQuickstepDebugFileDependencies' because:
+  Build cache is disabled
+Skipping task ':desugarNoQuickstepDebugFileDependencies' as it is up-to-date.
+Resolve mutations for :mergeExtDexNoQuickstepDebug (Thread[#148,Execution worker Thread 4,5,main]) started.
+:mergeExtDexNoQuickstepDebug (Thread[#148,Execution worker Thread 4,5,main]) started.
+
+> Task :mergeExtDexNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':mergeExtDexNoQuickstepDebug' because:
+  Build cache is disabled
+Skipping task ':mergeExtDexNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :mergeLibDexNoQuickstepDebug (Thread[#147,Execution worker Thread 3,5,main]) started.
+:mergeLibDexNoQuickstepDebug (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :mergeLibDexNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':mergeLibDexNoQuickstepDebug' because:
+  Build cache is disabled
+Skipping task ':mergeLibDexNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :mergeNoQuickstepDebugJniLibFolders (Thread[#147,Execution worker Thread 3,5,main]) started.
+:mergeNoQuickstepDebugJniLibFolders (Thread[#144,included builds,5,main]) started.
+
+> Task :mergeNoQuickstepDebugJniLibFolders UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugJniLibFolders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':mergeNoQuickstepDebugJniLibFolders' as it is up-to-date.
+Resolve mutations for :mergeNoQuickstepDebugNativeLibs (Thread[#144,included builds,5,main]) started.
+:mergeNoQuickstepDebugNativeLibs (Thread[#144,included builds,5,main]) started.
+
+> Task :mergeNoQuickstepDebugNativeLibs UP-TO-DATE
+Caching disabled for task ':mergeNoQuickstepDebugNativeLibs' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':mergeNoQuickstepDebugNativeLibs' as it is up-to-date.
+Resolve mutations for :stripNoQuickstepDebugDebugSymbols (Thread[#147,Execution worker Thread 3,5,main]) started.
+:stripNoQuickstepDebugDebugSymbols (Thread[#147,Execution worker Thread 3,5,main]) started.
+
+> Task :stripNoQuickstepDebugDebugSymbols UP-TO-DATE
+Caching disabled for task ':stripNoQuickstepDebugDebugSymbols' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':stripNoQuickstepDebugDebugSymbols' as it is up-to-date.
+Resolve mutations for :validateSigningNoQuickstepDebug (Thread[#150,Execution worker Thread 6,5,main]) started.
+:validateSigningNoQuickstepDebug (Thread[#150,Execution worker Thread 6,5,main]) started.
+
+> Task :validateSigningNoQuickstepDebug UP-TO-DATE
+Caching disabled for task ':validateSigningNoQuickstepDebug' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':validateSigningNoQuickstepDebug' as it is up-to-date.
+Resolve mutations for :writeNoQuickstepDebugAppMetadata (Thread[#150,Execution worker Thread 6,5,main]) started.
+:writeNoQuickstepDebugAppMetadata (Thread[#150,Execution worker Thread 6,5,main]) started.
+
+> Task :writeNoQuickstepDebugAppMetadata UP-TO-DATE
+Caching disabled for task ':writeNoQuickstepDebugAppMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':writeNoQuickstepDebugAppMetadata' as it is up-to-date.
+Resolve mutations for :writeNoQuickstepDebugSigningConfigVersions (Thread[#150,Execution worker Thread 6,5,main]) started.
+:writeNoQuickstepDebugSigningConfigVersions (Thread[#150,Execution worker Thread 6,5,main]) started.
+
+> Task :writeNoQuickstepDebugSigningConfigVersions UP-TO-DATE
+Caching disabled for task ':writeNoQuickstepDebugSigningConfigVersions' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':writeNoQuickstepDebugSigningConfigVersions' as it is up-to-date.
+
+> Task :kaptGenerateStubsNoQuickstepDebugKotlin
+Caching disabled for task ':kaptGenerateStubsNoQuickstepDebugKotlin' because:
+  Build cache is disabled
+Task ':kaptGenerateStubsNoQuickstepDebugKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':kaptGenerateStubsNoQuickstepDebugKotlin'.
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/main/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstep/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/kotlin', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/debug/java', not found
+file or directory '/data/data/com.termux/files/home/Launcher3/src/noQuickstepDebug/java', not found
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: null
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), areFileChangesKnown=false, modifiedFiles=null, deletedFiles=null, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=/data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=/data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/local-state/build-history.bin, useModuleDetection=true), usePreciseJavaTracking=true, icFeatures=IncrementalCompilationFeatures(withAbiSnapshot=false, preciseCompilationResultsBackup=true, keepIncrementalCompilationCachesInMemory=true, enableUnsafeIncrementalCompilationForMultiplatform=false), outputFiles=[/data/data/com.termux/files/home/Launcher3/build/tmp/kapt3/incrementalData/noQuickstepDebug, /data/data/com.termux/files/home/Launcher3/build/tmp/kapt3/stubs/noQuickstepDebug, /data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/cacheable, /data/data/com.termux/files/home/Launcher3/build/kotlin/kaptGenerateStubsNoQuickstepDebugKotlin/local-state])
+w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
+e: Could not load module <Error module>
+Finished executing kotlin compiler using DAEMON strategy
+
+> Task :kaptGenerateStubsNoQuickstepDebugKotlin FAILED
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':kaptGenerateStubsNoQuickstepDebugKotlin' (registered by plugin 'org.jetbrains.kotlin.android').
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':kaptGenerateStubsNoQuickstepDebugKotlin' (registered by plugin 'org.jetbrains.kotlin.android').
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException: A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+	at org.gradle.workers.internal.DefaultWorkerExecutor$WorkItemExecution.waitForCompletion(DefaultWorkerExecutor.java:278)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$2(DefaultAsyncWorkTracker.java:132)
+	at org.gradle.internal.Factories$1.create(Factories.java:30)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$withoutLocksBlocking$3(DefaultWorkerLeaseService.java:410)
+	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocksBlocking(DefaultWorkerLeaseService.java:405)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.blocking(DefaultWorkerLeaseService.java:255)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.blocking(DefaultWorkerLeaseService.java:237)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$3(DefaultAsyncWorkTracker.java:128)
+	at org.gradle.internal.Factories$1.create(Factories.java:30)
+	at org.gradle.internal.resources.AbstractResourceLockRegistry.whileDisallowingLockChanges(AbstractResourceLockRegistry.java:50)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.whileDisallowingProjectLockChanges(DefaultWorkerLeaseService.java:260)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:127)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:93)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForAll(DefaultAsyncWorkTracker.java:79)
+	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForCompletion(DefaultAsyncWorkTracker.java:67)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:267)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:85)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	... 30 more
+Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
+	at org.jetbrains.kotlin.gradle.tasks.TasksUtilsKt.throwExceptionIfCompilationFailed(tasksUtils.kt:21)
+	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run(GradleKotlinCompilerWork.kt:119)
+	at org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute(GradleCompilerRunnerWithWorkers.kt:76)
+	at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:68)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:64)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:61)
+	at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:102)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0(NoIsolationWorkerFactory.java:61)
+	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
+	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:58)
+	at org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0(DefaultWorkerExecutor.java:174)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:191)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$500(DefaultConditionalExecutionQueue.java:112)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run(DefaultConditionalExecutionQueue.java:168)
+	at org.gradle.internal.Factories$1.create(Factories.java:30)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:300)
+	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:298)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:294)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:286)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:130)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:135)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:163)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:125)
+	... 2 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 27s
+28 actionable tasks: 1 executed, 27 up-to-date

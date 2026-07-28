@@ -1,0 +1,22 @@
+# Artefatos de build (recriáveis via gradle)
+/build/
+**/build/
+.gradle/
+.kotlin/
+
+# Cache local do Gradle/Android Studio
+local.properties
+*.iml
+.idea/
+
+# Pacote grande, não versionar
+Launcher3-android17-r1.tar.gz
+
+# APKs e arquivos assinados
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Backups automáticos criados durante os fixes
+*.bak

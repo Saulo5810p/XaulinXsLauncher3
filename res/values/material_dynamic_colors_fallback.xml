@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    "materialColorX" / "customColorSurfaceEffectX": no AOSP essas cores vêm da
+    lib interna "dynamiccolors" (static_lib do Launcher3ResLib no Android.bp),
+    que não existe fora da árvore do sistema. Ela normalmente gera esses nomes
+    a partir da paleta dinâmica do Material You do dispositivo.
+
+    Aqui usamos a paleta baseline padrão do Material 3 (tema claro) como
+    fallback fixo, só pra destravar a compilação. Numa fase posterior (tema/
+    Material You) dá pra sobrescrever isso em values-v34/values-night etc.
+    apontando pros @color/system_* já existentes em values-v34/colors.xml.
+-->
+<resources>
+    <color name="materialColorPrimary">#6750A4</color>
+    <color name="materialColorOnPrimary">#FFFFFF</color>
+    <color name="materialColorPrimaryFixed">#EADDFF</color>
+    <color name="materialColorPrimaryFixedDim">#D0BCFF</color>
+    <color name="materialColorOnPrimaryFixed">#21005D</color>
+
+    <color name="materialColorSecondaryFixed">#E8DEF8</color>
+    <color name="materialColorOnSecondaryFixedVariant">#4A4458</color>
+
+    <color name="materialColorSurface">#FFFBFE</color>
+    <color name="materialColorSurfaceDim">#DED8E1</color>
+    <color name="materialColorSurfaceBright">#FFFBFE</color>
+    <color name="materialColorSurfaceContainerLowest">#FFFFFF</color>
+    <color name="materialColorSurfaceContainerLow">#F7F2FA</color>
+    <color name="materialColorSurfaceContainer">#F3EDF7</color>
+    <color name="materialColorSurfaceContainerHigh">#ECE6F0</color>
+    <color name="materialColorSurfaceContainerHighest">#E6E0E9</color>
+
+    <color name="materialColorOnSurface">#1C1B1F</color>
+    <color name="materialColorOnSurfaceVariant">#49454F</color>
+    <color name="materialColorOutline">#79747E</color>
+    <color name="materialColorOutlineVariant">#CAC4D0</color>
+
+    <color name="customColorSurfaceEffect0">#F3EDF7</color>
+    <color name="customColorSurfaceEffect0Fallback">#F3EDF7</color>
+
+    <color name="materialColorTertiaryContainer">#E8DEF8</color>
+    <color name="materialColorInverseSurface">#313033</color>
+    <color name="materialColorSecondary">#625B71</color>
+    <color name="materialColorTertiary">#7D5260</color>
+    <color name="materialColorOnTertiaryFixed">#31111D</color>
+    <color name="materialColorTertiaryFixedDim">#EFB8C8</color>
+    <color name="materialColorSurfaceVariant">#E7E0EC</color>
+    <color name="materialColorOnTertiary">#FFFFFF</color>
+    <color name="materialColorOnTertiaryContainer">#31111D</color>
+</resources>

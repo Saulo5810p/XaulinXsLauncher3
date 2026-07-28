@@ -1,0 +1,394 @@
+Starting a Gradle Daemon, 4 stopped Daemons could not be reused, use --status for details
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+
+> Configure project :
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+
+> Task :preBuild UP-TO-DATE
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeDebugMetadata NO-SOURCE
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :generateNoQuickstepDebugBuildConfig
+> Task :extractDebugProto UP-TO-DATE
+> Task :extractIncludeNoQuickstepDebugProto
+> Task :extractNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepProto UP-TO-DATE
+> Task :extractProto UP-TO-DATE
+> Task :generateNoQuickstepDebugProto
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+> Task :mapNoQuickstepDebugSourceSetPaths UP-TO-DATE
+> Task :generateNoQuickstepDebugResources UP-TO-DATE
+> Task :mergeNoQuickstepDebugResources UP-TO-DATE
+> Task :packageNoQuickstepDebugResources UP-TO-DATE
+> Task :parseNoQuickstepDebugLocalResources UP-TO-DATE
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+> Task :processNoQuickstepDebugResources UP-TO-DATE
+> Task :javaPreCompileNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugShaders UP-TO-DATE
+> Task :compileNoQuickstepDebugShaders NO-SOURCE
+> Task :generateNoQuickstepDebugAssets UP-TO-DATE
+> Task :mergeNoQuickstepDebugAssets UP-TO-DATE
+> Task :compressNoQuickstepDebugAssets UP-TO-DATE
+> Task :desugarNoQuickstepDebugFileDependencies UP-TO-DATE
+> Task :mergeNoQuickstepDebugJniLibFolders UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeLibs UP-TO-DATE
+> Task :stripNoQuickstepDebugDebugSymbols UP-TO-DATE
+> Task :validateSigningNoQuickstepDebug UP-TO-DATE
+> Task :writeNoQuickstepDebugAppMetadata UP-TO-DATE
+> Task :writeNoQuickstepDebugSigningConfigVersions UP-TO-DATE
+> Task :checkNoQuickstepDebugDuplicateClasses
+> Task :kspNoQuickstepDebugKotlin
+> Task :mergeLibDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeExtDexNoQuickstepDebug
+> Task :compileNoQuickstepDebugKotlin
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/LauncherCustomizationProvider.kt:46:70 'static field GET_SIGNATURES: Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/LauncherCustomizationProvider.kt:46:87 'field signatures: (Array<Signature!>?..Array<out Signature!>?)' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:53:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:117:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:127:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:55:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:56:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:57:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:122:28 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:133:50 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:148:17 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:156:78 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:208:48 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:31:8 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:370:28 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:400:38 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:401:9 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:483:33 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:541:28 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+
+> Task :compileNoQuickstepDebugJavaWithJavac
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:65: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
+                                           ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:75: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor ORDERED_BG_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:84: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor MAIN_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:99: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor UI_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:110: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor DATA_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:125: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static LooperExecutor getPackageExecutor(String packageName) {
+                                 ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:152: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static class SimpleThreadFactory implements ThreadFactory {
+                  ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/CheckLongPressHelper.java:145: error: cannot find symbol
+                && (Flags.showHomeBehindDesktop() || mView.hasWindowFocus())
+                         ^
+  symbol:   method showHomeBehindDesktop()
+  location: class Flags
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 error
+7 warnings
+
+> Task :compileNoQuickstepDebugJavaWithJavac FAILED
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+> Compilation failed; see the compiler output below.
+  Note: Recompile with -Xlint:deprecation for details.
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:65: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
+                                             ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:75: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static final LooperExecutor ORDERED_BG_EXECUTOR =
+                                         ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:84: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static final LooperExecutor MAIN_EXECUTOR =
+                                         ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:99: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static final LooperExecutor UI_HELPER_EXECUTOR =
+                                         ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:110: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static final LooperExecutor DATA_HELPER_EXECUTOR =
+                                         ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:125: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static LooperExecutor getPackageExecutor(String packageName) {
+                                   ^
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:152: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+      public static class SimpleThreadFactory implements ThreadFactory {
+                    ^
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  Note: Some input files use unchecked or unsafe operations.
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/CheckLongPressHelper.java:145: error: cannot find symbol
+                  && (Flags.showHomeBehindDesktop() || mView.hasWindowFocus())
+                           ^
+    symbol:   method showHomeBehindDesktop()
+    location: class Flags
+  1 error
+  7 warnings
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:146)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:131)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$11(DefaultBuildLifecycleController.java:323)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:304)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$9(StateTransitionController.java:215)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:215)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:300)
+	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:298)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:294)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:286)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:130)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:65: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
+                                           ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:75: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor ORDERED_BG_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:84: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor MAIN_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:99: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor UI_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:110: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static final LooperExecutor DATA_HELPER_EXECUTOR =
+                                       ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:125: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static LooperExecutor getPackageExecutor(String packageName) {
+                                 ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/Executors.java:152: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public static class SimpleThreadFactory implements ThreadFactory {
+                  ^
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/CheckLongPressHelper.java:145: error: cannot find symbol
+                && (Flags.showHomeBehindDesktop() || mView.hasWindowFocus())
+                         ^
+  symbol:   method showHomeBehindDesktop()
+  location: class Flags
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 error
+7 warnings
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$3(JavaCompile.java:206)
+	at org.gradle.api.internal.tasks.compile.CleaningJavaCompiler.execute(CleaningJavaCompiler.java:53)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalCompilerFactory.lambda$createRebuildAllCompiler$0(IncrementalCompilerFactory.java:55)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:70)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:78)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:49)
+	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:224)
+	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:165)
+	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:150)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:90)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	... 61 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 2m 47s
+37 actionable tasks: 8 executed, 29 up-to-date

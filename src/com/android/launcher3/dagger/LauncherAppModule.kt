@@ -53,6 +53,7 @@ class BootSafeModules
             WidgetModule::class,
             StatsLoggerModule::class,
             OrganizerLauncherModule::class,
+            LauncherWidgetPickerModule::class,
         ]
 )
 class BootUnsafeModules

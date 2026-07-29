@@ -68,7 +68,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.android.launcher3.widgetpicker.R
+import com.android.launcher3.R
 import com.android.launcher3.widgetpicker.ui.components.WidgetsSearchBarDefaults.searchBarShape
 import com.android.launcher3.widgetpicker.ui.theme.WidgetPickerTheme
 import kotlin.coroutines.cancellation.CancellationException

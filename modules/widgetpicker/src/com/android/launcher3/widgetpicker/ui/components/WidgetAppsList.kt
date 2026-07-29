@@ -35,7 +35,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.android.launcher3.widgetpicker.R
+import com.android.launcher3.R
 import com.android.launcher3.widgetpicker.shared.model.AppIcon
 import com.android.launcher3.widgetpicker.shared.model.AppIconBadge
 import com.android.launcher3.widgetpicker.shared.model.WidgetAppIcon

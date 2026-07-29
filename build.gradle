@@ -60,17 +60,14 @@ android {
                 'dagger/src',
                 'shared/src',
                 'modules/concurrent/src',
-                // 'modules/appfunctions/src',
-                // 'modules/widgetpicker/src',
+                'deferred-appfunctions-widgetpicker',
+                'modules/widgetpicker/src',
                 'iconloader/src',
                 'animationlib/src',
             ]
-            java.exclude 'com/android/launcher3/dagger/WorkspaceFunctionsLauncherModule.kt'
-            java.exclude 'com/android/launcher3/widgetpicker/LauncherWidgetPickerModule.kt'
-            java.exclude 'com/android/launcher3/widgetpicker/WidgetPickerComposeWrapperImpl.kt'
             res.srcDirs = [
                 'res',
-                // 'modules/widgetpicker/res',
+                'modules/widgetpicker/res',
                 'iconloader/res',
                 'animationlib/res',
             ]

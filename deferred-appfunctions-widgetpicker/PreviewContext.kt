@@ -44,7 +44,6 @@ import com.android.launcher3.widget.LauncherWidgetHolder.WidgetHolderFactory
 import com.android.launcher3.widget.LocalColorExtractor
 import com.android.launcher3.widget.util.WidgetSizeHandler
 import com.android.launcher3.widgetpicker.NoOpWidgetPickerModule
-import com.android.launcher3.workspacefunctions.NoOpWorkspaceFunctionsModule
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
@@ -186,7 +185,6 @@ constructor(
             [
                 PerDisplayModule::class,
                 NoOpWidgetPickerModule::class,
-                NoOpWorkspaceFunctionsModule::class,
                 NoOpLoggerModule::class,
                 PreviewModule::class,
                 BootSafeModules::class,

@@ -20,7 +20,7 @@ import android.icu.text.MessageFormat
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.android.launcher3.widgetpicker.R
+import com.android.launcher3.R
 import java.util.Locale
 
 /** Helper to build a string representing widgets count */

@@ -81,6 +81,7 @@ import com.android.launcher3.util.window.WindowManagerProxy;
 import com.android.launcher3.widget.LauncherWidgetHolder.WidgetHolderFactory;
 import com.android.launcher3.widget.custom.CustomWidgetManager;
 import com.android.launcher3.widget.util.WidgetSizeHandler;
+import com.android.launcher3.widgetpicker.WidgetPickerComposeWrapper;
 
 import dagger.BindsInstance;
 
@@ -148,6 +149,9 @@ public interface LauncherBaseAppComponent {
 
     @VisibleForTesting
     GridSizeMigrationLogic createNewGridSizeMigrationLogic();
+
+    /** Wrapper that bootstraps the compose-based widget picker UI */
+    WidgetPickerComposeWrapper getWidgetPickerComposeWrapper();
     /** Returns reference to various model objects used for test verification */
     TestableModelState getTestableModelState();
 

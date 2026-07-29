@@ -17,6 +17,8 @@
 package com.android.launcher3.widgetpicker.ui.components.floatingsheet
 
 import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -32,7 +34,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -58,7 +59,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.android.launcher3.widgetpicker.R
+import com.android.launcher3.R
 import com.android.launcher3.widgetpicker.ui.components.LocalWidgetPickerHostStateProvider
 import com.android.launcher3.widgetpicker.ui.components.SheetDismissState
 import com.android.launcher3.widgetpicker.ui.components.SheetHeader
@@ -88,7 +89,6 @@ import kotlinx.coroutines.launch
  *   completed.
  * @param content the content to be displayed below the [title] and [description]
  */
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun TitledFloatingSheet(
     modifier: Modifier = Modifier,
@@ -101,7 +101,8 @@ fun TitledFloatingSheet(
     content: @Composable () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
-    val animSpec: AnimationSpec<Float> = MaterialTheme.motionScheme.slowSpatialSpec()
+    val animSpec: AnimationSpec<Float> =
+        spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessLow)
     val sheetState = remember { SheetDismissState(expandCollapseAnimationSpec = animSpec) }
     var scrimAlpha by remember { mutableFloatStateOf(0f) }
 

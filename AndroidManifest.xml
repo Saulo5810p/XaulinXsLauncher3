@@ -28,6 +28,20 @@
     <permission android:name="${applicationId}.permission.START_WIDGET_PICKER_ACTIVITY"
         android:protectionLevel="signature|privileged" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.appwidget.action.APPWIDGET_PICK" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+        </intent>
+        <provider android:authorities="com.android.launcher3.settings" />
+    </queries>
+
     <application
         android:backupAgent="com.android.launcher3.LauncherBackupAgent"
         android:fullBackupOnly="true"
@@ -40,11 +54,6 @@
         android:largeHeap="@bool/config_largeHeap"
         android:restoreAnyVersion="true"
         android:supportsRtl="true" >
-
-        <!-- App Functions Metadata -->
-        <property
-            android:name="android.app.appfunctions.app_metadata"
-            android:resource="@xml/app_metadata" />
 
         <!--
         Main launcher activity. When extending only change the name, and keep all the
@@ -77,6 +86,17 @@
                 android:value="${packageName}.grid_control" />
         </activity>
 
+        <activity
+            android:name="com.android.launcher3.settings.SettingsActivity"
+            android:label="@string/settings_button_text"
+            android:theme="@style/AppTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="com.android.launcher3.widgetpicker.WidgetPickerActivity"
             android:theme="@style/WidgetPickerActivityTheme"
             android:excludeFromRecents="true"
@@ -92,11 +112,12 @@
         </activity>
 
         <service
-            android:name="androidx.appfunctions.service.ExtensionAppFunctionService"
-            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
+            android:name="com.android.launcher3.notification.NotificationListener"
+            android:label="@string/derived_app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.app.appfunctions.AppFunctionService" />
+                <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
 

@@ -17,6 +17,8 @@ package com.android.launcher3.dagger
 
 import com.android.launcher3.concurrent.ExecutorsModule
 import com.android.launcher3.util.dagger.LauncherExecutorsModule
+import com.android.launcher3.widgetpicker.LauncherWidgetPickerBindsModule
+import com.android.launcher3.widgetpicker.LauncherWidgetPickerModule
 import dagger.Module
 
 @Module(
@@ -53,7 +55,8 @@ class BootSafeModules
             WidgetModule::class,
             StatsLoggerModule::class,
             OrganizerLauncherModule::class,
-            LauncherWidgetPickerModule::class,
+            LauncherWidgetPickerBindsModule::class,
+                LauncherWidgetPickerModule::class,
         ]
 )
 class BootUnsafeModules

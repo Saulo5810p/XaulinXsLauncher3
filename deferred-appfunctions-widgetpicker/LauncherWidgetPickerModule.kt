@@ -29,9 +29,9 @@ import com.android.launcher3.widgetpicker.repository.WidgetsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 
-/** A module that installs widget picker for launcher. */
-@Module(subcomponents = [WidgetPickerComponent::class])
-interface LauncherWidgetPickerModule {
+/** Módulo separado só com os @Binds — o subcomponents fica em outra interface (ver abaixo). */
+@Module
+interface LauncherWidgetPickerBindsModule {
     @Binds
     fun bindWidgetPickerComposeWrapper(
         impl: WidgetPickerComposeWrapperImpl
@@ -52,3 +52,7 @@ interface LauncherWidgetPickerModule {
     @Binds
     fun bindWidgetsSearchAlgorithm(impl: InMemoryWidgetSearchAlgorithm): WidgetsSearchAlgorithm
 }
+
+/** A module that installs widget picker for launcher (só o subcomponent, separado dos @Binds). */
+@Module(subcomponents = [WidgetPickerComponent::class])
+interface LauncherWidgetPickerModule

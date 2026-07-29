@@ -62,6 +62,7 @@ android {
                 'modules/concurrent/src',
                 'deferred-appfunctions-widgetpicker',
                 'modules/widgetpicker/src',
+                'modules/customizations/src',
                 'iconloader/src',
                 'animationlib/src',
             ]

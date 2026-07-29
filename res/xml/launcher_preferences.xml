@@ -37,4 +37,19 @@
         launcher:logIdOn="613"
         launcher:logIdOff="614" />
 
+
+    <!-- ============ XaulinXs Customizations — início ============ -->
+    <PreferenceScreen
+        android:key="xaulinxs_customizations_screen"
+        android:title="@string/xaulinxs_customizations_title"
+        android:summary="@string/xaulinxs_customizations_summary">
+
+        <com.xaulinxs.customizations.settings.ThemedIconsPreference
+            android:key="xaulinxs_themed_icons"
+            android:title="@string/xaulinxs_themed_icons_title"
+            android:summary="@string/xaulinxs_themed_icons_summary"
+            android:persistent="false" />
+
+    </PreferenceScreen>
+    <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XaulinXs Customizations — arquivo novo, não faz parte do AOSP original. -->
+<resources>
+    <string name="xaulinxs_customizations_title">XaulinXs Customizations</string>
+    <string name="xaulinxs_customizations_summary">Personalizações extras do launcher</string>
+    <string name="xaulinxs_themed_icons_title">Ícones temáticos</string>
+    <string name="xaulinxs_themed_icons_summary">Colorir os ícones com base no papel de parede (Material You)</string>
+</resources>

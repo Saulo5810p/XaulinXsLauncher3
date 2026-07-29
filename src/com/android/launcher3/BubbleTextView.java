@@ -686,8 +686,9 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
     }
 
     protected boolean shouldUseTheme() {
+        // XaulinXs Customizations: também aplica ícones temáticos no App Drawer.
         return mDisplay == DISPLAY_WORKSPACE || mDisplay == DISPLAY_FOLDER
-                || mDisplay == DISPLAY_TASKBAR;
+                || mDisplay == DISPLAY_TASKBAR || mDisplay == DISPLAY_ALL_APPS;
     }
 
     /**

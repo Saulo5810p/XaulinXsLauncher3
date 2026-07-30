@@ -30,7 +30,7 @@ class XaulinXsDepthController(private val launcher: Launcher) {
 
     fun setupWindowBlurFlags() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            launcher.window.addFlags(FLAG_BLUR_BEHIND)
+            launcher.window?.addFlags(FLAG_BLUR_BEHIND)
         }
     }
 
@@ -46,10 +46,12 @@ class XaulinXsDepthController(private val launcher: Launcher) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
         val radius = (depth * MAX_BLUR_RADIUS_PX).toInt()
 
-        try {
-            launcher.window.attributes =
-                launcher.window.attributes.apply { blurBehindRadius = radius }
-        } catch (_: Exception) {
+        val window = launcher.window
+        if (window != null) {
+            try {
+                window.attributes = window.attributes.apply { blurBehindRadius = radius }
+            } catch (_: Exception) {
+            }
         }
 
         val effect = if (radius > 1) {

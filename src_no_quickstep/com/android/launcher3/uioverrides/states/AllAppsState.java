@@ -27,6 +27,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.views.ActivityContext;
 import com.android.launcher3.views.ScrimColors;
+import com.xaulinxs.customizations.theme.WallpaperScrimHelper; // XaulinXs Customizations
 
 /**
  * Definition for AllApps state
@@ -105,6 +106,14 @@ public class AllAppsState extends LauncherState {
 
     @Override
     public ScrimColors getWorkspaceScrimColor(Launcher launcher) {
+        // XaulinXs Customizations: usa a cor translúcida extraída do wallpaper quando
+        // disponível e a opção estiver ativada; senão cai no comportamento AOSP original.
+        Integer themedScrim = WallpaperScrimHelper.getScrimColorIfEnabled(launcher);
+        if (themedScrim != null) {
+            return new ScrimColors(
+                    /* backgroundColor */ themedScrim,
+                    /* foregroundColor */ Color.TRANSPARENT);
+        }
         return new ScrimColors(
                 /* backgroundColor */
                 launcher.getDeviceProfile().getDeviceProperties().isLargeScreen()

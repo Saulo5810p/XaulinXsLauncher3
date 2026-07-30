@@ -32,11 +32,17 @@ class XaulinXsDepthController(private val launcher: Launcher) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             launcher.window?.addFlags(FLAG_BLUR_BEHIND)
         }
+        XaulinXsWindowBlurStateHolder.setBlurEnabled(
+            isEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        )
     }
 
     fun setDepth(depth: Float) {
         val clamped = depth.coerceIn(0f, 1f)
         val target = if (isEnabled) clamped else 0f
+        XaulinXsWindowBlurStateHolder.setBlurEnabled(
+            isEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        )
         if (target == currentDepth) return
         currentDepth = target
         applyBlur(target)

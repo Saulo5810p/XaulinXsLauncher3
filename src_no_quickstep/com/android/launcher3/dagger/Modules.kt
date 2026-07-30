@@ -30,6 +30,7 @@ import com.android.launcher3.qsb.QsbAppWidgetHost
 import com.android.launcher3.qsb.QsbAppWidgetHostImpl
 import com.android.launcher3.util.BaseDefaultsValueProvider
 import com.android.launcher3.util.DefaultsValueProvider
+import com.android.launcher3.util.ListenableRef
 import com.android.launcher3.util.MutableListenableRef
 import com.android.launcher3.util.WindowBlurState.WINDOW_BLUR_STATE
 import com.android.launcher3.util.window.RefreshRateTracker
@@ -101,7 +102,8 @@ object AppModule {
     @JvmStatic
     @LauncherAppSingleton
     @Named(WINDOW_BLUR_STATE)
-    fun provideWindowBlurState() = MutableListenableRef<Boolean>(false).asListenable()
+    fun provideWindowBlurState(): ListenableRef<Boolean> =
+        com.xaulinxs.customizations.blur.XaulinXsWindowBlurStateHolder.state
 
     @Provides
     @JvmStatic

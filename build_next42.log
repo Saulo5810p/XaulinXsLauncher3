@@ -1,0 +1,1722 @@
+Starting a Gradle Daemon, 1 stopped Daemon could not be reused, use --status for details
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+
+> Configure project :
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+
+> Task :preBuild UP-TO-DATE
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeDebugMetadata NO-SOURCE
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :generateNoQuickstepDebugBuildConfig UP-TO-DATE
+> Task :extractDebugProto UP-TO-DATE
+> Task :extractIncludeNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepProto UP-TO-DATE
+> Task :extractProto UP-TO-DATE
+> Task :generateNoQuickstepDebugProto UP-TO-DATE
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+> Task :mapNoQuickstepDebugSourceSetPaths UP-TO-DATE
+> Task :generateNoQuickstepDebugResources UP-TO-DATE
+> Task :mergeNoQuickstepDebugResources UP-TO-DATE
+> Task :packageNoQuickstepDebugResources UP-TO-DATE
+> Task :parseNoQuickstepDebugLocalResources UP-TO-DATE
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+> Task :processNoQuickstepDebugResources UP-TO-DATE
+> Task :javaPreCompileNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugShaders UP-TO-DATE
+> Task :compileNoQuickstepDebugShaders NO-SOURCE
+> Task :generateNoQuickstepDebugAssets UP-TO-DATE
+> Task :mergeNoQuickstepDebugAssets UP-TO-DATE
+> Task :compressNoQuickstepDebugAssets UP-TO-DATE
+> Task :checkNoQuickstepDebugDuplicateClasses UP-TO-DATE
+> Task :desugarNoQuickstepDebugFileDependencies UP-TO-DATE
+> Task :mergeExtDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeLibDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugJniLibFolders UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeLibs UP-TO-DATE
+> Task :stripNoQuickstepDebugDebugSymbols UP-TO-DATE
+> Task :validateSigningNoQuickstepDebug UP-TO-DATE
+> Task :writeNoQuickstepDebugAppMetadata UP-TO-DATE
+> Task :writeNoQuickstepDebugSigningConfigVersions UP-TO-DATE
+> Task :kspNoQuickstepDebugKotlin
+> Task :compileNoQuickstepDebugKotlin
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewContext.kt:132:27 Java type mismatch: inferred type is 'kotlin.Array<(out) java.io.File!>?', but 'kotlin.Array<(out) java.io.File!>' was expected.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:29:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:51:90 'fun get(p0: String!): Any?' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:70:13 'val MESSAGE_ID_UPDATE_SHAPE: Int' is deprecated. Use [MESSAGE_ID_UPDATE_COMMAND] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:72:13 'val MESSAGE_ID_UPDATE_GRID: Int' is deprecated. Use [MESSAGE_ID_UPDATE_COMMAND] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:74:13 'val MESSAGE_ID_UPDATE_ICON_THEMED: Int' is deprecated. Use [MESSAGE_ID_UPDATE_COMMAND] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:82:17 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:82:27 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:90:9 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/PreviewLifecycleObserver.kt:90:19 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/widgetpicker/repository/WidgetAppIconsRepositoryImpl.kt:23:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/widgetpicker/repository/WidgetAppIconsRepositoryImpl.kt:53:13 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/deferred-appfunctions-widgetpicker/widgetpicker/repository/WidgetsRepositoryImpl.kt:31:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt:76:17 Condition is always 'true'.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/BitmapInfo.kt:223:18 Expected performance impact from inlining is insignificant. Inlining works best for functions with parameters of function types.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/ClockDrawableWrapper.kt:273:21 'fun getDrawableForDensity(p0: Int, p1: Int): Drawable?' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/cache/BaseIconCache.kt:403:25 'constructor(p0: Bitmap!): BitmapDrawable' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/cache/BaseIconCache.kt:408:42 Condition is always 'true'.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/cache/CacheLookupFlag.kt:22:28 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.1.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/mono/ThemedIconDelegate.kt:91:43 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/mono/ThemedIconDelegate.kt:92:43 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/mono/ThemedIconDelegate.kt:94:25 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/mono/ThemedIconDelegate.kt:95:44 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/iconloader/src/com/android/launcher3/icons/mono/ThemedIconDelegate.kt:96:44 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/modules/customizations/src/com/xaulinxs/customizations/settings/ThemedIconsPreference.kt:25:56 'var isMonoThemeEnabled: Boolean' is deprecated. Use [ThemePreference] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/modules/customizations/src/com/xaulinxs/customizations/settings/ThemedIconsPreference.kt:27:48 'var isMonoThemeEnabled: Boolean' is deprecated. Use [ThemePreference] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/modules/customizations/src/com/xaulinxs/customizations/theme/WallpaperScrimHelper.kt:19:8 'class ColorScheme : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/modules/customizations/src/com/xaulinxs/customizations/theme/WallpaperScrimHelper.kt:29:22 'constructor(wallpaperColors: WallpaperColors!, darkTheme: Boolean): ColorScheme' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:255:13 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:273:18 'fun hasSeenReconfigurableWidgetEducationTip(): Boolean' is deprecated. Will be removed as part of homeScreenEditImprovements flag.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:275:25 'fun showReconfigurableWidgetEducationTip(): ArrowTipView?' is deprecated. Will be removed as part of homeScreenEditImprovements flag.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:746:31 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/AppWidgetResizeFrame.kt:981:31 'var reconfigureButton: ImageButton?' is deprecated. Replaced with an option in popup when homeScreenEditImprovements flag is on.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BoxSelectionHelper.kt:158:21 Condition is always 'true'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/InMemoryLauncherPrefs.kt:23:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/InMemoryLauncherPrefs.kt:135:13 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/LauncherModel.kt:47:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/LauncherPrefs.kt:390:60 'val backedUpPrefs: SharedPreferences' is deprecated. Don't use shared preferences directly. Use other LauncherPref methods.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:37:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:38:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:39:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:85:44 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:340:13 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:484:55 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:507:9 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:542:52 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:555:9 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:561:13 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:620:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:627:40 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:627:59 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:632:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:650:21 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/ModelCallbacks.kt:654:21 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/PillColorProvider.kt:24:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/PillColorProvider.kt:41:34 'static field ORDERED_BG_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/RemoveAnimationSettingsTracker.kt:35:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/deviceprofile/TaskbarDeviceProfileFactory.kt:42:44 'fun changeIconSize(iconSizePx: Int): WorkspaceProfile' is deprecated. This classes should be treated as immutable, in order to change it weshould use a factory and create a new one.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/deviceprofile/WorkspaceProfile.kt:32:8 'object WorkspaceProfileNonResponsiveFactory : Any' is deprecated. Non responsive grids are deprecated, please refer to responsive grid for a replacement. Nexus Launcher doesn't use Non Scalable grids anymore.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/deviceprofile/WorkspaceProfile.kt:155:13 'object WorkspaceProfileNonResponsiveFactory : Any' is deprecated. Non responsive grids are deprecated, please refer to responsive grid for a replacement. Nexus Launcher doesn't use Non Scalable grids anymore.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/deviceprofile/WorkspaceProfileNonResponsiveFactory.kt:664:34 'fun calculateAndSetWorkspaceVerticalPadding(context: Context, inv: InvariantDeviceProfile): WorkspaceProfile' is deprecated. This is only used for scalable which is deprecated. This should also go away once we add extraSpace into the WorkspaceProfile.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/deviceprofile/WorkspaceProfileNonResponsiveFactory.kt:669:33 'fun recalculateWorkspacePadding(isVerticalLayout: Boolean, isSeascape: Boolean, isFixedLandscape: Boolean, isScalableGrid: Boolean, hotseatProfile: HotseatProfileInitialValues, deviceProperties: DeviceProperties, res: Resources, inv: InvariantDeviceProfile): WorkspaceProfile' is deprecated. This classes should be treated as immutable, in order to change it weshould use a factory and create a new one.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:31:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:62:54 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:62:64 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:72:17 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:84:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:86:21 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:105:14 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:117:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:118:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayControllerImpl.kt:129:13 'val perDisplayInfo: SparseArray<DisplayInfoContainer>' is deprecated. Will replace it with threadSafePerDisplayInfo.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/DisplayInfoContainer.kt:92:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/display/PortraitSize.kt:22:25 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.1.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/dragndrop/AddItemActivity.kt:35:8 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/dragndrop/AddItemActivity.kt:60:31 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/dragndrop/AddItemActivity.kt:197:78 'field label: String!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/dragndrop/AddItemActivity.kt:273:44 'static fun obtain(p0: Int): AccessibilityEvent!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/dragndrop/AddItemActivity.kt:273:70 'static field TYPE_ANNOUNCEMENT: Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/folder/FolderNameSuggestionLoader.kt:24:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/LauncherCustomizationProvider.kt:46:70 'static field GET_SIGNATURES: Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/LauncherCustomizationProvider.kt:46:87 'field signatures: (Array<Signature!>?..Array<out Signature!>?)' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:427:53 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:428:57 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/graphics/PreloadIconDelegate.kt:429:61 'fun getColor(p0: Int): Int' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/homescreenfiles/HomeScreenFilesUpdateTask.kt:69:5 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.1.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:74:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:75:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:103:20 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:113:41 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:152:9 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:193:17 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:209:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/icons/IconCache.kt:589:13 Condition is always 'false'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/keyboard/KeyboardStateManager.kt:29:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/keyboard/KeyboardStateManager.kt:106:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/keyboard/KeyboardStateManager.kt:106:23 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/keyboard/KeyboardStateManager.kt:110:21 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/keyboard/KeyboardStateManager.kt:110:31 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/logging/FileLog.kt:255:30 Unchecked cast of 'kotlin.Any!' to 'android.util.Pair<java.io.PrintWriter?, java.util.concurrent.CountDownLatch?>'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/logging/RecreateTaskbarLatencyLogger.kt:22:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/logging/StartupLatencyLogger.kt:32:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/logging/StartupLatencyLogger.kt:85:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/logging/StartupLatencyLogger.kt:85:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:53:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:117:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:127:9 'val extraItems: IntSparseArrayMap<BgDataModel.FixedContainerItems>' is deprecated. Use independent repository for each extra item.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/BgDataModel.kt:422:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/DbEntry.kt:130:80 'fun toURI(): String!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/FirstScreenBroadcastHelper.kt:30:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/FirstScreenBroadcastHelper.kt:116:61 Unchecked cast of 'kotlin.collections.Map<kotlin.String?, kotlin.collections.Set<kotlin.String>>' to 'kotlin.collections.Map<kotlin.String, kotlin.collections.Set<kotlin.String>>'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/FirstScreenBroadcastHelper.kt:138:37 Unchecked cast of 'kotlin.collections.MutableMap<kotlin.String?, kotlin.collections.MutableList<com.android.launcher3.model.data.ItemInfo>>' to 'kotlin.collections.Map<kotlin.String, kotlin.collections.List<com.android.launcher3.model.data.ItemInfo>>'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/FirstScreenBroadcastHelper.kt:212:20 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/FirstScreenBroadcastHelper.kt:212:30 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:55:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:56:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:57:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:122:28 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:133:50 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:148:17 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:156:78 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelInitializer.kt:208:48 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelProxyProvider.kt:43:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelProxyProvider.kt:207:20 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelTaskController.kt:29:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelTaskController.kt:46:30 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:38:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:52:45 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:257:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:309:28 'static field IS_DEBUG_DEVICE: Boolean' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriter.kt:310:35 'static field IS_STUDIO_BUILD: Boolean' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/ModelWriterFactory.kt:28:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/StringCache.kt:28:1 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.1.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/model/testing/FakeModelWriter.kt:172:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/pm/UserCache.kt:98:27 'fun <T : Parcelable!> getParcelableExtra(p0: String!): T?' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/AppLockShortcut.kt:29:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/AppLockShortcut.kt:72:17 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/AppLockShortcut.kt:72:27 'static field ORDERED_BG_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PinToTaskbarShortcut.kt:31:8 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PinToTaskbarShortcut.kt:76:13 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:45:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:104:59 Unchecked cast of 'com.android.launcher3.popup.PopupContainerWithArrow<T>' to 'com.android.launcher3.popup.PopupContainerWithArrow<com.android.launcher3.Launcher>'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:200:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupContainerWithArrow.kt:210:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/popup/PopupControllerAppIcons.kt:59:68 Unchecked cast of '(com.android.launcher3.popup.SystemShortcut<com.android.launcher3.views.ActivityContext!>?..com.android.launcher3.popup.SystemShortcut<*>?)' to 'com.android.launcher3.popup.SystemShortcut<T>?'.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:31:8 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:370:28 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:400:38 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:401:9 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:483:33 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/provider/RestoreDbTask.kt:541:28 'val db: SQLiteDatabase' is deprecated. Use [getTable] instead.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/AsyncObjectAllocator.kt:23:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/AsyncObjectAllocator.kt:41:13 'constructor(namePrefix: String!, priority: Int): Executors.SimpleThreadFactory' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/HybridHotseatOrganizer.kt:83:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/HybridHotseatOrganizer.kt:83:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/HybridHotseatOrganizer.kt:84:13 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/HybridHotseatOrganizer.kt:84:23 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/ItemInflater.kt:27:8 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/ItemInflater.kt:56:33 'data class LauncherAppState : Any' is deprecated. Inject the specific targets directly instead of using LauncherAppState.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/RetryingExecutor.kt:24:55 'constructor(): Handler' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperColorHints.kt:29:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperColorHints.kt:30:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperColorHints.kt:57:9 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperColorHints.kt:60:17 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperColorHints.kt:64:13 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/WallpaperThemeManager.kt:55:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:27:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:28:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:82:57 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:82:67 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:92:63 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:92:73 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:97:70 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:97:80 'static field DATA_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:102:65 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:102:75 'static field ORDERED_BG_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:108:46 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/dagger/LauncherExecutorsModule.kt:108:56 'static field THREAD_POOL_EXECUTOR: ThreadPoolExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/window/RefreshRateTracker.kt:27:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/window/RefreshRateTracker.kt:43:50 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/util/window/RefreshRateTracker.kt:43:60 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/views/DoubleShadowIconDrawable.kt:115:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Please add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:23:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:24:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:25:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:36:9 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:50:13 'static field MAIN_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:81:63 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/ListenableAppWidgetHost.kt:81:73 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:31:8 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:59:30 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:59:40 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:67:30 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:67:40 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:83:30 'class Executors : Any' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:83:40 'static field UI_HELPER_EXECUTOR: LooperExecutor!' is deprecated. Deprecated in Java.
+w: file:///data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/widget/util/WidgetSizeHandler.kt:142:42 'fun <T : Parcelable!> getParcelableArrayList(p0: String?): ArrayList<T!>?' is deprecated. Deprecated in Java.
+
+> Task :compileNoQuickstepDebugJavaWithJavac
+/data/data/com.termux/files/home/Launcher3/aosp-stubs/com/android/internal/graphics/ColorUtils.java:13: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:21: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+import android.annotation.NonNull;
+                         ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:22: error: cannot find symbol
+import android.annotation.Size;
+                         ^
+  symbol:   class Size
+  location: package android.annotation
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:24: error: package android.content.theming does not exist
+import android.content.theming.ThemeStyle;
+                              ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:29: error: package com.google.ux.material.libmonet.dynamiccolor.ColorSpec does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ColorSpec.SpecVersion;
+                                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:30: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:31: error: package com.google.ux.material.libmonet.dynamiccolor.DynamicScheme does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme.Platform;
+                                                                 ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:32: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:33: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeCmf;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:34: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeContent;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:35: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeExpressive;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:36: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeFruitSalad;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:37: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeMonochrome;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:38: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeNeutral;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:39: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeRainbow;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:40: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeTonalSpot;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:41: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeVibrant;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:65: error: cannot find symbol
+    private final DynamicScheme mMaterialScheme;
+                  ^
+  symbol:   class DynamicScheme
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:72: error: cannot find symbol
+    private final List<Hct> mProposedSeedHcts;
+                       ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                  ^
+  symbol:   class SpecVersion
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                           ^
+  symbol:   class Platform
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                  ^
+  symbol:   class SpecVersion
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                           ^
+  symbol:   class Platform
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:194: error: cannot find symbol
+    public DynamicScheme getMaterialScheme() {
+           ^
+  symbol:   class DynamicScheme
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:451: error: cannot find symbol
+    private static double score(Hct hct, double proportion) {
+                                ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:459: error: cannot find symbol
+    private static List<Double> huePopulations(Map<Integer, Hct> hctByColor,
+                                                            ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:25: error: package com.google.ux.material.libmonet.palettes does not exist
+    private final com.google.ux.material.libmonet.palettes.TonalPalette mMaterialTonalPalette;
+                                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:33: error: package com.google.ux.material.libmonet.palettes does not exist
+    TonalPalette(com.google.ux.material.libmonet.palettes.TonalPalette materialTonalPalette) {
+                                                         ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: package com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair does not exist
+import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+                                                                        ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+                                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ContrastCurve;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:26: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.TonePolarity;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:27: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:28: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:29: error: package com.google.ux.material.libmonet.utils does not exist
+import com.google.ux.material.libmonet.utils.MathUtils;
+                                            ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:36: error: cannot find symbol
+    private final MaterialDynamicColors mMdc;
+                  ^
+  symbol:   class MaterialDynamicColors
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:37: error: cannot find symbol
+    public final List<Supplier<DynamicColor>> allColors;
+                               ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:73: error: cannot find symbol
+    public DynamicColor widgetBackground() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:82: error: cannot find symbol
+    public DynamicColor clockHour() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:95: error: cannot find symbol
+    public DynamicColor clockMinute() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:106: error: cannot find symbol
+    public DynamicColor clockSecond() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:117: error: cannot find symbol
+    public DynamicColor weatherTemp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:129: error: cannot find symbol
+    public DynamicColor themeApp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:152: error: cannot find symbol
+    public DynamicColor onThemeApp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:163: error: cannot find symbol
+    public DynamicColor themeAppRing() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:178: error: cannot find symbol
+    public DynamicColor themeNotif() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:191: error: cannot find symbol
+    public DynamicColor brandA() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:202: error: cannot find symbol
+    public DynamicColor brandB() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:213: error: cannot find symbol
+    public DynamicColor brandC() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:224: error: cannot find symbol
+    public DynamicColor brandD() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:236: error: cannot find symbol
+    public DynamicColor underSurface() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:245: error: cannot find symbol
+    public DynamicColor shadeActive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:258: error: cannot find symbol
+    public DynamicColor onShadeActive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:273: error: cannot find symbol
+    public DynamicColor onShadeActiveVariant() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:284: error: cannot find symbol
+    public DynamicColor shadeInactive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:297: error: cannot find symbol
+    public DynamicColor onShadeInactive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:312: error: cannot find symbol
+    public DynamicColor onShadeInactiveVariant() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:323: error: cannot find symbol
+    public DynamicColor shadeDisabled() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:334: error: cannot find symbol
+    public DynamicColor overviewBackground() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:344: error: cannot find symbol
+    public DynamicColor surfaceEffect0() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:354: error: cannot find symbol
+    public DynamicColor surfaceEffect1() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:364: error: cannot find symbol
+    public DynamicColor surfaceEffect2() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:374: error: cannot find symbol
+    public DynamicColor surfaceEffect3() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:384: error: cannot find symbol
+    public DynamicColor surfaceEffect0Fallback() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:40: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllNeutralPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:52: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllAccentPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:65: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllErrorPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:78: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllDynamicColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:89: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getFixedColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:101: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getCustomColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:107: error: cannot find symbol
+            List<Supplier<DynamicColor>> allColors) {
+                          ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:106: error: cannot find symbol
+    private static List<Pair<String, DynamicColor>> generateSysUINames(
+                                     ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:129: error: cannot find symbol
+            List<Pair<String, Function<DynamicScheme, TonalPalette>>> paletteMap) {
+                                       ^
+  symbol:   class DynamicScheme
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:128: error: cannot find symbol
+    private static List<Pair<String, DynamicColor>> generatePaletteColors(
+                                     ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: package com.google.ux.material.libmonet.utils does not exist
+import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:25: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:28: error: cannot find symbol
+public class SchemeClock extends DynamicScheme {
+                                 ^
+  symbol: class DynamicScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:29: error: cannot find symbol
+    public SchemeClock(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                       ^
+  symbol:   class Hct
+  location: class SchemeClock
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:21: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:23: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:24: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:26: error: cannot find symbol
+public class SchemeClockVibrant extends DynamicScheme {
+                                        ^
+  symbol: class DynamicScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:27: error: cannot find symbol
+    public SchemeClockVibrant(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                              ^
+  symbol:   class Hct
+  location: class SchemeClockVibrant
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:63: error: package ThemeStyle does not exist
+    @ThemeStyle.Type
+               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:76: error: package ThemeStyle does not exist
+    public ColorScheme(@ColorInt int seed, boolean isDark, @ThemeStyle.Type int style,
+                                                                      ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:81: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+    public ColorScheme(@NonNull @Size(min = 1) List<Integer> seeds, boolean isDark,
+                        ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+100 errors
+
+> Task :compileNoQuickstepDebugJavaWithJavac FAILED
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+> Compilation failed; see the compiler output below.
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: static import only from classes and interfaces
+  import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+  ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: static import only from classes and interfaces
+  import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+  ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: static import only from classes and interfaces
+  import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+  ^
+  Note: Recompile with -Xlint:deprecation for details.
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:22: error: cannot find symbol
+  import android.annotation.Size;
+                           ^
+    symbol:   class Size
+    location: package android.annotation
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:65: error: cannot find symbol
+      private final DynamicScheme mMaterialScheme;
+                    ^
+    symbol:   class DynamicScheme
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:72: error: cannot find symbol
+      private final List<Hct> mProposedSeedHcts;
+                         ^
+    symbol:   class Hct
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+              double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                    ^
+    symbol:   class SpecVersion
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+              double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                             ^
+    symbol:   class Platform
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+              double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                    ^
+    symbol:   class SpecVersion
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+              double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                             ^
+    symbol:   class Platform
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:194: error: cannot find symbol
+      public DynamicScheme getMaterialScheme() {
+             ^
+    symbol:   class DynamicScheme
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:451: error: cannot find symbol
+      private static double score(Hct hct, double proportion) {
+                                  ^
+    symbol:   class Hct
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:459: error: cannot find symbol
+      private static List<Double> huePopulations(Map<Integer, Hct> hctByColor,
+                                                              ^
+    symbol:   class Hct
+    location: class ColorScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:36: error: cannot find symbol
+      private final MaterialDynamicColors mMdc;
+                    ^
+    symbol:   class MaterialDynamicColors
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:37: error: cannot find symbol
+      public final List<Supplier<DynamicColor>> allColors;
+                                 ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:73: error: cannot find symbol
+      public DynamicColor widgetBackground() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:82: error: cannot find symbol
+      public DynamicColor clockHour() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:95: error: cannot find symbol
+      public DynamicColor clockMinute() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:106: error: cannot find symbol
+      public DynamicColor clockSecond() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:117: error: cannot find symbol
+      public DynamicColor weatherTemp() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:129: error: cannot find symbol
+      public DynamicColor themeApp() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:152: error: cannot find symbol
+      public DynamicColor onThemeApp() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:163: error: cannot find symbol
+      public DynamicColor themeAppRing() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:178: error: cannot find symbol
+      public DynamicColor themeNotif() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:191: error: cannot find symbol
+      public DynamicColor brandA() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:202: error: cannot find symbol
+      public DynamicColor brandB() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:213: error: cannot find symbol
+      public DynamicColor brandC() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:224: error: cannot find symbol
+      public DynamicColor brandD() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:236: error: cannot find symbol
+      public DynamicColor underSurface() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:245: error: cannot find symbol
+      public DynamicColor shadeActive() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:258: error: cannot find symbol
+      public DynamicColor onShadeActive() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:273: error: cannot find symbol
+      public DynamicColor onShadeActiveVariant() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:284: error: cannot find symbol
+      public DynamicColor shadeInactive() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:297: error: cannot find symbol
+      public DynamicColor onShadeInactive() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:312: error: cannot find symbol
+      public DynamicColor onShadeInactiveVariant() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:323: error: cannot find symbol
+      public DynamicColor shadeDisabled() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:334: error: cannot find symbol
+      public DynamicColor overviewBackground() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:344: error: cannot find symbol
+      public DynamicColor surfaceEffect0() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:354: error: cannot find symbol
+      public DynamicColor surfaceEffect1() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:364: error: cannot find symbol
+      public DynamicColor surfaceEffect2() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:374: error: cannot find symbol
+      public DynamicColor surfaceEffect3() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:384: error: cannot find symbol
+      public DynamicColor surfaceEffect0Fallback() {
+             ^
+    symbol:   class DynamicColor
+    location: class CustomDynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:40: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getAllNeutralPalette() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:52: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getAllAccentPalette() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:65: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getAllErrorPalette() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:78: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getAllDynamicColorsMapped() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:89: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getFixedColorsMapped() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:101: error: cannot find symbol
+      public static List<Pair<String, DynamicColor>> getCustomColorsMapped() {
+                                      ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:107: error: cannot find symbol
+              List<Supplier<DynamicColor>> allColors) {
+                            ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:106: error: cannot find symbol
+      private static List<Pair<String, DynamicColor>> generateSysUINames(
+                                       ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:129: error: cannot find symbol
+              List<Pair<String, Function<DynamicScheme, TonalPalette>>> paletteMap) {
+                                         ^
+    symbol:   class DynamicScheme
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:128: error: cannot find symbol
+      private static List<Pair<String, DynamicColor>> generatePaletteColors(
+                                       ^
+    symbol:   class DynamicColor
+    location: class DynamicColors
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:29: error: cannot find symbol
+      public SchemeClock(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                         ^
+    symbol:   class Hct
+    location: class SchemeClock
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:27: error: cannot find symbol
+      public SchemeClockVibrant(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                                ^
+    symbol:   class Hct
+    location: class SchemeClockVibrant
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:21: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+  import android.annotation.NonNull;
+                           ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:81: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+      public ColorScheme(@NonNull @Size(min = 1) List<Integer> seeds, boolean isDark,
+                          ^
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:28: error: cannot find symbol
+  public class SchemeClock extends DynamicScheme {
+                                   ^
+    symbol: class DynamicScheme
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:26: error: cannot find symbol
+  public class SchemeClockVibrant extends DynamicScheme {
+                                          ^
+    symbol: class DynamicScheme
+  Note: Some input files use unchecked or unsafe operations.
+  /data/data/com.termux/files/home/Launcher3/aosp-stubs/com/android/internal/graphics/ColorUtils.java:13: error: package com.google.ux.material.libmonet.hct does not exist
+  import com.google.ux.material.libmonet.hct.Hct;
+                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:24: error: package android.content.theming does not exist
+  import android.content.theming.ThemeStyle;
+                                ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:29: error: package com.google.ux.material.libmonet.dynamiccolor.ColorSpec does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.ColorSpec.SpecVersion;
+                                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:30: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:31: error: package com.google.ux.material.libmonet.dynamiccolor.DynamicScheme does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme.Platform;
+                                                                   ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:32: error: package com.google.ux.material.libmonet.hct does not exist
+  import com.google.ux.material.libmonet.hct.Hct;
+                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:33: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeCmf;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:34: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeContent;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:35: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeExpressive;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:36: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeFruitSalad;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:37: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeMonochrome;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:38: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeNeutral;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:39: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeRainbow;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:40: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeTonalSpot;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:41: error: package com.google.ux.material.libmonet.scheme does not exist
+  import com.google.ux.material.libmonet.scheme.SchemeVibrant;
+                                               ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:25: error: package com.google.ux.material.libmonet.palettes does not exist
+      private final com.google.ux.material.libmonet.palettes.TonalPalette mMaterialTonalPalette;
+                                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:33: error: package com.google.ux.material.libmonet.palettes does not exist
+      TonalPalette(com.google.ux.material.libmonet.palettes.TonalPalette materialTonalPalette) {
+                                                           ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: package com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair does not exist
+  import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+                                                                          ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+                                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.ContrastCurve;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:26: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.TonePolarity;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:27: error: package com.google.ux.material.libmonet.hct does not exist
+  import com.google.ux.material.libmonet.hct.Hct;
+                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:28: error: package com.google.ux.material.libmonet.palettes does not exist
+  import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                                 ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:29: error: package com.google.ux.material.libmonet.utils does not exist
+  import com.google.ux.material.libmonet.utils.MathUtils;
+                                              ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+  import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                                 ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: package com.google.ux.material.libmonet.utils does not exist
+  import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:25: error: package com.google.ux.material.libmonet.hct does not exist
+  import com.google.ux.material.libmonet.hct.Hct;
+                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+  import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                                 ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:21: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+  import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                     ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:23: error: package com.google.ux.material.libmonet.hct does not exist
+  import com.google.ux.material.libmonet.hct.Hct;
+                                            ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:24: error: package com.google.ux.material.libmonet.palettes does not exist
+  import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                                 ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:63: error: package ThemeStyle does not exist
+      @ThemeStyle.Type
+                 ^
+  /data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:76: error: package ThemeStyle does not exist
+      public ColorScheme(@ColorInt int seed, boolean isDark, @ThemeStyle.Type int style,
+                                                                        ^
+  100 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
+/data/data/com.termux/files/home/Launcher3/aosp-stubs/com/android/internal/graphics/ColorUtils.java:13: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:21: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+import android.annotation.NonNull;
+                         ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:22: error: cannot find symbol
+import android.annotation.Size;
+                         ^
+  symbol:   class Size
+  location: package android.annotation
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:24: error: package android.content.theming does not exist
+import android.content.theming.ThemeStyle;
+                              ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:29: error: package com.google.ux.material.libmonet.dynamiccolor.ColorSpec does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ColorSpec.SpecVersion;
+                                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:30: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:31: error: package com.google.ux.material.libmonet.dynamiccolor.DynamicScheme does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme.Platform;
+                                                                 ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:32: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:33: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeCmf;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:34: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeContent;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:35: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeExpressive;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:36: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeFruitSalad;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:37: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeMonochrome;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:38: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeNeutral;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:39: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeRainbow;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:40: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeTonalSpot;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:41: error: package com.google.ux.material.libmonet.scheme does not exist
+import com.google.ux.material.libmonet.scheme.SchemeVibrant;
+                                             ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:65: error: cannot find symbol
+    private final DynamicScheme mMaterialScheme;
+                  ^
+  symbol:   class DynamicScheme
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:72: error: cannot find symbol
+    private final List<Hct> mProposedSeedHcts;
+                       ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                  ^
+  symbol:   class SpecVersion
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:77: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                           ^
+  symbol:   class Platform
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                  ^
+  symbol:   class SpecVersion
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:83: error: cannot find symbol
+            double contrastLevel, SpecVersion specVersion, Platform platform) {
+                                                           ^
+  symbol:   class Platform
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:194: error: cannot find symbol
+    public DynamicScheme getMaterialScheme() {
+           ^
+  symbol:   class DynamicScheme
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:451: error: cannot find symbol
+    private static double score(Hct hct, double proportion) {
+                                ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:459: error: cannot find symbol
+    private static List<Double> huePopulations(Map<Integer, Hct> hctByColor,
+                                                            ^
+  symbol:   class Hct
+  location: class ColorScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:25: error: package com.google.ux.material.libmonet.palettes does not exist
+    private final com.google.ux.material.libmonet.palettes.TonalPalette mMaterialTonalPalette;
+                                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/TonalPalette.java:33: error: package com.google.ux.material.libmonet.palettes does not exist
+    TonalPalette(com.google.ux.material.libmonet.palettes.TonalPalette materialTonalPalette) {
+                                                         ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: package com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair does not exist
+import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+                                                                        ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:19: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair.DeltaConstraint.FARTHER;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+                                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:20: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.dynamiccolor.TonePolarity.RELATIVE_LIGHTER;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ContrastCurve;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.ToneDeltaPair;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:26: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.TonePolarity;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:27: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:28: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:29: error: package com.google.ux.material.libmonet.utils does not exist
+import com.google.ux.material.libmonet.utils.MathUtils;
+                                            ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:36: error: cannot find symbol
+    private final MaterialDynamicColors mMdc;
+                  ^
+  symbol:   class MaterialDynamicColors
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:37: error: cannot find symbol
+    public final List<Supplier<DynamicColor>> allColors;
+                               ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:73: error: cannot find symbol
+    public DynamicColor widgetBackground() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:82: error: cannot find symbol
+    public DynamicColor clockHour() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:95: error: cannot find symbol
+    public DynamicColor clockMinute() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:106: error: cannot find symbol
+    public DynamicColor clockSecond() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:117: error: cannot find symbol
+    public DynamicColor weatherTemp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:129: error: cannot find symbol
+    public DynamicColor themeApp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:152: error: cannot find symbol
+    public DynamicColor onThemeApp() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:163: error: cannot find symbol
+    public DynamicColor themeAppRing() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:178: error: cannot find symbol
+    public DynamicColor themeNotif() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:191: error: cannot find symbol
+    public DynamicColor brandA() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:202: error: cannot find symbol
+    public DynamicColor brandB() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:213: error: cannot find symbol
+    public DynamicColor brandC() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:224: error: cannot find symbol
+    public DynamicColor brandD() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:236: error: cannot find symbol
+    public DynamicColor underSurface() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:245: error: cannot find symbol
+    public DynamicColor shadeActive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:258: error: cannot find symbol
+    public DynamicColor onShadeActive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:273: error: cannot find symbol
+    public DynamicColor onShadeActiveVariant() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:284: error: cannot find symbol
+    public DynamicColor shadeInactive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:297: error: cannot find symbol
+    public DynamicColor onShadeInactive() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:312: error: cannot find symbol
+    public DynamicColor onShadeInactiveVariant() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:323: error: cannot find symbol
+    public DynamicColor shadeDisabled() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:334: error: cannot find symbol
+    public DynamicColor overviewBackground() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:344: error: cannot find symbol
+    public DynamicColor surfaceEffect0() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:354: error: cannot find symbol
+    public DynamicColor surfaceEffect1() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:364: error: cannot find symbol
+    public DynamicColor surfaceEffect2() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:374: error: cannot find symbol
+    public DynamicColor surfaceEffect3() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/CustomDynamicColors.java:384: error: cannot find symbol
+    public DynamicColor surfaceEffect0Fallback() {
+           ^
+  symbol:   class DynamicColor
+  location: class CustomDynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicColor;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:25: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.MaterialDynamicColors;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:40: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllNeutralPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:52: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllAccentPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:65: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllErrorPalette() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:78: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getAllDynamicColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:89: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getFixedColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:101: error: cannot find symbol
+    public static List<Pair<String, DynamicColor>> getCustomColorsMapped() {
+                                    ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:107: error: cannot find symbol
+            List<Supplier<DynamicColor>> allColors) {
+                          ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:106: error: cannot find symbol
+    private static List<Pair<String, DynamicColor>> generateSysUINames(
+                                     ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:129: error: cannot find symbol
+            List<Pair<String, Function<DynamicScheme, TonalPalette>>> paletteMap) {
+                                       ^
+  symbol:   class DynamicScheme
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/DynamicColors.java:128: error: cannot find symbol
+    private static List<Pair<String, DynamicColor>> generatePaletteColors(
+                                     ^
+  symbol:   class DynamicColor
+  location: class DynamicColors
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: package com.google.ux.material.libmonet.utils does not exist
+import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:19: error: static import only from classes and interfaces
+import static com.google.ux.material.libmonet.utils.MathUtils.clampDouble;
+^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:23: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:24: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:25: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:26: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:28: error: cannot find symbol
+public class SchemeClock extends DynamicScheme {
+                                 ^
+  symbol: class DynamicScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClock.java:29: error: cannot find symbol
+    public SchemeClock(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                       ^
+  symbol:   class Hct
+  location: class SchemeClock
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:21: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.DynamicScheme;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:22: error: package com.google.ux.material.libmonet.dynamiccolor does not exist
+import com.google.ux.material.libmonet.dynamiccolor.Variant;
+                                                   ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:23: error: package com.google.ux.material.libmonet.hct does not exist
+import com.google.ux.material.libmonet.hct.Hct;
+                                          ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:24: error: package com.google.ux.material.libmonet.palettes does not exist
+import com.google.ux.material.libmonet.palettes.TonalPalette;
+                                               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:26: error: cannot find symbol
+public class SchemeClockVibrant extends DynamicScheme {
+                                        ^
+  symbol: class DynamicScheme
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/SchemeClockVibrant.java:27: error: cannot find symbol
+    public SchemeClockVibrant(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+                              ^
+  symbol:   class Hct
+  location: class SchemeClockVibrant
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:63: error: package ThemeStyle does not exist
+    @ThemeStyle.Type
+               ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:76: error: package ThemeStyle does not exist
+    public ColorScheme(@ColorInt int seed, boolean isDark, @ThemeStyle.Type int style,
+                                                                      ^
+/data/data/com.termux/files/home/Launcher3/monet/src/com/android/systemui/monet/ColorScheme.java:81: error: NonNull is not public in android.annotation; cannot be accessed from outside package
+    public ColorScheme(@NonNull @Size(min = 1) List<Integer> seeds, boolean isDark,
+                        ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+100 errors
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$3(JavaCompile.java:206)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.lambda$execute$0(SelectiveCompiler.java:101)
+	at org.gradle.api.internal.tasks.compile.incremental.transaction.CompileTransaction.execute(CompileTransaction.java:108)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:95)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:78)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:49)
+	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:224)
+	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:165)
+	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:150)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:90)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	... 30 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 3m 53s
+37 actionable tasks: 3 executed, 34 up-to-date

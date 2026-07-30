@@ -396,6 +396,9 @@ public class Launcher extends StatefulActivity<LauncherState>
     private StartupLatencyLogger mStartupLatencyLogger;
 
     protected WallpaperThemeManager mWallpaperThemeManager;
+    // XaulinXs Customizations: controla o desfoque real (RenderEffect + FLAG_BLUR_BEHIND)
+    // do App Drawer, sincronizado com o progresso do gesto de abrir/fechar.
+    private com.xaulinxs.customizations.blur.XaulinXsDepthController mXaulinXsDepthController;
 
     public static Launcher getLauncher(Context context) {
         return fromContext(context);
@@ -427,6 +430,10 @@ public class Launcher extends StatefulActivity<LauncherState>
         mAllAppsController = new AllAppsTransitionController(this);
         mStateManager = new StateManager<>(this, NORMAL);
         mStateManager.setLauncherUiState(mLauncherUiState);
+        // XaulinXs Customizations: registra o controller de desfoque real do App Drawer
+        // (precisa vir depois de mStateManager estar pronto).
+        mXaulinXsDepthController = new com.xaulinxs.customizations.blur.XaulinXsDepthController(this);
+        mXaulinXsDepthController.setupWindowBlurFlags();
 
         mAppWidgetManager = new WidgetManagerHelper(this);
         mAppWidgetHolder = LauncherWidgetHolder.newInstance(this);
@@ -2514,7 +2521,11 @@ public class Launcher extends StatefulActivity<LauncherState>
      * @param progress Transition progress from 0 to 1; where 0 => home and 1 => all apps.
      */
     public void onAllAppsTransition(float progress) {
-        // No-Op
+        // XaulinXs Customizations: aplica o desfoque real em cada frame do gesto de
+        // abrir/fechar o App Drawer (progress: 0 = home, 1 = drawer totalmente aberto).
+        if (mXaulinXsDepthController != null) {
+            mXaulinXsDepthController.setDepth(progress);
+        }
     }
 
     /** @return list of View targets to be blurred based on changes to depth. */

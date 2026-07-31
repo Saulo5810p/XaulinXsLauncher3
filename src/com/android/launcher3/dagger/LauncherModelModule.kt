@@ -23,7 +23,6 @@ import com.android.launcher3.ModelReloader
 import com.android.launcher3.dagger.LauncherAppSingleton
 import com.android.launcher3.graphics.ThemeManager.Companion.ICON_FACTORY_DAGGER_KEY
 import com.android.launcher3.graphics.theme.IconThemeFactory
-import com.android.launcher3.graphics.theme.MonoIconThemeFactory
 import com.android.launcher3.graphics.theme.MonoIconThemeFactory.MONO_FACTORY_ID
 import com.android.launcher3.graphics.theme.ThemePreference.Companion.THEME_OVERRIDES_DAGGER_KEY
 import com.android.launcher3.model.ModelWriterFactory
@@ -75,7 +74,7 @@ abstract class LauncherModelModule {
         @StringKey(MONO_FACTORY_ID)
         @Named(ICON_FACTORY_DAGGER_KEY)
         @JvmStatic
-        fun monoIconFactory(): IconThemeFactory = MonoIconThemeFactory
+        fun monoIconFactory(): IconThemeFactory = com.xaulinxs.customizations.icons.XaulinXsMonoIconThemeFactory
 
         @Provides
         @JvmStatic

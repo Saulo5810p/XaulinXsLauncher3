@@ -18,6 +18,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.xaulinxs.customizations.theme.WallpaperGradientView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <View
         android:id="@+id/bottom_sheet_handle_area"
         android:layout_width="match_parent"

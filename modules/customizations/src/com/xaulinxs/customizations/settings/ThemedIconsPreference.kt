@@ -12,13 +12,13 @@ package com.xaulinxs.customizations.settings
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.SwitchPreference
 import com.android.launcher3.graphics.ThemeManager
 
 class ThemedIconsPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-) : SwitchPreferenceCompat(context, attrs) {
+) : SwitchPreference(context, attrs) {
 
     init {
         isPersistent = false

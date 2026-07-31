@@ -14,12 +14,19 @@ package com.xaulinxs.customizations.blur
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Build
+import android.util.Log
+import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.FLAG_BLUR_BEHIND
+import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
 import com.android.launcher3.Launcher
 import com.android.launcher3.LauncherPrefs
 import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
 
-private const val MAX_BLUR_RADIUS_PX = 150
+// Raio bem mais agressivo — 150px (~60dp em telas xxhdpi) resultava em um blur
+// perceptível como "fraco"; valores de referência do Pixel/One UI passam de
+// 100dp de raio efetivo. Em xxhdpi (~2.5x), 320px ≈ 128dp.
+private const val MAX_BLUR_RADIUS_PX = 320
+private const val TAG = "XaulinXsDepthController"
 
 class XaulinXsDepthController(private val launcher: Launcher) {
 
@@ -31,6 +38,12 @@ class XaulinXsDepthController(private val launcher: Launcher) {
     fun setupWindowBlurFlags() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             launcher.window?.addFlags(FLAG_BLUR_BEHIND)
+            launcher.window?.addFlags(FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+            val windowManager = launcher.getSystemService(WindowManager::class.java)
+            windowManager?.addCrossWindowBlurEnabledListener { enabled ->
+                Log.d(TAG, "Cross-window blur enabled pelo sistema: $enabled")
+            }
         }
         XaulinXsWindowBlurStateHolder.setBlurEnabled(
             isEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S

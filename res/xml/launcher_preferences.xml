@@ -56,6 +56,12 @@
             android:summary="@string/xaulinxs_themed_scrim_summary"
             android:persistent="false" />
 
+        <com.xaulinxs.customizations.settings.IconScalePreference
+            android:key="xaulinxs_icon_scale"
+            android:title="@string/xaulinxs_icon_scale_title"
+            android:summary="@string/xaulinxs_icon_scale_summary"
+            android:persistent="false" />
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

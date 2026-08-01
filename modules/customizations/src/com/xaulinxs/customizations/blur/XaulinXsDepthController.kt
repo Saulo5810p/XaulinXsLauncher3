@@ -22,15 +22,24 @@ import com.android.launcher3.Launcher
 import com.android.launcher3.LauncherPrefs
 import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
 
-// Raio bem mais agressivo — 150px (~60dp em telas xxhdpi) resultava em um blur
-// perceptível como "fraco"; valores de referência do Pixel/One UI passam de
-// 100dp de raio efetivo. Em xxhdpi (~2.5x), 320px ≈ 128dp.
-private const val MAX_BLUR_RADIUS_PX = 320
+// Raio do blur do App Drawer, sincronizado com o progresso do gesto de
+// abrir/fechar (0..1 * este valor). 320px (~128dp em xxhdpi) — intensidade
+// forte pedida para o vidro fosco do drawer.
+private const val DRAWER_MAX_BLUR_RADIUS_PX = 320f
+
+// Raio do blur atrás de um balão de contexto (long-press), aplicado de forma
+// instantânea (sem crescer a partir de um gesto) — diferente do drawer, aqui
+// não há transição progressiva, então um raio muito alto aplicado de uma vez
+// gera artefato visual (a View borrada "some" em vez de ficar fosca).
+private const val POPUP_BLUR_RADIUS_PX = 70f
+
 private const val TAG = "XaulinXsDepthController"
 
 class XaulinXsDepthController(private val launcher: Launcher) {
 
     private var currentDepth = 0f
+    private var popupBlurActive = false
+    private var appliedRadius = -1f
 
     private val isEnabled: Boolean
         get() = LauncherPrefs.get(launcher).get(THEMED_SCRIM_ENABLED)
@@ -52,18 +61,38 @@ class XaulinXsDepthController(private val launcher: Launcher) {
 
     fun setDepth(depth: Float) {
         val clamped = depth.coerceIn(0f, 1f)
-        val target = if (isEnabled) clamped else 0f
+        currentDepth = if (isEnabled) clamped else 0f
         XaulinXsWindowBlurStateHolder.setBlurEnabled(
             isEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
         )
-        if (target == currentDepth) return
-        currentDepth = target
-        applyBlur(target)
+        applyEffectiveBlur()
     }
 
-    private fun applyBlur(depth: Float) {
+    fun setPopupBlurActive(active: Boolean) {
+        if (popupBlurActive == active) return
+        popupBlurActive = active
+        applyEffectiveBlur()
+    }
+
+    private fun applyEffectiveBlur() {
+        if (!isEnabled) {
+            applyBlurRadius(0f)
+            return
+        }
+        val drawerRadius = currentDepth * DRAWER_MAX_BLUR_RADIUS_PX
+        val popupRadius = if (popupBlurActive) POPUP_BLUR_RADIUS_PX else 0f
+        applyBlurRadius(maxOf(drawerRadius, popupRadius))
+    }
+
+    private fun applyBlurRadius(radiusPx: Float) {
+        if (radiusPx == appliedRadius) return
+        appliedRadius = radiusPx
+        applyBlur(radiusPx)
+    }
+
+    private fun applyBlur(radiusPx: Float) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
-        val radius = (depth * MAX_BLUR_RADIUS_PX).toInt()
+        val radius = radiusPx.toInt()
 
         val window = launcher.window
         if (window != null) {
@@ -74,7 +103,7 @@ class XaulinXsDepthController(private val launcher: Launcher) {
         }
 
         val effect = if (radius > 1) {
-            RenderEffect.createBlurEffect(radius.toFloat(), radius.toFloat(), Shader.TileMode.CLAMP)
+            RenderEffect.createBlurEffect(radiusPx, radiusPx, Shader.TileMode.CLAMP)
         } else {
             null
         }

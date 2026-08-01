@@ -461,6 +461,12 @@ public class InvariantDeviceProfile {
         // If the partner customization apk contains any grid overrides, apply them
         // Supported overrides: numRows, numColumns, iconSize
         applyPartnerDeviceProfileOverrides(context, metrics);
+        // XaulinXs Customizations: aplica o multiplicador de tamanho de ícone
+        // (100%-200%) escolhido pelo usuário. Tem que vir depois do override de
+        // partner acima (mesma convenção) e recalcula iconBitmapSize/fillResIconDpi
+        // na sequência — diferente do override de partner, que não recalcula e
+        // pixelizaria em valores altos.
+        applyXaulinXsIconScaleOverride(context, metrics);
 
         final List<DeviceProfile> localSupportedProfiles = new ArrayList<>();
         defaultWallpaperSize = new Point(displayInfo.currentSize);
@@ -533,6 +539,16 @@ public class InvariantDeviceProfile {
             onConfigChanged();
             Trace.endSection();
         });
+    }
+
+    /**
+     * XaulinXs Customizations — força o InvariantDeviceProfile a recalcular
+     * grid/ícone/bitmap depois que o usuário muda o slider de tamanho de
+     * ícone. Reaproveita o mesmo pipeline de onConfigChanged() usado pela
+     * troca de grid (recalcula tudo e notifica os listeners).
+     */
+    public void onXaulinXsIconScaleChanged() {
+        mMainExecutor.execute(() -> onConfigChanged());
     }
 
     private Object[] toModelState() {
@@ -647,6 +663,44 @@ public class InvariantDeviceProfile {
         } catch (Resources.NotFoundException ex) {
             Log.e(TAG, "Invalid Partner grid resource!", ex);
         }
+    }
+
+    /**
+     * XaulinXs Customizations — aplica o multiplicador de tamanho de ícone
+     * (100%-200%) definido pelo usuário em
+     * com.xaulinxs.customizations.settings.IconScalePreference. Escala todos
+     * os tamanhos de ícone por tipo de tela (retrato/paisagem/etc.) e
+     * recalcula iconBitmapSize/fillResIconDpi para o ícone renderizar sem
+     * pixelizar mesmo em 200%.
+     */
+    private void applyXaulinXsIconScaleOverride(Context context, DisplayMetrics dm) {
+        int percent = com.xaulinxs.customizations.icons.XaulinXsIconScale.getScalePercent(context);
+        if (percent == 100) {
+            return;
+        }
+        float scale = percent / 100f;
+        for (int i = 0; i < iconSize.length; i++) {
+            iconSize[i] = iconSize[i] * scale;
+        }
+        // XaulinXs Customizations: allAppsIconSize é um array SEPARADO de iconSize,
+        // usado só pelo App Drawer (ver AllAppsProfile.kt) — sem escalar aqui, o
+        // tamanho do ícone no App Drawer não mudava, mesmo com o slider em 200%.
+        if (allAppsIconSize != null) {
+            for (int i = 0; i < allAppsIconSize.length; i++) {
+                allAppsIconSize[i] = allAppsIconSize[i] * scale;
+            }
+        }
+        float maxIconSize = iconSize[0];
+        for (int i = 1; i < iconSize.length; i++) {
+            maxIconSize = Math.max(maxIconSize, iconSize[i]);
+        }
+        if (allAppsIconSize != null) {
+            for (float size : allAppsIconSize) {
+                maxIconSize = Math.max(maxIconSize, size);
+            }
+        }
+        iconBitmapSize = ResourceUtils.pxFromDp(maxIconSize, dm);
+        fillResIconDpi = getLauncherIconDensity(iconBitmapSize);
     }
 
     private static float dist(float x0, float y0, float x1, float y1) {

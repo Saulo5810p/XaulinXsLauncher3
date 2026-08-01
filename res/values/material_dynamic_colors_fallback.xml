@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    XaulinXs Customizations: paleta de marca fixa (rosa-carmesim, extraída de
-    icone.png), substituindo o fallback genérico do Material 3. Estas cores
-    NÃO são dinâmicas por design — é a identidade visual "stock" do
-    XaulinXs Launcher, consistente entre tema claro/escuro do sistema.
+    Fallback values for the material colors above, used pre Android 12
+    when we don't have wallpaper based colors.
 -->
 <resources>
-    <color name="materialColorPrimary">#A12668</color>
+    <color name="materialColorPrimary">#6750A4</color>
     <color name="materialColorOnPrimary">#FFFFFF</color>
-    <color name="materialColorPrimaryFixed">#F1D0E2</color>
-    <color name="materialColorPrimaryFixedDim">#E6A8C9</color>
-    <color name="materialColorOnPrimaryFixed">#3B0C25</color>
+    <color name="materialColorPrimaryFixed">#EADDFF</color>
+    <color name="materialColorPrimaryFixedDim">#D0BCFF</color>
+    <color name="materialColorOnPrimaryFixed">#21005D</color>
 
-    <color name="materialColorSecondaryFixed">#E6CBDA</color>
-    <color name="materialColorOnSecondaryFixedVariant">#67324E</color>
+    <color name="materialColorSecondaryFixed">#E8DEF8</color>
+    <color name="materialColorOnSecondaryFixedVariant">#4A4458</color>
 
-    <color name="materialColorSurface">#FAEFF5</color>
-    <color name="materialColorSurfaceDim">#F2D4E4</color>
-    <color name="materialColorSurfaceBright">#FCF3F8</color>
+    <color name="materialColorSurface">#FEF7FF</color>
+    <color name="materialColorSurfaceDim">#DED8E1</color>
+    <color name="materialColorSurfaceBright">#FEF7FF</color>
     <color name="materialColorSurfaceContainerLowest">#FFFFFF</color>
-    <color name="materialColorSurfaceContainerLow">#F9ECF3</color>
-    <color name="materialColorSurfaceContainer">#F6E4EE</color>
-    <color name="materialColorSurfaceContainerHigh">#F1DAE6</color>
-    <color name="materialColorSurfaceContainerHighest">#EDCFDF</color>
+    <color name="materialColorSurfaceContainerLow">#F7F2FA</color>
+    <color name="materialColorSurfaceContainer">#F3EDF7</color>
+    <color name="materialColorSurfaceContainerHigh">#ECE6F0</color>
+    <color name="materialColorSurfaceContainerHighest">#E6E0E9</color>
 
-    <color name="materialColorOnSurface">#3B0C25</color>
-    <color name="materialColorOnSurfaceVariant">#723154</color>
-    <color name="materialColorOutline">#995C7C</color>
-    <color name="materialColorOutlineVariant">#DBBDCD</color>
+    <color name="materialColorOnSurface">#1C1B1F</color>
+    <color name="materialColorOnSurfaceVariant">#49454F</color>
+    <color name="materialColorOutline">#79747E</color>
+    <color name="materialColorOutlineVariant">#CAC4D0</color>
 
-    <color name="customColorSurfaceEffect0">#F6E4EE</color>
-    <color name="customColorSurfaceEffect0Fallback">#F6E4EE</color>
+    <color name="customColorSurfaceEffect0">#F3EDF7</color>
+    <color name="customColorSurfaceEffect0Fallback">#F3EDF7</color>
 
-    <color name="materialColorTertiaryContainer">#E8C9DA</color>
-    <color name="materialColorInverseSurface">#4F1735</color>
-    <color name="materialColorSecondary">#8B4B6D</color>
-    <color name="materialColorTertiary">#A63F76</color>
-    <color name="materialColorOnTertiaryFixed">#3B0C25</color>
-    <color name="materialColorTertiaryFixedDim">#D9A6C1</color>
-    <color name="materialColorSurfaceVariant">#E9D2DF</color>
+    <color name="materialColorTertiaryContainer">#FFD8E4</color>
+    <color name="materialColorInverseSurface">#313033</color>
+    <color name="materialColorSecondary">#625B71</color>
+    <color name="materialColorTertiary">#7D5260</color>
+    <color name="materialColorOnTertiaryFixed">#31111D</color>
+    <color name="materialColorTertiaryFixedDim">#EFB8C8</color>
+    <color name="materialColorSurfaceVariant">#E7E0EC</color>
     <color name="materialColorOnTertiary">#FFFFFF</color>
-    <color name="materialColorOnTertiaryContainer">#3B0C25</color>
+    <color name="materialColorOnTertiaryContainer">#31111D</color>
 </resources>

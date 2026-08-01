@@ -2535,6 +2535,12 @@ public class Launcher extends StatefulActivity<LauncherState>
         return mDepthBlurTargets == null ? Collections.emptyList() : mDepthBlurTargets;
     }
 
+    // XaulinXs Customizations: getter público para o XaulinXsPopupBlurHelper
+    // acionar o blur ao abrir/fechar um balão de contexto (long-press).
+    public com.xaulinxs.customizations.blur.XaulinXsDepthController getXaulinXsDepthController() {
+        return mXaulinXsDepthController;
+    }
+
     /**
      * Animates Launcher elements during a transition to the Widgets pages.
      *

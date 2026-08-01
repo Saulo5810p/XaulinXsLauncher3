@@ -325,6 +325,8 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
         if (shouldAddArrow()) {
             addArrow();
         }
+        // XaulinXs Customizations: aciona o blur real atrás do popup ao abrir
+        com.xaulinxs.customizations.blur.XaulinXsPopupBlurHelper.onPopupShown(mActivityContext);
         animateOpen();
     }
 
@@ -743,6 +745,8 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
         getPopupContainer().removeView(this);
         getPopupContainer().removeView(mArrow);
         mOnCloseCallbacks.executeAllAndClear();
+        // XaulinXs Customizations: desativa o blur do popup ao fechar
+        com.xaulinxs.customizations.blur.XaulinXsPopupBlurHelper.onPopupClosed(mActivityContext);
     }
 
     /**

@@ -281,11 +281,4 @@
 
     <!-- Home screen files -->
     <color name="home_screen_files_folder_icon_color">@color/system_primary_light</color>
-
-    <color name="xaulinxs_brand_primary">#A12668</color>
-    <color name="xaulinxs_brand_primary_dark">#3B0C25</color>
-    <color name="xaulinxs_brand_on_primary">#FFFFFF</color>
-
-    <color name="home_settings_switch_thumb_color">@color/xaulinxs_brand_primary</color>
-    <color name="home_settings_switch_track_color">@color/xaulinxs_brand_primary_dark</color>
 </resources>

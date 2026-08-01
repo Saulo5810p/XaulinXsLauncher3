@@ -7,4 +7,6 @@
     <string name="xaulinxs_themed_icons_summary">Colorir os ícones com base no papel de parede (Material You)</string>
     <string name="xaulinxs_themed_scrim_title">Fundo desfocado no menu de apps</string>
     <string name="xaulinxs_themed_scrim_summary">Aplica um efeito de vidro fosco temático ao papel de parede na tela de apps</string>
+    <string name="xaulinxs_icon_scale_title">Tamanho dos ícones</string>
+    <string name="xaulinxs_icon_scale_summary">Aumenta o tamanho dos ícones até 200% (valores altos podem sobrepor ícones vizinhos)</string>
 </resources>

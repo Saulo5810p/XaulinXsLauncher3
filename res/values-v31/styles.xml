@@ -30,8 +30,6 @@
         <item name="android:windowNoTitle">true</item>
         <item name="preferenceTheme">@style/HomeSettings.PreferenceTheme</item>
         <item name="android:fontFamily">google-sans-flex</item>
-        <item name="android:colorAccent">@color/xaulinxs_brand_primary</item>
-        <item name="android:colorControlActivated">@color/xaulinxs_brand_primary</item>
     </style>
 
     <style name="HomeSettings.PreferenceTheme" parent="@style/PreferenceThemeOverlay">

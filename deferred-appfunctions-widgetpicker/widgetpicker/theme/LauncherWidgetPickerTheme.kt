@@ -20,6 +20,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.android.launcher3.widgetpicker.ui.theme.WidgetPickerTheme
+import com.xaulinxs.customizations.theme.XaulinXsComposeColorScheme // XaulinXs Customizations
 
 /** Contains theme that launcher applies to the widget picker. */
 @Composable
@@ -41,7 +42,7 @@ fun LauncherWidgetPickerTheme(
             )
         }
 
-    MaterialTheme {
+    MaterialTheme(colorScheme = XaulinXsComposeColorScheme) {
         WidgetPickerTheme(
             colors = widgetPickerColors,
             textStyles = launcherWidgetPickerTextStyles(),

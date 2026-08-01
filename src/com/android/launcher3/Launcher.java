@@ -434,6 +434,7 @@ public class Launcher extends StatefulActivity<LauncherState>
         // (precisa vir depois de mStateManager estar pronto).
         mXaulinXsDepthController = new com.xaulinxs.customizations.blur.XaulinXsDepthController(this);
         mXaulinXsDepthController.setupWindowBlurFlags();
+        com.xaulinxs.customizations.theme.DefaultWallpaperApplier.applyOnFirstRunIfNeeded(this);
 
         mAppWidgetManager = new WidgetManagerHelper(this);
         mAppWidgetHolder = LauncherWidgetHolder.newInstance(this);

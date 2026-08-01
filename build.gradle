@@ -72,6 +72,7 @@ android {
                 'iconloader/res',
                 'animationlib/res',
             ]
+            assets.srcDirs = ['assets']
             proto {
                 srcDirs 'protos', 'protos_overrides'
             }

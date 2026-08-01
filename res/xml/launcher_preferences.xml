@@ -62,6 +62,24 @@
             android:summary="@string/xaulinxs_icon_scale_summary"
             android:persistent="false" />
 
+        <com.xaulinxs.customizations.settings.IconLabelsPreference
+            android:key="xaulinxs_icon_labels_hidden"
+            android:title="@string/xaulinxs_icon_labels_title"
+            android:summary="@string/xaulinxs_icon_labels_summary"
+            android:persistent="false" />
+
+        <com.xaulinxs.customizations.settings.IconOpacityPreference
+            android:key="xaulinxs_icon_opacity"
+            android:title="@string/xaulinxs_icon_opacity_title"
+            android:summary="@string/xaulinxs_icon_opacity_summary"
+            android:persistent="false" />
+
+        <com.xaulinxs.customizations.settings.ScrimOpacityPreference
+            android:key="xaulinxs_scrim_opacity"
+            android:title="@string/xaulinxs_scrim_opacity_title"
+            android:summary="@string/xaulinxs_scrim_opacity_summary"
+            android:persistent="false" />
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

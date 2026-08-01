@@ -9,4 +9,10 @@
     <string name="xaulinxs_themed_scrim_summary">Aplica um efeito de vidro fosco temático ao papel de parede na tela de apps</string>
     <string name="xaulinxs_icon_scale_title">Tamanho dos ícones</string>
     <string name="xaulinxs_icon_scale_summary">Aumenta o tamanho dos ícones até 200% (valores altos podem sobrepor ícones vizinhos)</string>
+    <string name="xaulinxs_icon_labels_title">Ocultar labels dos ícones</string>
+    <string name="xaulinxs_icon_labels_summary">Esconde o texto abaixo dos ícones na tela inicial, gaveta de apps e pastas</string>
+    <string name="xaulinxs_icon_opacity_title">Transparência dos ícones</string>
+    <string name="xaulinxs_icon_opacity_summary">Ajusta a opacidade dos ícones de 0% a 100%</string>
+    <string name="xaulinxs_scrim_opacity_title">Transparência do fundo do menu de apps</string>
+    <string name="xaulinxs_scrim_opacity_summary">Ajusta a opacidade do véu atrás da gaveta de apps (aplica na próxima vez que abrir)</string>
 </resources>

@@ -754,7 +754,11 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
             if (isTextWithArchivingIcon) {
                 setTextWithArchivingIcon(label);
             } else {
-                setText(label);
+                // XaulinXs Customizations: oculta o texto visível quando o toggle
+                // "ocultar labels dos ícones" está ativo (contentDescription abaixo
+                // continua normal, pra não quebrar leitor de tela).
+                setText(com.xaulinxs.customizations.icons.XaulinXsIconLabels.isHidden(getContext())
+                        ? "" : label);
             }
         }
         if (contentDescription != null) {
@@ -1450,6 +1454,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         mDisableRelayout = mIcon != null;
 
         icon.setBounds(0, 0, mIconSize, mIconSize);
+        // XaulinXs Customizations: aplica a opacidade de ícone escolhida pelo usuário
+        icon.setAlpha(com.xaulinxs.customizations.icons.XaulinXsIconOpacity.getAlpha(getContext()));
 
         updateIcon(icon);
 

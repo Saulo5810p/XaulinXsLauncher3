@@ -19,11 +19,21 @@ import com.android.launcher3.LauncherPrefs
 import com.android.launcher3.Utilities
 import com.android.launcher3.util.WallpaperColorHints
 import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
+import com.android.launcher3.LauncherPrefs.Companion.backedUpItem
 
 private const val SCRIM_ALPHA_LIGHT = 140
 private const val SCRIM_ALPHA_DARK = 160
 private const val SHADE_RATIO_LIGHT = 0.15f
 private const val SHADE_RATIO_DARK = 0.55f
+
+// XaulinXs Customizations: percentual de opacidade do véu escolhido pelo
+// usuário no slider "Transparência do fundo do menu de apps". 100%
+// preserva o alpha original (SCRIM_ALPHA_LIGHT/DARK acima); 0% deixa o véu
+// totalmente transparente (só o blur real do XaulinXsDepthController fica visível).
+const val SCRIM_OPACITY_MIN_PERCENT = 0
+const val SCRIM_OPACITY_MAX_PERCENT = 100
+private const val KEY_SCRIM_OPACITY_PERCENT = "xaulinxs_scrim_opacity_percent"
+val SCRIM_OPACITY_PERCENT = backedUpItem(KEY_SCRIM_OPACITY_PERCENT, SCRIM_OPACITY_MAX_PERCENT)
 
 object WallpaperScrimHelper {
 
@@ -42,7 +52,11 @@ object WallpaperScrimHelper {
             } else {
                 ColorUtils.blendARGB(primaryColor, android.graphics.Color.WHITE, SHADE_RATIO_LIGHT)
             }
-        val alpha = if (isDark) SCRIM_ALPHA_DARK else SCRIM_ALPHA_LIGHT
+        val baseAlpha = if (isDark) SCRIM_ALPHA_DARK else SCRIM_ALPHA_LIGHT
+        // XaulinXs Customizations: escala o alpha base pelo percentual do slider.
+        val opacityPercent = LauncherPrefs.get(context).get(SCRIM_OPACITY_PERCENT)
+            .coerceIn(SCRIM_OPACITY_MIN_PERCENT, SCRIM_OPACITY_MAX_PERCENT)
+        val alpha = (baseAlpha * opacityPercent / 100).coerceIn(0, 255)
         return ColorUtils.setAlphaComponent(shaded, alpha)
     }
 }

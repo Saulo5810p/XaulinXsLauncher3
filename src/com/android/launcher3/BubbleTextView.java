@@ -1453,17 +1453,6 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         // same as before.
         mDisableRelayout = mIcon != null;
 
-        // XaulinXs Customizations: envolve o ícone com um wrapper de blur real (glifo
-        // desfocado), se a opção estiver ativada.
-        float xaulinXsIconBlurRadius =
-                com.xaulinxs.customizations.icons.XaulinXsIconBlur.getBlurRadiusPx(getContext());
-        if (xaulinXsIconBlurRadius > 0f) {
-            com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable blurredIcon =
-                    new com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable(icon);
-            blurredIcon.setBlurRadiusPx(xaulinXsIconBlurRadius);
-            icon = blurredIcon;
-        }
-
         icon.setBounds(0, 0, mIconSize, mIconSize);
         // XaulinXs Customizations: aplica a opacidade de ícone escolhida pelo usuário
         icon.setAlpha(com.xaulinxs.customizations.icons.XaulinXsIconOpacity.getAlpha(getContext()));

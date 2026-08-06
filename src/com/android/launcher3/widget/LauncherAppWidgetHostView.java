@@ -163,6 +163,7 @@ public class LauncherAppWidgetHostView extends BaseLauncherAppWidgetHostView
 
         // The provider info or the views might have changed.
         checkIfAutoAdvance();
+        com.xaulinxs.customizations.blur.XaulinXsWidgetBlur.applyTo(this);
     }
 
     @Override
@@ -279,6 +280,7 @@ public class LauncherAppWidgetHostView extends BaseLauncherAppWidgetHostView
         super.onAttachedToWindow();
         mIsAttachedToWindow = true;
         checkIfAutoAdvance();
+        com.xaulinxs.customizations.blur.XaulinXsWidgetBlur.applyTo(this);
     }
 
     @Override

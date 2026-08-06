@@ -19,7 +19,9 @@ object XaulinXsPopupBlurHelper {
 
     @JvmStatic
     fun onPopupShown(activityContext: ActivityContext?) {
-        (activityContext as? Launcher)?.xaulinXsDepthController?.setPopupBlurActive(true)
+        val launcher = activityContext as? Launcher ?: return
+        if (!com.xaulinxs.customizations.blur.XaulinXsPopupBlur.isEnabled(launcher)) return
+        launcher.xaulinXsDepthController?.setPopupBlurActive(true)
     }
 
     @JvmStatic

@@ -1,0 +1,1821 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+
+> Configure project :
+WARNING: The option setting 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' is experimental.
+
+> Task :preBuild UP-TO-DATE
+> Task :preNoQuickstepDebugBuild UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeDebugMetadata NO-SOURCE
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :generateNoQuickstepDebugBuildConfig UP-TO-DATE
+> Task :extractDebugProto UP-TO-DATE
+> Task :extractIncludeNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepDebugProto UP-TO-DATE
+> Task :extractNoQuickstepProto UP-TO-DATE
+> Task :extractProto UP-TO-DATE
+> Task :generateNoQuickstepDebugProto UP-TO-DATE
+> Task :checkNoQuickstepDebugAarMetadata UP-TO-DATE
+> Task :generateNoQuickstepDebugResValues UP-TO-DATE
+> Task :mapNoQuickstepDebugSourceSetPaths
+> Task :generateNoQuickstepDebugResources
+> Task :packageNoQuickstepDebugResources
+> Task :createNoQuickstepDebugCompatibleScreenManifests UP-TO-DATE
+> Task :extractDeepLinksNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugResources
+> Task :processNoQuickstepDebugMainManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifest UP-TO-DATE
+> Task :processNoQuickstepDebugManifestForPackage UP-TO-DATE
+> Task :parseNoQuickstepDebugLocalResources
+> Task :javaPreCompileNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugShaders UP-TO-DATE
+> Task :compileNoQuickstepDebugShaders NO-SOURCE
+> Task :generateNoQuickstepDebugAssets UP-TO-DATE
+> Task :mergeNoQuickstepDebugAssets UP-TO-DATE
+> Task :compressNoQuickstepDebugAssets UP-TO-DATE
+> Task :checkNoQuickstepDebugDuplicateClasses UP-TO-DATE
+> Task :desugarNoQuickstepDebugFileDependencies UP-TO-DATE
+> Task :mergeExtDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeLibDexNoQuickstepDebug UP-TO-DATE
+> Task :mergeNoQuickstepDebugJniLibFolders UP-TO-DATE
+> Task :mergeNoQuickstepDebugNativeLibs UP-TO-DATE
+> Task :stripNoQuickstepDebugDebugSymbols UP-TO-DATE
+> Task :validateSigningNoQuickstepDebug UP-TO-DATE
+> Task :writeNoQuickstepDebugAppMetadata UP-TO-DATE
+> Task :writeNoQuickstepDebugSigningConfigVersions UP-TO-DATE
+warn: removing resource com.android.launcher3:string/allow_rotation_title without required default value.
+warn: removing resource com.android.launcher3:string/folder_name_format_exact without required default value.
+warn: removing resource com.android.launcher3:string/folder_name_format_overflow without required default value.
+warn: removing resource com.android.launcher3:string/item_added_to_workspace without required default value.
+warn: removing resource com.android.launcher3:string/widgets_full_sheet_cancel_button_description without required default value.
+warn: removing resource com.android.launcher3:string/widgets_full_sheet_search_bar_hint without required default value.
+warn: removing resource com.android.launcher3:string/work_profile_edu_accept without required default value.
+08-06 18:40:12.920 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040432.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e7.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ec.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054d.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cd.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e8.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040087.
+08-06 18:40:12.921 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008f.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008e.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c2.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ab.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ba.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b1.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402eb.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b0.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b9.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030d.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b3.
+08-06 18:40:12.922 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013c.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f2.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040232.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04002b.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040029.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040003.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c7.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c8.
+08-06 18:40:12.923 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057c.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040067.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057a.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e2.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040389.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042c.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040506.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040388.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fe.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400df.
+08-06 18:40:12.924 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403ef.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040034.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004b.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c1.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040233.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037d.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037f.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037e.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04053e.
+08-06 18:40:12.925 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040535.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040536.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04053b.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04053a.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040379.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040378.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037a.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040525.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405db.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405dc.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d5.
+08-06 18:40:12.926 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d6.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d7.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040580.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b7.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040083.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040082.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040081.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040080.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007f.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028d.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040381.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040256.
+08-06 18:40:12.927 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032e.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040297.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f8.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401fe.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f9.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f6.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401fb.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f7.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401fc.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401fd.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040215.
+08-06 18:40:12.928 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040636.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063f.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040637.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040638.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063b.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063a.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063c.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040639.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063d.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04063e.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000b.
+08-06 18:40:12.929 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000a.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000c.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040023.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040024.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040006.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040009.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040008.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000d.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040021.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000e.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040007.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040004.
+08-06 18:40:12.930 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040005.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040012.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040013.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040020.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040015.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040014.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001f.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040017.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040019.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040018.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001b.
+08-06 18:40:12.931 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001d.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001e.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001a.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040022.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040016.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04001c.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040597.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405a0.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04059d.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e2.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e1.
+08-06 18:40:12.932 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040387.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401dc.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040010.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040206.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040513.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04000f.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400db.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d7.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e2.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e3.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400c3.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ef.
+08-06 18:40:12.933 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ea.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04002a.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f0.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ef.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040493.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049a.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020b.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020a.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e5.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04059f.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04059e.
+08-06 18:40:12.934 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ac.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d8.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038c.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038e.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038d.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040390.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040391.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040392.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038f.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040203.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038b.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040599.
+08-06 18:40:12.935 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04059a.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04059b.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040473.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040475.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040474.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040384.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04016a.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04016c.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04014a.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040150.
+08-06 18:40:12.936 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04014e.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04014f.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04014c.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040181.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a2.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04014b.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040031.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04002f.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040030.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040032.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ab.
+08-06 18:40:12.937 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400da.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d8.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d9.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007d.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e3.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e4.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040106.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040111.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020d.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b9.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404bb.
+08-06 18:40:12.938 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404bc.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404bd.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e0.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040514.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040559.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04038a.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f3.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f2.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040151.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040621.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040386.
+08-06 18:40:12.939 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040385.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040078.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040079.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040094.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009c.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009b.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009f.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009d.
+08-06 18:40:12.940 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a2.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040093.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009e.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040088.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04009a.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d4.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403db.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040098.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044d.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040092.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040099.
+08-06 18:40:12.941 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040095.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040096.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a0.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a1.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040451.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402bf.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061f.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c0.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040620.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032d.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007b.
+08-06 18:40:12.942 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040605.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fe.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ec.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fb.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f5.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b0.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f7.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f3.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f1.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040090.
+08-06 18:40:12.943 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040431.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040245.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040247.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040248.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040249.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024a.
+08-06 18:40:12.944 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024b.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040246.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c7.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04002d.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b4.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040468.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046a.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046b.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e1.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040307.
+08-06 18:40:12.945 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040187.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e7.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ef.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400af.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ad.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b2.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ab.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a9.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ac.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400aa.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b1.
+08-06 18:40:12.946 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b0.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029f.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046f.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039b.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039c.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039d.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f4.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040334.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d7.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ce.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040100.
+08-06 18:40:12.947 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040062.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b8.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f2.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ea.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400eb.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ec.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ee.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f0.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ef.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040199.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019c.
+08-06 18:40:12.948 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019d.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019f.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019a.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f5.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f9.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f8.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f7.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f6.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f3.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400fb.
+08-06 18:40:12.949 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400fa.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400fc.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f4.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400f2.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040190.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e4.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d2.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d8.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d9.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cf.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040554.
+08-06 18:40:12.950 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040553.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e5.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040103.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040104.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040105.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040125.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040112.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011b.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040113.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040122.
+08-06 18:40:12.951 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040123.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ca.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011c.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040223.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011a.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040117.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040116.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040119.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040118.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013b.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040136.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040135.
+08-06 18:40:12.952 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013a.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040138.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010f.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010a.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040109.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010e.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fa.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b1.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040121.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402db.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d0.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405bc.
+08-06 18:40:12.953 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ad.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040139.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040137.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040114.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011d.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011e.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04011f.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040507.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040509.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e4.
+08-06 18:40:12.954 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040108.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f0.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ef.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ed.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040134.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040131.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040132.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403bc.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e5.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040236.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040239.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04023a.
+08-06 18:40:12.955 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040238.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040237.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04023b.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040142.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405eb.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04023c.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040143.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a0.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04053f.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ee.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d4.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d2.
+08-06 18:40:12.956 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040141.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040235.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e1.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405de.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e0.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403da.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040299.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040244.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e8.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040339.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033a.
+08-06 18:40:12.957 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040063.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040329.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400dc.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e5.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e6.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040626.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040483.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040608.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040364.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034d.
+08-06 18:40:12.958 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040344.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040346.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040345.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034a.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034b.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034c.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a7.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040356.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040357.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040359.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035a.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040360.
+08-06 18:40:12.959 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035f.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040343.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040342.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033e.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040340.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033f.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035b.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035c.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040349.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040348.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036f.
+08-06 18:40:12.960 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040372.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040370.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036d.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040371.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036e.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036c.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040376.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033c.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033b.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040352.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040361.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040365.
+08-06 18:40:12.961 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034e.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040367.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040366.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040368.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040350.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034f.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040351.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040355.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035e.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040358.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040341.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033d.
+08-06 18:40:12.962 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040347.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040354.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040363.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040353.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040362.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036a.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036b.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037c.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a5.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a6.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018c.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018d.
+08-06 18:40:12.963 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a4.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040101.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026e.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040278.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040275.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026b.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040276.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026c.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040279.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040273.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026d.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040277.
+08-06 18:40:12.964 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040268.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026a.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040267.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040269.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040270.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040272.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04026f.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040271.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006d.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006a.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060e.
+08-06 18:40:12.965 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047b.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040489.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040610.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f5.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040426.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035d.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040427.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b5.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b4.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b3.
+08-06 18:40:12.966 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040377.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040332.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040189.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012b.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040128.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012c.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012a.
+08-06 18:40:12.967 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040129.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c1.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404be.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404bf.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c0.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040488.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040191.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.968 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d8.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040188.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040328.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04053d.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040338.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040336.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040375.
+08-06 18:40:12.969 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040337.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040374.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040369.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007a.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e3.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401bd.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401bc.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c1.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401bf.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c5.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401be.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c3.
+08-06 18:40:12.970 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401bb.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c4.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d5.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040002.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040085.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e7.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e3.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401df.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401dd.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049b.
+08-06 18:40:12.971 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040435.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401de.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040213.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040214.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040212.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f2.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f1.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f7.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040149.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040512.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401fa.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029e.
+08-06 18:40:12.972 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040076.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040077.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a3.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c2.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061c.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04023e.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fa.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b1.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04023d.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ff.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040140.
+08-06 18:40:12.973 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a7.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a8.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040321.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061d.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012d.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040466.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018f.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d1.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04064b.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04064c.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040510.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040511.
+08-06 18:40:12.974 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cd.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405de.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040618.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040090.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040091.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ca.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024d.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024c.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040223.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cc.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ac.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400c2.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040619.
+08-06 18:40:12.975 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d7.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e7.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ef.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040318.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040382.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040286.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040283.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e4.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d2.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04027f.
+08-06 18:40:12.976 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040280.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04027e.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040281.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028b.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028e.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040293.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040294.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040290.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028f.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040291.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040292.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040295.
+08-06 18:40:12.977 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040296.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028c.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040298.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040297.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040615.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029b.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042d.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a4.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a2.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044b.
+08-06 18:40:12.978 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043d.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044c.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400fe.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040444.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040445.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040446.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040447.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040440.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040441.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040442.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040443.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040289.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040059.
+08-06 18:40:12.979 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043b.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043e.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043c.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044a.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043f.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f4.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f8.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401cd.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401cf.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040301.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401db.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040647.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040648.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040057.
+08-06 18:40:12.980 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040058.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040287.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040288.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ca.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cb.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040643.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040644.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040045.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a3.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040056.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040046.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f9.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a5.
+08-06 18:40:12.981 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401da.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f5.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f0.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403ee.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040449.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040448.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b3.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040066.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404cf.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d6.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040628.
+08-06 18:40:12.982 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a1.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b6.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404cc.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04045c.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404cd.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e6.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e7.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e9.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e8.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040640.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040285.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040468.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046a.
+08-06 18:40:12.983 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046b.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046d.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046f.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039b.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039c.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039d.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040373.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029d.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060e.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ba.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040426.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040608.
+08-06 18:40:12.984 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040610.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04062d.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04062c.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04062b.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04062a.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04062e.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040322.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047f.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040480.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047e.
+08-06 18:40:12.985 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047d.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047b.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f5.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04050a.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040629.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040613.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040454.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040455.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040452.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040624.
+08-06 18:40:12.986 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040625.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040623.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040614.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040612.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040429.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042a.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040364.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034d.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040344.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040346.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040345.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034a.
+08-06 18:40:12.987 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034b.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034c.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a7.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040356.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040357.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040359.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035a.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040360.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035f.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040343.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040342.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033e.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040340.
+08-06 18:40:12.988 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033f.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035b.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035c.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040349.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040348.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036f.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040372.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040370.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036d.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040371.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036e.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036c.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040376.
+08-06 18:40:12.989 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033c.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033b.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040352.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040361.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040365.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034e.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040367.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040366.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040368.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040350.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04034f.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040351.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040355.
+08-06 18:40:12.990 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035e.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040358.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040341.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04033d.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040347.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040354.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040363.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040353.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040362.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036a.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04036b.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037c.
+08-06 18:40:12.991 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a5.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a6.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018c.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018d.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d6.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403de.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f1.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f6.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a4.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040101.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403df.
+08-06 18:40:12.992 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e8.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f8.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ed.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ea.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ee.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040604.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040225.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040226.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061c.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040395.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040394.
+08-06 18:40:12.993 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040090.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008b.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008c.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008a.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040089.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a2.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a4.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a3.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a5.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a0.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403a1.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040502.
+08-06 18:40:12.994 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040505.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040503.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040504.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040202.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040091.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cd.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d5.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d4.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d1.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e0.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e1.
+08-06 18:40:12.995 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e7.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ef.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040541.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040542.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401aa.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ca.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ed.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040509.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e4.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040107.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401cb.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c9.
+08-06 18:40:12.996 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ca.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401cc.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04064e.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04064d.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04064f.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ba.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040438.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040305.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031f.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040319.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031a.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040311.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040312.
+08-06 18:40:12.997 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ed.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040109.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010e.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010d.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010c.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04010b.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040537.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400dc.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061b.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e5.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400de.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e0.
+08-06 18:40:12.998 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e1.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ff.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022e.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040227.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040110.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040538.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040539.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e9.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ee.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401eb.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ec.
+08-06 18:40:12.999 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032f.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c6.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c8.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c9.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c7.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ff.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040600.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040601.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040381.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040327.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040133.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040431.
+08-06 18:40:13.000 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405df.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054a.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040397.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040399.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040064.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044e.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f6.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040011.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040027.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040025.
+08-06 18:40:13.001 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040192.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f5.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ab.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040543.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f9.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403fb.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403fa.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f8.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403fc.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403fd.
+08-06 18:40:13.002 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006d.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006a.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060e.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047b.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040425.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040427.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f5.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b5.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b4.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b3.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04041e.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04041c.
+08-06 18:40:13.003 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040420.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040421.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04041b.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040422.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04041d.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04041f.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040456.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040453.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ba.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405bb.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b4.
+08-06 18:40:13.004 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d0.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b5.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b9.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b8.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405a6.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c0.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405bf.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405bd.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405a7.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405a8.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405aa.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405a9.
+08-06 18:40:13.005 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405be.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040332.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b7.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040426.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040073.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fb.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403fe.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ce.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040333.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057f.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057d.
+08-06 18:40:13.006 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057e.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040225.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040226.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d9.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040330.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c8.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04048c.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04048d.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04048e.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040224.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040231.
+08-06 18:40:13.007 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04048a.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04048b.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04043a.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040075.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040618.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040003.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e4.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052c.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042e.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a1.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039a.
+08-06 18:40:13.008 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e0.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032c.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040304.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040310.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040309.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030a.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031e.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031c.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031d.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030f.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030e.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040028.
+08-06 18:40:13.009 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040303.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030c.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402aa.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e2.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046f.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040468.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046d.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040544.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040547.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04031b.
+08-06 18:40:13.010 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040306.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040320.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040308.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04030b.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040311.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040312.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040316.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040317.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040315.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040314.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040313.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f6.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400c5.
+08-06 18:40:13.011 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040546.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040545.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040200.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ce.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057b.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040130.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f3.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f4.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007c.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403dd.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403cf.
+08-06 18:40:13.012 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040522.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040523.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040521.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040524.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040520.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401f0.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f7.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f8.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404cb.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405f9.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040380.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040436.
+08-06 18:40:13.013 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042b.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040458.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040470.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040033.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04045b.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040534.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402cd.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040321.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405de.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040552.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040459.
+08-06 18:40:13.014 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029c.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040331.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040631.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040218.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e1.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d7.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040482.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d4.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f3.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04005f.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040061.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040508.
+08-06 18:40:13.015 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402da.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040300.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040216.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040060.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04045a.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f3.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403de.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d6.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a5.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049d.
+08-06 18:40:13.016 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049e.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a3.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a1.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049f.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04049c.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a4.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a2.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040102.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e0.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020c.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040207.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a0.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040558.
+08-06 18:40:13.017 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040557.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404df.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042d.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f7.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f2.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e6.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403ea.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e7.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403eb.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e9.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403ed.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e8.
+08-06 18:40:13.018 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403ec.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b6.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b7.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400c1.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b8.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b9.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ba.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400be.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400bf.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400c0.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400bb.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400bc.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400bd.
+08-06 18:40:13.019 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040041.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040047.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040042.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040048.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040044.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004a.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040043.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040049.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004c.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004d.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004f.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04004e.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040050.
+08-06 18:40:13.020 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040052.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040051.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040035.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040036.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040040.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040037.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040038.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040039.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003d.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003e.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003f.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003a.
+08-06 18:40:13.021 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003b.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04003c.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c2.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c3.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c4.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c5.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c6.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c7.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c8.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402c9.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040609.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060a.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060b.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060c.
+08-06 18:40:13.022 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d2.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d6.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d9.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402d8.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402dc.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402dd.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402df.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402de.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040528.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040529.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052a.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052b.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e8.
+08-06 18:40:13.023 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402bb.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402bc.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402bd.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402be.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040626.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040426.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04035d.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403bc.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061e.
+08-06 18:40:13.024 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f4.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040467.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046e.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040335.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04050f.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c9.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040526.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024e.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040251.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040252.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04024f.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040250.
+08-06 18:40:13.025 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400e9.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e4.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d2.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d1.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402f6.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ae.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040090.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d0.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d2.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b2.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04029a.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405dd.
+08-06 18:40:13.026 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040431.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040541.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040542.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c0.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039e.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e2.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b7.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d1.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040135.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a0.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d6.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d5.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040627.
+08-06 18:40:13.027 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040186.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040551.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b6.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040548.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404d7.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061a.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006c.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006b.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04007e.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402aa.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040086.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e5.
+08-06 18:40:13.028 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404de.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04002e.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fc.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040617.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401c6.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040069.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040068.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040324.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040323.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040325.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040326.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ab.
+08-06 18:40:13.029 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ae.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401af.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ad.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401ac.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a5.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a8.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a9.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a7.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a6.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e7.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ef.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040199.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019a.
+08-06 18:40:13.030 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019b.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019c.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019d.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019e.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04019f.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400a9.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401a4.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040257.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04044f.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040450.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04039f.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403dc.
+08-06 18:40:13.031 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a8.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402a9.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032a.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04032b.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c3.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c4.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d1.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c5.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ca.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405cb.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405cc.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d0.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403f5.
+08-06 18:40:13.032 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d2.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d3.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d4.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d8.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405d9.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405da.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fb.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fc.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fd.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040602.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040603.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040604.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04050d.
+08-06 18:40:13.033 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04050c.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04050e.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04020e.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d0.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006f.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04008d.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040091.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040026.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040499.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404ad.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404db.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404da.
+08-06 18:40:13.034 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012e.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040254.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040255.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051e.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051c.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051a.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051b.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040519.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040518.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040517.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04057a.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04006e.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051d.
+08-06 18:40:13.035 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040516.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040515.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040484.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040540.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040253.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018e.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401d3.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04037b.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ce.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405cf.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405fa.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040606.
+08-06 18:40:13.036 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040607.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405cd.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055a.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040555.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040556.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04051f.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404fd.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04061b.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040554.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040553.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055c.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055b.
+08-06 18:40:13.037 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e5.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040565.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040568.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055e.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055d.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040562.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040567.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040563.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040566.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040564.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056c.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04055f.
+08-06 18:40:13.038 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040569.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056b.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056a.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040577.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040578.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040575.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040574.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040570.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040571.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056f.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056e.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04056d.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040560.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040561.
+08-06 18:40:13.039 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040572.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040579.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04028d.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040580.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b7.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040297.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ae.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b9.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b8.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b4.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400b5.
+08-06 18:40:13.040 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405b2.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b6.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b5.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b7.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402b8.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040234.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ac.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ad.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402ae.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402af.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022a.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022f.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040230.
+08-06 18:40:13.041 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040229.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040228.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022b.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022c.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04022d.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b8.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b9.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b0.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b1.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b4.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b5.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b2.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401b3.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040485.
+08-06 18:40:13.042 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040486.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040487.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a6.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a7.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404a8.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054e.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054f.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040550.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052f.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052e.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04052d.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040532.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040533.
+08-06 18:40:13.043 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040530.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040531.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021d.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021b.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021a.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040219.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021f.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040220.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021c.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04021e.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400cc.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400cd.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d1.
+08-06 18:40:13.044 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d0.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400cf.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400ce.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d2.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d3.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400cb.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d4.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400d5.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040478.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040477.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040476.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040479.
+08-06 18:40:13.045 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047a.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040221.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040222.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e9.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054b.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405de.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040549.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e2.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e5.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e4.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e6.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e3.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405e7.
+08-06 18:40:13.046 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040197.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040193.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040195.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040196.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040198.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040194.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d3.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400dd.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013f.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013e.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040499.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040430.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04042f.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040396.
+08-06 18:40:13.047 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040398.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405ea.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04054c.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403e0.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040090.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404f9.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040608.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018b.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018a.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060d.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040333.
+08-06 18:40:13.048 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04047b.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040084.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040423.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040208.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040527.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04060f.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c5.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c6.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c3.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404c4.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04018e.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04046c.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040469.
+08-06 18:40:13.049 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0405c1.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040091.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040428.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040622.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040457.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040616.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040001.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040000.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404e6.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04012f.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e4.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0402e3.
+08-06 18:40:13.050 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404b2.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040065.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0400fd.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404dd.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0404dc.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040071.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f04013d.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0401e4.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f0403d2.
+08-06 18:40:13.051 13885 13885 E aapt2   : No package ID 7f found for resource ID 0x7f040189.
+
+> Task :processNoQuickstepDebugResources
+> Task :kspNoQuickstepDebugKotlin
+> Task :compileNoQuickstepDebugKotlin
+
+> Task :compileNoQuickstepDebugJavaWithJavac
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1459: error: cannot find symbol
+                com.xaulinxs.customizations.icons.XaulinXsIconBlur.getBlurRadiusPx(getContext());
+                                                 ^
+  symbol:   class XaulinXsIconBlur
+  location: package com.xaulinxs.customizations.icons
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1461: error: cannot find symbol
+            com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable blurredIcon =
+                                             ^
+  symbol:   class XaulinXsBlurredIconDrawable
+  location: package com.xaulinxs.customizations.icons
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1462: error: cannot find symbol
+                    new com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable(icon);
+                                                         ^
+  symbol:   class XaulinXsBlurredIconDrawable
+  location: package com.xaulinxs.customizations.icons
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 errors
+
+> Task :compileNoQuickstepDebugJavaWithJavac FAILED
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/Launcher3/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+> Compilation failed; see the compiler output below.
+  Note: Recompile with -Xlint:deprecation for details.
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1459: error: cannot find symbol
+                  com.xaulinxs.customizations.icons.XaulinXsIconBlur.getBlurRadiusPx(getContext());
+                                                   ^
+    symbol:   class XaulinXsIconBlur
+    location: package com.xaulinxs.customizations.icons
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1461: error: cannot find symbol
+              com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable blurredIcon =
+                                               ^
+    symbol:   class XaulinXsBlurredIconDrawable
+    location: package com.xaulinxs.customizations.icons
+  /data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1462: error: cannot find symbol
+                      new com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable(icon);
+                                                           ^
+    symbol:   class XaulinXsBlurredIconDrawable
+    location: package com.xaulinxs.customizations.icons
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  Note: Some input files use unchecked or unsafe operations.
+  3 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':compileNoQuickstepDebugJavaWithJavac' (registered by plugin 'com.android.internal.application').
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1459: error: cannot find symbol
+                com.xaulinxs.customizations.icons.XaulinXsIconBlur.getBlurRadiusPx(getContext());
+                                                 ^
+  symbol:   class XaulinXsIconBlur
+  location: package com.xaulinxs.customizations.icons
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1461: error: cannot find symbol
+            com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable blurredIcon =
+                                             ^
+  symbol:   class XaulinXsBlurredIconDrawable
+  location: package com.xaulinxs.customizations.icons
+/data/data/com.termux/files/home/Launcher3/src/com/android/launcher3/BubbleTextView.java:1462: error: cannot find symbol
+                    new com.xaulinxs.customizations.icons.XaulinXsBlurredIconDrawable(icon);
+                                                         ^
+  symbol:   class XaulinXsBlurredIconDrawable
+  location: package com.xaulinxs.customizations.icons
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 errors
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$3(JavaCompile.java:206)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.lambda$execute$0(SelectiveCompiler.java:101)
+	at org.gradle.api.internal.tasks.compile.incremental.transaction.CompileTransaction.execute(CompileTransaction.java:108)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:95)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:78)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:49)
+	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:224)
+	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:165)
+	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:150)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:90)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	... 30 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 51s
+37 actionable tasks: 9 executed, 28 up-to-date

@@ -75,10 +75,6 @@ class XaulinXsDepthController(private val launcher: Launcher) {
     }
 
     private fun applyEffectiveBlur() {
-        if (!isEnabled) {
-            applyBlurRadius(0f)
-            return
-        }
         val drawerRadius = currentDepth * DRAWER_MAX_BLUR_RADIUS_PX
         val popupRadius = if (popupBlurActive) POPUP_BLUR_RADIUS_PX else 0f
         applyBlurRadius(maxOf(drawerRadius, popupRadius))

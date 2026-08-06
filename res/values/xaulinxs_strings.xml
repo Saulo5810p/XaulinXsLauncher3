@@ -15,4 +15,8 @@
     <string name="xaulinxs_icon_opacity_summary">Ajusta a opacidade dos ícones de 0% a 100%</string>
     <string name="xaulinxs_scrim_opacity_title">Transparência do fundo do menu de apps</string>
     <string name="xaulinxs_scrim_opacity_summary">Ajusta a opacidade do véu atrás da gaveta de apps (aplica na próxima vez que abrir)</string>
+    <string name="xaulinxs_popup_blur_title">Blur nos balões de contexto</string>
+    <string name="xaulinxs_popup_blur_summary">Desfoca o fundo atrás do menu que abre ao segurar o dedo num ícone (independente do blur do menu de apps)</string>
+    <string name="xaulinxs_widget_blur_title">Desfoque dos widgets</string>
+    <string name="xaulinxs_widget_blur_summary">Deixa a aparência de cada widget embaçada (0 = nítido)</string>
 </resources>

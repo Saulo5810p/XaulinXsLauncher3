@@ -80,6 +80,19 @@
             android:summary="@string/xaulinxs_scrim_opacity_summary"
             android:persistent="false" />
 
+        <com.xaulinxs.customizations.settings.PopupBlurPreference
+            android:key="xaulinxs_popup_blur_enabled"
+            android:title="@string/xaulinxs_popup_blur_title"
+            android:summary="@string/xaulinxs_popup_blur_summary"
+            android:persistent="false" />
+
+
+        <com.xaulinxs.customizations.settings.WidgetBlurPreference
+            android:key="xaulinxs_widget_blur_intensity"
+            android:title="@string/xaulinxs_widget_blur_title"
+            android:summary="@string/xaulinxs_widget_blur_summary"
+            android:persistent="false" />
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

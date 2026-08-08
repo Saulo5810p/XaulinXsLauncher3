@@ -18,6 +18,7 @@ import androidx.core.graphics.ColorUtils
 import com.android.launcher3.Utilities
 import com.android.launcher3.icons.mono.ColorList
 import com.android.launcher3.util.WallpaperColorHints
+import com.xaulinxs.customizations.theme.XaulinXsManualColor
 
 private const val BG_SHADE_RATIO_LIGHT = 0.20f
 private const val BG_SHADE_RATIO_DARK = 0.65f
@@ -27,9 +28,13 @@ private const val FG_SHADE_RATIO_DARK = 0.15f
 object XaulinXsThemedIconColors {
 
     fun getColorsIfAvailable(context: Context): ColorList? {
-        val primary = WallpaperColorHints.get(context).colors?.primaryColor?.toArgb() ?: return null
-        val isDark = Utilities.isDarkTheme(context)
+        val primary = XaulinXsManualColor.getBaseColorIfEnabled(context)
+            ?: WallpaperColorHints.get(context).colors?.primaryColor?.toArgb()
+            ?: return null
+        return buildColorList(primary, Utilities.isDarkTheme(context))
+    }
 
+    private fun buildColorList(primary: Int, isDark: Boolean): ColorList {
         val background =
             if (isDark) {
                 ColorUtils.blendARGB(primary, android.graphics.Color.BLACK, BG_SHADE_RATIO_DARK)

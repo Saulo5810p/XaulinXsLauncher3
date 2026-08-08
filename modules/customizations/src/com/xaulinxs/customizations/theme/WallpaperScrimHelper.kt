@@ -19,6 +19,7 @@ import com.android.launcher3.LauncherPrefs
 import com.android.launcher3.Utilities
 import com.android.launcher3.util.WallpaperColorHints
 import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
+import com.xaulinxs.customizations.theme.XaulinXsManualColor
 import com.android.launcher3.LauncherPrefs.Companion.backedUpItem
 
 private const val SCRIM_ALPHA_LIGHT = 140
@@ -44,7 +45,10 @@ object WallpaperScrimHelper {
     }
 
     fun getScrimColor(context: Context): Int? {
-        val primaryColor = WallpaperColorHints.get(context).colors?.primaryColor?.toArgb() ?: return null
+        // XaulinXs Customizations: cor manual (se ativada) tem prioridade sobre a do wallpaper.
+        val primaryColor = XaulinXsManualColor.getBaseColorIfEnabled(context)
+            ?: WallpaperColorHints.get(context).colors?.primaryColor?.toArgb()
+            ?: return null
         val isDark = Utilities.isDarkTheme(context)
         val shaded =
             if (isDark) {

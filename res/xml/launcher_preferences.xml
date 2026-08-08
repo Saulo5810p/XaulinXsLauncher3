@@ -93,6 +93,17 @@
             android:summary="@string/xaulinxs_widget_blur_summary"
             android:persistent="false" />
 
+        <com.xaulinxs.customizations.settings.ManualColorEnabledPreference
+            android:key="xaulinxs_manual_color_enabled"
+            android:title="@string/xaulinxs_manual_color_enabled_title"
+            android:summary="@string/xaulinxs_manual_color_enabled_summary"
+            android:persistent="false" />
+
+        <com.xaulinxs.customizations.settings.ManualColorPickerPreference
+            android:key="xaulinxs_manual_color_picker"
+            android:title="@string/xaulinxs_manual_color_picker_title"
+            android:persistent="false" />
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

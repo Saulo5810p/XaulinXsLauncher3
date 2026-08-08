@@ -19,4 +19,8 @@
     <string name="xaulinxs_popup_blur_summary">Desfoca o fundo atrás do menu que abre ao segurar o dedo num ícone (independente do blur do menu de apps)</string>
     <string name="xaulinxs_widget_blur_title">Desfoque dos widgets</string>
     <string name="xaulinxs_widget_blur_summary">Deixa a aparência de cada widget embaçada (0 = nítido)</string>
+    <string name="xaulinxs_manual_color_enabled_title">Usar cor manual</string>
+    <string name="xaulinxs_manual_color_enabled_summary">Usa uma cor fixa escolhida por você em vez da cor do papel de parede</string>
+    <string name="xaulinxs_manual_color_picker_title">Escolher cor (hex)</string>
+    <string name="xaulinxs_manual_color_save">Salvar</string>
 </resources>

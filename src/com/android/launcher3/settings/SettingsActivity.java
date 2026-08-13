@@ -196,6 +196,16 @@ public class SettingsActivity extends FragmentActivity
         }
 
         @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            // XaulinXs Customizations: repassa o resultado da escolha de fonte
+            // customizada (Activity separada) para a preference que sabe salvar
+            // e atualizar o resumo.
+            com.xaulinxs.customizations.settings.CustomFontPreference.handleActivityResult(
+                    this, requestCode, resultCode, data);
+        }
+
+        @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             final Bundle args = getArguments();
             mHighLightKey = args == null ? null : args.getString(EXTRA_FRAGMENT_HIGHLIGHT_KEY);

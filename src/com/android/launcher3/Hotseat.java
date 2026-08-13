@@ -109,7 +109,19 @@ public class Hotseat extends CellLayout implements Insettable {
 
     public Hotseat(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mQsb = LauncherComponentProvider.get(context).getQsbWidgetFactory().createView(this);
+        // XaulinXs Customizations: barra de busca própria (opcional). Quando
+        // desativada (padrão), createViewIfEnabled() retorna null e o QSB
+        // original do AOSP é usado normalmente, sem nenhuma mudança de
+        // comportamento. Quando ativada, ocupa o mesmo slot que o QSB original
+        // ocuparia — que já fica abaixo da fileira de ícones por design do
+        // AOSP (Hotseat.onLayout/getQsbOffsetY), sem precisar de nenhum ajuste
+        // de posição aqui.
+        View xaulinxsSearchBar =
+                com.xaulinxs.customizations.search.XaulinXsSearchBarFactory
+                        .createViewIfEnabled(context, this);
+        mQsb = xaulinxsSearchBar != null
+                ? xaulinxsSearchBar
+                : LauncherComponentProvider.get(context).getQsbWidgetFactory().createView(this);
 
         addView(mQsb);
         mIconsAlphaChannels = new MultiValueAlpha(getShortcutsAndWidgets(),

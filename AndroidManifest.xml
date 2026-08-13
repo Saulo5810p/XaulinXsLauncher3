@@ -33,6 +33,18 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.BIND_APPWIDGET" />
+    <!-- XaulinXs Customizations: acesso a todos os arquivos, necessário para o
+         file manager próprio navegar livremente o armazenamento e importar
+         fontes TTF/OTF de qualquer pasta.
+         - MANAGE_EXTERNAL_STORAGE: Android 11+ (API 30+), concedida via tela
+           especial do sistema (ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).
+         - WRITE_EXTERNAL_STORAGE com maxSdkVersion=29: cobre minSdk 28-29 via
+           diálogo padrão de runtime permission (API 23+). READ_EXTERNAL_STORAGE
+           já existe acima sem maxSdkVersion, então não precisa duplicar. -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
@@ -215,6 +227,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.xaulinxs.customizations.font.XaulinXsFontFileManagerActivity"
+            android:theme="@style/HomeSettings.Theme"
+            android:label="@string/xaulinxs_filemanager_title"
+            android:exported="false" />
         <activity
             android:name="com.android.launcher3.settings.SettingsActivity"
             android:label="@string/settings_button_text"

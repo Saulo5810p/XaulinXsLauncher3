@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XaulinXs Customizations: file manager próprio para importar fonte TTF/OTF. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/xaulinxs_fm_current_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="#11000000"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:ellipsize="start" />
+
+    <Button
+        android:id="@+id/xaulinxs_fm_button_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/xaulinxs_filemanager_up" />
+
+    <TextView
+        android:id="@+id/xaulinxs_fm_empty_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:gravity="center"
+        android:text="@string/xaulinxs_filemanager_empty"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/xaulinxs_fm_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

@@ -377,6 +377,14 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
                 defaultIconSize);
         a.recycle();
 
+        // XaulinXs Customizations: aplica fonte customizada (TTF/OTF) importada
+        // pelo usuário ao label do ícone, se houver uma configurada.
+        android.graphics.Typeface xaulinxsCustomTypeface =
+                com.xaulinxs.customizations.font.XaulinXsCustomFont.loadTypefaceIfAvailable(context);
+        if (xaulinxsCustomTypeface != null) {
+            setTypeface(xaulinxsCustomTypeface);
+        }
+
         mRunningAppIndicatorHeight =
                 getResources().getDimensionPixelSize(R.dimen.taskbar_running_app_indicator_height);
         mRunningAppIndicatorTopMargin =

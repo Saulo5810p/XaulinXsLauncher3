@@ -311,6 +311,13 @@ public abstract class BaseAllAppsAdapter
                         icon.setVisibility(GONE);
                     }
                 }
+                // XaulinXs Customizations: giro 720° em cascata REMOVIDO
+                // daqui — agora disparado direto pelo AllAppsTransitionController
+                // via AllAppsCascadeTrigger, reagindo à mudança de direção
+                // do gesto de abrir/fechar (ver AllAppsCascadeTrigger.kt).
+                // onBindViewHolder não é o lugar certo porque só roda na
+                // reciclagem, não necessariamente quando a view já está
+                // visível na tela no momento do toque.
                 break;
             }
             case VIEW_TYPE_EMPTY_SEARCH: {

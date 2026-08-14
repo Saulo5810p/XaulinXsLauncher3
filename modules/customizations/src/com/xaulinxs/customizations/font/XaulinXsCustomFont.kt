@@ -44,7 +44,16 @@ object XaulinXsCustomFont {
 
     @JvmStatic
     fun setCustomFontPath(context: Context, path: String?) {
-        LauncherPrefs.get(context).put(CUSTOM_FONT_PATH, path)
+        // XaulinXs fix: LauncherPrefs.put() espera Pair<Item, Any> (valor
+        // não-nulo) — path nulo (ação "Restaurar padrão") precisa usar
+        // remove(), não put() com null, senão o compilador rejeita e,
+        // pior, o valor antigo nunca seria de fato limpo.
+        val prefs = LauncherPrefs.get(context)
+        if (path != null) {
+            prefs.put(CUSTOM_FONT_PATH to path)
+        } else {
+            prefs.remove(CUSTOM_FONT_PATH)
+        }
         cachedTypeface = null
         cachedTypefacePath = null
     }
@@ -54,6 +63,40 @@ object XaulinXsCustomFont {
      * ainda existir. Nunca lança exceção — quem chamar sempre pode recair
      * no Typeface padrão da view.
      */
+    /**
+     * XaulinXs fix (causa raiz do "fonte não muda ao importar"): o
+     * typeface só era aplicado uma vez, no construtor de cada
+     * BubbleTextView — views já existentes na tela nunca eram
+     * recarregadas ao importar uma fonte nova. Este método percorre a
+     * árvore de views a partir da raiz do launcher (Workspace, Hotseat,
+     * AllApps — todos filhos da DragLayer) e reaplica o typeface atual
+     * (ou o padrão do sistema, se a fonte foi resetada) em toda
+     * BubbleTextView viva, sem precisar recriar a Activity.
+     */
+    @JvmStatic
+    fun reapplyToVisibleIcons(context: Context, root: android.view.View) {
+        val typeface = loadTypefaceIfAvailable(context)
+        applyRecursively(root, typeface)
+    }
+
+    private fun applyRecursively(view: android.view.View, typeface: Typeface?) {
+        // Restrito a BubbleTextView (ícones), nunca TextView genérico —
+        // widgets, relógios, textos de notificação etc. NÃO devem ter o
+        // typeface trocado por esta rotina. Reset usa null (não
+        // Typeface.DEFAULT): null faz o Android resolver de volta o
+        // fontFamily definido no tema/XML original da view (fontes
+        // variáveis do Material), enquanto DEFAULT forçaria Roboto puro
+        // e quebraria o visual original dos ícones.
+        if (view is com.android.launcher3.BubbleTextView) {
+            view.typeface = typeface
+        }
+        if (view is android.view.ViewGroup) {
+            for (i in 0 until view.childCount) {
+                applyRecursively(view.getChildAt(i), typeface)
+            }
+        }
+    }
+
     @JvmStatic
     fun loadTypefaceIfAvailable(context: Context): Typeface? {
         val path = getCustomFontPath(context)

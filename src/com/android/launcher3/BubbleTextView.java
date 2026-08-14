@@ -822,6 +822,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // XaulinXs Customizations: efeito visual de giro/blur/escala,
+        // puramente observacional — não altera o retorno nem consome
+        // o evento. O clique/long-press original continua 100% intacto.
+        com.xaulinxs.customizations.cinematic.CinematicPressEffects.onTouchObserved(this, event);
         return onDelegateTouchEvent(event);
     }
 

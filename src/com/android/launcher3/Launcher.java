@@ -1119,8 +1119,22 @@ public class Launcher extends StatefulActivity<LauncherState>
         super.onResume();
         mLauncherUiState.setIsResumedActivity(true);
         DragView.removeAllViews(this);
+        // XaulinXs Customizations: reaplica a fonte customizada nos ícones
+        // já existentes na tela se ela mudou desde o último resume (fix do
+        // bug "fonte não atualiza ao importar" — ver XaulinXsCustomFont).
+        String xaulinxsCurrentFontPath =
+                com.xaulinxs.customizations.font.XaulinXsCustomFont.getCustomFontPath(this);
+        if (!java.util.Objects.equals(xaulinxsCurrentFontPath, mXaulinXsLastAppliedFontPath)) {
+            mXaulinXsLastAppliedFontPath = xaulinxsCurrentFontPath;
+            com.xaulinxs.customizations.font.XaulinXsCustomFont.reapplyToVisibleIcons(
+                    this, getDragLayer());
+        }
         TraceHelper.INSTANCE.endSection();
     }
+
+    // XaulinXs Customizations: guarda o último path de fonte aplicado para
+    // evitar reaplicar em todo onResume (só quando de fato mudou).
+    private String mXaulinXsLastAppliedFontPath;
 
     @Override
     protected void onPause() {

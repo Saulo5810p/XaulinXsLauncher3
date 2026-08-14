@@ -109,40 +109,6 @@
             android:title="@string/xaulinxs_custom_font_title"
             android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.SearchBarEnabledPreference
-            android:key="xaulinxs_searchbar_enabled"
-            android:title="@string/xaulinxs_searchbar_enabled_title"
-            android:summary="@string/xaulinxs_searchbar_enabled_summary"
-            android:persistent="false" />
-
-        <com.xaulinxs.customizations.settings.SearchBarWebModePreference
-            android:key="xaulinxs_searchbar_web_mode"
-            android:title="@string/xaulinxs_searchbar_web_mode_title"
-            android:summary="@string/xaulinxs_searchbar_web_mode_summary"
-            android:persistent="false" />
-
-        <com.xaulinxs.customizations.settings.SearchBarOpacityPreference
-            android:key="xaulinxs_searchbar_opacity"
-            android:title="@string/xaulinxs_searchbar_opacity_title"
-            android:persistent="false" />
-
-        <com.xaulinxs.customizations.settings.SearchBarColorEnabledPreference
-            android:key="xaulinxs_searchbar_custom_color_enabled"
-            android:title="@string/xaulinxs_searchbar_custom_color_enabled_title"
-            android:summary="@string/xaulinxs_searchbar_custom_color_enabled_summary"
-            android:persistent="false" />
-
-        <com.xaulinxs.customizations.settings.SearchBarColorPickerPreference
-            android:key="xaulinxs_searchbar_custom_color_picker"
-            android:title="@string/xaulinxs_searchbar_color_picker_title"
-            android:persistent="false" />
-
-        <com.xaulinxs.customizations.settings.SearchBarBlurEnabledPreference
-            android:key="xaulinxs_searchbar_blur_enabled"
-            android:title="@string/xaulinxs_searchbar_blur_enabled_title"
-            android:summary="@string/xaulinxs_searchbar_blur_enabled_summary"
-            android:persistent="false" />
-
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

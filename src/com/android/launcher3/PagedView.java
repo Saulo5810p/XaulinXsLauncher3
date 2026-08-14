@@ -609,6 +609,12 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
             }
 
             invalidate();
+            // XaulinXs Customizations: motion blur + aberração cromática
+            // proporcional à velocidade do fling entre páginas, portado do
+            // RetroPlayer. Puramente observacional — não altera newPos nem
+            // qualquer lógica de scroll real acima.
+            com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
+                    .onScrollPositionChanged(this, (float) newPos);
             return true;
         } else if (mNextPage != INVALID_PAGE) {
             sendScrollAccessibilityEvent();
@@ -628,6 +634,10 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
                 announcePageForAccessibility();
             }
         }
+        // XaulinXs Customizations: scroll/fling parou de vez (nenhum dos
+        // dois ramos acima segue em andamento) — zera o efeito cinematográfico.
+        com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
+                .onScrollSettled(this);
         return false;
     }
 
@@ -1377,6 +1387,13 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
 
                 if (delta != 0) {
                     mOrientationHandler.setPrimary(this, VIEW_SCROLL_BY, delta);
+                    // XaulinXs Customizations: motion blur + aberração
+                    // cromática também durante o arrasto manual (dedo ainda
+                    // na tela, antes de qualquer fling do OverScroller).
+                    // Puramente observacional, roda depois do scroll real.
+                    com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
+                            .onScrollPositionChanged(this,
+                                    (float) mOrientationHandler.getPrimaryScroll(this));
 
                     if (mAllowOverScroll) {
                         final float pulledToX = oldScroll + delta;

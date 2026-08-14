@@ -187,6 +187,12 @@ public class AllAppsRecyclerView extends FastScrollRecyclerView {
                 mgr.logger().sendToInteractionJankMonitor(
                         LAUNCHER_ALLAPPS_VERTICAL_SWIPE_END, this);
                 logCumulativeVerticalScroll();
+                // XaulinXs Customizations: scroll da lista de ícones parou
+                // — zera o motion blur/aberração cromática e a direção
+                // conhecida da cascata.
+                com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
+                        .onScrollSettled(this);
+                com.xaulinxs.customizations.cinematic.AllAppsCascadeTrigger.reset();
                 break;
         }
     }
@@ -222,7 +228,28 @@ public class AllAppsRecyclerView extends FastScrollRecyclerView {
     public void onScrolled(int dx, int dy) {
         super.onScrolled(dx, dy);
         mCumulativeVerticalScroll += dy;
+        // XaulinXs Customizations: motion blur + aberração cromática ao
+        // rolar a lista de ícones do app drawer, mesmo motor já usado no
+        // scroll de páginas do Workspace (feature 2) — reaproveitado sem
+        // mudanças. Usa um acumulador PRÓPRIO (não mCumulativeVerticalScroll,
+        // que o AOSP reseta a cada novo toque — resetar quebraria a
+        // suavização de velocidade do motor cinematográfico). Puramente
+        // observacional, roda depois do scroll real.
+        mXaulinXsScrollAccumulator += dy;
+        com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
+                .onScrollPositionChanged(this, (float) mXaulinXsScrollAccumulator);
+        // XaulinXs Customizations: giro 720° em cascata também ao rolar
+        // (não só ao abrir/fechar o drawer inteiro) — dispara nos ícones
+        // atualmente visíveis quando a direção do scroll muda (para cima
+        // vs para baixo), mesma lógica de detecção de direção usada na
+        // abertura/fechamento.
+        com.xaulinxs.customizations.cinematic.AllAppsCascadeTrigger
+                .onScrollDirectionChanged(dy, this);
     }
+
+    // XaulinXs Customizations: acumulador de posição independente, ver
+    // comentário em onScrolled acima.
+    private int mXaulinXsScrollAccumulator = 0;
 
     /**
      * Maps the touch (from 0..1) to the adapter position that should be visible.

@@ -39,7 +39,7 @@ object AllAppsIconEnterEffect {
     // Atraso entre o início da animação de cada ícone consecutivo na
     // cascata — pequeno o bastante para não atrasar demais o último ícone
     // visível, grande o bastante para a sequência ser perceptível.
-    private const val STAGGER_DELAY_MS = 18L
+    private const val STAGGER_DELAY_MS = 110L // suavizado (era 18L) — cascata varre bem mais devagar
     private const val MAX_STAGGER_ITEMS = 30 // evita atraso enorme em grids grandes
 
     /**
@@ -75,8 +75,8 @@ object AllAppsIconEnterEffect {
         val spring = SpringAnimation(holder).apply {
             setSpring(
                 SpringForce(1f).apply {
-                    stiffness = SpringForce.STIFFNESS_LOW
-                    dampingRatio = 0.55f // <1 = permite overshoot visível
+                    stiffness = 15f // customizado — mais mole que STIFFNESS_LOW (200f)
+                    dampingRatio = 0.78f // overshoot bem mais contido/suave
                 }
             )
             setStartVelocity(0f)

@@ -615,6 +615,11 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
             // qualquer lógica de scroll real acima.
             com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
                     .onScrollPositionChanged(this, (float) newPos);
+            // XaulinXs Customizations: cascata giratória 720° nos
+            // ícones/widgets das páginas visíveis, ao mudar a direção do fling.
+            // XAULINXS_WORKSPACE_CASCADE_HOOK_FLING
+            com.xaulinxs.customizations.cinematic.WorkspaceCascadeTrigger
+                    .onScrollPositionChanged(this, (float) newPos, (float) oldPos);
             return true;
         } else if (mNextPage != INVALID_PAGE) {
             sendScrollAccessibilityEvent();
@@ -638,6 +643,10 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
         // dois ramos acima segue em andamento) — zera o efeito cinematográfico.
         com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
                 .onScrollSettled(this);
+        // XaulinXs Customizations: reseta a direção conhecida da cascata
+        // do Workspace junto com o reset do blur de velocidade.
+        // XAULINXS_WORKSPACE_CASCADE_HOOK_RESET
+        com.xaulinxs.customizations.cinematic.WorkspaceCascadeTrigger.reset();
         return false;
     }
 
@@ -1394,6 +1403,14 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
                     com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
                             .onScrollPositionChanged(this,
                                     (float) mOrientationHandler.getPrimaryScroll(this));
+                    // XaulinXs Customizations: cascata giratória 720° nos
+                    // ícones/widgets das páginas visíveis, ao mudar a direção
+                    // do arrasto manual. Mesmo padrão do AllAppsCascadeTrigger.
+                    // XAULINXS_WORKSPACE_CASCADE_HOOK_DRAG
+                    com.xaulinxs.customizations.cinematic.WorkspaceCascadeTrigger
+                            .onScrollPositionChanged(this,
+                                    (float) mOrientationHandler.getPrimaryScroll(this),
+                                    (float) mOrientationHandler.getPrimaryScroll(this) - delta);
 
                     if (mAllowOverScroll) {
                         final float pulledToX = oldScroll + delta;

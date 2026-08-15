@@ -151,7 +151,7 @@ private const val OVERSHOOT_SCALE = 1.5f
 private const val BLUR_MULTIPLIER = 3.6f
 private const val CHROMATIC_MULTIPLIER = 3.0f
 private const val VIGNETTE_MULTIPLIER = 1.0f
-private const val STAGGER_DELAY_MS = 18L
+private const val STAGGER_DELAY_MS = 110L // suavizado (era 18L) — cascata varre bem mais devagar
 private const val MAX_STAGGER_ITEMS = 30
 
 /**
@@ -176,8 +176,8 @@ fun Modifier.cascadeSpinEnter(indexInGrid: Int): Modifier =
                     targetValue = 1f,
                     animationSpec =
                         spring(
-                            dampingRatio = 0.55f,
-                            stiffness = Spring.StiffnessLow,
+                            dampingRatio = 0.78f, // overshoot bem mais contido/suave (era 0.55f)
+                            stiffness = 15f, // mais mole que Spring.StiffnessLow (era 200f)
                         ),
                 )
             }

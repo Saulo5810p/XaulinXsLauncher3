@@ -16,6 +16,7 @@ import android.graphics.RenderEffect
 import android.graphics.RuntimeShader
 import android.graphics.Shader
 import android.os.Build
+import androidx.compose.ui.graphics.asComposeRenderEffect
 
 object CinematicShader {
 
@@ -142,4 +143,36 @@ object CinematicShader {
 
         return null
     }
+
+    /**
+     * Variante Compose do factory acima — devolve ComposeRenderEffect em
+     * vez de android.graphics.RenderEffect, para uso direto em
+     * Modifier.graphicsLayer { renderEffect = ... } dentro de Composables.
+     * Portado do projeto irmão RetroPlayer (CinematicShader.kt original,
+     * createComposeCinematicEffect) — omitido na primeira portagem deste
+     * arquivo porque o Launcher3 até então só usava View System puro; a
+     * feature de painel de widgets (100% Compose) volta a precisar dela.
+     */
+    fun createComposeCinematicEffect(
+        width: Float,
+        height: Float,
+        rotationSpeed: Float,
+        scaleFactor: Float,
+        blurIntensity: Float,
+        chromaticShift: Float,
+        vignetteIntensity: Float = 0.0f
+    ): androidx.compose.ui.graphics.RenderEffect? {
+        val effect = createCinematicEffect(
+            width = width,
+            height = height,
+            rotationSpeed = rotationSpeed,
+            scaleFactor = scaleFactor,
+            blurIntensity = blurIntensity,
+            chromaticShift = chromaticShift,
+            vignetteIntensity = vignetteIntensity
+        ) ?: return null
+        return effect.asComposeRenderEffect()
+    }
+
+// XAULINXS_COMPOSE_EFFECT_ADDED
 }

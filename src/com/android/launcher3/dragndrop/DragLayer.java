@@ -63,6 +63,7 @@ import com.android.launcher3.views.BaseDragLayer;
 import com.android.systemui.plugins.shared.LauncherOverlayManager.LauncherOverlayCallbacks;
 
 import java.util.ArrayList;
+import com.xaulinxs.customizations.cinematic.CinematicDragEffect;
 
 /**
  * A ViewGroup that coordinates dragging across its descendants
@@ -397,6 +398,8 @@ public class DragLayer extends BaseDragLayer<Launcher> implements LauncherOverla
         if (animationEndStyle == ANIMATION_END_DISAPPEAR) {
             mDropAnim.addListener(forEndCallback(this::clearAnimatedView));
         }
+        // XAULINXS_CASCADE_HOOK_DRAG_DROP_BOUNCE
+        mDropAnim.addListener(forEndCallback(() -> CinematicDragEffect.onDragDropSettled(view)));
         mDropAnim.start();
     }
 

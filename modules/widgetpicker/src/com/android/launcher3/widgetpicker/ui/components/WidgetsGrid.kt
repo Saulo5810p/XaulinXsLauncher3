@@ -48,6 +48,7 @@ import com.android.launcher3.widgetpicker.shared.model.WidgetId
 import com.android.launcher3.widgetpicker.shared.model.WidgetPreview
 import com.android.launcher3.widgetpicker.ui.WidgetInteractionInfo
 import com.android.launcher3.widgetpicker.ui.WidgetInteractionSource
+import com.xaulinxs.customizations.cinematic.cascadeSpinEnter
 import com.android.launcher3.widgetpicker.ui.components.WidgetGridDimensions.MAX_ITEMS_PER_ROW
 import com.android.launcher3.widgetpicker.ui.model.WidgetSizeGroup
 import kotlin.math.max
@@ -204,7 +205,8 @@ private fun Previews(
     onClick: (WidgetId) -> Unit,
     onHoverChange: (WidgetId, Boolean) -> Unit,
 ) {
-    widgets.forEach { widgetItem ->
+    // XAULINXS_CASCADE_HOOK_WIDGETS_GRID
+    widgets.forEachIndexed { index, widgetItem ->
         val id = widgetItem.id
 
         val widgetPreview: WidgetPreview =
@@ -215,9 +217,11 @@ private fun Previews(
         Box(
             contentAlignment = Alignment.BottomCenter,
             modifier =
-                Modifier.fillMaxSize().clearAndSetSemantics {
-                    testTag = buildWidgetPickerTestTag(WIDGET_PREVIEW_TEST_TAG)
-                },
+                Modifier.fillMaxSize()
+                    .cascadeSpinEnter(indexInGrid = index)
+                    .clearAndSetSemantics {
+                        testTag = buildWidgetPickerTestTag(WIDGET_PREVIEW_TEST_TAG)
+                    },
         ) {
             WidgetPreview(
                 id = widgetItem.id,

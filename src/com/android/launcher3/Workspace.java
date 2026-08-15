@@ -104,6 +104,7 @@ import com.android.launcher3.celllayout.CellPosMapper.CellPos;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.dragndrop.BaseItemDragListener;
 import com.android.launcher3.dragndrop.DragController;
+import com.xaulinxs.customizations.cinematic.CinematicCoverFlowEffect;
 import com.android.launcher3.dragndrop.DragLayer;
 import com.android.launcher3.dragndrop.DragOptions;
 import com.android.launcher3.dragndrop.DragView;
@@ -1564,6 +1565,8 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
             if (child != null) {
                 float scrollProgress = getScrollProgress(screenCenter, child, i);
                 child.setScrollProgress(scrollProgress);
+                // XAULINXS_CASCADE_HOOK_COVERFLOW_WORKSPACE
+                CinematicCoverFlowEffect.applyToPage(child, scrollProgress);
             }
         }
     }
@@ -1571,6 +1574,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         mWallpaperOffset.setWindowToken(getWindowToken());
+        com.xaulinxs.customizations.cinematic.GyroTiltProvider.subscribe(this);
         computeScroll();
         mLauncher.getStateManager().addStateListener(mAccessibilityDropListener);
         mLayoutTransition.addTransitionListener(mTransitionListener);

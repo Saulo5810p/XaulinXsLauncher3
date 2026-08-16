@@ -5,21 +5,31 @@
  * no app drawer e no widget picker) para o Workspace: ícones E widgets
  * das páginas do launcher também giram em cascata ao rolar entre telas.
  *
- * Mesma lógica de detecção de MUDANÇA DE DIREÇÃO do AllAppsCascadeTrigger
- * (dispara toda vez que o gesto de arrastar entre páginas inverte de
- * sentido, inclusive no meio do caminho) — decisão do usuário de manter
- * o comportamento idêntico ao já aprovado no app drawer.
+ * ATUALIZAÇÃO (pedido do usuário): a versão anterior disparava a cada
+ * MUDANÇA DE DIREÇÃO durante o próprio arrasto (igual ao AllApps). Isso
+ * ofuscava o efeito de coverflow 3D (CinematicCoverFlowEffect) — a
+ * cascata demora pra "cair" (física suavizada do item 1: stiffness 15f,
+ * stagger 110ms) e competia visualmente com a rotação 3D das páginas
+ * enquanto elas ainda estavam se movendo. Agora o disparo é ADIADO: só
+ * acontece quando o scroll ASSENTA de vez (mesmo ponto de
+ * onScrollSettled/reset já usado pelo blur de velocidade), e só se de
+ * fato houve movimento de página desde o último assentamento — não mais
+ * durante o arrasto. Isso libera o coverflow para ser visto sem
+ * concorrência, e a cascata vira um "acabamento" depois que a página já
+ * está parada.
  *
  * Diferença de arquitetura em relação ao AllApps: lá, os ícones "surgem"
- * de verdade (drawer abrindo, RecyclerView populando). No Workspace as
- * páginas vizinhas já ficam sempre montadas por baixo do pano — não há um
- * momento nativo de "entrada". Por isso a cascata aqui dispara sobre as
- * views JÁ EXISTENTES, sem tocar em nenhuma lógica de posicionamento.
+ * de verdade (drawer abrindo, RecyclerView populando) e a cascata reage
+ * ao próprio gesto em tempo real. No Workspace as páginas vizinhas já
+ * ficam sempre montadas por baixo do pano — não há um momento nativo de
+ * "entrada", e agora nem reage mais ao gesto em si. Por isso a cascata
+ * aqui dispara sobre as views JÁ EXISTENTES, sem tocar em nenhuma lógica
+ * de posicionamento, e só depois que o movimento parou.
  *
- * Escopo por página (confirmado com o usuário): ao inverter a direção,
- * a cascata roda em TODAS as páginas visíveis na tela naquele momento —
- * a página que está ficando central E a(s) que ainda está(ão)
- * entrando/saindo pela lateral — não só a página central.
+ * Escopo por página (confirmado com o usuário, mantido na atualização
+ * acima): quando dispara, a cascata roda em TODAS as páginas visíveis na
+ * tela naquele momento — a página que ficou central E a(s) que ainda
+ * está(ão) entrando/saindo pela lateral — não só a página central.
  *
  * Widgets: diferente do AllApps (só BubbleTextView), aqui o container de
  * cada página (ShortcutAndWidgetContainer) mistura BubbleTextView e
@@ -34,40 +44,42 @@ import com.android.launcher3.widget.LauncherAppWidgetHostView
 
 object WorkspaceCascadeTrigger {
 
-    private const val DIRECTION_NONE = 0
-    private const val DIRECTION_POSITIVE = 1
-    private const val DIRECTION_NEGATIVE = -1
-
+    // Não guardamos mais a direção pra disparar durante o arrasto — só
+    // marcamos que houve movimento, para decidir no assentamento se vale
+    // a pena disparar a cascata (evita disparar em toques que nem
+    // chegaram a mover a página).
     @Volatile
-    private var lastDirection = DIRECTION_NONE
+    private var hasPendingMovement = false
 
     /**
      * Chamar a cada mudança de posição de scroll do Workspace (arrasto
      * manual ou fling — mesmos pontos já alimentando
      * CinematicScrollVelocityEffect.onScrollPositionChanged em
-     * PagedView.java). newScroll é a posição de scroll bruta (px);
-     * comparamos com a última chamada para saber a direção instantânea.
-     * `pages` é o próprio PagedView/Workspace (ViewGroup cujos filhos
-     * diretos são as CellLayout/páginas).
+     * PagedView.java). Não dispara mais a cascata aqui — só registra que
+     * houve movimento, para o disparo real acontecer em reset(), quando
+     * o scroll assenta de vez.
      */
     @JvmStatic
     fun onScrollPositionChanged(pages: ViewGroup, newScroll: Float, previousScroll: Float) {
         if (!newScroll.isFinite() || !previousScroll.isFinite()) return
-        val delta = newScroll - previousScroll
-        if (delta == 0f) return
-
-        val direction = if (delta > 0) DIRECTION_POSITIVE else DIRECTION_NEGATIVE
-
-        if (direction != lastDirection) {
-            lastDirection = direction
-            triggerOnVisiblePages(pages)
-        }
+        if (newScroll == previousScroll) return
+        hasPendingMovement = true
     }
 
-    /** Reseta a direção conhecida — chamar quando o scroll assenta de vez (mesmo ponto do onScrollSettled do blur de velocidade). */
+    /**
+     * Chamar quando o scroll assenta de vez (mesmo ponto do
+     * onScrollSettled do blur de velocidade). Dispara a cascata nas
+     * páginas atualmente visíveis SE houve movimento desde o último
+     * assentamento — evita disparar em toques que não moveram a página.
+     * `pages` é o próprio PagedView/Workspace (ViewGroup cujos filhos
+     * diretos são as CellLayout/páginas).
+     */
     @JvmStatic
-    fun reset() {
-        lastDirection = DIRECTION_NONE
+    fun reset(pages: ViewGroup) {
+        if (hasPendingMovement) {
+            triggerOnVisiblePages(pages)
+        }
+        hasPendingMovement = false
     }
 
     private fun triggerOnVisiblePages(pages: ViewGroup) {

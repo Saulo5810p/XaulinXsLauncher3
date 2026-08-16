@@ -643,10 +643,11 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
         // dois ramos acima segue em andamento) — zera o efeito cinematográfico.
         com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
                 .onScrollSettled(this);
-        // XaulinXs Customizations: reseta a direção conhecida da cascata
-        // do Workspace junto com o reset do blur de velocidade.
+        // XaulinXs Customizations: scroll assentou de vez — dispara a
+        // cascata do Workspace AGORA (adiada até aqui, pedido do
+        // usuário) se houve movimento, e zera o estado.
         // XAULINXS_WORKSPACE_CASCADE_HOOK_RESET
-        com.xaulinxs.customizations.cinematic.WorkspaceCascadeTrigger.reset();
+        com.xaulinxs.customizations.cinematic.WorkspaceCascadeTrigger.reset(this);
         return false;
     }
 

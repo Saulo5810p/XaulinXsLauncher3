@@ -48,7 +48,6 @@ import com.android.launcher3.widgetpicker.shared.model.WidgetId
 import com.android.launcher3.widgetpicker.shared.model.WidgetPreview
 import com.android.launcher3.widgetpicker.ui.WidgetInteractionInfo
 import com.android.launcher3.widgetpicker.ui.WidgetInteractionSource
-import com.xaulinxs.customizations.cinematic.cascadeSpinEnter
 import com.android.launcher3.widgetpicker.ui.components.WidgetGridDimensions.MAX_ITEMS_PER_ROW
 import com.android.launcher3.widgetpicker.ui.model.WidgetSizeGroup
 import kotlin.math.max
@@ -218,7 +217,6 @@ private fun Previews(
             contentAlignment = Alignment.BottomCenter,
             modifier =
                 Modifier.fillMaxSize()
-                    .cascadeSpinEnter(indexInGrid = index)
                     .clearAndSetSemantics {
                         testTag = buildWidgetPickerTestTag(WIDGET_PREVIEW_TEST_TAG)
                     },

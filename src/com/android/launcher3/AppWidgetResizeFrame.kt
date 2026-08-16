@@ -58,7 +58,6 @@ import com.android.launcher3.widget.LauncherAppWidgetHostView
 import com.android.launcher3.widget.LauncherAppWidgetProviderInfo
 import com.android.launcher3.widget.PendingAppWidgetHostView
 import com.android.launcher3.widget.resize.AppWidgetResizeFrameCompose
-import com.xaulinxs.customizations.cinematic.CinematicResizeEffect
 import com.android.launcher3.widget.util.WidgetSizeHandler.Companion.updateSizeRanges
 import kotlin.math.abs
 import kotlin.math.max
@@ -408,19 +407,6 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private fun visualizeResizeForDelta(deltaX: Int, deltaY: Int) {
         this.deltaX = deltaXRange.clamp(deltaX)
         this.deltaY = deltaYRange.clamp(deltaY)
-        // XAULINXS_CASCADE_HOOK_WIDGET_RESIZE_MOVE
-        CinematicResizeEffect.onResizeMove(
-            frame = this,
-            deltaX = this.deltaX,
-            deltaY = this.deltaY,
-            activeHandle = when {
-                isLeftBorderActive -> dragHandles.left
-                isRightBorderActive -> dragHandles.right
-                isTopBorderActive -> dragHandles.top
-                isBottomBorderActive -> dragHandles.bottom
-                else -> null
-            },
-        )
         val lp = layoutParams as BaseDragLayer.LayoutParams
 
         baselineXRange.applyDelta(
@@ -607,8 +593,6 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     private fun onTouchUp() {
-        // XAULINXS_CASCADE_HOOK_WIDGET_RESIZE_SETTLE
-        CinematicResizeEffect.onResizeSettled(this, dragHandles.all)
         val dp = launcher.deviceProfile
         val xThreshold = cellLayout.cellWidth + dp.workspaceProfile.cellLayoutBorderSpacePx.x
         val yThreshold = cellLayout.cellHeight + dp.workspaceProfile.cellLayoutBorderSpacePx.y

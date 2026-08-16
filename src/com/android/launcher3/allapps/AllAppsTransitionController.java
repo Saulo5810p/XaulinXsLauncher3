@@ -171,7 +171,6 @@ public class AllAppsTransitionController
         if (Float.compare(mProgress, progress) == 0) {
             return;
         }
-        float previousProgress = mProgress;
         mProgress = progress;
         boolean fromBackground =
                 mLauncher.getStateManager().getCurrentStableState() == BACKGROUND_APP;
@@ -179,33 +178,6 @@ public class AllAppsTransitionController
         float shiftRange = fromBackground ? mLauncher.getDeviceProfile().getDeviceProperties().getHeightPx() : mShiftRange;
         getAppsViewProgressTranslationY().setValue(mProgress * shiftRange);
         mLauncher.onAllAppsTransition(1 - progress);
-
-        // XaulinXs Customizations: motion blur + aberração cromática
-        // reagindo à velocidade da transição de abertura/fechamento do app
-        // drawer, portado do RetroPlayer. progress*shiftRange já é uma
-        // posição em pixels equivalente à do scroll de páginas — mesmo
-        // motor (CinematicScrollVelocityEffect) reaproveitado sem mudanças.
-        // Puramente observacional, roda depois da translação real acima.
-        if (mAppsView != null) {
-            com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
-                    .onScrollPositionChanged(mAppsView, mProgress * shiftRange);
-            if (mProgress <= 0f || mProgress >= 1f) {
-                com.xaulinxs.customizations.cinematic.CinematicScrollVelocityEffect
-                        .onScrollSettled(mAppsView);
-            }
-        }
-        // XaulinXs Customizations: dispara o giro 720° em cascata sempre
-        // que a DIREÇÃO do gesto de abrir/fechar o drawer muda — mesmo no
-        // meio do caminho, não só ao cruzar totalmente aberto/fechado.
-        // Substitui a versão anterior (janela de tempo única), que quase
-        // nunca disparava com toques rápidos e parciais.
-        if (mAppsView != null) {
-            com.xaulinxs.customizations.cinematic.AllAppsCascadeTrigger
-                    .onProgressChanged(previousProgress, mProgress, mAppsView);
-            if (mProgress <= 0f || mProgress >= 1f) {
-                com.xaulinxs.customizations.cinematic.AllAppsCascadeTrigger.reset();
-            }
-        }
 
         boolean hasScrim = progress < NAV_BAR_COLOR_FORCE_UPDATE_THRESHOLD
                 && mLauncher.getAppsView().getNavBarScrimHeight() > 0;

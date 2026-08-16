@@ -58,7 +58,6 @@ import androidx.dynamicanimation.animation.SpringForce;
 
 import com.android.app.animation.Interpolators;
 import com.android.launcher3.R;
-import com.xaulinxs.customizations.cinematic.CinematicDragEffect;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.folder.ClippedFolderIconLayoutRule;
 import com.android.launcher3.graphics.ThemeManager;
@@ -490,8 +489,6 @@ public class DragView extends FrameLayout {
             mTranslateX.animateToPos(mLastTouchX - touchX);
             mTranslateY.animateToPos(mLastTouchY - touchY);
         }
-        // XAULINXS_CASCADE_HOOK_DRAG_MOVE
-        CinematicDragEffect.onDragMove(this, mLastTouchX - touchX, mLastTouchY - touchY);
         mLastTouchX = touchX;
         mLastTouchY = touchY;
         applyTranslation();

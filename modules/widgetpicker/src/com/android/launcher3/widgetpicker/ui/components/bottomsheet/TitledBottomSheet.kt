@@ -69,9 +69,6 @@ import androidx.compose.ui.unit.times
 import com.android.launcher3.R
 import com.android.launcher3.widgetpicker.shared.model.CloseBehavior
 import com.android.launcher3.widgetpicker.ui.components.SheetDismissState
-import com.xaulinxs.customizations.cinematic.CinematicWidgetSheetScrim
-import com.xaulinxs.customizations.cinematic.LocalCinematicWidgetsCascadeTrigger
-import com.xaulinxs.customizations.cinematic.rememberWidgetsSheetCascadeTrigger
 import com.android.launcher3.widgetpicker.ui.components.SheetHeader
 import com.android.launcher3.widgetpicker.ui.components.accessibility.LocalAccessibilityState
 import com.android.launcher3.widgetpicker.ui.components.bottomsheet.TitledBottomSheetAnimations.OpenCloseAnimationSpec
@@ -130,16 +127,6 @@ fun TitledBottomSheet(
                 LocalWindowInfo.current.containerSize.let { it.width.toDp() to it.height.toDp() }
             }
 
-        // XAULINXS_CASCADE_HOOK_WIDGETS_SHEET
-        val cinematicCascadeTrigger = rememberWidgetsSheetCascadeTrigger(scrimAlpha)
-        CinematicWidgetSheetScrim(
-            scrimAlpha = scrimAlpha,
-            scrimColor = WidgetPickerTheme.colors.sheetBackgroundScrim,
-        )
-
-        CompositionLocalProvider(
-            LocalCinematicWidgetsCascadeTrigger provides cinematicCascadeTrigger
-        ) {
         BoxWithConstraints(
             modifier =
                 modifier
@@ -230,7 +217,6 @@ fun TitledBottomSheet(
                     onClose = { scope.launch { sheetState.collapse() } },
                 )
             }
-        }
         }
     }
 }

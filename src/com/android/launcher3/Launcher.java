@@ -1376,17 +1376,6 @@ public class Launcher extends StatefulActivity<LauncherState>
         mItemInflater.prepareAppWidget(hostView, launcherInfo);
         if (hostView.getParent() == null) {
             mWorkspace.addInScreen(hostView, launcherInfo);
-            // XaulinXs Customizations: efeito leve de entrada (giro 720°
-            // + escala + fade, mesmo AllAppsIconEnterEffect usado nos
-            // ícones do app drawer) no widget recém-adicionado à
-            // Workspace — pedido do usuário, dispara uma única vez.
-            // continuous NÃO é passado (fica no default false) — isso é
-            // um giro individual normal, não o modo contínuo do App
-            // Drawer (que só ativa quando explicitamente pedido via
-            // AllAppsCascadeTrigger).
-            // XAULINXS_WIDGET_ADD_ENTER_HOOK
-            com.xaulinxs.customizations.cinematic.AllAppsIconEnterEffect
-                    .animateEnter(hostView, 0);
         }
 
         // Show the widget resize frame.

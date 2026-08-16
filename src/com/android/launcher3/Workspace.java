@@ -1567,9 +1567,6 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
                 child.setScrollProgress(scrollProgress);
                 // XAULINXS_CASCADE_HOOK_COVERFLOW_WORKSPACE
                 CinematicCoverFlowEffect.applyToPage(child, scrollProgress);
-                // XAULINXS_CASCADE_HOOK_DEPTH_BLUR_WORKSPACE
-                com.xaulinxs.customizations.cinematic.WorkspaceDepthBlurEffect
-                        .applyToPage(child, scrollProgress);
             }
         }
     }

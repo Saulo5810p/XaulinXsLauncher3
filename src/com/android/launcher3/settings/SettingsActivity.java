@@ -225,6 +225,18 @@ public class SettingsActivity extends FragmentActivity
                 }
             }
 
+            // XaulinXs Customizations: entrega ao CustomFontPreference a
+            // referência deste fragment (é ele quem precisa originar o
+            // startActivityForResult para o FragmentManager repassar o
+            // resultado corretamente — ver comentário em
+            // CustomFontPreference.kt).
+            Preference xaulinxsFontPref = screen.findPreference("xaulinxs_custom_font");
+            if (xaulinxsFontPref
+                    instanceof com.xaulinxs.customizations.settings.CustomFontPreference) {
+                ((com.xaulinxs.customizations.settings.CustomFontPreference) xaulinxsFontPref)
+                        .setOwnerFragment(this);
+            }
+
             // If the target preference is not in the current preference screen, find the parent
             // preference screen that contains the target preference and set it as the preference
             // screen.

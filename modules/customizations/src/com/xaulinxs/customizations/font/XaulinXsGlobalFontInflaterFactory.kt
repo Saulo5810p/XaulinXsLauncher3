@@ -24,6 +24,7 @@
  */
 package com.xaulinxs.customizations.font
 
+import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -40,6 +41,27 @@ class XaulinXsGlobalFontInflaterFactory(
         context: Context,
         attrs: AttributeSet,
     ): View? {
+        // XaulinXs fix (causa raiz dos widgets quebrados na Fase 2): a
+        // Activity Launcher passa "this" como Context para
+        // LauncherWidgetHolder/LauncherAppWidgetHost, então
+        // AppWidgetHostView.updateAppWidget()/RemoteViews.apply() acaba
+        // usando LayoutInflater.from(context) do MESMO LayoutInflater da
+        // Activity — o que já tem este Factory2 instalado — em vez de um
+        // inflater isolado do processo do widget, como a suposição
+        // original (Fase 2) previa. RemoteViews.apply() já instala seu
+        // próprio LayoutInflater.Filter (a própria RemoteViews via
+        // onLoadClass) nesse mesmo inflater compartilhado para
+        // sandboxing de segurança — nosso Factory2 rodando no meio disso
+        // corrompe esse fluxo e quebra a inflação de QUALQUER widget.
+        // Fix: se algum ancestral na árvore de "parent" for um
+        // AppWidgetHostView, este Factory2 não participa em nada —
+        // devolve null imediatamente e deixa o LayoutInflater original
+        // resolver sozinho, do jeito que resolveria sem este Factory2
+        // existir.
+        if (isInsideAppWidgetHostView(parent)) {
+            return null
+        }
+
         // Deixa qualquer factory pré-existente (ex.: a própria do
         // PreferenceFragmentCompat/androidx) criar a view primeiro, se
         // houver uma; senão cai no inflater padrão da plataforma via
@@ -54,6 +76,15 @@ class XaulinXsGlobalFontInflaterFactory(
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
         onCreateView(null, name, context, attrs)
+
+    private fun isInsideAppWidgetHostView(parent: View?): Boolean {
+        var current = parent
+        while (current != null) {
+            if (current is AppWidgetHostView) return true
+            current = current.parent as? View
+        }
+        return false
+    }
 
     private fun createViewFallback(context: Context, name: String, attrs: AttributeSet): View? {
         // createView(name, prefix, attrs) resolve a classe via reflection

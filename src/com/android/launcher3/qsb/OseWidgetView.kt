@@ -81,14 +81,38 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     fun attachedToWindow() {
         closeActions.executeAllAndClear()
 
+        // XaulinXs Customizations: esta é a QSB nativa AOSP/Launcher3
+        // "NoQuickstep" — OseWidgetManager nunca mais localiza/binda um
+        // AppWidget de terceiro (ver comentário em
+        // OseWidgetManager.handleOseInfoUpdate), então providerInfo e
+        // views são sempre despachados como null. O fluxo original do
+        // AOSP abaixo pressupõe que, depois de setAppWidget(id, info)
+        // com um "info" real, um evento de "views" real chega logo em
+        // seguida sobrescrevendo o RemoteViews(context.packageName, 0)
+        // usado só como placeholder de reset — com info sempre null,
+        // esse RemoteViews vazio (layoutId=0) nunca é sobrescrito e
+        // fica permanentemente visível, o que o framework renderiza
+        // como uma UI de erro nativa genérica (não a nossa
+        // getErrorView() customizada — essa só dispara quando
+        // updateAppWidget recebe null, não um RemoteViews vazio).
+        // Fix: quando não há provider (it == null), pula esse reset
+        // por completo e delega direto para getErrorView(), chamando
+        // updateAppWidget(null) — o caminho que o framework já trata
+        // corretamente.
+        //
         // We use INVALID_APPWIDGET_ID because appWidgetId is not tracked in OseWidgetView. Instead
         // it is managed by OseWidgetManager and QsbAppWidgetHost.
         closeActions.add(
             oseWidgetManager.providerInfo.forEach(activityContext.uiExecutor) {
                 setAppWidget(INVALID_APPWIDGET_ID, it)
-                // We will get valid updateAppWidget remoteview call from OseWidgetManager again.
-                // This is only for resetting the remoteviews using a broken remote view.
-                updateAppWidget(RemoteViews(context.packageName, 0))
+                if (it == null) {
+                    updateAppWidget(null)
+                } else {
+                    // We will get valid updateAppWidget remoteview call from
+                    // OseWidgetManager again. This is only for resetting the
+                    // remoteviews using a broken remote view.
+                    updateAppWidget(RemoteViews(context.packageName, 0))
+                }
                 if (autoUpdateTag) tag = getTagInfo(it)
                 Log.i(TAG, "setAppWidget providerInfo=$it")
             }::close

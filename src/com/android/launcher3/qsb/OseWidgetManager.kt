@@ -79,53 +79,34 @@ constructor(
         tracker.addCloseable { idp.removeOnChangeListener(idpListener) }
     }
 
-    private fun handleOseInfoUpdate(info: OSEInfo) {
-        // If the package is null, leave it to the current value as the OSEManager
-        // may not have initialized yet
-        val providerPkg =
-            if (info.pkg != null) {
-                info.pkg
-            } else {
-                // When defaultSearchPackage is disabled oseInfo pkg is null.
-                dispatchNullValues()
-                return
-            }
-        val searchWidget = findSearchWidgetForPackage(context, providerPkg)
-
+    private fun handleOseInfoUpdate(@Suppress("UNUSED_PARAMETER") info: OSEInfo) {
+        // XaulinXs Customizations: esta é a QSB nativa AOSP/Launcher3
+        // "NoQuickstep", não o Pixel Launcher com Widget de busca do
+        // Google. O comportamento AOSP original bindava um AppWidget
+        // real (RemoteViews de terceiro) do "on-device search engine"
+        // configurado no sistema — no caso comum (Google como app
+        // padrão), isso injetava o widget real de busca do Google na
+        // QSB, e por consequência: (1) o long-press na QSB abria as
+        // configurações desse widget de terceiro via
+        // OseWidgetOptionsProvider/startConfigActivity, e (2) a QSB
+        // ficava sujeita ao mesmo problema de RemoteViews.apply()
+        // reutilizando o LayoutInflater da Activity que afeta qualquer
+        // AppWidgetHostView (ver XaulinXsGlobalFontInflaterFactory).
+        // Fix: nunca localiza/binda um AppWidget de terceiro — sempre
+        // despacha valores nulos, o que faz o framework
+        // (AppWidgetHostView.updateAppWidget(null)) cair automaticamente
+        // em OseWidgetView.getErrorView(), a própria UI estática nativa
+        // do AOSP (ícone + label + clique abre busca/browser), sem
+        // nenhuma RemoteViews de terceiro envolvida e sem opção de
+        // configuração no long-press. widgetHost.getBoundWidgetId()
+        // permanece disponível para limpar qualquer widget já bindado
+        // de uma sessão anterior (antes deste fix).
         val currentWidgetId = widgetHost.getBoundWidgetId()
-        val currentInfo =
-            if (currentWidgetId != INVALID_APPWIDGET_ID)
-                AppWidgetManager.getInstance(context).getAppWidgetInfo(currentWidgetId)
-            else null
-
-        // Everything is in order
-        if (currentInfo?.provider == searchWidget?.provider) {
-            widgetHost.setActiveWidget(currentWidgetId, currentInfo)
-            updateWidgetSizeAsync()
-            return
+        if (currentWidgetId != INVALID_APPWIDGET_ID) {
+            widgetHost.deleteAppWidgetId(currentWidgetId)
         }
-
-        // If there is no possible search widget, switch to a null view
-        if (searchWidget == null) {
-            widgetHost.setActiveWidget(INVALID_APPWIDGET_ID, null)
-            dispatchNullValues()
-            return
-        }
-
-        // Try to bind a new search widget
-        val widgetId = widgetHost.allocateAppWidgetId()
-        val bindSuccess =
-            AppWidgetManager.getInstance(context)
-                .bindAppWidgetIdIfAllowed(widgetId, searchWidget.provider)
-
-        if (bindSuccess) {
-            widgetHost.setActiveWidget(widgetId, searchWidget)
-            updateWidgetSizeAsync()
-        } else {
-            widgetHost.deleteAppWidgetId(widgetId)
-            widgetHost.setActiveWidget(INVALID_APPWIDGET_ID, null)
-            dispatchNullValues()
-        }
+        widgetHost.setActiveWidget(INVALID_APPWIDGET_ID, null)
+        dispatchNullValues()
     }
 
     private fun updateWidgetSizeAsync() {

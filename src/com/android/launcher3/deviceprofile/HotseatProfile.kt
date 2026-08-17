@@ -145,14 +145,58 @@ data class HotseatProfile(
             isVerticalBarLayout: Boolean,
             numShownHotseatIconsParam: Int,
         ): HotseatWithBorderAndSpace {
-            if (!isScalableGrid)
+            if (!isScalableGrid) {
+                // XaulinXs fix: no grid não-escalável (grid padrão de
+                // telefone, ex. "5_by_5"/Large Phone — o caso do
+                // Samsung Galaxy A35 em densidade real), este branch
+                // sempre zerava qsbWidth incondicionalmente. Hotseat
+                // mede a QSB com makeMeasureSpec(qsbWidth, EXACTLY), e
+                // largura exata 0 faz a QSB nunca aparecer — mesmo ela
+                // estando corretamente adicionada à hierarquia de views
+                // (addView(mQsb) sempre roda). Isso só não acontecia em
+                // densidades altas o bastante para o algoritmo de
+                // "closest display option" cair, por acidente, num
+                // GridOption com isScalable=true (ex. "6_by_5", grid de
+                // tablet) — não é um comportamento pretendido, é uma
+                // seleção de grid errada mascarando o bug.
+                // O próprio comentário de calculateQsbWidth() acima já
+                // documenta a intenção original: "QSB width is always
+                // calculated" — não deveria depender de isScalableGrid.
+                // Fix: calcula qsbWidth de verdade aqui também,
+                // reaproveitando calculateQsbWidth() com columnSpan =
+                // inv.numColumns (mesmo valor já usado para widthPx e
+                // columnSpan neste branch), sem alterar nada mais do
+                // comportamento do grid fixo de telefone (widthPx,
+                // borderSpace, numShownIcons continuam 0/inalterados —
+                // só qsbWidth passa a refletir a largura real).
+                val nonScalableQsbWidth =
+                    calculateQsbWidth(
+                        borderAndSpace =
+                            HotseatBorderAndSpace(
+                                widthPx = 0,
+                                columnSpan = inv.numColumns,
+                                borderSpace = 0,
+                            ),
+                        workspaceProfile = workspaceProfile,
+                        inv = inv,
+                        panelCount = panelCount,
+                        numShownHotseatIcons = numShownHotseatIconsParam,
+                        isQsbInline = hotseatProfileInitialValues.isQsbInline,
+                        // coerceAtLeast(0): MeasureSpec.EXACTLY com
+                        // largura negativa é comportamento indefinido —
+                        // salvaguarda defensiva, não deveria ocorrer em
+                        // grids de telefone normais, mas garante que
+                        // nunca voltamos a pior do que "QSB invisível"
+                        // (0px) em vez de crashar.
+                    ).coerceAtLeast(0)
                 return HotseatWithBorderAndSpace(
                     widthPx = 0,
                     numShownIcons = numShownHotseatIconsParam,
                     columnSpan = inv.numColumns,
-                    qsbWidth = 0,
+                    qsbWidth = nonScalableQsbWidth,
                     borderSpace = 0,
                 )
+            }
 
             var numShownHotseatIcons = numShownHotseatIconsParam
             var borderAndSpace =

@@ -108,6 +108,17 @@ public class SettingsActivity extends FragmentActivity
 
         setActionBar(findViewById(R.id.action_bar));
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        // XaulinXs Customizations: XaulinXsGlobalFontInflaterFactory não
+        // alcança o título desta tela porque ele nunca é inflado como
+        // TextView a partir de XML — em API 31+ (res/layout-v31, caso do
+        // Galaxy A35) é um CollapsingToolbarLayout que DESENHA o título
+        // internamente via CollapsingTextHelper (não infla view alguma
+        // para o texto); em versões anteriores é o próprio
+        // android.widget.Toolbar que cria sua TextView de título
+        // programaticamente, também fora do fluxo de LayoutInflater.
+        // Fix: aplica o typeface diretamente nos dois pontos possíveis,
+        // usando a API pública de cada view — sem reflection.
+        com.xaulinxs.customizations.font.XaulinXsCustomFont.applyToSettingsTitle(this);
 
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_FRAGMENT_ROOT_KEY) || intent.hasExtra(EXTRA_FRAGMENT_ARGS)
@@ -137,6 +148,19 @@ public class SettingsActivity extends FragmentActivity
             // Display the fragment as the main content.
             fm.beginTransaction().replace(R.id.content_frame, f).commit();
         }
+
+        // XaulinXs Customizations: no layout pré-API 31 (sem
+        // CollapsingToolbarLayout), a TextView interna do título da
+        // Toolbar só é criada na primeira vez que setTitle() recebe um
+        // texto não vazio — o fragment acima ainda vai chamar
+        // getActivity().setTitle() de forma assíncrona ao montar as
+        // preferences, então a TextView pode não existir ainda no ponto
+        // acima. Reaplica depois que a fila de mensagens processar essa
+        // transação, garantindo que a TextView já exista. Sem efeito no
+        // caso CollapsingToolbarLayout (já resolvido acima, idempotente).
+        findViewById(R.id.content_frame).post(() ->
+                com.xaulinxs.customizations.font.XaulinXsCustomFont
+                        .applyToSettingsTitle(SettingsActivity.this));
     }
 
     private boolean startPreference(String fragment, Bundle args, String key) {
@@ -314,6 +338,20 @@ public class SettingsActivity extends FragmentActivity
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             View listView = getListView();
+            // XaulinXs Customizations: aplica a fonte customizada no
+            // título/summary de cada linha da lista de preferences
+            // (inclusive "XaulinXs Customizations"), cobrindo também
+            // reciclagem de views durante o scroll — ver comentário em
+            // XaulinXsCustomFont.applyToPreferenceListRecycling.
+            // Precisa rodar aqui (onViewCreated), não em
+            // onCreatePreferences: a RecyclerView só existe depois que
+            // PreferenceFragmentCompat.onCreateView() roda, que é
+            // posterior a onCreate()/onCreatePreferences() no ciclo de
+            // vida do Fragment — getListView() ali retornava null e
+            // derrubava a Activity com NullPointerException.
+            com.xaulinxs.customizations.font.XaulinXsCustomFont
+                    .applyToPreferenceListRecycling(
+                            (androidx.recyclerview.widget.RecyclerView) listView);
             final int bottomPadding = listView.getPaddingBottom();
             listView.setOnApplyWindowInsetsListener((v, insets) -> {
                 v.setPadding(

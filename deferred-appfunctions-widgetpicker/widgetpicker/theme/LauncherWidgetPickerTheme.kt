@@ -20,6 +20,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.android.launcher3.widgetpicker.ui.theme.WidgetPickerTheme
+import com.xaulinxs.customizations.font.XaulinXsComposeFont
 
 /** Contains theme that launcher applies to the widget picker. */
 @Composable
@@ -41,10 +42,28 @@ fun LauncherWidgetPickerTheme(
             )
         }
 
-    MaterialTheme {
+    // XaulinXs Customizations: estende a fonte customizada (TTF/OTF
+    // importada pelo usuário) para o Widget Picker Compose. Sem isso,
+    // MaterialTheme() usa FontFamily.Default do Material 3 e
+    // launcherWidgetPickerTextStyles() lê fontFamily dos estilos XML via
+    // DeviceFontFamilyName, que só resolve fontes de sistema — nenhum
+    // dos dois caminhos suporta um arquivo de fonte arbitrário. Quando
+    // não há fonte customizada configurada (rememberCustomFontFamily
+    // retorna null), applyFontFamily devolve o typography/textStyles
+    // originais sem qualquer alteração — comportamento 100% original
+    // preservado nesse caso.
+    val xaulinxsFontFamily = XaulinXsComposeFont.rememberCustomFontFamily()
+    val baseTextStyles = launcherWidgetPickerTextStyles()
+    val widgetPickerTextStyles =
+        XaulinXsComposeFont.applyFontFamily(baseTextStyles, xaulinxsFontFamily)
+
+    MaterialTheme(
+        typography = XaulinXsComposeFont.applyFontFamily(
+            MaterialTheme.typography, xaulinxsFontFamily),
+    ) {
         WidgetPickerTheme(
             colors = widgetPickerColors,
-            textStyles = launcherWidgetPickerTextStyles(),
+            textStyles = widgetPickerTextStyles,
         ) {
             content()
         }

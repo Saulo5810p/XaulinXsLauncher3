@@ -1,0 +1,368 @@
+diff --git a/deferred-appfunctions-widgetpicker/widgetpicker/theme/LauncherWidgetPickerTheme.kt b/deferred-appfunctions-widgetpicker/widgetpicker/theme/LauncherWidgetPickerTheme.kt
+index 3961b34..aed123a 100644
+--- a/deferred-appfunctions-widgetpicker/widgetpicker/theme/LauncherWidgetPickerTheme.kt
++++ b/deferred-appfunctions-widgetpicker/widgetpicker/theme/LauncherWidgetPickerTheme.kt
+@@ -20,6 +20,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
+ import androidx.compose.material3.MaterialTheme
+ import androidx.compose.runtime.Composable
+ import com.android.launcher3.widgetpicker.ui.theme.WidgetPickerTheme
++import com.xaulinxs.customizations.font.XaulinXsComposeFont
+ 
+ /** Contains theme that launcher applies to the widget picker. */
+ @Composable
+@@ -41,10 +42,28 @@ fun LauncherWidgetPickerTheme(
+             )
+         }
+ 
+-    MaterialTheme {
++    // XaulinXs Customizations: estende a fonte customizada (TTF/OTF
++    // importada pelo usuário) para o Widget Picker Compose. Sem isso,
++    // MaterialTheme() usa FontFamily.Default do Material 3 e
++    // launcherWidgetPickerTextStyles() lê fontFamily dos estilos XML via
++    // DeviceFontFamilyName, que só resolve fontes de sistema — nenhum
++    // dos dois caminhos suporta um arquivo de fonte arbitrário. Quando
++    // não há fonte customizada configurada (rememberCustomFontFamily
++    // retorna null), applyFontFamily devolve o typography/textStyles
++    // originais sem qualquer alteração — comportamento 100% original
++    // preservado nesse caso.
++    val xaulinxsFontFamily = XaulinXsComposeFont.rememberCustomFontFamily()
++    val baseTextStyles = launcherWidgetPickerTextStyles()
++    val widgetPickerTextStyles =
++        XaulinXsComposeFont.applyFontFamily(baseTextStyles, xaulinxsFontFamily)
++
++    MaterialTheme(
++        typography = XaulinXsComposeFont.applyFontFamily(
++            MaterialTheme.typography, xaulinxsFontFamily),
++    ) {
+         WidgetPickerTheme(
+             colors = widgetPickerColors,
+-            textStyles = launcherWidgetPickerTextStyles(),
++            textStyles = widgetPickerTextStyles,
+         ) {
+             content()
+         }
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsComposeFont.kt b/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsComposeFont.kt
+new file mode 100644
+index 0000000..32abf91
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsComposeFont.kt
+@@ -0,0 +1,131 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Estende a fonte customizada (TTF/OTF importada pelo usuário) para o
++ * lado Compose do app — hoje, o Widget Picker (modules/widgetpicker +
++ * deferred-appfunctions-widgetpicker), que usa MaterialTheme sem
++ * typography customizado (herda FontFamily.Default do Material 3).
++ *
++ * O View System (Workspace, AllApps, Settings) já é coberto por
++ * XaulinXsGlobalFontInflaterFactory, que intercepta o LayoutInflater.
++ * Compose não passa por LayoutInflater — TextStyle é resolvido pela
++ * árvore de composição, então a única forma de alcançar todo texto
++ * Compose de uma vez é sobrescrever o Typography fornecido no
++ * MaterialTheme raiz (ver LauncherWidgetPickerTheme.kt).
++ */
++package com.xaulinxs.customizations.font
++
++import androidx.compose.material3.Typography
++import androidx.compose.runtime.Composable
++import androidx.compose.runtime.remember
++import androidx.compose.ui.platform.LocalContext
++import androidx.compose.ui.text.font.Font
++import androidx.compose.ui.text.font.FontFamily
++import com.android.launcher3.widgetpicker.ui.theme.WidgetPickerTextStyles
++import java.io.File
++
++object XaulinXsComposeFont {
++
++    /**
++     * Constrói uma [FontFamily] Compose a partir do arquivo de fonte
++     * customizada atualmente configurado, ou retorna null se não houver
++     * nenhuma (nesse caso o chamador deve manter o Typography padrão
++     * inalterado). Diferente de XaulinXsCustomFont.loadTypefaceIfAvailable
++     * (que retorna um android.graphics.Typeface para uso em View System),
++     * este método lê o mesmo path salvo mas monta o tipo específico do
++     * Compose — Font(file = ...) aceita um java.io.File diretamente,
++     * então não precisamos duplicar a lógica de leitura do arquivo, só a
++     * de construção do tipo final.
++     */
++    @Composable
++    fun rememberCustomFontFamily(): FontFamily? {
++        val context = LocalContext.current
++        val path = XaulinXsCustomFont.getCustomFontPath(context)
++        return remember(path) {
++            buildFontFamilyOrNull(path)
++        }
++    }
++
++    private fun buildFontFamilyOrNull(path: String?): FontFamily? {
++        if (path == null) return null
++        val file = File(path)
++        if (!file.isFile) return null
++        return try {
++            FontFamily(Font(file))
++        } catch (e: Exception) {
++            null
++        }
++    }
++
++    /**
++     * Retorna uma cópia de [base] com [fontFamily] aplicado a todos os 15
++     * TextStyle nomeados do Material 3 Typography. Se [fontFamily] for
++     * null (nenhuma fonte customizada configurada), retorna [base]
++     * inalterado — mantém 100% do comportamento original do Material 3
++     * (FontFamily.Default) quando o usuário não importou nenhuma fonte.
++     */
++    fun applyFontFamily(base: Typography, fontFamily: FontFamily?): Typography {
++        if (fontFamily == null) return base
++        return Typography(
++            displayLarge = base.displayLarge.copy(fontFamily = fontFamily),
++            displayMedium = base.displayMedium.copy(fontFamily = fontFamily),
++            displaySmall = base.displaySmall.copy(fontFamily = fontFamily),
++            headlineLarge = base.headlineLarge.copy(fontFamily = fontFamily),
++            headlineMedium = base.headlineMedium.copy(fontFamily = fontFamily),
++            headlineSmall = base.headlineSmall.copy(fontFamily = fontFamily),
++            titleLarge = base.titleLarge.copy(fontFamily = fontFamily),
++            titleMedium = base.titleMedium.copy(fontFamily = fontFamily),
++            titleSmall = base.titleSmall.copy(fontFamily = fontFamily),
++            bodyLarge = base.bodyLarge.copy(fontFamily = fontFamily),
++            bodyMedium = base.bodyMedium.copy(fontFamily = fontFamily),
++            bodySmall = base.bodySmall.copy(fontFamily = fontFamily),
++            labelLarge = base.labelLarge.copy(fontFamily = fontFamily),
++            labelMedium = base.labelMedium.copy(fontFamily = fontFamily),
++            labelSmall = base.labelSmall.copy(fontFamily = fontFamily),
++        )
++    }
++
++    /**
++     * Mesmo princípio de [applyFontFamily], mas para
++     * [WidgetPickerTextStyles] — os TextStyle específicos do widget
++     * picker que vêm de res/values/styles.xml via textStyleFromResource
++     * (ver LauncherWidgetPickerTypography.kt), não do Typography do
++     * Material 3. Sem isso, aplicar a fonte só no MaterialTheme não
++     * bastaria: os textos do widget picker leem
++     * WidgetPickerTheme.typography.* diretamente, não
++     * MaterialTheme.typography.*.
++     */
++    fun applyFontFamily(
++        base: WidgetPickerTextStyles,
++        fontFamily: FontFamily?,
++    ): WidgetPickerTextStyles {
++        if (fontFamily == null) return base
++        return WidgetPickerTextStyles(
++            sheetTitle = base.sheetTitle.copy(fontFamily = fontFamily),
++            sheetDescription = base.sheetDescription.copy(fontFamily = fontFamily),
++            expandableListHeaderTitle =
++                base.expandableListHeaderTitle.copy(fontFamily = fontFamily),
++            expandableListHeaderSubTitle =
++                base.expandableListHeaderSubTitle.copy(fontFamily = fontFamily),
++            selectedListHeaderTitle = base.selectedListHeaderTitle.copy(fontFamily = fontFamily),
++            unSelectedListHeaderTitle =
++                base.unSelectedListHeaderTitle.copy(fontFamily = fontFamily),
++            selectedListHeaderSubTitle =
++                base.selectedListHeaderSubTitle.copy(fontFamily = fontFamily),
++            unSelectedListHeaderSubTitle =
++                base.unSelectedListHeaderSubTitle.copy(fontFamily = fontFamily),
++            noWidgetsErrorText = base.noWidgetsErrorText.copy(fontFamily = fontFamily),
++            widgetLabel = base.widgetLabel.copy(fontFamily = fontFamily),
++            widgetSpanText = base.widgetSpanText.copy(fontFamily = fontFamily),
++            widgetDescription = base.widgetDescription.copy(fontFamily = fontFamily),
++            addWidgetButtonLabel = base.addWidgetButtonLabel.copy(fontFamily = fontFamily),
++            toolbarUnSelectedTabLabel =
++                base.toolbarUnSelectedTabLabel.copy(fontFamily = fontFamily),
++            toolbarSelectedTabLabel =
++                base.toolbarSelectedTabLabel.copy(fontFamily = fontFamily),
++            searchBarPlaceholderText =
++                base.searchBarPlaceholderText.copy(fontFamily = fontFamily),
++            searchBarText = base.searchBarText.copy(fontFamily = fontFamily),
++        )
++    }
++}
+\ No newline at end of file
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsGlobalFontInflaterFactory.kt b/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsGlobalFontInflaterFactory.kt
+new file mode 100644
+index 0000000..7c2c648
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/font/XaulinXsGlobalFontInflaterFactory.kt
+@@ -0,0 +1,113 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Estende a fonte customizada (que já funcionava só para os labels dos
++ * ícones via BubbleTextView) para TODA TextView do app — telas de
++ * configurações, popups, diálogos, widget picker (View System), e
++ * qualquer view nova que venha a ser inflada, sem precisar tocar em
++ * cada estilo XML individualmente.
++ *
++ * Mecanismo: LayoutInflater.Factory2 é o hook oficial do Android para
++ * interceptar toda inflação de view a partir de XML. Diferente de
++ * sobrescrever fontFamily em cada @style, isso pega qualquer TextView
++ * (ou subclasse: Button, EditText, CheckBox etc herdam de TextView)
++ * automaticamente, incluindo layouts que ainda não existem hoje.
++ *
++ * Retornar null em onCreateView() deixa o LayoutInflater seguir seu
++ * fluxo normal de criação (mesmo padrão usado em
++ * LauncherPreviewRenderer.onCreateView para "fragment"/TextClock) —
++ * aqui em vez de interceptar a criação em si, deixamos o inflater base
++ * criar a view do jeito padrão e só aplicamos o typeface DEPOIS, o que
++ * é mais seguro: preserva 100% do comportamento original de inflação
++ * (estilos, temas, AppCompat quando aplicável) e só acrescenta uma
++ * etapa no final.
++ */
++package com.xaulinxs.customizations.font
++
++import android.content.Context
++import android.util.AttributeSet
++import android.view.LayoutInflater
++import android.view.View
++import android.widget.TextView
++
++class XaulinXsGlobalFontInflaterFactory(
++    private val baseFactory: LayoutInflater.Factory2?,
++) : LayoutInflater.Factory2 {
++
++    override fun onCreateView(
++        parent: View?,
++        name: String,
++        context: Context,
++        attrs: AttributeSet,
++    ): View? {
++        // Deixa qualquer factory pré-existente (ex.: a própria do
++        // PreferenceFragmentCompat/androidx) criar a view primeiro, se
++        // houver uma; senão cai no inflater padrão da plataforma via
++        // createView, que resolve o nome da tag (com ou sem pacote,
++        // como "TextView" ou "com.android.launcher3.BubbleTextView").
++        val view = baseFactory?.onCreateView(parent, name, context, attrs)
++            ?: createViewFallback(context, name, attrs)
++
++        applyFontIfTextView(context, view)
++        return view
++    }
++
++    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
++        onCreateView(null, name, context, attrs)
++
++    private fun createViewFallback(context: Context, name: String, attrs: AttributeSet): View? {
++        // createView(name, prefix, attrs) resolve a classe via reflection
++        // diretamente (Class.forName), SEM reconsultar nenhuma Factory —
++        // é o mesmo método que o PhoneLayoutInflater usa internamente
++        // depois que nenhuma factory registrada resolveu a view, então é
++        // seguro chamar daqui sem risco de recursão.
++        val inflater = LayoutInflater.from(context)
++        return try {
++            if (name.contains('.')) {
++                // Nome totalmente qualificado (ex.: view customizada do
++                // launcher, como com.android.launcher3.BubbleTextView).
++                inflater.createView(name, null, attrs)
++            } else {
++                // Nome de widget de plataforma sem pacote (ex.: "TextView",
++                // "Button") — tenta os prefixos padrão nesta ordem, igual
++                // o PhoneLayoutInflater faz internamente.
++                for (prefix in PLATFORM_VIEW_PREFIXES) {
++                    try {
++                        return inflater.createView(name, prefix, attrs)
++                    } catch (e: ClassNotFoundException) {
++                        // tenta o próximo prefixo
++                    }
++                }
++                null
++            }
++        } catch (e: ClassNotFoundException) {
++            // Não é um widget conhecido por esses caminhos (ex.: tags
++            // estruturais como <merge>/<include>, ou uma view customizada
++            // fora do padrão android.widget) — devolve null e deixa o
++            // LayoutInflater original (chamado por fora desta factory)
++            // resolver do jeito dele.
++            null
++        }
++    }
++
++    private fun applyFontIfTextView(context: Context, view: View?) {
++        if (view !is TextView) return
++        // loadTypefaceIfAvailable retorna null quando não há fonte
++        // customizada configurada — nesse caso não fazemos nada e a
++        // view fica com o typeface que o tema/estilo XML já aplicou
++        // normalmente (comportamento 100% original preservado).
++        val typeface = XaulinXsCustomFont.loadTypefaceIfAvailable(context) ?: return
++        view.typeface = typeface
++    }
++
++    companion object {
++        // Mesma ordem de prefixos que o PhoneLayoutInflater da plataforma
++        // tenta internamente ao resolver uma tag sem pacote.
++        private val PLATFORM_VIEW_PREFIXES = arrayOf(
++            "android.widget.",
++            "android.webkit.",
++            "android.app.",
++            "android.view.",
++        )
++    }
++}
+diff --git a/src/com/android/launcher3/Launcher.java b/src/com/android/launcher3/Launcher.java
+index a31c3e3..3acc76e 100644
+--- a/src/com/android/launcher3/Launcher.java
++++ b/src/com/android/launcher3/Launcher.java
+@@ -404,6 +404,27 @@ public class Launcher extends StatefulActivity<LauncherState>
+         return fromContext(context);
+     }
+ 
++    @Override
++    protected void attachBaseContext(Context base) {
++        super.attachBaseContext(base);
++        // XaulinXs Customizations: estende a fonte customizada (antes só
++        // aplicada aos labels dos ícones via BubbleTextView) para TODA
++        // TextView inflada nesta Activity — Workspace, AllApps, popups,
++        // diálogos etc. Precisa ser instalado aqui, em attachBaseContext,
++        // porque é o ponto mais cedo do ciclo de vida em que o
++        // LayoutInflater já existe e nada ainda foi inflado — instalar
++        // depois (ex.: em onCreate) arriscaria perder a primeira inflação
++        // de layout, que pode ocorrer dentro do próprio super.onCreate().
++        // Usa LayoutInflater.from(base) — o Context já anexado por
++        // super.attachBaseContext — em vez de "this": a própria Activity
++        // ainda não está totalmente inicializada neste ponto do ciclo de
++        // vida, então evitamos depender dela antes da hora.
++        android.view.LayoutInflater inflater = android.view.LayoutInflater.from(base);
++        inflater.setFactory2(
++                new com.xaulinxs.customizations.font.XaulinXsGlobalFontInflaterFactory(
++                        inflater.getFactory2()));
++    }
++
+     @Override
+     @TargetApi(Build.VERSION_CODES.S)
+     protected void onCreate(Bundle savedInstanceState) {
+diff --git a/src/com/android/launcher3/settings/SettingsActivity.java b/src/com/android/launcher3/settings/SettingsActivity.java
+index d101631..f2b1e61 100644
+--- a/src/com/android/launcher3/settings/SettingsActivity.java
++++ b/src/com/android/launcher3/settings/SettingsActivity.java
+@@ -26,6 +26,7 @@ import static com.android.launcher3.InvariantDeviceProfile.TYPE_TABLET;
+ import static com.android.launcher3.util.Executors.MAIN_EXECUTOR;
+ 
+ import android.app.Activity;
++import android.content.Context;
+ import android.content.Intent;
+ import android.content.pm.ActivityInfo;
+ import android.net.Uri;
+@@ -83,6 +84,23 @@ public class SettingsActivity extends FragmentActivity
+     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
+     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
+ 
++    @Override
++    protected void attachBaseContext(Context base) {
++        super.attachBaseContext(base);
++        // XaulinXs Customizations: mesma extensão de fonte customizada
++        // instalada em Launcher.attachBaseContext — aqui cobre a tela de
++        // Configurações (PreferenceFragmentCompat inclusive, já que o
++        // Factory2 é encadeado com o que o PreferenceFragmentCompat
++        // registrar depois, preservando o comportamento dele). Usa
++        // LayoutInflater.from(base), não "this" — mesmo motivo do
++        // Launcher: a Activity ainda não está totalmente inicializada
++        // neste ponto do ciclo de vida.
++        android.view.LayoutInflater inflater = android.view.LayoutInflater.from(base);
++        inflater.setFactory2(
++                new com.xaulinxs.customizations.font.XaulinXsGlobalFontInflaterFactory(
++                        inflater.getFactory2()));
++    }
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);

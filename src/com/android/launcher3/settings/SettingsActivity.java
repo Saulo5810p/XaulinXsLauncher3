@@ -26,6 +26,7 @@ import static com.android.launcher3.InvariantDeviceProfile.TYPE_TABLET;
 import static com.android.launcher3.util.Executors.MAIN_EXECUTOR;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -82,6 +83,23 @@ public class SettingsActivity extends FragmentActivity
 
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // XaulinXs Customizations: mesma extensão de fonte customizada
+        // instalada em Launcher.attachBaseContext — aqui cobre a tela de
+        // Configurações (PreferenceFragmentCompat inclusive, já que o
+        // Factory2 é encadeado com o que o PreferenceFragmentCompat
+        // registrar depois, preservando o comportamento dele). Usa
+        // LayoutInflater.from(base), não "this" — mesmo motivo do
+        // Launcher: a Activity ainda não está totalmente inicializada
+        // neste ponto do ciclo de vida.
+        android.view.LayoutInflater inflater = android.view.LayoutInflater.from(base);
+        inflater.setFactory2(
+                new com.xaulinxs.customizations.font.XaulinXsGlobalFontInflaterFactory(
+                        inflater.getFactory2()));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

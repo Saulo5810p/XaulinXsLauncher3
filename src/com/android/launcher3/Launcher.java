@@ -405,6 +405,27 @@ public class Launcher extends StatefulActivity<LauncherState>
     }
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // XaulinXs Customizations: estende a fonte customizada (antes só
+        // aplicada aos labels dos ícones via BubbleTextView) para TODA
+        // TextView inflada nesta Activity — Workspace, AllApps, popups,
+        // diálogos etc. Precisa ser instalado aqui, em attachBaseContext,
+        // porque é o ponto mais cedo do ciclo de vida em que o
+        // LayoutInflater já existe e nada ainda foi inflado — instalar
+        // depois (ex.: em onCreate) arriscaria perder a primeira inflação
+        // de layout, que pode ocorrer dentro do próprio super.onCreate().
+        // Usa LayoutInflater.from(base) — o Context já anexado por
+        // super.attachBaseContext — em vez de "this": a própria Activity
+        // ainda não está totalmente inicializada neste ponto do ciclo de
+        // vida, então evitamos depender dela antes da hora.
+        android.view.LayoutInflater inflater = android.view.LayoutInflater.from(base);
+        inflater.setFactory2(
+                new com.xaulinxs.customizations.font.XaulinXsGlobalFontInflaterFactory(
+                        inflater.getFactory2()));
+    }
+
+    @Override
     @TargetApi(Build.VERSION_CODES.S)
     protected void onCreate(Bundle savedInstanceState) {
         TraceHelper.INSTANCE.beginSection(ON_CREATE_EVT);

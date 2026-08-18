@@ -54,5 +54,12 @@
     <string name="xaulinxs_qsb_config_mode_text_title">Modo Texto</string>
     <string name="xaulinxs_qsb_config_mode_text_summary">Toque abre um campo de texto: reconhece comandos como "abrir WhatsApp"; se não reconhecer, cai para o Modo Web</string>
     <string name="xaulinxs_qsb_text_mode_dialog_title">O que você quer fazer?</string>
-    <string name="xaulinxs_qsb_text_mode_hint">Ex: abrir WhatsApp</string>
+    <string name="xaulinxs_qsb_text_mode_hint">Ex: ligar pra Ana, manda whatsapp pro João dizendo oi</string>
+
+    <!-- QSB Super Inteligente -->
+    <string name="xaulinxs_qsb_smart_permission_title">Acesso aos contatos</string>
+    <string name="xaulinxs_qsb_smart_permission_message">Para reconhecer nomes de contato em comandos como "ligar pra Ana" ou "manda whatsapp pro João", o app precisa de permissão para ler seus contatos.</string>
+    <string name="xaulinxs_qsb_smart_permission_error">Não foi possível pedir a permissão de contatos</string>
+    <string name="xaulinxs_qsb_smart_app_not_found">Não encontrei esse app instalado</string>
+    <string name="xaulinxs_qsb_smart_contact_not_found">Não encontrei esse contato</string>
 </resources>

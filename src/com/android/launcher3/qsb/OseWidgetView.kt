@@ -49,7 +49,9 @@ import com.android.launcher3.util.SafeCloseable
 import com.android.launcher3.util.ViewEx.registerLifecycleTask
 import com.android.launcher3.views.ActivityContext
 import com.android.launcher3.widget.LauncherAppWidgetHostView
+import com.xaulinxs.customizations.qsb.QsbAction
 import com.xaulinxs.customizations.qsb.QsbConfig
+import com.xaulinxs.customizations.qsb.QsbFailureReason
 import com.xaulinxs.customizations.qsb.QsbTextModeCommand
 import com.xaulinxs.customizations.qsb.QsbTextModeResult
 
@@ -265,13 +267,77 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     return@setPositiveButton
                 }
                 val appsStore = activityContext.activityComponent.appsStore
-                when (val result = QsbTextModeCommand.interpret(raw, appsStore)) {
-                    is QsbTextModeResult.LaunchApp ->
-                        launchQsbIntent(QsbTextModeCommand.launchIntentFor(result.appInfo))
-                    is QsbTextModeResult.FreeText -> launchQsbIntent(fallbackIntent)
-                }
+                handleXaulinXsTextModeResult(
+                    QsbTextModeCommand.interpret(raw, appsStore, context),
+                    fallbackIntent,
+                )
             }
             .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    /**
+     * Trata o resultado da QSB Inteligente. FreeText (nenhum comando
+     * reconhecido) é o único caso que cai para o Modo Web
+     * ([fallbackIntent]) — todo o resto é uma ação concreta reconhecida
+     * (lançada, pendente de permissão, ou alvo não encontrado), nunca
+     * um fallback genérico de busca/browser no lugar da ação pedida.
+     */
+    private fun View.handleXaulinXsTextModeResult(result: QsbTextModeResult, fallbackIntent: Intent) {
+        when (result) {
+            is QsbTextModeResult.Launch -> launchQsbIntent(result.intent)
+            is QsbTextModeResult.FreeText -> launchQsbIntent(fallbackIntent)
+            is QsbTextModeResult.NotFound -> showXaulinXsNotFoundToast(result.reason)
+            is QsbTextModeResult.NeedsPermission ->
+                requestXaulinXsPermission(result.permission, result.retryAction)
+        }
+    }
+
+    private fun showXaulinXsNotFoundToast(reason: QsbFailureReason) {
+        val messageRes =
+            when (reason) {
+                QsbFailureReason.APP_NOT_FOUND -> R.string.xaulinxs_qsb_smart_app_not_found
+                QsbFailureReason.CONTACT_NOT_FOUND -> R.string.xaulinxs_qsb_smart_contact_not_found
+            }
+        android.widget.Toast.makeText(context, messageRes, android.widget.Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Pede a permissão em falta via diálogo explicativo + Activity
+     * transparente dedicada (XaulinXsQsbPermissionActivity), em vez de
+     * pedir a permissão diretamente pelo Launcher: o Launcher não
+     * implementa onRequestPermissionsResult, e adicionar esse override
+     * nele mexeria num arquivo grande do AOSP com alto risco de
+     * conflito em atualizações futuras. A Activity dedicada resolve o
+     * pedido e devolve o resultado via callback estático de curta
+     * duração (XaulinXsQsbPermissionCallback), reexecutando
+     * [retryAction] automaticamente se concedida — usuário não precisa
+     * digitar o comando de novo.
+     */
+    private fun requestXaulinXsPermission(permission: String, retryAction: QsbAction) {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.xaulinxs_qsb_smart_permission_title)
+            .setMessage(R.string.xaulinxs_qsb_smart_permission_message)
+            .setPositiveButton(R.string.xaulinxs_storage_permission_grant) { _, _ ->
+                val appsStore = activityContext.activityComponent.appsStore
+                XaulinXsQsbPermissionCallback.onGranted = { grantedAction ->
+                    // retry() só devolve FreeText no caso defensivo de a
+                    // ação reconhecida virar Unrecognized (não deveria
+                    // acontecer para uma action já validada pelo parser) —
+                    // nesse cenário não há intent de fallback sensato, só
+                    // ignora silenciosamente em vez de arriscar um crash
+                    // com um Intent vazio.
+                    when (val result = QsbTextModeCommand.retry(grantedAction, appsStore, context)) {
+                        is QsbTextModeResult.FreeText -> Unit
+                        else -> handleXaulinXsTextModeResult(result, Intent())
+                    }
+                }
+                context.startActivity(
+                    XaulinXsQsbPermissionActivity.newIntent(context, permission, retryAction)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
+            }
+            .setNegativeButton(R.string.xaulinxs_storage_permission_deny, null)
             .show()
     }
 

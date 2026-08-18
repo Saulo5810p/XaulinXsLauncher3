@@ -1,44 +1,4 @@
-"""
-XaulinXs Customizations — Feature Cinematográfica 1/N: giro/blur/escala ao
-tocar nos ícones (BubbleTextView), portado do princípio já validado no
-projeto irmão RetroPlayer Compose (cinematicPressVisuals).
-
-Idempotente: pode rodar de novo sem duplicar nada.
-
-USO (Termux, dentro da pasta raiz do projeto XaulinXsLauncher3):
-    python3 feature_cinematic_1_icon_press.py
-"""
-from pathlib import Path
-
-def write_if_absent(path_str, content):
-    path = Path(path_str)
-    if path.exists():
-        print(f"SKIP (já existe): {path_str}")
-        return
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
-    print(f"CRIADO: {path_str}")
-
-def replace_once(path_str, old, new, label):
-    path = Path(path_str)
-    assert path.exists(), f"arquivo não encontrado: {path_str} (rode este script na raiz do projeto)"
-    content = path.read_text(encoding="utf-8")
-    if new in content:
-        print(f"SKIP ({label}): já aplicado")
-        return
-    assert old in content, f"âncora não encontrada em {path_str} ({label}) — o arquivo pode ter mudado, cola de novo o BubbleTextView.java atual"
-    assert content.count(old) == 1, f"âncora aparece mais de uma vez em {path_str} ({label})"
-    content = content.replace(old, new)
-    path.write_text(content, encoding="utf-8")
-    print(f"APLICADO: {label}")
-
-
-# ---------------------------------------------------------------------------
-# 1) Novo arquivo, pacote isolado — nenhum risco pro código AOSP original
-# ---------------------------------------------------------------------------
-write_if_absent(
-    "src/com/xaulinxs/customizations/cinematic/CinematicPressEffects.kt",
-    '''/*
+/*
  * XaulinXs Customizations — não faz parte do AOSP original.
  *
  * Efeito visual de giro/blur/escala ao tocar em um ícone, portado do
@@ -155,29 +115,3 @@ object CinematicPressEffects {
         )
     }
 }
-''',
-)
-
-# ---------------------------------------------------------------------------
-# 2) Hook de UMA linha no BubbleTextView.java — nunca substitui o
-#    comportamento original, só observa em paralelo
-# ---------------------------------------------------------------------------
-replace_once(
-    "src/com/android/launcher3/BubbleTextView.java",
-    """    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return onDelegateTouchEvent(event);
-    }""",
-    """    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        // XaulinXs Customizations: efeito visual de giro/blur/escala,
-        // puramente observacional — não altera o retorno nem consome
-        // o evento. O clique/long-press original continua 100% intacto.
-        com.xaulinxs.customizations.cinematic.CinematicPressEffects.onTouchObserved(this, event);
-        return onDelegateTouchEvent(event);
-    }""",
-    "hook onTouchEvent do BubbleTextView (ícones do app drawer e da tela inicial)",
-)
-
-print("\nOK — Feature (giro/blur/escala ao tocar em ícones) aplicada.")
-print("Para compilar: ./gradlew assembleNoQuickstepDebug (NUNCA assembleDebug puro — puxa o módulo QuickStep e quebra o build).")

@@ -17,6 +17,7 @@
 package com.android.launcher3.qsb
 
 import android.appwidget.AppWidgetProviderInfo.WIDGET_FEATURE_RECONFIGURABLE
+import android.content.Intent
 import android.util.Log
 import com.android.launcher3.BaseActivity
 import com.android.launcher3.R
@@ -24,6 +25,7 @@ import com.android.launcher3.logging.StatsLogManager
 import com.android.launcher3.popup.PopupCategory
 import com.android.launcher3.popup.PopupData
 import com.android.launcher3.views.ActivityContext
+import com.xaulinxs.customizations.qsb.QsbConfigActivity
 import javax.inject.Inject
 
 /** Provides option items when QSB is long pressed. */
@@ -34,20 +36,32 @@ constructor(
     private val activityContext: ActivityContext,
 ) {
 
+    // XaulinXs Customizations: a QSB nunca mais binda um AppWidget de
+    // terceiro (ver OseWidgetManager.handleOseInfoUpdate), então
+    // appWidgetSupportsReconfigure() abaixo é sempre false e a lista de
+    // opções do AOSP original ficava permanentemente vazia — o
+    // long-press não abria mais nada. Fix: sempre oferecer um item de
+    // "Configurar barra de busca" apontando pra QsbConfigActivity
+    // (tela própria do launcher, não mais configuração de widget de
+    // terceiro), reproduzindo o mesmo balão que o widget do Google
+    // mostrava antes.
     open fun getOptionItems(): List<PopupData> {
-        if (appWidgetSupportsReconfigure() && activityContext is BaseActivity) {
-            val widgetSettingsItem =
-                PopupData(
-                    iconResId = R.drawable.ic_setting,
-                    labelResId = R.string.gadget_setup_text,
-                    category = PopupCategory.SYSTEM_SHORTCUT_FIXED,
-                    eventId = StatsLogManager.LauncherEvent.LAUNCHER_QSB_WIDGET_SETTINGS_TAP,
-                ) { activityContext, _, _ ->
-                    oseWidgetManager.startConfigActivity(activityContext as BaseActivity)
-                }
-            return listOf(widgetSettingsItem)
-        }
-        return emptyList()
+        val qsbSettingsItem =
+            PopupData(
+                iconResId = R.drawable.ic_setting,
+                labelResId = R.string.xaulinxs_qsb_config_menu_item,
+                category = PopupCategory.SYSTEM_SHORTCUT_FIXED,
+                eventId = StatsLogManager.LauncherEvent.LAUNCHER_QSB_WIDGET_SETTINGS_TAP,
+            ) { activityContext, _, _ ->
+                // Mesmo padrão do código original (que castava pra
+                // BaseActivity antes de chamar oseWidgetManager.startConfigActivity):
+                // o tipo do parâmetro do lambda vem da API compilada de
+                // PopupData, então o cast explícito garante acesso a
+                // startActivity() independente do tipo estático exposto.
+                val activity = activityContext as BaseActivity
+                activity.startActivity(Intent(activity, QsbConfigActivity::class.java))
+            }
+        return listOf(qsbSettingsItem)
     }
 
     /**

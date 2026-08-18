@@ -233,6 +233,11 @@
             android:label="@string/xaulinxs_filemanager_title"
             android:exported="false" />
         <activity
+            android:name="com.xaulinxs.customizations.qsb.QsbConfigActivity"
+            android:theme="@style/HomeSettings.Theme"
+            android:label="@string/xaulinxs_qsb_config_title"
+            android:exported="false" />
+        <activity
             android:name="com.android.launcher3.settings.SettingsActivity"
             android:label="@string/settings_button_text"
             android:icon="@drawable/ic_setting"

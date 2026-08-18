@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XaulinXs Customizations: tela dedicada de configuração da QSB.
+     Single screen (sem abas/seções) — 4 sliders + toggle de modo +
+     botão de cor, tudo direto na tela, dentro de um ScrollView pra
+     caber em qualquer altura de tela. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/xaulinxs_qsb_config_section_appearance"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Slider 1: Tamanho -->
+        <TextView
+            android:id="@+id/xaulinxs_qsb_size_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+        <SeekBar
+            android:id="@+id/xaulinxs_qsb_size_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Slider 2: Largura -->
+        <TextView
+            android:id="@+id/xaulinxs_qsb_width_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+        <SeekBar
+            android:id="@+id/xaulinxs_qsb_width_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Slider 3: Transparência -->
+        <TextView
+            android:id="@+id/xaulinxs_qsb_transparency_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+        <SeekBar
+            android:id="@+id/xaulinxs_qsb_transparency_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Cor da barra: preview + botão que abre o editor hex/RGB -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:text="@string/xaulinxs_qsb_config_color_label" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp">
+            <View
+                android:id="@+id/xaulinxs_qsb_color_preview"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="12dp" />
+            <Button
+                android:id="@+id/xaulinxs_qsb_color_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/xaulinxs_qsb_config_color_button" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#22000000"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/xaulinxs_qsb_config_section_behavior"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/xaulinxs_qsb_mode_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <RadioButton
+                android:id="@+id/xaulinxs_qsb_mode_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/xaulinxs_qsb_config_mode_web_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="36dp"
+                android:paddingBottom="12dp"
+                android:textSize="12sp"
+                android:alpha="0.7"
+                android:text="@string/xaulinxs_qsb_config_mode_web_summary" />
+
+            <RadioButton
+                android:id="@+id/xaulinxs_qsb_mode_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/xaulinxs_qsb_config_mode_text_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="36dp"
+                android:textSize="12sp"
+                android:alpha="0.7"
+                android:text="@string/xaulinxs_qsb_config_mode_text_summary" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+</ScrollView>

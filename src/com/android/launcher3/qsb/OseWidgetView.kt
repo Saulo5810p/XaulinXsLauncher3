@@ -17,16 +17,20 @@
 package com.android.launcher3.qsb
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID
 import android.appwidget.AppWidgetProviderInfo
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.os.Process.myUserHandle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.RemoteViews
 import androidx.annotation.VisibleForTesting
 import androidx.core.net.toUri
@@ -45,6 +49,9 @@ import com.android.launcher3.util.SafeCloseable
 import com.android.launcher3.util.ViewEx.registerLifecycleTask
 import com.android.launcher3.views.ActivityContext
 import com.android.launcher3.widget.LauncherAppWidgetHostView
+import com.xaulinxs.customizations.qsb.QsbConfig
+import com.xaulinxs.customizations.qsb.QsbTextModeCommand
+import com.xaulinxs.customizations.qsb.QsbTextModeResult
 
 /**
  * Renders the On-device search engine's widget [RemoteViews] based on [AppWidgetProviderInfo] by
@@ -145,6 +152,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     override fun getErrorView(): View {
         val view =
             View.inflate(context, R.layout.ose_default_bubbletext_layout, null) as BubbleTextView
+        applyXaulinXsQsbAppearance(view)
         val oseInfo = context.appComponent.getOseManager().oseInfo.value
         val osePkg: String? =
             when {
@@ -201,7 +209,73 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         return view
     }
 
+    /**
+     * XaulinXs Customizations: aplica os 4 sliders da QsbConfigActivity
+     * (Tamanho, Largura, Transparência, Cor) na view inflada da QSB.
+     * Tamanho e Largura são independentes (por isso dois sliders
+     * separados em vez de uma única "escala"): Tamanho escala a view
+     * inteira (scaleX/scaleY, mantém proporção); Largura reduz só a
+     * largura via layout_weight fracionário, então dá pra ter uma QSB
+     * mais estreita sem achatar o texto/ícone.
+     */
+    private fun applyXaulinXsQsbAppearance(view: BubbleTextView) {
+        val sizeFraction = QsbConfig.getSizePercent(context) / 100f
+        view.scaleX = sizeFraction
+        view.scaleY = sizeFraction
+
+        val widthFraction = QsbConfig.getWidthPercent(context) / 100f
+        (view.layoutParams as? LinearLayout.LayoutParams)?.let { params ->
+            params.weight = widthFraction
+            view.layoutParams = params
+        }
+
+        val transparencyPercent = QsbConfig.getTransparencyPercent(context)
+        view.alpha = 1f - (transparencyPercent / 100f)
+
+        view.backgroundTintList = ColorStateList.valueOf(QsbConfig.getBarColor(context))
+    }
+
     fun View.setOnClickIntent(intent: Intent) = setOnClickListener {
+        // XaulinXs Customizations: Modo Texto e Modo Web são exclusivos
+        // (QsbConfig.MODE_TEXT_ENABLED). No Modo Texto, o toque abre um
+        // campo de texto: se reconhecer um comando ("abrir <app>"),
+        // executa direto; senão cai pro comportamento normal do Modo
+        // Web (o mesmo intent que já seria disparado), nunca deixa o
+        // toque sem efeito.
+        if (QsbConfig.isTextModeEnabled(context)) {
+            showXaulinXsTextModeDialog(intent)
+            return@setOnClickListener
+        }
+        launchQsbIntent(intent)
+    }
+
+    private fun View.showXaulinXsTextModeDialog(fallbackIntent: Intent) {
+        val input =
+            EditText(context).apply {
+                hint = context.getString(R.string.xaulinxs_qsb_text_mode_hint)
+                setPadding(48, 32, 48, 32)
+            }
+        AlertDialog.Builder(context)
+            .setTitle(R.string.xaulinxs_qsb_text_mode_dialog_title)
+            .setView(input)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                val raw = input.text?.toString().orEmpty()
+                if (raw.isBlank()) {
+                    launchQsbIntent(fallbackIntent)
+                    return@setPositiveButton
+                }
+                val appsStore = activityContext.activityComponent.appsStore
+                when (val result = QsbTextModeCommand.interpret(raw, appsStore)) {
+                    is QsbTextModeResult.LaunchApp ->
+                        launchQsbIntent(QsbTextModeCommand.launchIntentFor(result.appInfo))
+                    is QsbTextModeResult.FreeText -> launchQsbIntent(fallbackIntent)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun View.launchQsbIntent(intent: Intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
         if (intent.action == Intent.ACTION_VIEW) {
             // Browser Intent and set the default browser package.

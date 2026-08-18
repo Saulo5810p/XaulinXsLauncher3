@@ -37,4 +37,22 @@
     <string name="xaulinxs_storage_permission_grant">Conceder acesso</string>
     <string name="xaulinxs_storage_permission_deny">Agora não</string>
     <string name="xaulinxs_storage_permission_error">Não foi possível abrir as configurações de permissão</string>
+
+    <!-- QSB Config -->
+    <string name="xaulinxs_qsb_config_title">Configurar barra de busca</string>
+    <string name="xaulinxs_qsb_config_menu_item">Configurar barra de busca</string>
+    <string name="xaulinxs_qsb_config_section_appearance">Aparência</string>
+    <string name="xaulinxs_qsb_config_section_behavior">Comportamento</string>
+    <string name="xaulinxs_qsb_config_size_label">Tamanho: %1$d%%</string>
+    <string name="xaulinxs_qsb_config_width_label">Largura: %1$d%%</string>
+    <string name="xaulinxs_qsb_config_transparency_label">Transparência: %1$d%%</string>
+    <string name="xaulinxs_qsb_config_color_label">Cor da barra</string>
+    <string name="xaulinxs_qsb_config_color_button">Escolher cor</string>
+    <string name="xaulinxs_qsb_config_color_picker_title">Escolher cor (hex/RGB)</string>
+    <string name="xaulinxs_qsb_config_mode_web_title">Modo Web</string>
+    <string name="xaulinxs_qsb_config_mode_web_summary">Toque abre a busca ou o app padrão de pesquisa (comportamento original)</string>
+    <string name="xaulinxs_qsb_config_mode_text_title">Modo Texto</string>
+    <string name="xaulinxs_qsb_config_mode_text_summary">Toque abre um campo de texto: reconhece comandos como "abrir WhatsApp"; se não reconhecer, cai para o Modo Web</string>
+    <string name="xaulinxs_qsb_text_mode_dialog_title">O que você quer fazer?</string>
+    <string name="xaulinxs_qsb_text_mode_hint">Ex: abrir WhatsApp</string>
 </resources>

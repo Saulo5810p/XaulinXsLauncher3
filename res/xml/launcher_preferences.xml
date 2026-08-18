@@ -109,6 +109,15 @@
             android:title="@string/xaulinxs_custom_font_title"
             android:persistent="false" />
 
+        <Preference
+            android:key="xaulinxs_qsb_config"
+            android:title="@string/xaulinxs_qsb_config_title"
+            android:persistent="false">
+            <intent
+                android:targetPackage="com.android.launcher3"
+                android:targetClass="com.xaulinxs.customizations.qsb.QsbConfigActivity" />
+        </Preference>
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

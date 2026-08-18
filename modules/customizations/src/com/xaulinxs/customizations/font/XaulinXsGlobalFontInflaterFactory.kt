@@ -24,7 +24,6 @@
  */
 package com.xaulinxs.customizations.font
 
-import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -41,24 +40,44 @@ class XaulinXsGlobalFontInflaterFactory(
         context: Context,
         attrs: AttributeSet,
     ): View? {
-        // XaulinXs fix (causa raiz dos widgets quebrados na Fase 2): a
-        // Activity Launcher passa "this" como Context para
-        // LauncherWidgetHolder/LauncherAppWidgetHost, então
-        // AppWidgetHostView.updateAppWidget()/RemoteViews.apply() acaba
-        // usando LayoutInflater.from(context) do MESMO LayoutInflater da
-        // Activity — o que já tem este Factory2 instalado — em vez de um
-        // inflater isolado do processo do widget, como a suposição
-        // original (Fase 2) previa. RemoteViews.apply() já instala seu
-        // próprio LayoutInflater.Filter (a própria RemoteViews via
-        // onLoadClass) nesse mesmo inflater compartilhado para
-        // sandboxing de segurança — nosso Factory2 rodando no meio disso
-        // corrompe esse fluxo e quebra a inflação de QUALQUER widget.
-        // Fix: se algum ancestral na árvore de "parent" for um
-        // AppWidgetHostView, este Factory2 não participa em nada —
-        // devolve null imediatamente e deixa o LayoutInflater original
-        // resolver sozinho, do jeito que resolveria sem este Factory2
-        // existir.
-        if (isInsideAppWidgetHostView(parent)) {
+        // XaulinXs fix v2 (causa raiz REAL confirmada via logcat real do
+        // Galaxy A35, não só leitura estática de código — a hipótese
+        // anterior, "não participar quando um ancestral já anexado é
+        // AppWidgetHostView", nunca disparava: durante rInflateChildren()
+        // a view sendo inflada ainda não está anexada a nenhum
+        // AppWidgetHostView, então esse ancestral nunca existe no
+        // momento em que onCreateView roda, e o Factory2 participava do
+        // mesmo jeito.
+        //
+        // O log real mostrou: RemoteViews.inflateView() (widget do
+        // Calendar, com.android.calendar:layout/appwidget) chama
+        // LayoutInflater.inflate() com ESTE Factory2 instalado (visível
+        // na stacktrace: XaulinXsGlobalFontInflaterFactory.onCreateView
+        // -> createViewFallback). createViewFallback usa
+        // inflater.createView(name, prefix, attrs), um caminho de
+        // resolução mais limitado que o inflater padrão: ao construir a
+        // view raiz do widget (LinearLayout), o construtor de View
+        // resolve um atributo de tema (actionBarTheme) que aponta para
+        // um drawable-animator do PRÓPRIO launcher
+        // (design_fab_hide_motion_spec) só que resolvido no contexto/
+        // classloader do pacote do Calendar -- Resources$NotFoundException
+        // seguido de ClassNotFoundException ao tentar inflar a tag
+        // <set> desse animator. Não é um problema de tag XML isolada; é
+        // o contexto errado (tema do launcher vazando para dentro da
+        // inflação de RemoteViews de outro pacote) sendo usado para
+        // resolver um atributo de tema durante a construção da view.
+        //
+        // Fix real: nunca participar quando o Context da inflação não é
+        // o do PRÓPRIO pacote do launcher. RemoteViews sempre infla
+        // usando o Context do pacote do app dono do widget (Calendar,
+        // Gmail, etc, nunca "com.android.launcher3") -- então essa
+        // checagem cobre QUALQUER inflação de RemoteViews de QUALQUER
+        // app de terceiro, não só quando está dentro de um
+        // AppWidgetHostView já anexado. Também cobre, pelo mesmo
+        // motivo, qualquer outro Context de pacote externo que por
+        // ventura passe por este Factory2 (ex.: notificações
+        // customizadas, outros usos de RemoteViews fora de widgets).
+        if (context.packageName != LAUNCHER_PACKAGE_NAME) {
             return null
         }
 
@@ -76,15 +95,6 @@ class XaulinXsGlobalFontInflaterFactory(
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
         onCreateView(null, name, context, attrs)
-
-    private fun isInsideAppWidgetHostView(parent: View?): Boolean {
-        var current = parent
-        while (current != null) {
-            if (current is AppWidgetHostView) return true
-            current = current.parent as? View
-        }
-        return false
-    }
 
     private fun createViewFallback(context: Context, name: String, attrs: AttributeSet): View? {
         // createView(name, prefix, attrs) resolve a classe via reflection
@@ -132,6 +142,14 @@ class XaulinXsGlobalFontInflaterFactory(
     }
 
     companion object {
+        // O applicationId real do build (ver build.gradle:
+        // applicationId "com.android.launcher3"). Hardcoded em vez de
+        // BuildConfig.APPLICATION_ID porque BuildConfig ainda não é
+        // usado em nenhum outro ponto deste módulo -- evita depender de
+        // uma classe gerada cujo pacote pode variar conforme a variante
+        // de build configurada no futuro.
+        private const val LAUNCHER_PACKAGE_NAME = "com.android.launcher3"
+
         // Mesma ordem de prefixos que o PhoneLayoutInflater da plataforma
         // tenta internamente ao resolver uma tag sem pacote.
         private val PLATFORM_VIEW_PREFIXES = arrayOf(

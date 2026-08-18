@@ -164,6 +164,14 @@ public class LauncherAppWidgetHostView extends BaseLauncherAppWidgetHostView
         // The provider info or the views might have changed.
         checkIfAutoAdvance();
         com.xaulinxs.customizations.blur.XaulinXsWidgetBlur.applyTo(this);
+        // XaulinXs Customizations: força a fonte customizada também
+        // dentro de widgets de terceiros (Calendar, Gmail, etc), não só
+        // nos ícones/telas do próprio launcher. Roda a cada
+        // updateAppWidget() (não só na primeira vez), o que também
+        // cobre o caso de um app de terceiro reenviar um RemoteViews
+        // novo que reaplique o typeface original — a próxima
+        // atualização do host reaplica a fonte customizada de novo.
+        com.xaulinxs.customizations.font.XaulinXsWidgetFontForcer.applyTo(this);
     }
 
     @Override

@@ -46,11 +46,34 @@ object XaulinXsWidgetFontForcer {
      * aplicar null é seguro: reseta para o typeface original resolvido
      * pelo tema/XML da própria view, mesmo comportamento de reset já
      * usado em XaulinXsCustomFont.applyRecursively).
+     *
+     * XaulinXs fix (crash real confirmado via logcat do Galaxy A35):
+     * updateAppWidget() -- de onde applyTo() é chamado -- às vezes roda
+     * fora da main thread. O caminho observado no crash:
+     * AppWidgetHost.startListening() (chamado a partir de uma
+     * HandlerThread interna, "UiThreadHelper", não a main thread) ->
+     * updateAppWidgetView() -> ListenableHostView.updateAppWidget() ->
+     * LauncherAppWidgetHostView.updateAppWidget() ->
+     * XaulinXsWidgetFontForcer.applyTo(). TextView.setTypeface()
+     * dispara requestLayout() internamente (troca de fonte pode mudar
+     * as dimensões do texto), e View exige que só a thread que criou a
+     * hierarquia toque nela -- CalledFromWrongThreadException.
+     * (XaulinXsWidgetBlur.applyTo(), chamado na linha logo acima desta
+     * no host, nunca teve esse problema: setRenderEffect() só marca a
+     * view para redesenho com efeito diferente, não invalida layout.)
+     *
+     * Fix: agenda a aplicação de fato via View.post(), que sempre
+     * entrega o Runnable na main thread (mesmo se a view ainda não
+     * estiver anexada à janela nesse momento -- o Android enfileira
+     * internamente e despacha assim que anexa). applyTo() em si
+     * continua podendo ser chamado de qualquer thread com segurança.
      */
     @JvmStatic
     fun applyTo(view: View) {
-        val typeface = XaulinXsCustomFont.loadTypefaceIfAvailable(view.context)
-        applyRecursively(view, typeface)
+        view.post {
+            val typeface = XaulinXsCustomFont.loadTypefaceIfAvailable(view.context)
+            applyRecursively(view, typeface)
+        }
     }
 
     private fun applyRecursively(view: View, typeface: android.graphics.Typeface?) {

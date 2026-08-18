@@ -141,7 +141,26 @@ public interface WorkspaceLayoutManager {
         }
 
         // Get the canonical child id to uniquely represent this view in this screen
-        ItemInfo info = (ItemInfo) child.getTag();
+        //
+        // XaulinXs fix (crash real confirmado via logcat do Galaxy A35 ao
+        // rotacionar para paisagem e scrollar as Settings): em certas
+        // condições de corrida do rebind assíncrono do model (ver o log
+        // de diagnóstico "b/388022685" já deixado pelo próprio AOSP
+        // acima, em addInScreenFromBind), child.getTag() chega null ou
+        // sem ser um ItemInfo aqui -- bug preexistente do AOSP upstream,
+        // não introduzido por nenhuma customização deste projeto (este
+        // arquivo nunca foi tocado desde o import inicial). Sem um fix
+        // oficial conhecido publicamente, a defesa segura é a mesma já
+        // usada alguns parágrafos acima para colisão de item: logar e
+        // desistir de adicionar ESTA view específica, em vez de deixar
+        // o NullPointerException derrubar a Activity inteira.
+        Object tag = child.getTag();
+        if (!(tag instanceof ItemInfo)) {
+            Log.e(TAG, "addInScreen: child.getTag() is not an ItemInfo (was: " + tag
+                    + ") for view: " + child + " -- skipping add to avoid crash");
+            return;
+        }
+        ItemInfo info = (ItemInfo) tag;
         int childId = info.getViewId();
 
         boolean markCellsAsOccupied = !(child instanceof Folder);

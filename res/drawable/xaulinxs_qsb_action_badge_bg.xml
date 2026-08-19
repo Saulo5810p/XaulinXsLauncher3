@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XaulinXs Customizations: fundo do Predictive Action Badge da QSB
+     Inteligente — cantos arredondados, cor de superfície com leve
+     contraste sobre o diálogo do Modo Texto. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/materialColorSurfaceContainer" />
+    <corners android:radius="12dp" />
+</shape>

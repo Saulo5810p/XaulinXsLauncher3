@@ -54,6 +54,8 @@ import com.xaulinxs.customizations.qsb.QsbConfig
 import com.xaulinxs.customizations.qsb.QsbFailureReason
 import com.xaulinxs.customizations.qsb.QsbTextModeCommand
 import com.xaulinxs.customizations.qsb.QsbTextModeResult
+import com.xaulinxs.customizations.qsb.XaulinXsQsbPermissionActivity
+import com.xaulinxs.customizations.qsb.XaulinXsQsbPermissionCallback
 
 /**
  * Renders the On-device search engine's widget [RemoteViews] based on [AppWidgetProviderInfo] by

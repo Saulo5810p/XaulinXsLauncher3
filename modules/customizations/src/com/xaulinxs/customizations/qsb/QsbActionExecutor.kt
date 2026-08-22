@@ -64,6 +64,22 @@ object QsbActionExecutor {
                 buildCallIntent(number)
             }
 
+            // WhatsApp não expõe deep link público/oficial para iniciar
+            // uma LIGAÇÃO de voz/vídeo diretamente (só existe API
+            // documentada para abrir a conversa) — confirmado: não há
+            // um esquema tipo "whatsapp://call?phone=..." suportado.
+            // Em vez de fingir automação que não existe (ou depender de
+            // ActivityClass não-documentada, que quebra em qualquer
+            // atualização do WhatsApp), abre a CONVERSA do contato já
+            // pronta — o usuário só precisa tocar no ícone de chamada
+            // dentro dela, um toque a mais em vez de zero.
+            is QsbAction.WhatsAppCallNumber ->
+                QsbExecutionOutcome.Launch(buildWhatsAppIntent(action.number, ""))
+
+            is QsbAction.WhatsAppCallContact -> resolveContactOrRequestPermission(context, action, action.contactQuery) { number ->
+                buildWhatsAppIntent(number, "")
+            }
+
             is QsbAction.WhatsAppNumber ->
                 QsbExecutionOutcome.Launch(buildWhatsAppIntent(action.number, action.message))
 
@@ -102,15 +118,32 @@ object QsbActionExecutor {
         return QsbExecutionOutcome.Launch(buildIntent(resolved.phoneNumber))
     }
 
+    /**
+     * Resolução tolerante contra o AllAppsStore real (nunca uma lista
+     * fixa de nomes) — cobre nome exato, prefixo, "contém", e por
+     * fim "todas as palavras da query aparecem em algum lugar do
+     * título do app" (cobre queries como "navegador chrome" batendo
+     * em "Google Chrome", mesmo com token extra que não faz parte do
+     * nome real do app).
+     */
     private fun resolveApp(appsStore: AllAppsStore, query: String): AppInfo? {
         val apps = appsStore.apps ?: emptyArray()
         val queryLower = query.trim().lowercase()
+        if (queryLower.isEmpty()) return null
 
         apps.firstOrNull { it.title?.toString()?.lowercase() == queryLower }?.let { return it }
         apps.firstOrNull { it.title?.toString()?.lowercase()?.startsWith(queryLower) == true }
             ?.let { return it }
         apps.firstOrNull { it.title?.toString()?.lowercase()?.contains(queryLower) == true }
             ?.let { return it }
+
+        val queryWords = queryLower.split(Regex("\\s+")).filter { it.isNotBlank() }
+        if (queryWords.size > 1) {
+            apps.firstOrNull { app ->
+                val title = app.title?.toString()?.lowercase() ?: return@firstOrNull false
+                queryWords.any { word -> title.contains(word) }
+            }?.let { return it }
+        }
         return null
     }
 

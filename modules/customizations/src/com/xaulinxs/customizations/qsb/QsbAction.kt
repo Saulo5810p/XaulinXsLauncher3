@@ -36,6 +36,12 @@ sealed class QsbAction : Serializable {
     /** Ligar para um contato salvo, resolvido por nome. */
     data class CallContact(val contactQuery: String) : QsbAction()
 
+    /** Chamada de voz pelo WhatsApp para número discado diretamente (sinal "whatsapp" + "ligar" combinados). */
+    data class WhatsAppCallNumber(val number: String) : QsbAction()
+
+    /** Chamada de voz pelo WhatsApp para um contato salvo, resolvido por nome. */
+    data class WhatsAppCallContact(val contactQuery: String) : QsbAction()
+
     /** Mandar mensagem no WhatsApp para um número discado diretamente. */
     data class WhatsAppNumber(val number: String, val message: String) : QsbAction()
 

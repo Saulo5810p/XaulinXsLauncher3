@@ -64,10 +64,35 @@ open class ListenableAppWidgetHost(private val ctx: Context, hostId: Int) :
     override fun onProviderChanged(appWidgetId: Int, appWidget: AppWidgetProviderInfo) {
         val info = LauncherAppWidgetProviderInfo.fromProviderInfo(ctx, appWidget)
         updateDispatcher.forEach { it.dispatchUpdate(appWidgetId, info) }
-        super.onProviderChanged(appWidgetId, info)
-        // The super method updates the dimensions of the providerInfo. Update the
-        // launcher spans accordingly.
-        info.initSpans(ctx, InvariantDeviceProfile.INSTANCE.get(ctx))
+        // XaulinXs fix (crash real confirmado via logcat do Galaxy A35,
+        // CalledFromWrongThreadException em UiThreadHelper):
+        // onProviderChanged() é chamado pelo framework de dentro de
+        // AppWidgetHost.startListening(), que o Launcher3 propositalmente
+        // roda fora da main thread (via widgetHolderExecutor /
+        // UI_HELPER_EXECUTOR, a "UiThreadHelper" HandlerThread), para não
+        // travar a UI. Mas super.onProviderChanged() aqui embaixo pode
+        // atualizar sincronamente uma AppWidgetHostView já existente
+        // (applyContent -> ViewGroup.addView -> PagedView.requestLayout),
+        // e View exige que só a thread que criou a hierarquia a toque.
+        // Fix: garante que a parte que mexe em view rode na main thread,
+        // mesmo padrão já usado em XaulinXsWidgetFontForcer.applyTo().
+        val runOnMain = Runnable {
+            callSuperOnProviderChanged(appWidgetId, info)
+            // The super method updates the dimensions of the providerInfo. Update the
+            // launcher spans accordingly.
+            info.initSpans(ctx, InvariantDeviceProfile.INSTANCE.get(ctx))
+        }
+        MAIN_EXECUTOR.execute(runOnMain)
+    }
+
+    // Kotlin não permite `super.foo()` dentro de uma lambda/Runnable (o `this`
+    // implícito lá dentro não é mais a instância externa) — isolando a chamada
+    // a super numa função membro normal contorna isso.
+    private fun callSuperOnProviderChanged(
+        appWidgetId: Int,
+        appWidget: AppWidgetProviderInfo,
+    ) {
+        super.onProviderChanged(appWidgetId, appWidget)
     }
 
     /** Listener for getting notifications on provider changes. */

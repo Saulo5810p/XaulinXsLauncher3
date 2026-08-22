@@ -26,12 +26,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Process.myUserHandle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RemoteViews
+import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.core.net.toUri
 import com.android.launcher3.BubbleTextView
@@ -50,6 +54,8 @@ import com.android.launcher3.util.ViewEx.registerLifecycleTask
 import com.android.launcher3.views.ActivityContext
 import com.android.launcher3.widget.LauncherAppWidgetHostView
 import com.xaulinxs.customizations.qsb.QsbAction
+import com.xaulinxs.customizations.qsb.QsbActionPreviewBuilder
+import com.xaulinxs.customizations.qsb.QsbBadgeIcon
 import com.xaulinxs.customizations.qsb.QsbConfig
 import com.xaulinxs.customizations.qsb.QsbFailureReason
 import com.xaulinxs.customizations.qsb.QsbTextModeCommand
@@ -253,22 +259,85 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         launchQsbIntent(intent)
     }
 
+    /**
+     * XaulinXs Customizations — "Predictive Action Badge": conforme o
+     * usuário digita, o texto é reprocessado (QsbActionPreviewBuilder)
+     * e uma etiqueta abaixo do campo mostra a ação que será executada
+     * — antes de apertar Enter. Construído em código (não em um XML
+     * do AOSP como search_container_all_apps.xml) para não editar um
+     * layout grande do launcher e ficar 100% contido no pacote
+     * XaulinXs Customizations.
+     */
     private fun View.showXaulinXsTextModeDialog(fallbackIntent: Intent) {
+        val appsStore = activityContext.activityComponent.appsStore
+
+        val badgeIcon =
+            ImageView(context).apply {
+                layoutParams =
+                    LinearLayout.LayoutParams(dp(16), dp(16)).apply { marginEnd = dp(8) }
+            }
+        val badgeText =
+            TextView(context).apply {
+                textSize = 12f
+                setTextColor(context.getColor(R.color.materialColorPrimary))
+                setTypeface(typeface, android.graphics.Typeface.BOLD)
+            }
+        val badgeContainer =
+            LinearLayout(context).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = android.view.Gravity.CENTER_VERTICAL
+                setPadding(dp(12), dp(6), dp(12), dp(6))
+                setBackgroundResource(R.drawable.xaulinxs_qsb_action_badge_bg)
+                visibility = View.GONE
+                addView(badgeIcon)
+                addView(badgeText)
+            }
+
         val input =
             EditText(context).apply {
                 hint = context.getString(R.string.xaulinxs_qsb_text_mode_hint)
                 setPadding(48, 32, 48, 32)
             }
+
+        val outerContainer =
+            LinearLayout(context).apply {
+                orientation = LinearLayout.VERTICAL
+                addView(input)
+                addView(
+                    badgeContainer,
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                    ).apply { topMargin = dp(4) },
+                )
+            }
+
+        input.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun afterTextChanged(s: Editable?) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val preview = QsbActionPreviewBuilder.build(appsStore, s?.toString().orEmpty())
+                    if (preview == null) {
+                        badgeContainer.visibility = View.GONE
+                        return
+                    }
+                    badgeText.text = preview.message
+                    badgeIcon.setImageResource(iconResFor(preview.icon))
+                    badgeContainer.visibility = View.VISIBLE
+                }
+            }
+        )
+
         AlertDialog.Builder(context)
             .setTitle(R.string.xaulinxs_qsb_text_mode_dialog_title)
-            .setView(input)
+            .setView(outerContainer)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 val raw = input.text?.toString().orEmpty()
                 if (raw.isBlank()) {
                     launchQsbIntent(fallbackIntent)
                     return@setPositiveButton
                 }
-                val appsStore = activityContext.activityComponent.appsStore
                 handleXaulinXsTextModeResult(
                     QsbTextModeCommand.interpret(raw, appsStore, context),
                     fallbackIntent,
@@ -277,6 +346,19 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
+
+    private fun View.dp(value: Int): Int =
+        (value * context.resources.displayMetrics.density).toInt()
+
+    private fun iconResFor(icon: QsbBadgeIcon): Int =
+        when (icon) {
+            QsbBadgeIcon.OPEN_APP -> android.R.drawable.ic_menu_manage
+            QsbBadgeIcon.CALL -> android.R.drawable.ic_menu_call
+            QsbBadgeIcon.WHATSAPP_CALL -> android.R.drawable.ic_menu_call
+            QsbBadgeIcon.MESSAGE -> android.R.drawable.ic_menu_send
+            QsbBadgeIcon.SEARCH -> android.R.drawable.ic_menu_search
+            QsbBadgeIcon.NONE -> android.R.drawable.ic_menu_search
+        }
 
     /**
      * Trata o resultado da QSB Inteligente. FreeText (nenhum comando

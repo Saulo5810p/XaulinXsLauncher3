@@ -1,288 +1,313 @@
 /*
  * XaulinXs Customizations — não faz parte do AOSP original.
  *
- * "QSB Super Inteligente" — parser de linguagem natural do Modo Texto.
+ * "QSB Super Inteligente" v2 — motor de intenção por PRESENÇA DE
+ * PALAVRAS-CHAVE, não por prefixo rígido de frase.
  *
- * Decisão de arquitetura (substitui a ideia original de usar a lib
- * nativa do LatinIME, libjni_latinime.so): aquela lib é o motor de
- * autocorreção/previsão de teclado do AOSP (BinaryDictionary +
- * ProximityInfo + DicTraverseSession — sugestão por n-gramas e
- * distância de edição). Ela não tem, e não foi desenhada para ter,
- * nenhum conceito de "ação" ou "intenção" — só sabe dizer qual palavra
- * do dicionário é estatisticamente mais provável a partir de outra ou
- * de um toque impreciso. Linkar JNI nela para reconhecer comandos
- * seria trabalho extra (bridge JNI, empacotar arquivo de dicionário
- * .dict, gerenciar ProximityInfo do layout) sem ganho nenhum sobre um
- * parser de regras leve — na real, pioraria: a lib tentaria
- * "corrigir"/prever palavras dentro do comando, e não extrair a ação.
+ * Por que a v1 (prefixo rígido, "a frase tem que começar com o verbo
+ * exato") não bastava: o usuário quer reconhecimento pelo SENTIDO —
+ * se o texto contém "ligar" + o nome de um contato, é uma ligação,
+ * não importa a ordem ou as palavras ao redor. Se contém "whatsapp" +
+ * "ligar"/"chamar", é uma CHAMADA por WhatsApp (voz/vídeo), não uma
+ * mensagem de texto — combinação de sinais, não só o primeiro que
+ * bater. E não pode ficar restrito a uma lista fixa de apps: "abrir
+ * <qualquer coisa> e pesquisar <algo>" tem que funcionar pra
+ * QUALQUER app instalado, resolvido dinamicamente contra o
+ * AllAppsStore, nunca contra uma lista hardcoded tipo
+ * ["youtube","spotify","netflix"].
  *
- * Este parser resolve o que o usuário pediu de fato — frase em
- * linguagem natural -> ação estruturada (QsbAction) -> Intent — com
- * reconhecimento de verbo + entidade via regex, 100% on-device, sem
- * dependência nativa nova. Fica aberto para, no futuro, ganhar
- * tolerância a erro de digitação via TextServicesManager/
- * SpellCheckerSession (serviço de correção ortográfica do próprio
- * Android), sem precisar reimplementar o LatinIME dentro do launcher.
+ * Decisão de arquitetura mantida da v1: nada de libjni_latinime.so —
+ * aquela lib é motor de autocorreção/previsão de teclado (n-gramas),
+ * sem conceito de ação. Este parser continua sendo regras leves
+ * on-device, só que agora por classificação de tokens em vez de regex
+ * de frase inteira.
  *
- * Cobertura desta primeira versão (ordem de tentativa = ordem de
- * prioridade, primeiro match vence):
- *   1) WhatsApp para contato/número, com mensagem
- *   2) SMS para contato/número, com mensagem
- *   3) Ligar para contato/número
- *   4) Abrir <app> e pesquisar <algo> dentro dele
- *   5) Abrir <app>
- * Qualquer texto que não bata com nenhum padrão -> QsbAction.Unrecognized.
+ * Arquitetura do motor:
+ *   1) Tokeniza o texto inteiro (minúsculo, sem pontuação nas bordas).
+ *   2) Classifica quais CATEGORIAS de sinal estão presentes:
+ *      SIGNAL_CALL ("ligar", "chamar", "discar", "telefonar", ...),
+ *      SIGNAL_WHATSAPP ("whatsapp", "whats", "zap", "zapzap"),
+ *      SIGNAL_MESSAGE ("mensagem", "manda", "envia", "escreve", ...),
+ *      SIGNAL_SMS ("sms"),
+ *      SIGNAL_OPEN ("abrir", "abre", "open"),
+ *      SIGNAL_SEARCH ("pesquisar", "pesquisa", "buscar", "busca",
+ *      "procurar", "procura").
+ *   3) Combina os sinais presentes para decidir o ActionKind:
+ *      WHATSAPP + CALL         -> chamada de voz pelo WhatsApp
+ *      WHATSAPP (sem CALL)     -> mensagem de texto pelo WhatsApp
+ *      SMS                     -> mensagem de texto por SMS
+ *      CALL (sem WHATSAPP)     -> ligação pela discadora nativa
+ *      OPEN + SEARCH           -> abrir app + pesquisar dentro dele
+ *      OPEN (sem SEARCH)       -> abrir app
+ *      nenhum sinal reconhecido-> Unrecognized (cai pro Modo Web)
+ *   4) Extrai o ALVO (nome de contato/número, ou nome de app+query)
+ *      removendo do texto os tokens de sinal já consumidos — sobra só
+ *      o que importa (nome, número, mensagem, termo de busca).
  *
- * Requisito do usuário respeitado: nenhum destes ramos cai para
- * browser/app genérico como fallback — cada um resolve uma ação
- * concreta, e a decisão de fallback só acontece em Unrecognized,
- * fora deste arquivo (OseWidgetView).
+ * Resolução de app continua fora deste arquivo (QsbActionExecutor),
+ * contra o AllAppsStore real — nunca uma lista fixa de nomes de app.
  */
 package com.xaulinxs.customizations.qsb
 
 object QsbIntentParser {
 
-    // Verbos aceitos por categoria, todos minúsculos (comparação é
-    // sempre contra o texto já lowercased). Mantidos como listas
-    // simples e não regex "|" gigante para ficar fácil de estender
-    // sem risco de quebrar grupos de captura.
-    private val OPEN_VERBS = listOf("abrir", "abre", "abrir o", "abre o", "abrir a", "abre a", "open")
-    private val CALL_VERBS =
-        listOf(
-            "ligar para", "ligue para", "liga para", "liga pro", "ligar pro",
-            "chamar", "chama",
-            "faz ligação para", "faz ligação pro", "fazer ligação para", "fazer ligação pro",
-            "faz uma ligação para", "faz uma ligação pro",
-            "disca para", "disca pro", "discar para", "discar pro",
+    private val CALL_SIGNAL_WORDS =
+        setOf("ligar", "ligue", "liga", "chamar", "chama", "discar", "disca", "telefonar", "telefona", "call")
+    private val WHATSAPP_SIGNAL_WORDS = setOf("whatsapp", "whats", "zap", "zapzap")
+    private val SMS_SIGNAL_WORDS = setOf("sms")
+    private val MESSAGE_SIGNAL_WORDS =
+        setOf("mensagem", "manda", "mandar", "envia", "enviar", "escreve", "escrever", "msg")
+    private val OPEN_SIGNAL_WORDS = setOf("abrir", "abre", "abra", "open")
+    private val SEARCH_SIGNAL_WORDS = setOf("pesquisar", "pesquisa", "pesquise", "buscar", "busca", "busque", "procurar", "procura", "procure")
+
+    // Palavras de função sem valor semântico próprio: descartadas ao
+    // montar o alvo (nome/mensagem/query), senão "para o João" vira
+    // alvo "para o João" em vez de só "João".
+    private val STOPWORDS =
+        setOf(
+            "para", "pra", "pro", "o", "a", "os", "as", "um", "uma", "no", "na", "nos", "nas",
+            "com", "de", "do", "da", "por", "pelo", "pela", "sobre", "e", "meu", "minha", "meus", "minhas",
+            "que", "diz", "dizendo", "falando", "falar", "escrito", "escrevendo",
         )
-    private val WHATSAPP_TRIGGERS =
-        listOf("whatsapp", "whats app", "zap", "zapzap")
-    private val SMS_TRIGGERS = listOf("sms", "mensagem de texto")
-    private val SEARCH_VERBS = listOf("pesquisar", "pesquisa", "procurar", "procura", "buscar", "busca")
 
-    // Aceita "pro", "para o", "pra", "para", "com" antes do destinatário —
-    // cobre as variações mais comuns de fala/escrita informal em pt-BR.
-    private val RECIPIENT_CONNECTORS = listOf(" pro ", " para o ", " pra ", " para ", " com ")
+    // Prefixo "número"/"numero" falado antes de um número discado
+    // ("ligar pro número 11987654321") — descartado ao normalizar.
+    private val NUMBER_WORD_PREFIXES = setOf("número", "numero", "num")
 
-    // "dizendo", "falando", "escrito", ou dois pontos — separam
-    // destinatário do corpo da mensagem em comandos de WhatsApp/SMS.
-    private val MESSAGE_CONNECTORS = listOf(" dizendo ", " falando ", " escrito ", " escrevendo ", ": ")
-
-    // Só dígitos, espaços, parênteses, hífen e '+' — o suficiente para
-    // reconhecer um número discado diretamente no texto (não valida
-    // DDD/formato, só decide "isso parece um número" vs "isso é um nome").
-    private val NUMBER_REGEX = Regex("^[+\\d][\\d\\s()-]{6,}$")
+    private val NUMBER_REGEX = Regex("^[+\\d][\\d\\s()-]{5,}$")
 
     /**
-     * Ponto de entrada único do parser. [rawInput] é o texto exatamente
-     * como o usuário digitou no campo do Modo Texto, sem normalização
-     * prévia feita pelo chamador.
+     * Ponto de entrada único. [rawInput] é o texto exatamente como
+     * está no campo agora — chamado a cada tecla digitada (para o
+     * badge preditivo) e de novo no Enter (para executar de fato).
+     * Determinístico: mesmo texto sempre produz o mesmo QsbAction.
      */
     @JvmStatic
     fun parse(rawInput: String): QsbAction {
         val trimmed = rawInput.trim()
         if (trimmed.isEmpty()) return QsbAction.Unrecognized
-        val lower = trimmed.lowercase()
 
-        parseWhatsApp(trimmed, lower)?.let { return it }
-        parseSms(trimmed, lower)?.let { return it }
-        parseCall(trimmed, lower)?.let { return it }
-        parseSearchInApp(trimmed, lower)?.let { return it }
-        parseOpenApp(trimmed, lower)?.let { return it }
+        val tokens = tokenize(trimmed)
+        if (tokens.isEmpty()) return QsbAction.Unrecognized
 
-        return QsbAction.Unrecognized
-    }
+        val hasCall = tokens.any { it in CALL_SIGNAL_WORDS }
+        val hasWhatsapp = tokens.any { it in WHATSAPP_SIGNAL_WORDS }
+        val hasSms = tokens.any { it in SMS_SIGNAL_WORDS }
+        val hasMessage = tokens.any { it in MESSAGE_SIGNAL_WORDS }
+        val hasOpen = tokens.any { it in OPEN_SIGNAL_WORDS }
+        val hasSearch = tokens.any { it in SEARCH_SIGNAL_WORDS }
 
-    // ------------------------------------------------------------------
-    // WhatsApp: "manda mensagem no whatsapp pro <alguem> dizendo <texto>"
-    // Ordem de busca dos gatilhos é flexível de propósito: o usuário pode
-    // falar "whatsapp" antes ou depois do destinatário ("manda whatsapp
-    // pra Ana dizendo oi" ou "manda pra Ana no whatsapp dizendo oi").
-    // ------------------------------------------------------------------
-    private fun parseWhatsApp(original: String, lower: String): QsbAction? {
-        if (WHATSAPP_TRIGGERS.none { lower.contains(it) }) return null
+        // Ordem de decisão = ordem de prioridade quando mais de uma
+        // categoria de sinal aparece no mesmo texto.
+        return when {
+            // WhatsApp + sinal de chamada -> chamada de voz pelo
+            // WhatsApp, não mensagem de texto (combinação de sinais,
+            // não o primeiro que bateu).
+            hasWhatsapp && hasCall -> buildRecipientAction(tokens, ::qsbWhatsAppCall)
 
-        val (recipientRaw, messageRaw) = splitRecipientAndMessage(original, lower) ?: return null
-        // Remove os próprios gatilhos de "whatsapp" do texto do
-        // destinatário, caso tenham ficado colados (ex.: "no whatsapp").
-        val recipient = stripTriggerWords(recipientRaw, WHATSAPP_TRIGGERS)
-        if (recipient.isBlank()) return null
+            // WhatsApp sem sinal de chamada -> mensagem de texto,
+            // mesmo sem a palavra "mensagem"/"manda" explícita (ex.:
+            // "whatsapp emily tudo bem" do exemplo do usuário).
+            hasWhatsapp -> buildRecipientAction(tokens, ::qsbWhatsAppMessage)
 
-        return if (looksLikeNumber(recipient)) {
-            QsbAction.WhatsAppNumber(normalizeNumber(recipient), messageRaw)
-        } else {
-            QsbAction.WhatsAppContact(recipient, messageRaw)
+            hasSms -> buildRecipientAction(tokens, ::qsbSms)
+
+            // "mensagem"/"manda"/"envia" sem WhatsApp nem SMS
+            // explícitos assume SMS (canal nativo do Android) —
+            // continua sendo uma mensagem de texto de verdade, nunca
+            // cai pro Modo Web só por faltar o nome do canal.
+            hasMessage -> buildRecipientAction(tokens, ::qsbSms)
+
+            hasCall -> buildRecipientAction(tokens, ::qsbCall)
+
+            hasOpen && hasSearch -> buildSearchInAppAction(trimmed, tokens)
+
+            hasOpen -> buildOpenAppAction(tokens)
+
+            // Sem nenhum verbo de ação reconhecido, mas ainda assim
+            // pode ser "abrir app" implícito (usuário só digitou o
+            // nome do app, sem dizer "abrir") — não é um sinal
+            // confiável o suficiente pra badge/execução automática
+            // nesta versão, então cai pra Unrecognized -> Modo Web.
+            else -> QsbAction.Unrecognized
         }
     }
 
-    // ------------------------------------------------------------------
-    // SMS: mesmo formato do WhatsApp, gatilho "sms" / "mensagem de texto"
-    // em vez de "whatsapp". Verificado depois do WhatsApp de propósito —
-    // "manda mensagem" sozinho (sem "sms" nem "whatsapp") não deve cair
-    // aqui, só quando o gatilho SMS aparece explicitamente.
-    // ------------------------------------------------------------------
-    private fun parseSms(original: String, lower: String): QsbAction? {
-        if (SMS_TRIGGERS.none { lower.contains(it) }) return null
-
-        val (recipientRaw, messageRaw) = splitRecipientAndMessage(original, lower) ?: return null
-        val recipient = stripTriggerWords(recipientRaw, SMS_TRIGGERS)
-        if (recipient.isBlank()) return null
-
-        return if (looksLikeNumber(recipient)) {
-            QsbAction.SmsNumber(normalizeNumber(recipient), messageRaw)
+    private fun qsbWhatsAppCall(recipient: String): QsbAction =
+        if (looksLikeNumber(recipient)) {
+            QsbAction.WhatsAppCallNumber(normalizeNumber(recipient))
         } else {
-            QsbAction.SmsContact(recipient, messageRaw)
+            QsbAction.WhatsAppCallContact(recipient)
         }
+
+    private fun qsbWhatsAppMessage(recipient: String, message: String): QsbAction =
+        if (looksLikeNumber(recipient)) {
+            QsbAction.WhatsAppNumber(normalizeNumber(recipient), message)
+        } else {
+            QsbAction.WhatsAppContact(recipient, message)
+        }
+
+    private fun qsbSms(recipient: String, message: String): QsbAction =
+        if (looksLikeNumber(recipient)) {
+            QsbAction.SmsNumber(normalizeNumber(recipient), message)
+        } else {
+            QsbAction.SmsContact(recipient, message)
+        }
+
+    private fun qsbCall(recipient: String): QsbAction =
+        if (looksLikeNumber(recipient)) {
+            QsbAction.CallNumber(normalizeNumber(recipient))
+        } else {
+            QsbAction.CallContact(recipient)
+        }
+
+    /**
+     * Monta uma ação "só destinatário" (chamadas), delegando para
+     * [build]. Usado quando a ação não carrega corpo de mensagem.
+     */
+    private inline fun buildRecipientAction(tokens: List<String>, build: (String) -> QsbAction): QsbAction {
+        val recipient = extractRecipient(tokens)
+        if (recipient.isBlank()) return QsbAction.Unrecognized
+        return build(recipient)
     }
 
     /**
-     * Extrai destinatário e corpo da mensagem de um comando do tipo
-     * "<verbo> mensagem [no <canal>] pro <destinatário> dizendo <corpo>".
-     * O corpo é opcional: se não houver conector de mensagem, o
-     * destinatário é o resto do texto e o corpo fica vazio (o app
-     * de destino abre com o campo de mensagem em branco, pronto pra
-     * o usuário digitar).
+     * Sobrecarga para ações "destinatário + mensagem" (WhatsApp/SMS
+     * texto). [build] recebe (destinatário, corpo da mensagem) —
+     * corpo pode ser vazio (abre o app já na conversa certa, sem
+     * texto pré-preenchido, quando o usuário não escreveu nada além
+     * do nome).
      */
-    private fun splitRecipientAndMessage(original: String, lower: String): Pair<String, String>? {
-        val connectorIndex =
-            RECIPIENT_CONNECTORS
-                .map { connector -> connector to lower.indexOf(connector) }
-                .filter { (_, index) -> index >= 0 }
-                .minByOrNull { (_, index) -> index }
-                ?: return null
-        val (connector, index) = connectorIndex
-
-        val afterConnector = original.substring(index + connector.length)
-        val afterConnectorLower = lower.substring(index + connector.length)
-
-        val messageConnectorIndex =
-            MESSAGE_CONNECTORS
-                .map { connector2 -> connector2 to afterConnectorLower.indexOf(connector2) }
-                .filter { (_, idx) -> idx >= 0 }
-                .minByOrNull { (_, idx) -> idx }
-
-        return if (messageConnectorIndex != null) {
-            val (msgConnector, msgIndex) = messageConnectorIndex
-            val recipient = afterConnector.substring(0, msgIndex).trim()
-            val message = afterConnector.substring(msgIndex + msgConnector.length).trim()
-            recipient to message
-        } else {
-            afterConnector.trim() to ""
-        }
+    private inline fun buildRecipientAction(
+        tokens: List<String>,
+        build: (String, String) -> QsbAction,
+    ): QsbAction {
+        val (recipient, message) = extractRecipientAndMessage(tokens)
+        if (recipient.isBlank()) return QsbAction.Unrecognized
+        return build(recipient, message)
     }
 
-    // ------------------------------------------------------------------
-    // Ligação: "ligar para <contato ou número>"
-    // ------------------------------------------------------------------
-    private fun parseCall(original: String, lower: String): QsbAction? {
-        val verb = CALL_VERBS.firstOrNull { lower.startsWith(it + " ") } ?: return null
-        val target = original.substring(verb.length).trim()
-        if (target.isBlank()) return null
-
-        return if (looksLikeNumber(target)) {
-            QsbAction.CallNumber(normalizeNumber(target))
-        } else {
-            QsbAction.CallContact(target)
-        }
+    /**
+     * Extrai o destinatário removendo todos os tokens de sinal
+     * conhecidos (ligar/whatsapp/sms/mensagem/abrir/pesquisar) e
+     * stopwords — o que sobra é o nome/número. Não tenta separar
+     * mensagem aqui (usado só por ações sem corpo de mensagem).
+     */
+    private fun extractRecipient(tokens: List<String>): String {
+        val allSignalWords =
+            CALL_SIGNAL_WORDS + WHATSAPP_SIGNAL_WORDS + SMS_SIGNAL_WORDS + MESSAGE_SIGNAL_WORDS +
+                OPEN_SIGNAL_WORDS + SEARCH_SIGNAL_WORDS
+        return tokens
+            .filter { it !in allSignalWords && it !in STOPWORDS }
+            .joinToString(" ")
+            .trim()
     }
 
-    // ------------------------------------------------------------------
-    // Pesquisa dentro de app: "abrir <app> e pesquisar <algo>"
-    // Checado ANTES de parseOpenApp: sem essa ordem, "abrir chrome e
-    // pesquisar gatos" seria capturado por parseOpenApp com appQuery
-    // = "chrome e pesquisar gatos" (nome de app inválido, sem resolver
-    // a pesquisa em si).
-    // ------------------------------------------------------------------
-    private fun parseSearchInApp(original: String, lower: String): QsbAction? {
-        val openVerb = OPEN_VERBS.firstOrNull { lower.startsWith(it + " ") } ?: return null
-        val afterOpen = original.substring(openVerb.length).trim()
+    /**
+     * Extrai destinatário + mensagem para ações WhatsApp/SMS. Como o
+     * motor agora é por palavra-chave (não posição fixa na frase), a
+     * heurística é: se houver um conector explícito de mensagem
+     * ("dizendo"/"falando"/":"), tudo antes dele é destinatário e
+     * tudo depois é mensagem. Sem conector explícito (ex.: "whatsapp
+     * emily tudo bem"), assume o PRIMEIRO token restante como nome do
+     * contato e o resto como mensagem — cobre o caso mais comum sem
+     * exigir acesso à agenda dentro do parser (que não conhece
+     * Android de propósito, pra continuar testável isoladamente).
+     * Nomes compostos sem conector explícito ("Ana Paula, oi") ficam
+     * fora desta primeira versão; o caminho recomendado nesse caso é
+     * usar "dizendo"/"falando" para marcar onde o nome termina.
+     */
+    private fun extractRecipientAndMessage(tokens: List<String>): Pair<String, String> {
+        val allSignalWords =
+            CALL_SIGNAL_WORDS + WHATSAPP_SIGNAL_WORDS + SMS_SIGNAL_WORDS + MESSAGE_SIGNAL_WORDS +
+                OPEN_SIGNAL_WORDS + SEARCH_SIGNAL_WORDS
+        val remaining = tokens.filter { it !in allSignalWords }
+
+        val messageConnectorIndex = remaining.indexOfFirst { it == "dizendo" || it == "falando" || it == ":" }
+        if (messageConnectorIndex >= 0) {
+            val recipientTokens = remaining.subList(0, messageConnectorIndex).filter { it !in STOPWORDS }
+            val messageTokens = remaining.subList(messageConnectorIndex + 1, remaining.size)
+            return recipientTokens.joinToString(" ").trim() to messageTokens.joinToString(" ").trim()
+        }
+
+        val meaningful = remaining.filter { it !in STOPWORDS }
+        if (meaningful.isEmpty()) return "" to ""
+        val recipient = meaningful.first()
+        val message = meaningful.drop(1).joinToString(" ").trim()
+        return recipient to message
+    }
+
+    private fun buildOpenAppAction(tokens: List<String>): QsbAction {
+        val appQuery = tokens.filter { it !in OPEN_SIGNAL_WORDS && it !in STOPWORDS }.joinToString(" ").trim()
+        if (appQuery.isBlank()) return QsbAction.Unrecognized
+        return QsbAction.OpenApp(appQuery)
+    }
+
+    /**
+     * "abrir <app> e pesquisar <query>" — como o app não vem mais de
+     * uma lista fixa, a extração aqui é posicional dentro do texto
+     * ORIGINAL (preserva capitalização, útil pra query de busca):
+     * tudo entre o verbo de abrir e o verbo de busca é candidato a
+     * nome de app; tudo depois do verbo de busca é a query. Resolução
+     * de qual token exatamente é o app de verdade (contra apps
+     * instalados) acontece no executor.
+     */
+    private fun buildSearchInAppAction(original: String, tokens: List<String>): QsbAction {
+        val lower = original.lowercase()
+        val openWord = OPEN_SIGNAL_WORDS.firstOrNull { word -> tokens.contains(word) } ?: return QsbAction.Unrecognized
+        val searchWord = SEARCH_SIGNAL_WORDS.firstOrNull { word -> tokens.contains(word) } ?: return QsbAction.Unrecognized
+
+        val openIndex = lower.indexOf(openWord)
+        if (openIndex < 0) return QsbAction.Unrecognized
+        val afterOpen = original.substring(openIndex + openWord.length)
         val afterOpenLower = afterOpen.lowercase()
+        val searchMatch = Regex("\\b${Regex.escape(searchWord)}\\b").find(afterOpenLower) ?: return QsbAction.Unrecognized
+        val searchIndexInRemainder = searchMatch.range.first
 
-        val searchVerb = SEARCH_VERBS.firstOrNull { verb -> " $afterOpenLower ".contains(" $verb ") }
-            ?: return null
-        val searchIndex = afterOpenLower.indexOf(searchVerb)
-        if (searchIndex <= 0) return null
-
-        // Remove conectores soltos ("e", "e depois") entre o nome do
-        // app e o verbo de busca, sem exigir uma lista fixa de todas
-        // as combinações — corta na última ocorrência de " e " antes
-        // do verbo de busca, se existir.
-        var appPart = afterOpen.substring(0, searchIndex).trim()
+        var appPart = afterOpen.substring(0, searchIndexInRemainder).trim()
+        // Remove conector "e" solto entre o app e o verbo de busca
+        // ("Chrome e" -> "Chrome"), com ou sem espaço remanescente.
+        if (appPart.lowercase().endsWith(" e")) appPart = appPart.dropLast(2).trim()
         val andIndex = appPart.lowercase().lastIndexOf(" e ")
-        appPart =
-            if (andIndex >= 0) {
-                appPart.substring(0, andIndex).trim()
-            } else {
-                // " e" pode ter ficado colado no fim (sem espaço depois)
-                // quando o corte caiu bem em cima do verbo de busca —
-                // rfind(" e ") com espaço nos dois lados não bate nesse
-                // caso, então trata separado.
-                appPart.removeSuffix(" e").trim()
-            }
-        // Descarta artigos/possessivos soltos que sobraram antes do
-        // nome de app de verdade (ex.: "meu navegador Chrome" ->
-        // "Chrome"). Nome de app na fala coloquial é tipicamente a
-        // última palavra dessa parte do texto.
+        if (andIndex >= 0) appPart = appPart.substring(0, andIndex).trim()
+        // Descarta artigos/possessivos soltos antes do nome de app de
+        // verdade (ex.: "meu navegador Chrome" -> "Chrome") — nome de
+        // app na fala coloquial é tipicamente a última palavra.
         appPart = appPart.substringAfterLast(' ').trim()
 
-        var query = afterOpen.substring(searchIndex + searchVerb.length).trim()
-        // Remove preposição solta logo após o verbo de busca
-        // ("pesquisa POR gatos", "pesquisa SOBRE gatos") — sem isso a
-        // query levaria a preposição junto.
+        var query = afterOpen.substring(searchIndexInRemainder + searchWord.length).trim()
         for (prep in listOf("por ", "sobre ", "de ")) {
             if (query.lowercase().startsWith(prep)) {
                 query = query.substring(prep.length).trim()
                 break
             }
         }
-        if (appPart.isBlank() || query.isBlank()) return null
-
+        if (appPart.isBlank() || query.isBlank()) return QsbAction.Unrecognized
         return QsbAction.SearchInApp(appPart, query)
-    }
-
-    // ------------------------------------------------------------------
-    // Abrir app: "abrir <app>" — mesmo comportamento (e resolução via
-    // AllAppsStore) que o QsbTextModeCommand original já tinha; o
-    // parser aqui só reconhece o padrão e devolve a query de app, quem
-    // resolve contra a lista de apps instalados continua sendo o
-    // chamador (evita este arquivo depender de AllAppsStore).
-    // ------------------------------------------------------------------
-    private fun parseOpenApp(original: String, lower: String): QsbAction? {
-        val verb = OPEN_VERBS.firstOrNull { lower.startsWith(it + " ") } ?: return null
-        val appQuery = original.substring(verb.length).trim()
-        if (appQuery.isBlank()) return null
-        return QsbAction.OpenApp(appQuery)
     }
 
     // ------------------------------------------------------------------
     // Helpers
     // ------------------------------------------------------------------
 
+    private fun tokenize(text: String): List<String> =
+        text
+            .lowercase()
+            .split(Regex("\\s+"))
+            .map { it.trim(',', '.', '!', '?', ';') }
+            .filter { it.isNotEmpty() }
+
     private fun looksLikeNumber(text: String): Boolean = NUMBER_REGEX.matches(stripNumberPrefix(text).trim())
 
-    /**
-     * Remove um prefixo falado como "número"/"numero" antes do dígito
-     * de fato ("liga pro número 11987654321" -> "11987654321") — sem
-     * isso, a palavra extra impede o NUMBER_REGEX de bater e o alvo
-     * cai incorretamente como nome de contato.
-     */
     private fun stripNumberPrefix(text: String): String {
         val trimmed = text.trim()
-        for (prefix in listOf("número ", "numero ", "num ")) {
-            if (trimmed.lowercase().startsWith(prefix)) return trimmed.substring(prefix.length).trim()
+        val firstWord = trimmed.substringBefore(' ')
+        return if (firstWord.lowercase() in NUMBER_WORD_PREFIXES) {
+            trimmed.substringAfter(' ').trim()
+        } else {
+            trimmed
         }
-        return trimmed
     }
 
     private fun normalizeNumber(text: String): String = stripNumberPrefix(text).filter { it.isDigit() || it == '+' }
-
-    private fun stripTriggerWords(text: String, triggers: List<String>): String {
-        var result = text
-        for (trigger in triggers) {
-            result = result.replace(Regex("(?i)\\bno $trigger\\b"), "")
-            result = result.replace(Regex("(?i)\\bpelo $trigger\\b"), "")
-            result = result.replace(Regex("(?i)\\b$trigger\\b"), "")
-        }
-        return result.trim().trim(',', '.', ' ')
-    }
 }

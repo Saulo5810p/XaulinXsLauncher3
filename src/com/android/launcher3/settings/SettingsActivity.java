@@ -86,7 +86,13 @@ public class SettingsActivity extends FragmentActivity
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+        // XaulinXs Customizations: "UI-UX Custom Colors" — mesmo motivo
+        // documentado em Launcher.attachBaseContext: o Resources desta
+        // Activity não herda do wrapper instalado em LauncherApplication,
+        // então precisa ser instalado de novo aqui para que a tela de
+        // Configurações (e a própria CustomColorsActivity) já reflita a
+        // paleta customizada.
+        super.attachBaseContext(new com.xaulinxs.customizations.theme.XaulinXsThemedContextWrapper(base));
         // XaulinXs Customizations: mesma extensão de fonte customizada
         // instalada em Launcher.attachBaseContext — aqui cobre a tela de
         // Configurações (PreferenceFragmentCompat inclusive, já que o

@@ -243,6 +243,11 @@
             android:theme="@style/HomeSettings.Theme"
             android:label="@string/xaulinxs_qsb_config_title"
             android:exported="false" />
+        <activity
+            android:name="com.xaulinxs.customizations.settings.CustomColorsActivity"
+            android:theme="@style/HomeSettings.Theme"
+            android:label="@string/xaulinxs_custom_colors_title"
+            android:exported="false" />
         <!-- XaulinXs Customizations: Activity transparente que pede a
              permissão de Contatos em nome da QSB Inteligente (Modo
              Texto) e devolve o resultado — ver comentário no arquivo

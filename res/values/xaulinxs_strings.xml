@@ -56,6 +56,10 @@
     <string name="xaulinxs_qsb_text_mode_dialog_title">O que você quer fazer?</string>
     <string name="xaulinxs_qsb_text_mode_hint">Ex: ligar pra Ana, manda whatsapp pro João dizendo oi</string>
 
+    <!-- UI-UX Custom Colors -->
+    <string name="xaulinxs_custom_colors_title">UI-UX Custom Colors</string>
+    <string name="xaulinxs_custom_colors_summary">Personaliza a cor primária (interruptores, botões, retângulos) e secundária (fundos, fontes) de todo o app</string>
+
     <!-- QSB Super Inteligente -->
     <string name="xaulinxs_qsb_smart_permission_title">Acesso aos contatos</string>
     <string name="xaulinxs_qsb_smart_permission_message">Para reconhecer nomes de contato em comandos como "ligar pra Ana" ou "manda whatsapp pro João", o app precisa de permissão para ler seus contatos.</string>

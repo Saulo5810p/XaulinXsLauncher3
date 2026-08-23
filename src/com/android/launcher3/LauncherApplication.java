@@ -16,18 +16,33 @@
 package com.android.launcher3;
 
 import android.app.Application;
+import android.content.Context;
 import com.android.launcher3.dagger.DaggerLauncherAppComponent;
 import com.android.launcher3.dagger.LauncherAppComponent;
 import com.android.launcher3.dagger.LauncherBaseAppComponent;
 import com.android.launcher3.dagger.LauncherComponentProvider;
 import com.android.launcher3.util.TraceHelper;
+import com.xaulinxs.customizations.theme.XaulinXsThemeColorResources;
+import com.xaulinxs.customizations.theme.XaulinXsThemedContextWrapper;
 
 public class LauncherApplication extends Application {
 
     private volatile LauncherBaseAppComponent mAppComponent;
+
+    // XaulinXs Customizations — "UI-UX Custom Colors": envolve o Context
+    // base do processo com um wrapper que intercepta @color/materialColorX
+    // (ver XaulinXsThemeColorResources.kt para o porquê disso, em vez de
+    // tentar reescrever o XML empacotado no APK). Precisa ser attachBaseContext,
+    // não onCreate: getResources() já é chamado antes de onCreate rodar.
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(new XaulinXsThemedContextWrapper(base));
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        XaulinXsThemeColorResources.installIfEnabled(this);
         LauncherComponentProvider.get(this).getMainProcessInitializer().init(this);
     }
 

@@ -118,6 +118,16 @@
                 android:targetClass="com.xaulinxs.customizations.qsb.QsbConfigActivity" />
         </Preference>
 
+        <Preference
+            android:key="xaulinxs_custom_colors"
+            android:title="@string/xaulinxs_custom_colors_title"
+            android:summary="@string/xaulinxs_custom_colors_summary"
+            android:persistent="false">
+            <intent
+                android:targetPackage="com.android.launcher3"
+                android:targetClass="com.xaulinxs.customizations.settings.CustomColorsActivity" />
+        </Preference>
+
     </PreferenceScreen>
     <!-- ============ XaulinXs Customizations — fim ============ -->
 </androidx.preference.PreferenceScreen>

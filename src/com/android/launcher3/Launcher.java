@@ -406,7 +406,15 @@ public class Launcher extends StatefulActivity<LauncherState>
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+        // XaulinXs Customizations: "UI-UX Custom Colors" — mesma razão da
+        // fonte customizada logo abaixo (attachBaseContext é o ponto mais
+        // cedo em que dá pra interceptar Resources antes de qualquer
+        // inflação). O wrapper de Application (LauncherApplication) cobre
+        // getApplicationContext(), mas Activity.getResources() usa o
+        // Resources da própria Activity, que NÃO herda do wrapper da
+        // Application — por isso precisa ser instalado de novo aqui. Ver
+        // XaulinXsThemeColorResources.kt para detalhes.
+        super.attachBaseContext(new com.xaulinxs.customizations.theme.XaulinXsThemedContextWrapper(base));
         // XaulinXs Customizations: estende a fonte customizada (antes só
         // aplicada aos labels dos ícones via BubbleTextView) para TODA
         // TextView inflada nesta Activity — Workspace, AllApps, popups,

@@ -78,7 +78,7 @@ object XaulinXsThemeColorResources {
         }
     }
 
-    /** Chamado uma vez em LauncherApplication.attachBaseContext, antes de qualquer inflação. */
+    /** Chamado uma vez em LauncherApplication.onCreate(), populando o mapa de override cedo. */
     @JvmStatic
     fun installIfEnabled(context: Context) {
         if (isEnabled(context)) {

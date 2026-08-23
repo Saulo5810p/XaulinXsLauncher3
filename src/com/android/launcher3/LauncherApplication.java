@@ -16,29 +16,30 @@
 package com.android.launcher3;
 
 import android.app.Application;
-import android.content.Context;
 import com.android.launcher3.dagger.DaggerLauncherAppComponent;
 import com.android.launcher3.dagger.LauncherAppComponent;
 import com.android.launcher3.dagger.LauncherBaseAppComponent;
 import com.android.launcher3.dagger.LauncherComponentProvider;
 import com.android.launcher3.util.TraceHelper;
 import com.xaulinxs.customizations.theme.XaulinXsThemeColorResources;
-import com.xaulinxs.customizations.theme.XaulinXsThemedContextWrapper;
 
 public class LauncherApplication extends Application {
 
     private volatile LauncherBaseAppComponent mAppComponent;
 
-    // XaulinXs Customizations — "UI-UX Custom Colors": envolve o Context
-    // base do processo com um wrapper que intercepta @color/materialColorX
-    // (ver XaulinXsThemeColorResources.kt para o porquê disso, em vez de
-    // tentar reescrever o XML empacotado no APK). Precisa ser attachBaseContext,
-    // não onCreate: getResources() já é chamado antes de onCreate rodar.
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(new XaulinXsThemedContextWrapper(base));
-    }
-
+    // XaulinXs Customizations — "UI-UX Custom Colors": NÃO envolver o
+    // Context da Application inteira aqui (attachBaseContext). Isso já
+    // foi tentado e causou crash real em produção: o framework Android
+    // faz cast interno de Context para ContextImpl em vários pontos que
+    // não passam pela Activity — por exemplo BroadcastReceiver
+    // (ActivityThread.handleReceiver) — e um ContextWrapper substituindo
+    // o Context "base" do processo inteiro quebra esse cast
+    // (ClassCastException: XaulinXsThemedContextWrapper cannot be cast
+    // to ContextImpl), derrubando SessionCommitReceiver e qualquer outro
+    // receiver/service que dependa do Context puro da Application. A
+    // interceptação de cor fica só nas Activities (Launcher,
+    // SettingsActivity, CustomColorsActivity), que é onde a UI é
+    // realmente inflada — ver XaulinXsThemeColorResources.kt.
     @Override
     public void onCreate() {
         super.onCreate();

@@ -12,7 +12,7 @@
  * dependência nova.
  *
  * Terciária e a família Neutra/Neutra-Variante (usadas nas superfícies
- * Surface*/Outline*) são derivadas automaticamente a partir do matiz da
+ * Surface e Outline) são derivadas automaticamente a partir do matiz da
  * Primária, do mesmo jeito que o algoritmo Material You real deriva do
  * wallpaper: terciária = matiz rotacionado, neutra = mesma matiz com
  * croma bem baixo. O usuário só controla os 2 sliders (Primária,

@@ -18,6 +18,7 @@ package com.android.launcher3.display
 import android.content.Context
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DisplayListener
+import android.os.Build
 import android.util.Log
 import android.util.SparseArray
 import android.view.Display
@@ -94,9 +95,35 @@ constructor(
         }
         return DisplayInfoContainer(
             displayId,
-            appContext.createWindowContext(display, LayoutParams.TYPE_APPLICATION, null),
+            createWindowContextCompat(display),
             wmProxy,
         )
+    }
+
+    // XaulinXs fix (crash real confirmado via logcat de um Android 11 —
+    // NoSuchMethodError, desde antes das features de customização):
+    // createWindowContext(Display, int, Bundle) — a variante com Display
+    // explícito — só existe a partir da API 31 (Android 12). No Android
+    // 11 (API 30) essa assinatura de 3 argumentos não existe na classe
+    // Context, e chamá-la incondicionalmente derruba o app com
+    // NoSuchMethodError logo no Launcher.onCreate(), antes de qualquer
+    // tela aparecer. Fix: em API 30, usar createDisplayContext(display)
+    // seguido de createWindowContext(int, Bundle) — a combinação
+    // documentada pela própria Android para obter um window context de
+    // um display específico quando só a variante de 2 argumentos está
+    // disponível. O projeto declara minSdk 28, mas mesmo
+    // createWindowContext(int, Bundle) e Context.getDisplay() (usado
+    // logo abaixo em DisplayInfoContainer) só existem a partir da API
+    // 30 — abaixo disso exigiria uma reestruturação maior do
+    // DisplayInfoContainer, fora do escopo deste crash específico.
+    private fun createWindowContextCompat(display: Display): Context {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            appContext.createWindowContext(display, LayoutParams.TYPE_APPLICATION, null)
+        } else {
+            appContext
+                .createDisplayContext(display)
+                .createWindowContext(LayoutParams.TYPE_APPLICATION, null)
+        }
     }
 
     @AnyThread

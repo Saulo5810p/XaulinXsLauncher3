@@ -6,16 +6,16 @@
  * Como visto na investigação: reescrever res/values/material_dynamic_
  * colors_fallback.xml não é possível depois do APK instalado (recurso
  * empacotado em resources.arsc é somente leitura sem root). A solução
- * viável é interceptar a LEITURA da cor, não o arquivo: envolver os
- * Resources da Application (via attachBaseContext, ContextWrapper) para
- * que toda chamada a getColor()/getColorStateList() com um dos 29 IDs
- * materialColorX devolva o valor calculado por XaulinXsColorPalette, e
- * delegue ao original para qualquer outro id. Isso cobre automaticamente
- * TODO consumidor — os 25 drawable XML, os 3 layout XML e os 13 arquivos
- * de código levantados — porque LayoutInflater, código Kotlin/Java e
- * Jetpack Compose (colorResource()) todos resolvem @color/x através do
- * mesmo Resources do Context, sem exceção. Nenhum dos ~46 arquivos
- * consumidores precisa ser tocado.
+ * viável é interceptar a LEITURA da cor, não o arquivo: um ContextWrapper
+ * (XaulinXsThemedContextWrapper, abaixo) instalado em cada Activity via
+ * attachBaseContext (NÃO em LauncherApplication — isso quebrava
+ * BroadcastReceiver, ver LauncherApplication.java) intercepta tanto
+ * Context.getColor()/getColorStateList() quanto, via getResources(),
+ * qualquer leitura feita através do Resources (inflação de XML,
+ * Resources.getColor() direto). Isso cobre os drawable XML, layout XML
+ * e código Kotlin/Java levantados, para os 30 IDs materialColorX/
+ * customColorSurfaceEffect0 — sem tocar em nenhum dos ~46 arquivos
+ * consumidores.
  */
 package com.xaulinxs.customizations.theme
 
@@ -144,19 +144,38 @@ class XaulinXsThemedResources(base: Resources) : Resources(
 
 /**
  * ContextWrapper que substitui getResources() pelo XaulinXsThemedResources
- * acima. Instalado uma única vez, em LauncherApplication.attachBaseContext,
- * envolvendo o Context base do processo inteiro — herdado por qualquer
- * Context derivado dele (Activities, Views, LayoutInflater), então cobre
- * tanto código (getColor/getColorStateList diretos, Compose colorResource())
- * quanto inflação de XML (drawable, layout), sem precisar tocar em nenhum
- * dos arquivos que consomem @color/materialColorX.
+ * acima. Instalado nas 3 Activities (Launcher, SettingsActivity,
+ * CustomColorsActivity), cada uma via seu attachBaseContext.
  *
- * Sem custo perceptível quando a feature está desligada: getColor()/
- * getColorStateList() fazem um único lookup em SparseArray nula (early
- * return via colorFor() retornando null) antes de delegar ao original.
+ * XaulinXs fix: sobrescrever só getResources() não bastava — a maioria
+ * do código real do Launcher3 chama context.getColor(R.color.materialColorX)
+ * diretamente (ex.: AutomatedIconDelegate.kt, PreloadIconDelegate.kt),
+ * não resources.getColor(id). Context.getColor()/getColorStateList()
+ * em ContextWrapper são métodos que simplesmente delegam para o Context
+ * "base" original (mBase.getColor(id)) — não passam por
+ * this.getResources() — então a cor nunca era interceptada nesse
+ * caminho, por isso "não aplicou em lugar nenhum" mesmo com o wrapper
+ * instalado e sem nenhum crash. Fix: sobrescrever getColor()/
+ * getColorStateList() aqui também, delegando para o Resources
+ * interceptador em vez de para o base.
+ *
+ * Sem custo perceptível quando a feature está desligada: cada chamada
+ * faz um único lookup em SparseArray nula (early return via colorFor()
+ * retornando null) antes de delegar ao original.
  */
 class XaulinXsThemedContextWrapper(base: Context) : ContextWrapper(base) {
     private val themedResources: Resources by lazy { XaulinXsThemedResources(base.resources) }
 
     override fun getResources(): Resources = themedResources
+
+    @ColorInt
+    override fun getColor(id: Int): Int {
+        XaulinXsThemeColorResources.colorFor(id)?.let { return it }
+        return super.getColor(id)
+    }
+
+    override fun getColorStateList(id: Int): ColorStateList {
+        XaulinXsThemeColorResources.colorFor(id)?.let { return ColorStateList.valueOf(it) }
+        return super.getColorStateList(id)
+    }
 }

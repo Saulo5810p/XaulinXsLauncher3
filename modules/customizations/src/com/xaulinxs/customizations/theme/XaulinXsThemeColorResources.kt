@@ -3,19 +3,21 @@
  *
  * "UI-UX Custom Colors" — parte 2: interceptação em runtime.
  *
- * Como visto na investigação: reescrever res/values/material_dynamic_
- * colors_fallback.xml não é possível depois do APK instalado (recurso
- * empacotado em resources.arsc é somente leitura sem root). A solução
- * viável é interceptar a LEITURA da cor, não o arquivo: um ContextWrapper
- * (XaulinXsThemedContextWrapper, abaixo) instalado em cada Activity via
- * attachBaseContext (NÃO em LauncherApplication — isso quebrava
- * BroadcastReceiver, ver LauncherApplication.java) intercepta tanto
- * Context.getColor()/getColorStateList() quanto, via getResources(),
- * qualquer leitura feita através do Resources (inflação de XML,
- * Resources.getColor() direto). Isso cobre os drawable XML, layout XML
- * e código Kotlin/Java levantados, para os 30 IDs materialColorX/
- * customColorSurfaceEffect0 — sem tocar em nenhum dos ~46 arquivos
- * consumidores.
+ * Reescrever res/values/material_dynamic_colors_fallback.xml não é
+ * possível depois do APK instalado (recurso empacotado em
+ * resources.arsc é somente leitura sem root). Um ContextWrapper
+ * (XaulinXsThemedContextWrapper, abaixo) instalado em cada Activity
+ * via attachBaseContext (NÃO em LauncherApplication — quebrava
+ * BroadcastReceiver, ver LauncherApplication.java) intercepta
+ * getResources().getColor()/getColorStateList() — mas isso é cobertura
+ * PARCIAL: Context.getColor()/getColorStateList() (o caminho mais
+ * comum no código real) são `final` no Android e não dão pra
+ * sobrescrever em nenhuma subclasse. Cobertura completa exigiria um
+ * Runtime Resource Overlay via aapt2 — pausado por enquanto (sem root
+ * no dispositivo, o Launcher3 não consegue chamar o aapt2 que mora no
+ * sandbox do Termux; ver detalhes em XaulinXsThemedContextWrapper
+ * abaixo). Por ora, esta interceptação parcial fica como está: sem
+ * custo, sem risco, cobre parte real dos casos.
  */
 package com.xaulinxs.customizations.theme
 
@@ -147,35 +149,31 @@ class XaulinXsThemedResources(base: Resources) : Resources(
  * acima. Instalado nas 3 Activities (Launcher, SettingsActivity,
  * CustomColorsActivity), cada uma via seu attachBaseContext.
  *
- * XaulinXs fix: sobrescrever só getResources() não bastava — a maioria
- * do código real do Launcher3 chama context.getColor(R.color.materialColorX)
- * diretamente (ex.: AutomatedIconDelegate.kt, PreloadIconDelegate.kt),
- * não resources.getColor(id). Context.getColor()/getColorStateList()
- * em ContextWrapper são métodos que simplesmente delegam para o Context
- * "base" original (mBase.getColor(id)) — não passam por
- * this.getResources() — então a cor nunca era interceptada nesse
- * caminho, por isso "não aplicou em lugar nenhum" mesmo com o wrapper
- * instalado e sem nenhum crash. Fix: sobrescrever getColor()/
- * getColorStateList() aqui também, delegando para o Resources
- * interceptador em vez de para o base.
+ * XaulinXs: cobertura PARCIAL, sabidamente. Context.getColor(int) e
+ * Context.getColorStateList(int) são `final` na classe Context do
+ * próprio Android SDK — não é possível sobrescrever esses métodos em
+ * NENHUMA subclasse (nem ContextWrapper, nem Activity), então o
+ * código real do Launcher3 que chama context.getColor(R.color.materialColorX)
+ * diretamente (ex.: AutomatedIconDelegate.kt, PreloadIconDelegate.kt)
+ * continua vendo a cor original, mesmo com este wrapper instalado.
+ * Esse wrapper só intercepta o caminho de quem usa
+ * context.getResources().getColor(id)/getColorStateList(id) diretamente
+ * (Resources, não Context) — cobertura real, mas parcial.
  *
- * Sem custo perceptível quando a feature está desligada: cada chamada
- * faz um único lookup em SparseArray nula (early return via colorFor()
- * retornando null) antes de delegar ao original.
+ * A cobertura completa (incluindo o caminho via Context.getColor(),
+ * que é o mais comum no código real) exigiria um Runtime Resource
+ * Overlay de verdade, empacotado via aapt2 e carregado com
+ * ResourcesLoader/ResourcesProvider. Investigado e pausado por
+ * enquanto: sem root, o Launcher3 (app sandboxed) não consegue
+ * executar o aapt2 que mora dentro do sandbox privado do Termux —
+ * isolamento entre apps do Android, não contornável sem root.
+ *
+ * Mantido mesmo sabendo da limitação porque não tem custo nem risco
+ * (early return via SparseArray nula quando desligado) e ainda cobre
+ * parte real dos casos.
  */
 class XaulinXsThemedContextWrapper(base: Context) : ContextWrapper(base) {
     private val themedResources: Resources by lazy { XaulinXsThemedResources(base.resources) }
 
     override fun getResources(): Resources = themedResources
-
-    @ColorInt
-    override fun getColor(id: Int): Int {
-        XaulinXsThemeColorResources.colorFor(id)?.let { return it }
-        return super.getColor(id)
-    }
-
-    override fun getColorStateList(id: Int): ColorStateList {
-        XaulinXsThemeColorResources.colorFor(id)?.let { return ColorStateList.valueOf(it) }
-        return super.getColorStateList(id)
-    }
 }

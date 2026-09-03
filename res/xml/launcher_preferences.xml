@@ -93,6 +93,24 @@
             android:summary="@string/xaulinxs_widget_blur_summary"
             android:persistent="false" />
 
+        <com.xaulinxs.customizations.settings.GyroTiltPreference
+            android:key="xaulinxs_gyro_tilt_enabled"
+            android:title="@string/xaulinxs_gyro_tilt_title"
+            android:summary="@string/xaulinxs_gyro_tilt_summary"
+            android:persistent="false" />
+
+        <com.xaulinxs.customizations.settings.AllAppsTransparencyEnabledPreference
+            android:key="xaulinxs_allapps_transparency_enabled"
+            android:title="@string/xaulinxs_allapps_transparency_enabled_title"
+            android:summary="@string/xaulinxs_allapps_transparency_enabled_summary"
+            android:persistent="false" />
+
+        <com.xaulinxs.customizations.settings.AllAppsTransparencyPercentPreference
+            android:key="xaulinxs_allapps_transparency_percent"
+            android:title="@string/xaulinxs_allapps_transparency_percent_title"
+            android:summary="@string/xaulinxs_allapps_transparency_percent_summary"
+            android:persistent="false" />
+
         <com.xaulinxs.customizations.settings.ManualColorEnabledPreference
             android:key="xaulinxs_manual_color_enabled"
             android:title="@string/xaulinxs_manual_color_enabled_title"

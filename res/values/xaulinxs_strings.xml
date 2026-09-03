@@ -13,12 +13,18 @@
     <string name="xaulinxs_icon_labels_summary">Esconde o texto abaixo dos ícones na tela inicial, gaveta de apps e pastas</string>
     <string name="xaulinxs_icon_opacity_title">Transparência dos ícones</string>
     <string name="xaulinxs_icon_opacity_summary">Ajusta a opacidade dos ícones de 0% a 100%</string>
-    <string name="xaulinxs_scrim_opacity_title">Transparência do fundo do menu de apps</string>
-    <string name="xaulinxs_scrim_opacity_summary">Ajusta a opacidade do véu atrás da gaveta de apps (aplica na próxima vez que abrir)</string>
+    <string name="xaulinxs_scrim_opacity_title">Transparência do véu temático (com blur)</string>
+    <string name="xaulinxs_scrim_opacity_summary">Ajusta a opacidade do véu colorido do wallpaper atrás da gaveta de apps — só tem efeito com "Fundo desfocado no menu de apps" ativado</string>
+    <string name="xaulinxs_allapps_transparency_enabled_title">Transparência do menu de apps (sem blur)</string>
+    <string name="xaulinxs_allapps_transparency_enabled_summary">Mostra a tela inicial por trás da gaveta de apps, sem nenhum desfoque — só funciona com "Fundo desfocado no menu de apps" DESATIVADO</string>
+    <string name="xaulinxs_allapps_transparency_percent_title">Nível de transparência</string>
+    <string name="xaulinxs_allapps_transparency_percent_summary">0% = totalmente transparente (mostra a tela inicial); 100% = opaco</string>
     <string name="xaulinxs_popup_blur_title">Blur nos balões de contexto</string>
     <string name="xaulinxs_popup_blur_summary">Desfoca o fundo atrás do menu que abre ao segurar o dedo num ícone (independente do blur do menu de apps)</string>
     <string name="xaulinxs_widget_blur_title">Desfoque dos widgets</string>
     <string name="xaulinxs_widget_blur_summary">Deixa a aparência de cada widget embaçada (0 = nítido)</string>
+    <string name="xaulinxs_gyro_tilt_title">Inclinação por giroscópio</string>
+    <string name="xaulinxs_gyro_tilt_summary">Inclina a tela inicial (efeito coverflow) conforme você move o aparelho na mão</string>
     <string name="xaulinxs_manual_color_enabled_title">Usar cor manual</string>
     <string name="xaulinxs_manual_color_enabled_summary">Usa uma cor fixa escolhida por você em vez da cor do papel de parede</string>
     <string name="xaulinxs_manual_color_picker_title">Escolher cor (hex)</string>

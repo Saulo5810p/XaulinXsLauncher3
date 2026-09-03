@@ -163,6 +163,39 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         val view =
             View.inflate(context, R.layout.ose_default_bubbletext_layout, null) as BubbleTextView
         applyXaulinXsQsbAppearance(view)
+        // XaulinXs Customizations: os 4 sliders/cor da QsbConfigActivity só
+        // eram aplicados nesta linha, na inflação — mudar a config em
+        // runtime não refletia na QSB já visível (só aparecia após "Forçar
+        // parada" recriar a Activity do zero). Fix: observa as 4 prefs via
+        // LauncherPrefs.addListener e reaplica na hora, sem precisar
+        // recriar a view. Desregistrado automaticamente quando a view sai
+        // de tela via registerLifecycleTask (mesmo padrão já usado abaixo
+        // para o appsStore.addUpdateListener).
+        val prefs = com.android.launcher3.LauncherPrefs.get(context)
+        val qsbAppearanceListener =
+            object : com.android.launcher3.LauncherPrefChangeListener {
+                override fun onPrefChanged(key: String) {
+                    applyXaulinXsQsbAppearance(view)
+                }
+            }
+        view.registerLifecycleTask {
+            prefs.addListener(
+                qsbAppearanceListener,
+                QsbConfig.SIZE_PERCENT,
+                QsbConfig.WIDTH_PERCENT,
+                QsbConfig.TRANSPARENCY_PERCENT,
+                QsbConfig.BAR_COLOR,
+            )
+            SafeCloseable {
+                prefs.removeListener(
+                    qsbAppearanceListener,
+                    QsbConfig.SIZE_PERCENT,
+                    QsbConfig.WIDTH_PERCENT,
+                    QsbConfig.TRANSPARENCY_PERCENT,
+                    QsbConfig.BAR_COLOR,
+                )
+            }
+        }
         val oseInfo = context.appComponent.getOseManager().oseInfo.value
         val osePkg: String? =
             when {

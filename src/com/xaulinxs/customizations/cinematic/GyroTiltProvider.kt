@@ -90,6 +90,11 @@ object GyroTiltProvider {
      * ela estiver anexada à janela. Chamar uma vez, tipicamente em
      * onAttachedToWindow/init da View interessada (Workspace, AllApps).
      * Seguro chamar múltiplas vezes para a mesma View.
+     *
+     * Se o interruptor XaulinXsGyroTiltSetting estiver desativado, a
+     * inscrição é ignorada (sensor nunca é registrado, tiltX/tiltY
+     * permanecem 0) — ver notifySettingChanged() para o caso do usuário
+     * desativar com o sensor já em uso.
      */
     @JvmStatic
     fun subscribe(view: View) {
@@ -101,8 +106,25 @@ object GyroTiltProvider {
         }
     }
 
+    /**
+     * Chamar quando o interruptor de configurações mudar em runtime
+     * (XaulinXsGyroTiltPreference). Se foi desativado, desregistra o
+     * sensor imediatamente mesmo com views ainda anexadas; se foi
+     * reativado, tenta re-registrar usando qualquer view já inscrita.
+     */
+    @JvmStatic
+    fun notifySettingChanged(context: Context, enabled: Boolean) {
+        if (!enabled) {
+            unregister()
+            return
+        }
+        val anyView = subscribedViews.firstOrNull() ?: return
+        ensureRegistered(anyView.context)
+    }
+
     private fun ensureRegistered(context: Context) {
         if (listenerRegistered) return
+        if (!com.xaulinxs.customizations.cinematic.XaulinXsGyroTiltSetting.isEnabled(context)) return
         val mgr = context.applicationContext
             .getSystemService(Context.SENSOR_SERVICE) as? SensorManager ?: return
         val sensor = mgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) ?: return
@@ -123,3 +145,4 @@ object GyroTiltProvider {
 }
 
 // XAULINXS_GYRO_PROVIDER_FILE
+// XAULINXS_GYRO_PROVIDER_TOGGLE_SUPPORT

@@ -36,12 +36,35 @@ const val SCRIM_OPACITY_MAX_PERCENT = 100
 private const val KEY_SCRIM_OPACITY_PERCENT = "xaulinxs_scrim_opacity_percent"
 val SCRIM_OPACITY_PERCENT = backedUpItem(KEY_SCRIM_OPACITY_PERCENT, SCRIM_OPACITY_MAX_PERCENT)
 
+// XaulinXs Customizations: NOVA transparência do menu de apps (agosto/2026),
+// feature separada de SCRIM_OPACITY_PERCENT acima. A diferença é a condição
+// de ativação: SCRIM_OPACITY_PERCENT só tem efeito quando o blur do drawer
+// (THEMED_SCRIM_ENABLED) está LIGADO — ver getScrimColorIfEnabled() abaixo,
+// que corta com "return null" se o blur estiver desligado. Essa nova
+// feature faz o oposto por pedido explícito do usuário: só tem efeito
+// quando o blur está DESLIGADO, revelando a Workspace por trás do drawer
+// sem nenhum desfoque. 0% no slider = totalmente transparente (workspace
+// 100% visível); 100% = opaco.
+const val ALLAPPS_TRANSPARENCY_MIN_PERCENT = 0
+const val ALLAPPS_TRANSPARENCY_MAX_PERCENT = 100
+private const val KEY_ALLAPPS_TRANSPARENCY_ENABLED = "xaulinxs_allapps_transparency_enabled"
+private const val KEY_ALLAPPS_TRANSPARENCY_PERCENT = "xaulinxs_allapps_transparency_percent"
+val ALLAPPS_TRANSPARENCY_ENABLED = backedUpItem(KEY_ALLAPPS_TRANSPARENCY_ENABLED, false)
+val ALLAPPS_TRANSPARENCY_PERCENT =
+    backedUpItem(KEY_ALLAPPS_TRANSPARENCY_PERCENT, ALLAPPS_TRANSPARENCY_MAX_PERCENT)
+
 object WallpaperScrimHelper {
 
     @JvmStatic
     fun getScrimColorIfEnabled(context: Context): Int? {
-        if (!LauncherPrefs.get(context).get(THEMED_SCRIM_ENABLED)) return null
-        return getScrimColor(context)
+        val prefs = LauncherPrefs.get(context)
+        if (prefs.get(THEMED_SCRIM_ENABLED)) return getScrimColor(context)
+        // Blur desligado: se a nova transparência estiver ativada, ela
+        // assume o fundo do drawer no lugar do véu temático do wallpaper —
+        // cor sólida de fundo do tema, com alpha controlado pelo slider,
+        // sem nenhum desfoque envolvido.
+        if (prefs.get(ALLAPPS_TRANSPARENCY_ENABLED)) return getPlainTransparentScrimColor(context)
+        return null
     }
 
     fun getScrimColor(context: Context): Int? {
@@ -63,4 +86,25 @@ object WallpaperScrimHelper {
         val alpha = (baseAlpha * opacityPercent / 100).coerceIn(0, 255)
         return ColorUtils.setAlphaComponent(shaded, alpha)
     }
+
+    /**
+     * Cor de fundo "lisa" (sem blur) para a nova transparência do menu de
+     * apps: reaproveita a cor de fundo padrão do tema do sistema (mesma
+     * usada pelo AOSP original em getWorkspaceScrimColor quando nenhuma
+     * customização está ativa) e só ajusta o alpha pelo percentual do
+     * slider — nada de tonalidade extraída do wallpaper nem shading, para
+     * não ser confundida com o véu temático de SCRIM_OPACITY_PERCENT.
+     */
+    private fun getPlainTransparentScrimColor(context: Context): Int {
+        val baseColor = com.android.launcher3.util.Themes.getAttrColor(
+            context, com.android.launcher3.R.attr.allAppsScrimColor
+        )
+        val percent = LauncherPrefs.get(context).get(ALLAPPS_TRANSPARENCY_PERCENT)
+            .coerceIn(ALLAPPS_TRANSPARENCY_MIN_PERCENT, ALLAPPS_TRANSPARENCY_MAX_PERCENT)
+        val baseAlpha = android.graphics.Color.alpha(baseColor)
+        val alpha = (baseAlpha * percent / 100).coerceIn(0, 255)
+        return ColorUtils.setAlphaComponent(baseColor, alpha)
+    }
 }
+
+// XAULINXS_ALLAPPS_TRANSPARENCY_V2_FILE

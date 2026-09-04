@@ -829,10 +829,21 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
     }
 
     int getBackgroundColor() {
-        return isBackgroundBlurEnabled()
-                ? mBottomSheetBackgroundColorOverBlur
-                : mBottomSheetBackgroundColorBlurFallback;
+        if (isBackgroundBlurEnabled()) {
+            return mBottomSheetBackgroundColorOverBlur;
+        }
+        // XaulinXs Customizations: quando o blur do menu de apps está
+        // desligado, este era o retângulo opaco (mBottomSheetBackgroundColorBlurFallback)
+        // pintado por cima de TUDO em drawOnScrimWithScaleAndBottomOffset —
+        // inclusive por cima da WallpaperGradientView e de qualquer alpha
+        // vindo de AllAppsState.getWorkspaceScrimColor()/WallpaperScrimHelper,
+        // por isso a transparência não tinha efeito nenhum visualmente
+        // mesmo com o valor correto sendo calculado em outro lugar. Aqui é
+        // o ponto real que precisa respeitar o slider.
+        return com.xaulinxs.customizations.theme.WallpaperScrimHelperKt.applyAllAppsTransparency(
+                getContext(), mBottomSheetBackgroundColorBlurFallback);
     }
+    // XAULINXS_ALLAPPS_TRANSPARENCY_REAL_HOOK
 
     boolean isBackgroundBlurEnabled() {
         return mActivityContext.isAllAppsBackgroundBlurEnabled();

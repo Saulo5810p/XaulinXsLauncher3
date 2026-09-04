@@ -116,10 +116,18 @@ object GyroTiltProvider {
     fun notifySettingChanged(context: Context, enabled: Boolean) {
         if (!enabled) {
             unregister()
-            return
+        } else {
+            val anyView = subscribedViews.firstOrNull()
+            if (anyView != null) ensureRegistered(anyView.context)
         }
-        val anyView = subscribedViews.firstOrNull() ?: return
-        ensureRegistered(anyView.context)
+        // XaulinXs Customizations: força a reaplicação imediata do
+        // coverflow nas Workspaces inscritas, tanto ao desligar (mostra a
+        // rotação zerada na hora, sem esperar o próximo scroll) quanto ao
+        // ligar de novo (evita a página ficar "presa" no ângulo neutro até
+        // o próximo gesto). // XAULINXS_GYRO_PROVIDER_REAPPLY_HOOK
+        subscribedViews.forEach { view ->
+            (view as? com.android.launcher3.Workspace<*>)?.xaulinXsReapplyCoverFlow()
+        }
     }
 
     private fun ensureRegistered(context: Context) {
@@ -137,6 +145,20 @@ object GyroTiltProvider {
     private fun unregister() {
         sensorManager?.unregisterListener(sensorListener)
         listenerRegistered = false
+        // XaulinXs Customizations: zerar tiltX/tiltY diretamente NÃO bastava
+        // — a SpringAnimation continua rodando seu próprio loop de física
+        // (via Choreographer interno da lib androidx.dynamicanimation) até
+        // convergir ao finalPosition antigo, e o addUpdateListener dela
+        // sobrescrevia tiltX/tiltY de volta a cada frame, revertendo o
+        // reset abaixo — por isso desligar o interruptor não desativava a
+        // inclinação na hora. Fix: cancel() para o spring imediatamente
+        // (sem mais updates) e zera o alvo (finalPosition) também, para
+        // que uma eventual reativação comece do repouso em vez de
+        // "perseguir" um ângulo antigo residual.
+        springX.cancel()
+        springY.cancel()
+        springX.spring.finalPosition = 0f
+        springY.spring.finalPosition = 0f
         tiltX = 0f
         tiltY = 0f
         rawTiltX = 0f
@@ -146,3 +168,4 @@ object GyroTiltProvider {
 
 // XAULINXS_GYRO_PROVIDER_FILE
 // XAULINXS_GYRO_PROVIDER_TOGGLE_SUPPORT
+// XAULINXS_GYRO_PROVIDER_SPRING_CANCEL_FIX

@@ -53,6 +53,30 @@ val ALLAPPS_TRANSPARENCY_ENABLED = backedUpItem(KEY_ALLAPPS_TRANSPARENCY_ENABLED
 val ALLAPPS_TRANSPARENCY_PERCENT =
     backedUpItem(KEY_ALLAPPS_TRANSPARENCY_PERCENT, ALLAPPS_TRANSPARENCY_MAX_PERCENT)
 
+/**
+ * XaulinXs Customizations: aplica o alpha da transparência do menu de apps
+ * (sem blur) sobre uma cor de fundo já resolvida. Função top-level (não
+ * dentro do object WallpaperScrimHelper) para ser chamada a partir do Java
+ * como WallpaperScrimHelperKt.applyAllAppsTransparency(...) — é o ponto
+ * real onde o retângulo de fundo do drawer é pintado por cima de tudo
+ * (inclusive por cima do blur/WallpaperGradientView), então é aqui que o
+ * slider precisa agir de fato, não em getWorkspaceScrimColor() (que
+ * também foi ajustado, mas fica embaixo dessa camada e nunca aparece
+ * sozinho).
+ *
+ * Só reduz o alpha quando a nova transparência está ativada; caso
+ * contrário devolve a cor original intacta (comportamento AOSP normal).
+ */
+fun applyAllAppsTransparency(context: Context, baseColor: Int): Int {
+    val prefs = LauncherPrefs.get(context)
+    if (!prefs.get(ALLAPPS_TRANSPARENCY_ENABLED)) return baseColor
+    val percent = prefs.get(ALLAPPS_TRANSPARENCY_PERCENT)
+        .coerceIn(ALLAPPS_TRANSPARENCY_MIN_PERCENT, ALLAPPS_TRANSPARENCY_MAX_PERCENT)
+    val baseAlpha = android.graphics.Color.alpha(baseColor)
+    val alpha = (baseAlpha * percent / 100).coerceIn(0, 255)
+    return ColorUtils.setAlphaComponent(baseColor, alpha)
+}
+
 object WallpaperScrimHelper {
 
     @JvmStatic

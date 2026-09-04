@@ -1571,6 +1571,21 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
         }
     }
 
+    /**
+     * XaulinXs Customizations — não faz parte do AOSP original.
+     * Wrapper público de updatePageScrollValues(), para permitir que
+     * GyroTiltProvider force a reaplicação imediata do coverflow (rotação
+     * das páginas) fora de um evento de scroll real — necessário porque
+     * updatePageScrollValues() só é chamado nativamente a partir de
+     * onScrollChanged()/bindAndInitFirstWorkspaceScreen(), então sem isso
+     * desligar o interruptor de giroscópio só "sumiria" visualmente na
+     * próxima vez que o usuário arrastasse entre telas.
+     */
+    public void xaulinXsReapplyCoverFlow() {
+        updatePageScrollValues();
+    }
+    // XAULINXS_WORKSPACE_REAPPLY_COVERFLOW_HOOK
+
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         mWallpaperOffset.setWindowToken(getWindowToken());

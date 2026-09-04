@@ -20,12 +20,19 @@ object XaulinXsAllAppsTransparencyRedraw {
     @JvmStatic
     fun requestRedraw(context: Context) {
         try {
+            val launcher = Launcher.getLauncher(context) ?: return
             // reapplyState() força o StateManager a rodar de novo o setScrim()
             // do estado atual, que é o que efetivamente chama
             // getWorkspaceScrimColor(mLauncher) e empurra a cor recalculada
-            // pro ScrimView — invalidate() sozinho não bastaria, pois só
-            // redesenha com a cor JÁ setada, sem recalculá-la.
-            Launcher.getLauncher(context)?.stateManager?.reapplyState()
+            // pro ScrimView.
+            launcher.stateManager.reapplyState()
+            // getBackgroundColor() de ActivityAllAppsContainerView (a camada
+            // real que aplica esta transparência, ver
+            // applyAllAppsTransparency() em WallpaperScrimHelper.kt) só é
+            // repintada dentro de ScrimView.onDraw() via
+            // drawOnScrimWithScaleAndBottomOffset — força o invalidate()
+            // explicitamente para garantir o redesenho na hora.
+            launcher.scrimView?.invalidate()
         } catch (_: Exception) {
             // Contexto pode não ter um Launcher associado (ex.: preference
             // aberta sem o launcher em memória) — sem problema, o valor

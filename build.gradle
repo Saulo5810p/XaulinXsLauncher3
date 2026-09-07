@@ -109,6 +109,41 @@ android {
     buildFeatures {
         buildConfig true
     }
+
+    buildTypes {
+        debug {
+            // XaulinXs Customizations: usuário pediu shrink também no
+            // Debug (fluxo real de build é sempre assembleNoQuickstepDebug,
+            // nunca Release). SourceFile/LineNumberTable ficam preservados
+            // (ver proguard-xaulinxs.pro) para que um crash em logcat
+            // continue apontando pro arquivo/linha certos mesmo com nomes
+            // de classe ofuscados — mesmo método de diagnóstico já usado
+            // nos crashes anteriores continua funcionando.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles(
+                getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard.flags',
+                'proguard-xaulinxs.pro',
+            )
+        }
+        release {
+            // XaulinXs Customizations: redução real de tamanho do APK.
+            // minifyEnabled ativa o R8 (remove classes/métodos/campos não
+            // referenciados — inclusive os milhares de ícones não usados
+            // de material-icons-extended, que é código Kotlin comum, não
+            // recurso, então o shrink de CÓDIGO já cobre isso sozinho).
+            // shrinkResources depende de minifyEnabled e remove
+            // drawables/layouts/strings não referenciados.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles(
+                getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard.flags',
+                'proguard-xaulinxs.pro',
+            )
+        }
+    }
 }
 
 protobuf {
@@ -135,7 +170,6 @@ dependencies {
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.fragment:fragment-ktx:1.8.3'
     implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.window:window:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.6'

@@ -164,6 +164,7 @@ public class LauncherAppWidgetHostView extends BaseLauncherAppWidgetHostView
         // The provider info or the views might have changed.
         checkIfAutoAdvance();
         com.xaulinxs.customizations.blur.XaulinXsWidgetBlur.applyTo(this);
+        com.xaulinxs.customizations.blur.XaulinXsWidgetTransparency.applyTo(this);
         // XaulinXs Customizations: força a fonte customizada também
         // dentro de widgets de terceiros (Calendar, Gmail, etc), não só
         // nos ícones/telas do próprio launcher. Roda a cada
@@ -289,6 +290,7 @@ public class LauncherAppWidgetHostView extends BaseLauncherAppWidgetHostView
         mIsAttachedToWindow = true;
         checkIfAutoAdvance();
         com.xaulinxs.customizations.blur.XaulinXsWidgetBlur.applyTo(this);
+        com.xaulinxs.customizations.blur.XaulinXsWidgetTransparency.applyTo(this);
     }
 
     @Override

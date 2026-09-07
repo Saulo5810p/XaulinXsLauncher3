@@ -69,6 +69,10 @@
     <string name="xaulinxs_folder_size_summary" formatted="false">100% = tamanho padrão. Mínimo de 30% para continuar fácil de tocar</string>
     <string name="xaulinxs_workspace_blur_title">Desfoque da tela inicial</string>
     <string name="xaulinxs_workspace_blur_summary">0% = sem desfoque (padrão). Desfoca o wallpaper próprio do launcher atrás dos ícones (precisa de Android 12+)</string>
+    <string name="xaulinxs_in_app_wallpaper_enabled_title">Usar wallpaper do R\'s Home3</string>
+    <string name="xaulinxs_in_app_wallpaper_enabled_summary">Ativado (padrão): usa o wallpaper próprio do launcher. Desativado: mostra o wallpaper do sistema do seu aparelho</string>
+    <string name="xaulinxs_widget_transparency_title">Transparência dos widgets</string>
+    <string name="xaulinxs_widget_transparency_summary">0% = opaco (padrão). Deixa os widgets mais transparentes, revelando o que está atrás deles</string>
     <string name="xaulinxs_custom_font_title">Fonte customizada dos ícones</string>
     <string name="xaulinxs_font_choose">Importar fonte (.ttf/.otf)</string>
     <string name="xaulinxs_font_current">Fonte atual: %1$s</string>

@@ -204,6 +204,12 @@
                     android:targetClass="com.xaulinxs.customizations.settings.WallpaperPickerActivity" />
             </Preference>
 
+            <com.xaulinxs.customizations.settings.InAppWallpaperEnabledPreference
+                android:key="xaulinxs_in_app_wallpaper_enabled"
+                android:title="@string/xaulinxs_in_app_wallpaper_enabled_title"
+                android:summary="@string/xaulinxs_in_app_wallpaper_enabled_summary"
+                android:persistent="false" />
+
             <com.xaulinxs.customizations.settings.WorkspaceBlurPreference
                 android:key="xaulinxs_workspace_blur_percent"
                 android:title="@string/xaulinxs_workspace_blur_title"
@@ -242,8 +248,11 @@
                 android:summary="@string/xaulinxs_widget_blur_summary"
                 android:persistent="false" />
 
-            <!-- TODO: transparência do widget (slider 0-100) pedida no
-                 info.txt ainda não existe — só o blur atual. -->
+            <com.xaulinxs.customizations.settings.WidgetTransparencyPreference
+                android:key="xaulinxs_widget_transparency_percent"
+                android:title="@string/xaulinxs_widget_transparency_title"
+                android:summary="@string/xaulinxs_widget_transparency_summary"
+                android:persistent="false" />
 
         </PreferenceScreen>
 

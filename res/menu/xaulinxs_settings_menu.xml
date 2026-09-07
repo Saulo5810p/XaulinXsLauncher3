@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  XaulinXs Customizations — não faz parte do AOSP original.
+
+  Feature nova (info.txt): botão no canto superior, dentro da aba
+  principal de configurações, para reiniciar o app e aplicar
+  customizações que exigem reinício (ex.: fonte customizada global,
+  troca de wallpaper próprio, remoção de fundo dos ícones — mudanças
+  que dependem de recriação de processo/cache de ícones, não só da
+  Activity de Configurações).
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/xaulinxs_action_restart_app"
+        android:title="@string/xaulinxs_restart_app_title"
+        android:icon="@android:drawable/ic_menu_rotate"
+        app:showAsAction="ifRoom" />
+
+</menu>

@@ -188,6 +188,50 @@ constructor(
             tempIcon = wrapToAdaptiveIcon(tempIcon, options)
         }
 
+        // XaulinXs fix (info.txt: "Fundo dos ícones não foi removido. Em
+        // vez de restringir a alguns, aplicar a remoção do fundo para
+        // todo e qualquer ícone que tiver um"):
+        //
+        // O fix anterior só cobria ícones LEGADOS (não-adaptativos) que
+        // precisavam ser embrulhados sinteticamente em wrapToAdaptiveIcon
+        // — ali a cor era escolhida na hora de criar o ColorDrawable de
+        // fundo. Mas isso não cobre um caso comum: apps que já entregam
+        // um AdaptiveIconDrawable de verdade (options.wrapNonAdaptiveIcon
+        // nunca embrulha nada, `icon as? AdaptiveIconDrawable` já
+        // retorna o próprio ícone), cuja layer de `background` é uma cor
+        // sólida opaca própria do app (branco, cinza, etc.) em vez de
+        // transparente. Esse ícone tecnicamente "tem" um fundo mesmo sem
+        // passar pelo wrapper sintético.
+        //
+        // Fix genérico: depois que tempIcon já está resolvido (embrulhado
+        // ou não), se a opção estiver ligada e ele for um
+        // AdaptiveIconDrawable cujo background é um ColorDrawable OPACO
+        // (alpha 255 — não mexe em fundos já parcialmente/totalmente
+        // transparentes, que não são o problema relatado), substitui o
+        // background por transparente. Cobre tanto o caso já embrulhado
+        // (branco sintético de wrapToAdaptiveIcon) quanto o ícone
+        // adaptativo real de terceiros com fundo opaco próprio — "todo e
+        // qualquer ícone que tiver um fundo", como pedido.
+        if (tempIcon is AdaptiveIconDrawable &&
+            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                .shouldRemoveBackgroundAndShadow(context)
+        ) {
+            val bg = tempIcon.background
+            if (bg is ColorDrawable && Color.alpha(bg.color) == 255) {
+                tempIcon = AdaptiveIconDrawable(ColorDrawable(Color.TRANSPARENT), tempIcon.foreground)
+                    .apply { bounds = icon.bounds }
+                // Ícone adaptativo real com fundo próprio removido aqui —
+                // ainda pode ter sombra sintética desenhada em
+                // drawableToBitmap (que só pula a sombra quando
+                // xaulinxsLegacyIconWrapped é true, ou seja, só para o
+                // caso do wrap sintético). Marca também este caso como
+                // "legado" para fins de sombra: um ícone que teve seu
+                // fundo removido não deve manter uma sombra desenhada em
+                // torno de uma máscara que já não tem fundo visível atrás.
+                options.xaulinxsLegacyIconWrapped = true
+            }
+        }
+
         val drawFullBleed = options.drawFullBleed ?: drawFullBleedIcons
         val bitmap = drawableToBitmap(tempIcon, drawFullBleed, options)
         icon.bounds = oldBounds

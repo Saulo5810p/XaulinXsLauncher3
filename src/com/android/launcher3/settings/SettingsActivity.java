@@ -84,6 +84,13 @@ public class SettingsActivity extends FragmentActivity
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
+    // XaulinXs Customizations: true quando esta instância da Activity é a
+    // tela PRINCIPAL de configurações (mesma condição já usada logo abaixo
+    // em onCreate para decidir se mostra a seta de voltar — quando nenhum
+    // desses extras está presente, a Activity foi aberta na raiz, não
+    // navegando para uma sub-tela específica).
+    private boolean mIsRootSettingsScreen;
+
     @Override
     protected void attachBaseContext(Context base) {
         // XaulinXs Customizations: a interceptação de "UI-UX Custom
@@ -125,10 +132,17 @@ public class SettingsActivity extends FragmentActivity
         com.xaulinxs.customizations.font.XaulinXsCustomFont.applyToSettingsTitle(this);
 
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_FRAGMENT_ROOT_KEY) || intent.hasExtra(EXTRA_FRAGMENT_ARGS)
-                || intent.hasExtra(EXTRA_FRAGMENT_HIGHLIGHT_KEY)) {
+        boolean isSubScreen = intent.hasExtra(EXTRA_FRAGMENT_ROOT_KEY)
+                || intent.hasExtra(EXTRA_FRAGMENT_ARGS)
+                || intent.hasExtra(EXTRA_FRAGMENT_HIGHLIGHT_KEY);
+        if (isSubScreen) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        // XaulinXs Customizations: guarda se esta é a tela raiz — usado em
+        // onCreateOptionsMenu para só mostrar "Reiniciar para aplicar
+        // alterações" na aba principal, não em toda sub-tela de
+        // configuração aberta por cima dela.
+        mIsRootSettingsScreen = !isSubScreen;
 
         if (savedInstanceState == null) {
             Bundle args = intent.getBundleExtra(EXTRA_FRAGMENT_ARGS);
@@ -199,9 +213,31 @@ public class SettingsActivity extends FragmentActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        // XaulinXs Customizations (info.txt): botão no canto superior da
+        // aba principal de configurações, "Reiniciar para aplicar
+        // alterações" — necessário porque algumas customizações (fonte
+        // global, wallpaper próprio do launcher, remoção de fundo dos
+        // ícones) dependem de estado carregado uma única vez no processo
+        // (Application/cache de ícones), não só da Activity de
+        // Configurações — Activity.recreate() (já usado internamente por
+        // tryRecreateActivity) não é suficiente nesses casos. Só aparece
+        // na tela raiz (mIsRootSettingsScreen), não em toda sub-tela
+        // aberta por cima dela.
+        if (mIsRootSettingsScreen) {
+            getMenuInflater().inflate(R.menu.xaulinxs_settings_menu, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+            return true;
+        }
+        if (item.getItemId() == R.id.xaulinxs_action_restart_app) {
+            com.xaulinxs.customizations.XaulinXsAppRestarter.restart(this);
             return true;
         }
         return super.onOptionsItemSelected(item);

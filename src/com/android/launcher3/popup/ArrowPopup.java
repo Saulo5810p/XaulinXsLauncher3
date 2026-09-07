@@ -142,7 +142,19 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
 
         // Initialize arrow view
         final Resources resources = getResources();
-        mArrowColor = getContext().getColor(R.color.materialColorSurfaceContainer);
+        // XaulinXs fix (info.txt: "Balões na workspace e nas opções do
+        // Launcher3 estão brancos"): mArrowColor tinha ficado de fora do
+        // primeiro fix — a seta do balão continuava lendo
+        // materialColorSurfaceContainer direto, então mesmo com o corpo
+        // do balão já corrigido a ponta ainda aparecia branca/destoante.
+        // Mesma prioridade das outras cores do balão: override manual >
+        // extração do wallpaper > fallback AOSP original.
+        Integer xaulinxsArrowColor =
+                com.xaulinxs.customizations.theme.XaulinXsBalloonColor
+                        .getBalloonColorOverride(getContext());
+        mArrowColor = xaulinxsArrowColor != null
+                ? xaulinxsArrowColor
+                : getContext().getColor(R.color.materialColorSurfaceContainer);
         mChildContainerMargin = resources.getDimensionPixelSize(R.dimen.popup_margin);
         mArrowWidth = resources.getDimensionPixelSize(R.dimen.popup_arrow_width);
         mArrowHeight = resources.getDimensionPixelSize(R.dimen.popup_arrow_height);
@@ -176,11 +188,29 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
         mIterateChildrenTag = getContext().getString(R.string.popup_container_iterate_children);
 
         if (mActivityContext.canUseMultipleShadesForPopup()) {
-            mColors = new int[]{
-                    getContext().getColor(R.color.popup_shade_first),
-                    getContext().getColor(R.color.popup_shade_second),
-                    getContext().getColor(R.color.popup_shade_third)
-            };
+            // XaulinXs fix (info.txt: "Balões na workspace e nas opções do
+            // Launcher3 estão brancos"): este é o ramo REALMENTE usado nos
+            // balões da workspace (canUseMultipleShadesForPopup() retorna
+            // true fora da gaveta de apps e fora de pastas — exatamente o
+            // caso "workspace" relatado) — o fix anterior só cobriu o
+            // ramo "else" (gaveta de apps/pastas), por isso a workspace
+            // continuava branca mesmo depois do primeiro fix. Quando há
+            // override (manual ou extraído do wallpaper), usamos a mesma
+            // cor sólida nos 3 tons — não faz sentido gerar 3 sombras
+            // diferentes a partir de um recurso estático quando o usuário
+            // já escolheu (ou o wallpaper já definiu) uma cor específica;
+            // cai pro comportamento AOSP original (3 tons estáticos) só
+            // quando não há nenhuma extração/override disponível.
+            Integer xaulinxsShadeColor =
+                    com.xaulinxs.customizations.theme.XaulinXsBalloonColor
+                            .getBalloonColorOverride(getContext());
+            mColors = xaulinxsShadeColor != null
+                    ? new int[]{xaulinxsShadeColor, xaulinxsShadeColor, xaulinxsShadeColor}
+                    : new int[]{
+                            getContext().getColor(R.color.popup_shade_first),
+                            getContext().getColor(R.color.popup_shade_second),
+                            getContext().getColor(R.color.popup_shade_third)
+                    };
         } else {
             // XaulinXs fix (info.txt: "Balões do app estão todos em
             // branco"): a cor original abaixo depende do dynamic color

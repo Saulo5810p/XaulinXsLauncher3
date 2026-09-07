@@ -3,6 +3,10 @@
 <resources>
     <string name="xaulinxs_customizations_title">R\'s Home3</string>
     <string name="xaulinxs_customizations_summary">Make your idea your own</string>
+    <!-- XaulinXs: botão no canto superior da tela principal de
+         configurações, reinicia o app pra aplicar customizações que
+         exigem reinício (não só recriação da tela de Configurações). -->
+    <string name="xaulinxs_restart_app_title">Reiniciar para aplicar alterações</string>
 
     <!-- Categorias — reorganização das XaulinXs Customizations em grupos -->
     <string name="xaulinxs_cat_interface_title">Interface</string>

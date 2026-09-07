@@ -155,7 +155,15 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
 
         int smallerRadius = resources.getDimensionPixelSize(R.dimen.popup_smaller_radius);
         mRoundedTop = new GradientDrawable();
-        int popupPrimaryColor = Themes.getAttrColor(context, R.attr.popupColorPrimary);
+        // XaulinXs fix (info.txt: "Balões do app estão todos em branco"):
+        // mesmo problema do bloco mColors abaixo — popupColorPrimary
+        // também depende do dynamic color do sistema.
+        Integer xaulinxsPopupPrimary =
+                com.xaulinxs.customizations.theme.XaulinXsBalloonColor
+                        .getBalloonColorOverride(context);
+        int popupPrimaryColor = xaulinxsPopupPrimary != null
+                ? xaulinxsPopupPrimary
+                : Themes.getAttrColor(context, R.attr.popupColorPrimary);
         mRoundedTop.setColor(popupPrimaryColor);
         mRoundedTop.setCornerRadii(new float[]{mOutlineRadius, mOutlineRadius, mOutlineRadius,
                 mOutlineRadius, smallerRadius, smallerRadius, smallerRadius, smallerRadius});
@@ -174,7 +182,24 @@ public abstract class ArrowPopup<T extends ActivityContext> extends AbstractFloa
                     getContext().getColor(R.color.popup_shade_third)
             };
         } else {
-            mColors = new int[]{getContext().getColor(R.color.materialColorSurfaceContainer)};
+            // XaulinXs fix (info.txt: "Balões do app estão todos em
+            // branco"): a cor original abaixo depende do dynamic color
+            // (Monet) do sistema, que não funciona de forma confiável
+            // neste device (mesmo motivo pelo qual os ícones temáticos já
+            // usam extração própria via WallpaperColorHints em vez de
+            // recursos estáticos). Se a extração do wallpaper der uma cor
+            // válida, ela some no lugar; getBalloonColorOverride() também
+            // já respeita a feature de cor customizada dos balões (3
+            // sliders + paleta + hex) quando ligada, com a mesma
+            // prioridade que XaulinXsManualColor já tem sobre ícones/scrim.
+            Integer xaulinxsBalloonColor =
+                    com.xaulinxs.customizations.theme.XaulinXsBalloonColor
+                            .getBalloonColorOverride(getContext());
+            mColors = new int[]{
+                    xaulinxsBalloonColor != null
+                            ? xaulinxsBalloonColor
+                            : getContext().getColor(R.color.materialColorSurfaceContainer)
+            };
         }
     }
 

@@ -243,10 +243,19 @@
             android:theme="@style/HomeSettings.Theme"
             android:label="@string/xaulinxs_qsb_config_title"
             android:exported="false" />
+        <!-- XaulinXs Customizations: Activity "ponte" sem UI própria que
+             abre o seletor de imagens do sistema pra trocar o wallpaper
+             PRÓPRIO do launcher (ver XaulinXsInAppWallpaper). Tema
+             translúcido porque ela nunca chega a desenhar nada na tela. -->
         <activity
-            android:name="com.xaulinxs.customizations.settings.CustomColorsActivity"
+            android:name="com.xaulinxs.customizations.settings.WallpaperPickerActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/xaulinxs_change_wallpaper_title"
+            android:exported="false" />
+        <activity
+            android:name="com.xaulinxs.customizations.settings.GridSizePickerActivity"
             android:theme="@style/HomeSettings.Theme"
-            android:label="@string/xaulinxs_custom_colors_title"
+            android:label="@string/xaulinxs_grid_size_title"
             android:exported="false" />
         <!-- XaulinXs Customizations: Activity transparente que pede a
              permissão de Contatos em nome da QSB Inteligente (Modo

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations — não faz parte do AOSP original.
+
+     Layout padrão VAZIO (sem favoritos/ícones pré-posicionados), usado por
+     todas as novas grades customizadas (2x2 até 10x10 — ver
+     res/xml/device_profiles.xml e info.txt/etapa 3). Como essas grades não
+     têm relação com nenhum tamanho de tela específico (foram pedidas como
+     opção livre de personalização, não como perfil de dispositivo), não
+     faz sentido pré-posicionar ícones de apps do sistema como os
+     default_workspace_NxN.xml originais fazem — o usuário monta a tela do
+     zero depois de trocar de grade.
+-->
+<favorites xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
+</favorites>

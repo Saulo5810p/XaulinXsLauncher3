@@ -176,7 +176,17 @@ constructor(
                     InsetDrawable(icon, inset, inset, inset, inset),
                 )
         }
-        if (options.wrapNonAdaptiveIcon) tempIcon = wrapToAdaptiveIcon(tempIcon, options)
+        if (options.wrapNonAdaptiveIcon) {
+            // XaulinXs: registra ANTES de embrulhar se este ícone era legado
+            // (não-adaptativo) — depois do wrap ele sempre vira um
+            // AdaptiveIconDrawable, então esse é o único ponto em que dá
+            // pra saber a diferença. Usado logo abaixo em drawableToBitmap
+            // pra decidir se pula a sombra sintética deste ícone
+            // específico (feature "remover fundo/sombra dos ícones",
+            // info.txt/etapa 3).
+            options.xaulinxsLegacyIconWrapped = tempIcon !is AdaptiveIconDrawable
+            tempIcon = wrapToAdaptiveIcon(tempIcon, options)
+        }
 
         val drawFullBleed = options.drawFullBleed ?: drawFullBleedIcons
         val bitmap = drawableToBitmap(tempIcon, drawFullBleed, options)
@@ -275,7 +285,14 @@ constructor(
     fun wrapToAdaptiveIcon(icon: Drawable, options: IconOptions? = null): AdaptiveIconDrawable =
         icon as? AdaptiveIconDrawable
             ?: AdaptiveIconDrawable(
-                    ColorDrawable(options?.wrapperBackgroundColor ?: DEFAULT_WRAPPER_BACKGROUND),
+                    ColorDrawable(
+                        if (
+                            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                                .shouldRemoveBackgroundAndShadow(context)
+                        )
+                            Color.TRANSPARENT
+                        else options?.wrapperBackgroundColor ?: DEFAULT_WRAPPER_BACKGROUND
+                    ),
                     icon.wrapIntoSquareDrawable(LEGACY_ICON_SCALE),
                 )
                 .apply { setBounds(0, 0, 1, 1) }
@@ -301,7 +318,15 @@ constructor(
             return createBitmap(options) { canvas, _ ->
                 canvas.transformed {
                     translate(offset.toFloat(), offset.toFloat())
-                    if (options.addShadows && !drawFullBleed)
+                    if (
+                        options.addShadows &&
+                            !drawFullBleed &&
+                            !(
+                                options.xaulinxsLegacyIconWrapped &&
+                                    com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                                        .shouldRemoveBackgroundAndShadow(context)
+                            )
+                    )
                         shadowGenerator.addPathShadow(icon.iconMask, canvas)
                     if (icon is Extender) icon.drawForPersistence()
 
@@ -374,6 +399,11 @@ constructor(
         internal var drawFullBleed: Boolean? = null
         internal var iconScale = ICON_VISIBLE_AREA_FACTOR
         internal var wrapNonAdaptiveIcon = true
+
+        // XaulinXs: ver comentário em createBadgedIconBitmap/wrapToAdaptiveIcon
+        // — marca se ESTE ícone específico era legado (não-adaptativo) e
+        // precisou ser embrulhado num AdaptiveIconDrawable sintético.
+        internal var xaulinxsLegacyIconWrapped = false
 
         /** User for this icon, in case of badging */
         fun setUser(user: UserHandle?) = apply { userHandle = user }

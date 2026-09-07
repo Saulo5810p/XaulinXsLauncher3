@@ -174,7 +174,15 @@ public class PreviewBackground extends DelegatedCellDrawing {
         ta.recycle();
 
         DeviceProfile grid = activity.getDeviceProfile();
-        previewSize = grid.getFolderProfile().getFolderIconSizePx();
+        // XaulinXs fix/feature (info.txt/etapa 3: "Pastas - Cor
+        // customizada [...]; Tamanho da pasta - slider 0-100"): aplica a
+        // cor customizada (se ligada) e o slider de tamanho por cima do
+        // valor calculado normalmente pelo AOSP. Os dois ficam neutros
+        // por padrão (cor customizada desligada = usa mBgColor de cima
+        // sem mudança; tamanho 100% = tamanho original), então nada muda
+        // pra quem não mexer nessas opções.
+        previewSize = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
+                .resolvePreviewSizePx(context, grid.getFolderProfile().getFolderIconSizePx());
 
         basePreviewOffsetX = (availableSpaceX - previewSize) / 2;
         basePreviewOffsetY = topPadding + grid.getFolderProfile().getFolderIconOffsetYPx();
@@ -243,7 +251,12 @@ public class PreviewBackground extends DelegatedCellDrawing {
     }
 
     public int getBgColor() {
-        return mBgColor;
+        // XaulinXs fix/feature (info.txt/etapa 3): cor customizada (se
+        // ligada) + transparência via slider, por cima da cor de tema
+        // original do AOSP. Neutro por padrão — ver
+        // XaulinXsFolderAppearance.
+        return com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
+                .resolveBackgroundColor(mContext, mBgColor);
     }
 
     public void drawBackground(Canvas canvas) {

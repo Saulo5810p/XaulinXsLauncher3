@@ -406,17 +406,13 @@ public class Launcher extends StatefulActivity<LauncherState>
 
     @Override
     protected void attachBaseContext(Context base) {
-        // XaulinXs Customizations: "UI-UX Custom Colors" — mesma razão da
-        // fonte customizada logo abaixo (attachBaseContext é o ponto mais
-        // cedo em que dá pra interceptar Resources antes de qualquer
-        // inflação). Instalado SÓ aqui, na Activity — não em
-        // LauncherApplication.attachBaseContext: essa outra tentativa
-        // quebrou BroadcastReceiver (SessionCommitReceiver), porque o
-        // framework faz cast do Context de Application para ContextImpl
-        // em pontos internos que não passam pela Activity. Ver
-        // XaulinXsThemeColorResources.kt e o comentário em
-        // LauncherApplication.java para detalhes.
-        super.attachBaseContext(new com.xaulinxs.customizations.theme.XaulinXsThemedContextWrapper(base));
+        // XaulinXs Customizations: a interceptação de "UI-UX Custom
+        // Colors" que existia aqui foi removida — a feature nunca
+        // funcionou de verdade (Context.getColor()/getColorStateList()
+        // são `final` no Android e não dão pra sobrescrever; cobertura
+        // completa exigiria Runtime Resource Overlay via aapt2, que não
+        // dá pra rodar sem root no Termux). Ver decisão no chat.
+        super.attachBaseContext(base);
         // XaulinXs Customizations: estende a fonte customizada (antes só
         // aplicada aos labels dos ícones via BubbleTextView) para TODA
         // TextView inflada nesta Activity — Workspace, AllApps, popups,
@@ -465,7 +461,12 @@ public class Launcher extends StatefulActivity<LauncherState>
         // (precisa vir depois de mStateManager estar pronto).
         mXaulinXsDepthController = new com.xaulinxs.customizations.blur.XaulinXsDepthController(this);
         mXaulinXsDepthController.setupWindowBlurFlags();
-        com.xaulinxs.customizations.theme.DefaultWallpaperApplier.applyOnFirstRunIfNeeded(this);
+        // XaulinXs Customizations: garante que o wallpaper PRÓPRIO do
+        // launcher (armazenamento privado, nunca o wallpaper do sistema)
+        // existe. Substitui o antigo DefaultWallpaperApplier, que chamava
+        // WallpaperManager.setBitmap() na 1ª execução — o que trocava o
+        // wallpaper do sistema inteiro, contrariando o pedido do usuário.
+        com.xaulinxs.customizations.theme.XaulinXsInAppWallpaper.ensureDefaultWallpaperExists(this);
 
         mAppWidgetManager = new WidgetManagerHelper(this);
         mAppWidgetHolder = LauncherWidgetHolder.newInstance(this);

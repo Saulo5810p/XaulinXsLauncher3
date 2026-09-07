@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- XaulinXs Customizations — arquivo novo, não faz parte do AOSP original. -->
 <resources>
-    <string name="xaulinxs_customizations_title">XaulinXs Customizations</string>
-    <string name="xaulinxs_customizations_summary">Personalizações extras do launcher</string>
+    <string name="xaulinxs_customizations_title">R\'s Home3</string>
+    <string name="xaulinxs_customizations_summary">Make your idea your own</string>
+
+    <!-- Categorias — reorganização das XaulinXs Customizations em grupos -->
+    <string name="xaulinxs_cat_interface_title">Interface</string>
+    <string name="xaulinxs_cat_interface_summary">Fonte customizada e cores gerais da interface</string>
+    <string name="xaulinxs_cat_icon_title">Ícone</string>
+    <string name="xaulinxs_cat_icon_summary">Labels, tamanho, cores temáticas e transparência dos ícones</string>
+    <string name="xaulinxs_cat_allapps_title">Menu de aplicativo</string>
+    <string name="xaulinxs_cat_allapps_summary">Cores, transparência e desfoque da gaveta de apps</string>
+    <string name="xaulinxs_cat_balloons_title">Balões</string>
+    <string name="xaulinxs_cat_balloons_summary">Aparência dos menus de contexto (segurar o dedo num ícone)</string>
+    <string name="xaulinxs_cat_workspace_title">Área de trabalho</string>
+    <string name="xaulinxs_cat_workspace_summary">Grade, desfoque e giroscópio da tela inicial</string>
+    <string name="xaulinxs_cat_qsb_title">Barra de busca</string>
+    <string name="xaulinxs_cat_qsb_summary">Aparência e comportamento da barra de pesquisa (QSB)</string>
+    <string name="xaulinxs_cat_widget_title">Widget</string>
+    <string name="xaulinxs_cat_widget_summary">Transparência e desfoque dos widgets</string>
+    <string name="xaulinxs_cat_folders_title">Pastas</string>
+    <string name="xaulinxs_cat_folders_summary">Cor, transparência e tamanho das pastas</string>
     <string name="xaulinxs_themed_icons_title">Ícones temáticos</string>
     <string name="xaulinxs_themed_icons_summary">Colorir os ícones com base no papel de parede (Material You)</string>
     <string name="xaulinxs_themed_scrim_title">Fundo desfocado no menu de apps</string>
@@ -18,7 +36,7 @@
     <string name="xaulinxs_allapps_transparency_enabled_title">Transparência do menu de apps (sem blur)</string>
     <string name="xaulinxs_allapps_transparency_enabled_summary">Mostra a tela inicial por trás da gaveta de apps, sem nenhum desfoque — só funciona com "Fundo desfocado no menu de apps" DESATIVADO</string>
     <string name="xaulinxs_allapps_transparency_percent_title">Nível de transparência</string>
-    <string name="xaulinxs_allapps_transparency_percent_summary">0% = totalmente transparente (mostra a tela inicial); 100% = opaco</string>
+    <string name="xaulinxs_allapps_transparency_percent_summary" formatted="false">0% = totalmente transparente (mostra a tela inicial); 100% = opaco</string>
     <string name="xaulinxs_popup_blur_title">Blur nos balões de contexto</string>
     <string name="xaulinxs_popup_blur_summary">Desfoca o fundo atrás do menu que abre ao segurar o dedo num ícone (independente do blur do menu de apps)</string>
     <string name="xaulinxs_widget_blur_title">Desfoque dos widgets</string>
@@ -29,6 +47,24 @@
     <string name="xaulinxs_manual_color_enabled_summary">Usa uma cor fixa escolhida por você em vez da cor do papel de parede</string>
     <string name="xaulinxs_manual_color_picker_title">Escolher cor (hex)</string>
     <string name="xaulinxs_manual_color_save">Salvar</string>
+    <string name="xaulinxs_legacy_icon_bg_shadow_title">Remover fundo/sombra dos ícones antigos</string>
+    <string name="xaulinxs_legacy_icon_bg_shadow_summary">Apps antigos sem ícone adaptativo ganham hoje um fundo branco sintético + sombra; ativando isso, o fundo vira transparente e a sombra some (ícones adaptativos modernos não são afetados)</string>
+    <string name="xaulinxs_balloon_color_enabled_title">Cor customizada dos balões</string>
+    <string name="xaulinxs_balloon_color_enabled_summary">Desligado (padrão): a cor dos balões segue a cor extraída do papel de parede. Ligado: usa a cor escolhida abaixo</string>
+    <string name="xaulinxs_balloon_color_picker_title">Cor dos balões (hex)</string>
+    <string name="xaulinxs_change_wallpaper_title">Trocar wallpaper</string>
+    <string name="xaulinxs_change_wallpaper_summary">Escolhe uma imagem para o fundo do R\'s Home3. Como você está trocando por dentro do launcher, o wallpaper do sistema também muda junto</string>
+    <string name="xaulinxs_grid_size_title">Tamanho da grade</string>
+    <string name="xaulinxs_grid_size_summary">Escolhe quantas colunas e linhas de ícones cabem no Menu de aplicativo e na Área de trabalho, de 2x2 até 10x10 (as duas telas usam a mesma grade)</string>
+    <string name="xaulinxs_folder_color_enabled_title">Cor customizada da pasta</string>
+    <string name="xaulinxs_folder_color_enabled_summary">Desligado (padrão): usa a cor de tema padrão. Ligado: usa a cor escolhida abaixo</string>
+    <string name="xaulinxs_folder_color_picker_title">Cor da pasta (hex)</string>
+    <string name="xaulinxs_folder_transparency_title">Transparência da pasta</string>
+    <string name="xaulinxs_folder_transparency_summary" formatted="false">100% = opaco (padrão), 0% = totalmente transparente</string>
+    <string name="xaulinxs_folder_size_title">Tamanho da pasta</string>
+    <string name="xaulinxs_folder_size_summary" formatted="false">100% = tamanho padrão. Mínimo de 30% para continuar fácil de tocar</string>
+    <string name="xaulinxs_workspace_blur_title">Desfoque da tela inicial</string>
+    <string name="xaulinxs_workspace_blur_summary">0% = sem desfoque (padrão). Desfoca o wallpaper próprio do launcher atrás dos ícones (precisa de Android 12+)</string>
     <string name="xaulinxs_custom_font_title">Fonte customizada dos ícones</string>
     <string name="xaulinxs_font_choose">Importar fonte (.ttf/.otf)</string>
     <string name="xaulinxs_font_current">Fonte atual: %1$s</string>
@@ -62,9 +98,6 @@
     <string name="xaulinxs_qsb_text_mode_dialog_title">O que você quer fazer?</string>
     <string name="xaulinxs_qsb_text_mode_hint">Ex: ligar pra Ana, manda whatsapp pro João dizendo oi</string>
 
-    <!-- UI-UX Custom Colors -->
-    <string name="xaulinxs_custom_colors_title">UI-UX Custom Colors</string>
-    <string name="xaulinxs_custom_colors_summary">Personaliza a cor primária (interruptores, botões, retângulos) e secundária (fundos, fontes) de todo o app</string>
 
     <!-- QSB Super Inteligente -->
     <string name="xaulinxs_qsb_smart_permission_title">Acesso aos contatos</string>

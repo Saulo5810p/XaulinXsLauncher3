@@ -143,12 +143,19 @@ class XaulinXsGlobalFontInflaterFactory(
 
     companion object {
         // O applicationId real do build (ver build.gradle:
-        // applicationId "com.android.launcher3"). Hardcoded em vez de
+        // applicationId "r.home3"). Hardcoded em vez de
         // BuildConfig.APPLICATION_ID porque BuildConfig ainda não é
         // usado em nenhum outro ponto deste módulo -- evita depender de
         // uma classe gerada cujo pacote pode variar conforme a variante
         // de build configurada no futuro.
-        private const val LAUNCHER_PACKAGE_NAME = "com.android.launcher3"
+        //
+        // XaulinXs: atualizado quando o applicationId virou "r.home3"
+        // (era "com.android.launcher3") — esse valor precisa SEMPRE
+        // bater com applicationId do build.gradle, senão a checagem de
+        // linha 79 (context.packageName != LAUNCHER_PACKAGE_NAME) nunca
+        // dá match e a fonte customizada para de funcionar
+        // silenciosamente (sem crash, só sem efeito nenhum).
+        private const val LAUNCHER_PACKAGE_NAME = "r.home3"
 
         // Mesma ordem de prefixos que o PhoneLayoutInflater da plataforma
         // tenta internamente ao resolver uma tag sem pacote.

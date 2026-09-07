@@ -295,4 +295,410 @@
 
     </grid-option>
 
+
+    <!-- ============ XaulinXs Customizations: grades extras (2x2 até 10x10) — início ============
+         Feature nova pedida no info.txt/etapa 3: permitir trocar o número
+         de colunas/linhas da tela inicial livremente, de 2x2 até 10x10.
+         Cada uma vira seu próprio grid-option (mesmo mecanismo do AOSP
+         puro usado pelas grades originais acima), com seu próprio dbFile
+         (troca de grade não mistura/corrompe dados de outra grade) e um
+         layout padrão vazio (sem ícones pré-posicionados, já que essas
+         grades não têm relação com nenhum tamanho de tela específico).
+         iconImageSize/iconTextSize são escalados proporcionalmente à
+         densidade da grade (quanto mais células, menores os ícones/texto) —
+         não testados visualmente em dispositivo real, ajustar conforme
+         necessário depois de compilar. Ver XaulinXsGridSizePreference /
+         XaulinXsGridSizePickerActivity pra a tela de seleção. -->
+
+    <grid-option
+        launcher:name="xaulinxs_2_by_2"
+        launcher:numRows="2"
+        launcher:numColumns="2"
+        launcher:numFolderRows="2"
+        launcher:numFolderColumns="3"
+        launcher:numHotseatIcons="3"
+        launcher:dbFile="launcher_xaulinxs_2_by_2.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 2x2"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="64"
+            launcher:iconTextSize="15.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_2_by_3"
+        launcher:numRows="2"
+        launcher:numColumns="3"
+        launcher:numFolderRows="2"
+        launcher:numFolderColumns="3"
+        launcher:numHotseatIcons="3"
+        launcher:dbFile="launcher_xaulinxs_2_by_3.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 2x3"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="64"
+            launcher:iconTextSize="15.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_3_by_3"
+        launcher:numRows="3"
+        launcher:numColumns="3"
+        launcher:numFolderRows="2"
+        launcher:numFolderColumns="3"
+        launcher:numHotseatIcons="3"
+        launcher:dbFile="launcher_xaulinxs_3_by_3.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 3x3"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="64"
+            launcher:iconTextSize="15.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_3_by_4"
+        launcher:numRows="3"
+        launcher:numColumns="4"
+        launcher:numFolderRows="2"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="4"
+        launcher:dbFile="launcher_xaulinxs_3_by_4.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 3x4"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="48"
+            launcher:iconTextSize="13.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_4_by_4"
+        launcher:numRows="4"
+        launcher:numColumns="4"
+        launcher:numFolderRows="3"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="4"
+        launcher:dbFile="launcher_xaulinxs_4_by_4.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 4x4"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="48"
+            launcher:iconTextSize="13.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_4_by_5"
+        launcher:numRows="4"
+        launcher:numColumns="5"
+        launcher:numFolderRows="3"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="5"
+        launcher:dbFile="launcher_xaulinxs_4_by_5.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 4x5"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="38"
+            launcher:iconTextSize="10.4"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_5_by_5"
+        launcher:numRows="5"
+        launcher:numColumns="5"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="5"
+        launcher:dbFile="launcher_xaulinxs_5_by_5.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 5x5"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="38"
+            launcher:iconTextSize="10.4"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_5_by_6"
+        launcher:numRows="5"
+        launcher:numColumns="6"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_5_by_6.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 5x6"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="32"
+            launcher:iconTextSize="8.7"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_6_by_6"
+        launcher:numRows="6"
+        launcher:numColumns="6"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_6_by_6.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 6x6"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="32"
+            launcher:iconTextSize="8.7"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_6_by_7"
+        launcher:numRows="6"
+        launcher:numColumns="7"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_6_by_7.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 6x7"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="27"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_7_by_7"
+        launcher:numRows="7"
+        launcher:numColumns="7"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_7_by_7.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 7x7"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="27"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_7_by_8"
+        launcher:numRows="7"
+        launcher:numColumns="8"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_7_by_8.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 7x8"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="24"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_8_by_8"
+        launcher:numRows="8"
+        launcher:numColumns="8"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_8_by_8.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 8x8"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="24"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_8_by_9"
+        launcher:numRows="8"
+        launcher:numColumns="9"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_8_by_9.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 8x9"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="21"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_9_by_9"
+        launcher:numRows="9"
+        launcher:numColumns="9"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_9_by_9.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 9x9"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="21"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_9_by_10"
+        launcher:numRows="9"
+        launcher:numColumns="10"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_9_by_10.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 9x10"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="19"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
+    <grid-option
+        launcher:name="xaulinxs_10_by_10"
+        launcher:numRows="10"
+        launcher:numColumns="10"
+        launcher:numFolderRows="4"
+        launcher:numFolderColumns="4"
+        launcher:numHotseatIcons="6"
+        launcher:dbFile="launcher_xaulinxs_10_by_10.db"
+        launcher:defaultLayoutId="@xml/default_workspace_xaulinxs_empty"
+        launcher:deviceCategory="phone" >
+
+        <display-option
+            launcher:name="XaulinXs 10x10"
+            launcher:minWidthDps="255"
+            launcher:minHeightDps="300"
+            launcher:iconImageSize="19"
+            launcher:iconTextSize="8.0"
+            launcher:allAppsBorderSpace="16"
+            launcher:allAppsCellHeight="104"
+            launcher:canBeDefault="true" />
+
+    </grid-option>
+
 </profiles>

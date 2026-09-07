@@ -38,114 +38,246 @@
         launcher:logIdOff="614" />
 
 
-    <!-- ============ XaulinXs Customizations — início ============ -->
+    <!-- ============ R\'s Home3 (ex-XaulinXs Customizations) — início ============
+         Reorganizado em categorias (uma PreferenceScreen aninhada por grupo),
+         em vez da lista única e desordenada de antes. Cada categoria abre
+         como uma nova tela (SettingsActivity.onPreferenceStartScreen já
+         suporta isso). Nenhuma key foi renomeada, então nada que já
+         dependia de LauncherPrefs/backedUpItem quebra. -->
     <PreferenceScreen
         android:key="xaulinxs_customizations_screen"
         android:title="@string/xaulinxs_customizations_title"
         android:summary="@string/xaulinxs_customizations_summary">
 
-        <com.xaulinxs.customizations.settings.ThemedIconsPreference
-            android:key="xaulinxs_themed_icons"
-            android:title="@string/xaulinxs_themed_icons_title"
-            android:summary="@string/xaulinxs_themed_icons_summary"
-            android:persistent="false" />
+        <!-- Interface (UI): fonte e cores gerais do app -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_interface"
+            android:title="@string/xaulinxs_cat_interface_title"
+            android:summary="@string/xaulinxs_cat_interface_summary">
 
-        <com.xaulinxs.customizations.settings.ThemedScrimPreference
-            android:key="xaulinxs_themed_scrim"
-            android:title="@string/xaulinxs_themed_scrim_title"
-            android:summary="@string/xaulinxs_themed_scrim_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.CustomFontPreference
+                android:key="xaulinxs_custom_font"
+                android:title="@string/xaulinxs_custom_font_title"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.IconScalePreference
-            android:key="xaulinxs_icon_scale"
-            android:title="@string/xaulinxs_icon_scale_title"
-            android:summary="@string/xaulinxs_icon_scale_summary"
-            android:persistent="false" />
+            <!-- XaulinXs: "Tamanho da grade" mora aqui (não em Área de
+                 trabalho) porque muda o número de colunas/linhas tanto do
+                 Workspace quanto do Menu de aplicativo — não é uma
+                 característica exclusiva de um dos dois. -->
+            <Preference
+                android:key="xaulinxs_grid_size"
+                android:title="@string/xaulinxs_grid_size_title"
+                android:summary="@string/xaulinxs_grid_size_summary"
+                android:persistent="false">
+                <intent
+                    android:targetPackage="r.home3"
+                    android:targetClass="com.xaulinxs.customizations.settings.GridSizePickerActivity" />
+            </Preference>
 
-        <com.xaulinxs.customizations.settings.IconLabelsPreference
-            android:key="xaulinxs_icon_labels_hidden"
-            android:title="@string/xaulinxs_icon_labels_title"
-            android:summary="@string/xaulinxs_icon_labels_summary"
-            android:persistent="false" />
+        </PreferenceScreen>
 
-        <com.xaulinxs.customizations.settings.IconOpacityPreference
-            android:key="xaulinxs_icon_opacity"
-            android:title="@string/xaulinxs_icon_opacity_title"
-            android:summary="@string/xaulinxs_icon_opacity_summary"
-            android:persistent="false" />
+        <!-- Ícone: labels, tamanho, cores temáticas, transparência -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_icon"
+            android:title="@string/xaulinxs_cat_icon_title"
+            android:summary="@string/xaulinxs_cat_icon_summary">
 
-        <com.xaulinxs.customizations.settings.ScrimOpacityPreference
-            android:key="xaulinxs_scrim_opacity"
-            android:title="@string/xaulinxs_scrim_opacity_title"
-            android:summary="@string/xaulinxs_scrim_opacity_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.IconLabelsPreference
+                android:key="xaulinxs_icon_labels_hidden"
+                android:title="@string/xaulinxs_icon_labels_title"
+                android:summary="@string/xaulinxs_icon_labels_summary"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.PopupBlurPreference
-            android:key="xaulinxs_popup_blur_enabled"
-            android:title="@string/xaulinxs_popup_blur_title"
-            android:summary="@string/xaulinxs_popup_blur_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.IconScalePreference
+                android:key="xaulinxs_icon_scale"
+                android:title="@string/xaulinxs_icon_scale_title"
+                android:summary="@string/xaulinxs_icon_scale_summary"
+                android:persistent="false" />
 
+            <com.xaulinxs.customizations.settings.ThemedIconsPreference
+                android:key="xaulinxs_themed_icons"
+                android:title="@string/xaulinxs_themed_icons_title"
+                android:summary="@string/xaulinxs_themed_icons_summary"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.WidgetBlurPreference
-            android:key="xaulinxs_widget_blur_intensity"
-            android:title="@string/xaulinxs_widget_blur_title"
-            android:summary="@string/xaulinxs_widget_blur_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.IconOpacityPreference
+                android:key="xaulinxs_icon_opacity"
+                android:title="@string/xaulinxs_icon_opacity_title"
+                android:summary="@string/xaulinxs_icon_opacity_summary"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.GyroTiltPreference
-            android:key="xaulinxs_gyro_tilt_enabled"
-            android:title="@string/xaulinxs_gyro_tilt_title"
-            android:summary="@string/xaulinxs_gyro_tilt_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.ManualColorEnabledPreference
+                android:key="xaulinxs_manual_color_enabled"
+                android:title="@string/xaulinxs_manual_color_enabled_title"
+                android:summary="@string/xaulinxs_manual_color_enabled_summary"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.AllAppsTransparencyEnabledPreference
-            android:key="xaulinxs_allapps_transparency_enabled"
-            android:title="@string/xaulinxs_allapps_transparency_enabled_title"
-            android:summary="@string/xaulinxs_allapps_transparency_enabled_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.ManualColorPickerPreference
+                android:key="xaulinxs_manual_color_picker"
+                android:title="@string/xaulinxs_manual_color_picker_title"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.AllAppsTransparencyPercentPreference
-            android:key="xaulinxs_allapps_transparency_percent"
-            android:title="@string/xaulinxs_allapps_transparency_percent_title"
-            android:summary="@string/xaulinxs_allapps_transparency_percent_summary"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.LegacyIconBackgroundPreference
+                android:key="xaulinxs_legacy_icon_bg_shadow_removed"
+                android:title="@string/xaulinxs_legacy_icon_bg_shadow_title"
+                android:summary="@string/xaulinxs_legacy_icon_bg_shadow_summary"
+                android:persistent="false" />
 
-        <com.xaulinxs.customizations.settings.ManualColorEnabledPreference
-            android:key="xaulinxs_manual_color_enabled"
-            android:title="@string/xaulinxs_manual_color_enabled_title"
-            android:summary="@string/xaulinxs_manual_color_enabled_summary"
-            android:persistent="false" />
+        </PreferenceScreen>
 
-        <com.xaulinxs.customizations.settings.ManualColorPickerPreference
-            android:key="xaulinxs_manual_color_picker"
-            android:title="@string/xaulinxs_manual_color_picker_title"
-            android:persistent="false" />
+        <!-- Menu de aplicativo (all-apps): cores, transparência, desfoque -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_allapps"
+            android:title="@string/xaulinxs_cat_allapps_title"
+            android:summary="@string/xaulinxs_cat_allapps_summary">
 
-        <com.xaulinxs.customizations.settings.CustomFontPreference
-            android:key="xaulinxs_custom_font"
-            android:title="@string/xaulinxs_custom_font_title"
-            android:persistent="false" />
+            <com.xaulinxs.customizations.settings.ThemedScrimPreference
+                android:key="xaulinxs_themed_scrim"
+                android:title="@string/xaulinxs_themed_scrim_title"
+                android:summary="@string/xaulinxs_themed_scrim_summary"
+                android:persistent="false" />
 
-        <Preference
-            android:key="xaulinxs_qsb_config"
-            android:title="@string/xaulinxs_qsb_config_title"
-            android:persistent="false">
-            <intent
-                android:targetPackage="com.android.launcher3"
-                android:targetClass="com.xaulinxs.customizations.qsb.QsbConfigActivity" />
-        </Preference>
+            <com.xaulinxs.customizations.settings.ScrimOpacityPreference
+                android:key="xaulinxs_scrim_opacity"
+                android:title="@string/xaulinxs_scrim_opacity_title"
+                android:summary="@string/xaulinxs_scrim_opacity_summary"
+                android:persistent="false" />
 
-        <Preference
-            android:key="xaulinxs_custom_colors"
-            android:title="@string/xaulinxs_custom_colors_title"
-            android:summary="@string/xaulinxs_custom_colors_summary"
-            android:persistent="false">
-            <intent
-                android:targetPackage="com.android.launcher3"
-                android:targetClass="com.xaulinxs.customizations.settings.CustomColorsActivity" />
-        </Preference>
+            <com.xaulinxs.customizations.settings.AllAppsTransparencyEnabledPreference
+                android:key="xaulinxs_allapps_transparency_enabled"
+                android:title="@string/xaulinxs_allapps_transparency_enabled_title"
+                android:summary="@string/xaulinxs_allapps_transparency_enabled_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.AllAppsTransparencyPercentPreference
+                android:key="xaulinxs_allapps_transparency_percent"
+                android:title="@string/xaulinxs_allapps_transparency_percent_title"
+                android:summary="@string/xaulinxs_allapps_transparency_percent_summary"
+                android:persistent="false" />
+
+        </PreferenceScreen>
+
+        <!-- Balões: menus de contexto (long-press) -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_balloons"
+            android:title="@string/xaulinxs_cat_balloons_title"
+            android:summary="@string/xaulinxs_cat_balloons_summary">
+
+            <com.xaulinxs.customizations.settings.PopupBlurPreference
+                android:key="xaulinxs_popup_blur_enabled"
+                android:title="@string/xaulinxs_popup_blur_title"
+                android:summary="@string/xaulinxs_popup_blur_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.BalloonColorEnabledPreference
+                android:key="xaulinxs_balloon_color_enabled"
+                android:title="@string/xaulinxs_balloon_color_enabled_title"
+                android:summary="@string/xaulinxs_balloon_color_enabled_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.BalloonColorPickerPreference
+                android:key="xaulinxs_balloon_color_picker"
+                android:title="@string/xaulinxs_balloon_color_picker_title"
+                android:persistent="false" />
+
+        </PreferenceScreen>
+
+        <!-- Área de trabalho (workspace): grade, desfoque, giroscópio -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_workspace"
+            android:title="@string/xaulinxs_cat_workspace_title"
+            android:summary="@string/xaulinxs_cat_workspace_summary">
+
+            <com.xaulinxs.customizations.settings.GyroTiltPreference
+                android:key="xaulinxs_gyro_tilt_enabled"
+                android:title="@string/xaulinxs_gyro_tilt_title"
+                android:summary="@string/xaulinxs_gyro_tilt_summary"
+                android:persistent="false" />
+
+            <Preference
+                android:key="xaulinxs_change_wallpaper"
+                android:title="@string/xaulinxs_change_wallpaper_title"
+                android:summary="@string/xaulinxs_change_wallpaper_summary"
+                android:persistent="false">
+                <intent
+                    android:targetPackage="r.home3"
+                    android:targetClass="com.xaulinxs.customizations.settings.WallpaperPickerActivity" />
+            </Preference>
+
+            <com.xaulinxs.customizations.settings.WorkspaceBlurPreference
+                android:key="xaulinxs_workspace_blur_percent"
+                android:title="@string/xaulinxs_workspace_blur_title"
+                android:summary="@string/xaulinxs_workspace_blur_summary"
+                android:persistent="false" />
+
+        </PreferenceScreen>
+
+        <!-- Barra personalizada (quicksearchbox): já isolada, só precisava
+             entrar na categoria certa -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_qsb"
+            android:title="@string/xaulinxs_cat_qsb_title"
+            android:summary="@string/xaulinxs_cat_qsb_summary">
+
+            <Preference
+                android:key="xaulinxs_qsb_config"
+                android:title="@string/xaulinxs_qsb_config_title"
+                android:persistent="false">
+                <intent
+                    android:targetPackage="r.home3"
+                    android:targetClass="com.xaulinxs.customizations.qsb.QsbConfigActivity" />
+            </Preference>
+
+        </PreferenceScreen>
+
+        <!-- Widget: transparência, desfoque -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_widget"
+            android:title="@string/xaulinxs_cat_widget_title"
+            android:summary="@string/xaulinxs_cat_widget_summary">
+
+            <com.xaulinxs.customizations.settings.WidgetBlurPreference
+                android:key="xaulinxs_widget_blur_intensity"
+                android:title="@string/xaulinxs_widget_blur_title"
+                android:summary="@string/xaulinxs_widget_blur_summary"
+                android:persistent="false" />
+
+            <!-- TODO: transparência do widget (slider 0-100) pedida no
+                 info.txt ainda não existe — só o blur atual. -->
+
+        </PreferenceScreen>
+
+        <!-- Pastas: cor, transparência, tamanho -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_folders"
+            android:title="@string/xaulinxs_cat_folders_title"
+            android:summary="@string/xaulinxs_cat_folders_summary">
+
+            <com.xaulinxs.customizations.settings.FolderColorEnabledPreference
+                android:key="xaulinxs_folder_color_enabled"
+                android:title="@string/xaulinxs_folder_color_enabled_title"
+                android:summary="@string/xaulinxs_folder_color_enabled_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.FolderColorPickerPreference
+                android:key="xaulinxs_folder_color_picker"
+                android:title="@string/xaulinxs_folder_color_picker_title"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.FolderTransparencyPreference
+                android:key="xaulinxs_folder_transparency_percent"
+                android:title="@string/xaulinxs_folder_transparency_title"
+                android:summary="@string/xaulinxs_folder_transparency_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.FolderSizePreference
+                android:key="xaulinxs_folder_size_percent"
+                android:title="@string/xaulinxs_folder_size_title"
+                android:summary="@string/xaulinxs_folder_size_summary"
+                android:persistent="false" />
+
+        </PreferenceScreen>
 
     </PreferenceScreen>
-    <!-- ============ XaulinXs Customizations — fim ============ -->
+    <!-- ============ R\'s Home3 — fim ============ -->
 </androidx.preference.PreferenceScreen>

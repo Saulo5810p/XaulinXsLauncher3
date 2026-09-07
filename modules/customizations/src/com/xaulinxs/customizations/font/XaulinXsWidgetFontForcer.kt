@@ -67,17 +67,60 @@ object XaulinXsWidgetFontForcer {
      * estiver anexada à janela nesse momento -- o Android enfileira
      * internamente e despacha assim que anexa). applyTo() em si
      * continua podendo ser chamado de qualquer thread com segurança.
+     *
+     * XaulinXs fix #2 (info.txt: "fonte customizada em widgets que
+     * desaplica sozinha"): o applyRecursively() de antes só rodava no
+     * instante do updateAppWidget() do host. Só isso não basta para
+     * dois casos comuns que acontecem SEM um updateAppWidget() novo:
+     *  1) widgets baseados em lista (RemoteViewsAdapter — ListView/
+     *     GridView dentro do widget) criam/reciclam os TextViews de
+     *     cada item sob demanda, conforme o usuário rola a lista —
+     *     views que nem existiam ainda quando applyTo() rodou da
+     *     primeira vez, então nunca recebiam a fonte;
+     *  2) o próprio RemoteViews reaplica os estilos originais de um
+     *     TextView em qualquer atualização parcial subsequente (ex.:
+     *     relógio/clima atualizando só o texto a cada minuto), o que
+     *     também dispara uma nova passada de layout na view.
+     * Os dois casos têm uma coisa em comum: sempre geram uma passada
+     * de layout na hierarquia do widget. Por isso, além da aplicação
+     * pontual, registramos (uma única vez por hierarquia) um
+     * OnGlobalLayoutListener na raiz que reaplica a fonte a cada
+     * passada de layout futura — sem precisar de um updateAppWidget()
+     * novo do host. Para não entrar em loop infinito (setTypeface()
+     * também dispara requestLayout(), que dispararia o próprio
+     * listener de novo), applyRecursively() só toca na TextView quando
+     * o typeface atual já é diferente do desejado.
+     *
+     * O controle de "já registrei o listener pra essa view" usa um
+     * WeakHashMap (chave fraca — não impede a AppWidgetHostView de ser
+     * coletada quando o widget é removido) em vez de View.setTag(int,
+     * Object): esse overload de setTag exige uma resource id de
+     * verdade como chave (lança IllegalArgumentException fora desse
+     * intervalo), então uma chave arbitrária aqui seria arriscada.
      */
+    private val viewsWithReapplyListener =
+        java.util.Collections.newSetFromMap(java.util.WeakHashMap<View, Boolean>())
+
     @JvmStatic
     fun applyTo(view: View) {
         view.post {
-            val typeface = XaulinXsCustomFont.loadTypefaceIfAvailable(view.context)
-            applyRecursively(view, typeface)
+            applyRecursively(view, XaulinXsCustomFont.loadTypefaceIfAvailable(view.context))
+        }
+        registerGlobalLayoutReapplier(view)
+    }
+
+    private fun registerGlobalLayoutReapplier(root: View) {
+        synchronized(viewsWithReapplyListener) {
+            if (!viewsWithReapplyListener.add(root)) return
+        }
+        root.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!root.isAttachedToWindow) return@addOnGlobalLayoutListener
+            applyRecursively(root, XaulinXsCustomFont.loadTypefaceIfAvailable(root.context))
         }
     }
 
     private fun applyRecursively(view: View, typeface: android.graphics.Typeface?) {
-        if (view is TextView) {
+        if (view is TextView && view.typeface !== typeface) {
             view.typeface = typeface
         }
         if (view is ViewGroup) {

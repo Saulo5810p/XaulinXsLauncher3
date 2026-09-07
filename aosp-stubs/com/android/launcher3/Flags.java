@@ -75,7 +75,16 @@ public final class Flags {
     public static boolean simplifiedLauncherModelBinding() { return false; }
     public static boolean workspaceItemsLabelHidden() { return false; }
 
-    public static boolean forceMonochromeAppIcons() { return false; }
+    // XaulinXs fix (info.txt: "Correção dos ícones temáticos - Alguns apps
+    // não aplicam. Forçar a aplicação das cores. todos os ícones"):
+    // MonoIconThemeController.createThemedBitmap só sintetiza um ícone
+    // monocromático pra apps SEM layer <monochrome> própria (a maioria dos
+    // apps que não seguem Material You) quando esta flag E
+    // shouldForceThemeIcon (já true em XaulinXsMonoIconThemeFactory) estão
+    // ligadas ao mesmo tempo. Com a flag presa em false, esses apps caíam
+    // direto em ThemedBitmap.NOT_SUPPORTED e nunca recebiam cor temática
+    // nenhuma — exatamente o bug relatado. Ligando aqui.
+    public static boolean forceMonochromeAppIcons() { return true; }
     public static boolean forceMonochromeAppIconsAdaptColors() { return false; }
 
 

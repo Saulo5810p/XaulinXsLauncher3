@@ -20,6 +20,7 @@
 package com.xaulinxs.customizations.popup
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -28,10 +29,10 @@ import com.android.launcher3.R
 import com.android.launcher3.model.data.ItemInfo
 import com.android.launcher3.popup.PopupData
 import com.android.launcher3.shortcuts.DeepShortcutView
-import com.android.launcher3.util.Themes
 import com.android.launcher3.Launcher
 import com.android.launcher3.views.AbstractSlideInView
 import com.android.launcher3.views.ActivityContext
+import com.xaulinxs.customizations.theme.XaulinXsBalloonColor
 
 /**
  * Bottom sheet com barrinha de arrastar para as opções da área vazia da tela inicial.
@@ -77,6 +78,29 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         super.onFinishInflate()
         mContent = findViewById(R.id.xaulinxs_sheet_content)
         rowsContainer = findViewById(R.id.xaulinxs_sheet_rows)
+        applyBalloonColorBackground()
+    }
+
+    /*
+     * XaulinXs Customizations: este retângulo (popup de área vazia da
+     * workspace: Plano de fundo / Widgets / Apps / Configurações) era um
+     * balão (ArrowPopup) e por isso já seguia XaulinXsBalloonColor. Ao ser
+     * redesenhado como bottom sheet moderno (XaulinXsOptionsSheet), o fundo
+     * passou a vir de um drawable estático (xaulinxs_sheet_background com
+     * @color/materialColorSurfaceContainer) e perdeu essa customização.
+     *
+     * Aqui reaplicamos a MESMA regra dos balões dos apps, sem duplicar
+     * lógica: desligado -> cor extraída do papel de parede; ligado -> cor
+     * manual do editor hex/paleta; sem nenhuma das duas -> mantém o
+     * drawable original (fallback AOSP), sem quebrar nada.
+     */
+    private fun applyBalloonColorBackground() {
+        val overrideColor =
+            XaulinXsBalloonColor.getBalloonColorOverride(context) ?: return
+        val background = mContent.background?.mutate()
+        if (background is GradientDrawable) {
+            background.setColor(overrideColor)
+        }
     }
 
     /**
@@ -120,7 +144,16 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         handleClose(animate, OPEN_CLOSE_DURATION_MS)
     }
 
+    /*
+     * XaulinXs Customizations: este bottom sheet não cobre a tela inteira
+     * (é ancorado embaixo), então a área acima dele usava um scrim estático
+     * quase-branco (?attr/allAppsScrimColor -> materialColorSurfaceDim),
+     * escondendo o papel de parede exatamente onde o retângulo do popup não
+     * aparece. Sem scrim (-1 = comportamento padrão de AbstractSlideInView,
+     * ver getScrimColor() lá), essa área fica transparente e mostra o papel
+     * de parede normalmente, como pedido.
+     */
     override fun getScrimColor(context: Context): Int {
-        return Themes.getAttrColor(context, R.attr.allAppsScrimColor)
+        return -1
     }
 }

@@ -19,6 +19,7 @@ import com.android.launcher3.Launcher
 import com.android.launcher3.LauncherAppState
 import com.android.launcher3.icons.cache.CacheLookupFlag
 import com.android.launcher3.model.data.AppInfo
+import com.android.launcher3.util.Executors
 
 object XaulinXsAppOverrideRefresher {
 
@@ -28,17 +29,28 @@ object XaulinXsAppOverrideRefresher {
             val appsStore = launcher.appsView.appsStore
             val app = appsStore.apps.firstOrNull { it.componentName == componentName }
             if (app != null) {
-                LauncherAppState.getInstance(launcher).iconCache.getTitleAndIcon(
-                    app,
-                    CacheLookupFlag.DEFAULT_LOOKUP_FLAG,
-                )
-                appsStore.xaulinXsReapplyIcon(app)
+                // IconCache.getTitleAndIcon só pode ser chamado na worker thread própria
+                // do cache (bgLooper = Executors.MODEL_EXECUTOR.looper, ver IconCache.kt) -
+                // chamar direto aqui (este listener já roda no MAIN_EXECUTOR, ver
+                // XaulinXsAppOverrides.notifyChanged) derruba o app com
+                // "Cache accessed on wrong thread". Resolve o título/ícone em
+                // background e só então volta pra main thread pra tocar nas Views.
+                Executors.MODEL_EXECUTOR.execute {
+                    LauncherAppState.getInstance(launcher).iconCache.getTitleAndIcon(
+                        app,
+                        CacheLookupFlag.DEFAULT_LOOKUP_FLAG,
+                    )
+                    Executors.MAIN_EXECUTOR.execute {
+                        appsStore.xaulinXsReapplyIcon(app)
+                        appsStore.xaulinXsRefreshFilters()
+                    }
+                }
+            } else {
+                // App não estava carregado na lista ainda - não há ícone pra
+                // re-resolver, mas o filtro de escondidos precisa ser reavaliado
+                // mesmo assim (é barato, não recarrega dados).
+                appsStore.xaulinXsRefreshFilters()
             }
-            // Independente de o app estar na lista de apps carregada (pode ainda não
-            // estar, se isso rodar muito cedo), sempre reavalia o filtro de escondidos -
-            // é barato (não recarrega dados) e garante que o interruptor "esconder do
-            // menu de aplicativos" reflita na hora.
-            appsStore.xaulinXsRefreshFilters()
         }
     }
 }

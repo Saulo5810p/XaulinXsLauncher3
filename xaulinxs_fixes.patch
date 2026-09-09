@@ -1,0 +1,214 @@
+diff --git a/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt b/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
+index c17e5bf..53888a2 100644
+--- a/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
++++ b/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
+@@ -326,20 +326,34 @@ constructor(
+ 
+     /** Wraps the provided icon in an adaptive icon drawable */
+     @JvmOverloads
+-    fun wrapToAdaptiveIcon(icon: Drawable, options: IconOptions? = null): AdaptiveIconDrawable =
+-        icon as? AdaptiveIconDrawable
++    fun wrapToAdaptiveIcon(icon: Drawable, options: IconOptions? = null): AdaptiveIconDrawable {
++        // XaulinXs fix (info.txt: "remover sombra" não deve só tirar o
++        // fundo, mas também aumentar o ícone que fica pequeno sem ele):
++        // LEGACY_ICON_SCALE embute um fator extra de 0.7 (ver companion
++        // object) pensado especificamente para o ícone "flutuar" com
++        // folga dentro do fundo/prato branco sintético + sombra ao redor
++        // — margem que só faz sentido visualmente com esse fundo
++        // presente. Sem fundo nem sombra, essa folga extra só faz o
++        // ícone parecer pequeno/perdido comparado aos ícones adaptativos
++        // reais vizinhos (que preenchem toda a área visível de segurança
++        // do próprio formato). Quando a opção está ligada, usa
++        // LEGACY_ICON_SCALE_NO_BG (mesma base de proporção da área
++        // visível do ícone, mas sem o fator 0.7 de recuo) — ícone maior,
++        // ocupando a mesma área de segurança que os demais.
++        val removeBgAndShadow =
++            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
++                .shouldRemoveBackgroundAndShadow(context)
++        val legacyScale = if (removeBgAndShadow) LEGACY_ICON_SCALE_NO_BG else LEGACY_ICON_SCALE
++        return icon as? AdaptiveIconDrawable
+             ?: AdaptiveIconDrawable(
+                     ColorDrawable(
+-                        if (
+-                            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+-                                .shouldRemoveBackgroundAndShadow(context)
+-                        )
+-                            Color.TRANSPARENT
++                        if (removeBgAndShadow) Color.TRANSPARENT
+                         else options?.wrapperBackgroundColor ?: DEFAULT_WRAPPER_BACKGROUND
+                     ),
+-                    icon.wrapIntoSquareDrawable(LEGACY_ICON_SCALE),
++                    icon.wrapIntoSquareDrawable(legacyScale),
+                 )
+                 .apply { setBounds(0, 0, 1, 1) }
++    }
+ 
+     private fun drawableToBitmap(
+         icon: Drawable,
+@@ -539,6 +553,15 @@ constructor(
+                 .7f *
+                 (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
+ 
++        // XaulinXs: mesma base de LEGACY_ICON_SCALE, mas sem o fator .7f
++        // de recuo extra — usado quando o fundo/sombra sintéticos do
++        // ícone legado foram removidos (ver wrapToAdaptiveIcon), já que
++        // esse recuo só existia para o ícone "flutuar" com folga dentro
++        // do prato branco + sombra que não existem mais nesse modo.
++        private val LEGACY_ICON_SCALE_NO_BG =
++            sqrt(MAX_SQUARE_AREA_FACTOR).toFloat() *
++                (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
++
+         const val MODE_DEFAULT: Int = 0
+         const val MODE_WITH_SHADOW: Int = 1
+         const val MODE_HARDWARE: Int = 1 shl 1
+diff --git a/src/com/android/launcher3/graphics/ThemeManager.kt b/src/com/android/launcher3/graphics/ThemeManager.kt
+index 5ed1a63..a19da25 100644
+--- a/src/com/android/launcher3/graphics/ThemeManager.kt
++++ b/src/com/android/launcher3/graphics/ThemeManager.kt
+@@ -101,12 +101,29 @@ constructor(
+         lifecycle.addCloseable(overlayChangeHandler.addCallback { verifyIconState() })
+ 
+         val prefListener = LauncherPrefChangeListener {
+-            if (it == PREF_ICON_SHAPE.sharedPrefKey) verifyIconState()
++            if (
++                it == PREF_ICON_SHAPE.sharedPrefKey ||
++                    it == com.xaulinxs.customizations.theme.XaulinXsManualColor
++                        .MANUAL_COLOR_ENABLED
++                        .sharedPrefKey
++            )
++                verifyIconState()
+         }
+-        prefs.addListener(prefListener, PREF_ICON_SHAPE)
++        // XaulinXs fix: precisa reavaliar o themeController (ver
++        // parseIconState acima) assim que a cor manual for ligada/
++        // desligada nas settings, não só quando o shape do ícone muda.
++        prefs.addListener(
++            prefListener,
++            PREF_ICON_SHAPE,
++            com.xaulinxs.customizations.theme.XaulinXsManualColor.MANUAL_COLOR_ENABLED,
++        )
+         lifecycle.addCloseable(themePreference.forEach(mainExecutor) { verifyIconState() })
+         lifecycle.addCloseable {
+-            prefs.removeListener(prefListener, PREF_ICON_SHAPE)
++            prefs.removeListener(
++                prefListener,
++                PREF_ICON_SHAPE,
++                com.xaulinxs.customizations.theme.XaulinXsManualColor.MANUAL_COLOR_ENABLED,
++            )
+             iconState.closeController()
+         }
+     }
+@@ -181,7 +198,28 @@ constructor(
+                     ShapeDelegate.GenericPathShape(path)
+                 }
+ 
+-        val themeKey = themePreference.value
++        // XaulinXs fix (cor manual de ícones parou de funcionar com
++        // ícones temáticos desligados): a cor manual (Feature 5,
++        // XaulinXsManualColor) só é aplicada de fato através do pipeline
++        // de ícones "mono-icons" (XaulinXsMonoIconThemeFactory ->
++        // XaulinXsThemedIconColors), que só roda quando existe um
++        // themeController != null. Sem essa mudança, desligar "ícones
++        // temáticos" zera themeKey/themeController e a cor manual nunca
++        // chega a ser lida, mesmo com o interruptor dela ligado — bug
++        // relatado pelo usuário. Como o pedido é que a cor manual
++        // funcione justamente QUANDO ícones temáticos está desligado,
++        // força aqui o mesmo themeKey do modo temático (MONO_THEME_VALUE)
++        // sempre que a cor manual estiver ativada e o usuário não tiver
++        // escolhido nenhum tema de ícone por conta própria — se o usuário
++        // ligar "ícones temáticos" de verdade, a preferência dele
++        // (themePreference.value) continua tendo prioridade normalmente.
++        val themeKey =
++            themePreference.value
++                ?: if (com.xaulinxs.customizations.theme.XaulinXsManualColor
++                        .getBaseColorIfEnabled(context) != null
++                )
++                    MONO_THEME_VALUE
++                else null
+         val themeCode = themeKey?.toString() ?: "no-theme"
+ 
+         val iconControllerFactory =
+diff --git a/src/com/android/launcher3/util/WallpaperColorHints.kt b/src/com/android/launcher3/util/WallpaperColorHints.kt
+index 258216f..3140b35 100644
+--- a/src/com/android/launcher3/util/WallpaperColorHints.kt
++++ b/src/com/android/launcher3/util/WallpaperColorHints.kt
+@@ -23,12 +23,14 @@ import android.app.WallpaperManager.OnColorsChangedListener
+ import android.content.Context
+ import androidx.annotation.MainThread
+ import androidx.annotation.VisibleForTesting
++import com.android.launcher3.LauncherPrefs
+ import com.android.launcher3.dagger.ApplicationContext
+ import com.android.launcher3.dagger.LauncherAppComponent
+ import com.android.launcher3.dagger.LauncherAppSingleton
+ import com.android.launcher3.util.Executors.MAIN_EXECUTOR
+ import com.android.launcher3.util.Executors.THREAD_POOL_EXECUTOR
+ import com.android.launcher3.util.Executors.UI_HELPER_EXECUTOR
++import com.xaulinxs.customizations.theme.XaulinXsInAppWallpaperSetting
+ import javax.inject.Inject
+ 
+ /**
+@@ -48,6 +50,20 @@ import javax.inject.Inject
+  * carregado; só cai de volta pro wallpaper real do sistema antes disso
+  * (ex.: primeiríssimo frame, antes do arquivo padrão terminar de ser
+  * copiado) ou se por algum motivo a extração falhar.
++ *
++ * FIX (bug do véu temático usando a cor do wallpaper do app mesmo com o
++ * interruptor "usar wallpaper do app" desligado): a priorização de
++ * [xaulinxsColors] acima só faz sentido enquanto
++ * XaulinXsInAppWallpaperSetting.IN_APP_WALLPAPER_ENABLED estiver ligado —
++ * é exatamente essa flag que decide se XaulinXsWallpaperView desenha o
++ * nosso wallpaper ou deixa aparecer o wallpaper real do sistema. Antes,
++ * [colors] ignorava essa flag e sempre preferia [xaulinxsColors] (que
++ * fica cacheada mesmo depois do usuário desligar o interruptor), fazendo
++ * ícones temáticos/scrim/balões continuarem usando a cor do NOSSO
++ * wallpaper por baixo do wallpaper real do sistema. Agora [colors] só
++ * consulta [xaulinxsColors] quando a flag está ligada; desligada, cai
++ * direto para [systemColors] (extraído do wallpaper real via
++ * WallpaperManager), igual ao comportamento puro do AOSP.
+  */
+ @LauncherAppSingleton
+ class WallpaperColorHints
+@@ -66,15 +82,21 @@ constructor(@ApplicationContext private val context: Context, tracker: DaggerSin
+ 
+     /**
+      * XaulinXs: cor efetiva usada pelo resto do launcher. Prioriza
+-     * [xaulinxsColors] (nosso wallpaper próprio); [systemColors] é só o
+-     * fallback enquanto [xaulinxsColors] ainda não foi calculada.
++     * [xaulinxsColors] (nosso wallpaper próprio) apenas quando o
++     * interruptor "usar wallpaper do app" está ligado; [systemColors] é
++     * o fallback enquanto [xaulinxsColors] ainda não foi calculada E é o
++     * valor usado sempre que o interruptor está desligado (ver fix
++     * acima).
+      */
+     var colors: WallpaperColors?
+-        get() = xaulinxsColors ?: systemColors
++        get() = if (isXaulinxsWallpaperEnabled()) xaulinxsColors ?: systemColors else systemColors
+         private set(value) {
+             systemColors = value
+         }
+ 
++    private fun isXaulinxsWallpaperEnabled(): Boolean =
++        LauncherPrefs.get(context).get(XaulinXsInAppWallpaperSetting.IN_APP_WALLPAPER_ENABLED)
++
+     val hints: Int
+         get() = colors?.colorHints ?: 0
+ 
+@@ -104,6 +126,18 @@ constructor(@ApplicationContext private val context: Context, tracker: DaggerSin
+         com.xaulinxs.customizations.theme.XaulinXsInAppWallpaper.addOnChangedListener {
+             recomputeXaulinxsColors()
+         }
++
++        // XaulinXs fix: quando o interruptor "usar wallpaper do app" é
++        // ligado/desligado, a cor efetiva de [colors] muda de fonte na
++        // hora (ver getter acima), mas ninguém avisava os listeners de
++        // hints disso — ícones temáticos/scrim/balões só atualizavam na
++        // próxima leitura incidental. Notifica explicitamente aqui,
++        // sempre (não dá pra comparar "antes vs depois" porque quando
++        // este listener dispara a preference já foi persistida, ou seja,
++        // não há mais como ler o valor anterior de [hints] pra comparar).
++        XaulinXsInAppWallpaperSetting.addOnChangedListener {
++            onColorHintsChangedListeners.forEach { it.onColorHintsChanged(hints) }
++        }
+     }
+ 
+     private fun recomputeXaulinxsColors() {

@@ -326,20 +326,34 @@ constructor(
 
     /** Wraps the provided icon in an adaptive icon drawable */
     @JvmOverloads
-    fun wrapToAdaptiveIcon(icon: Drawable, options: IconOptions? = null): AdaptiveIconDrawable =
-        icon as? AdaptiveIconDrawable
+    fun wrapToAdaptiveIcon(icon: Drawable, options: IconOptions? = null): AdaptiveIconDrawable {
+        // XaulinXs fix (info.txt: "remover sombra" não deve só tirar o
+        // fundo, mas também aumentar o ícone que fica pequeno sem ele):
+        // LEGACY_ICON_SCALE embute um fator extra de 0.7 (ver companion
+        // object) pensado especificamente para o ícone "flutuar" com
+        // folga dentro do fundo/prato branco sintético + sombra ao redor
+        // — margem que só faz sentido visualmente com esse fundo
+        // presente. Sem fundo nem sombra, essa folga extra só faz o
+        // ícone parecer pequeno/perdido comparado aos ícones adaptativos
+        // reais vizinhos (que preenchem toda a área visível de segurança
+        // do próprio formato). Quando a opção está ligada, usa
+        // LEGACY_ICON_SCALE_NO_BG (mesma base de proporção da área
+        // visível do ícone, mas sem o fator 0.7 de recuo) — ícone maior,
+        // ocupando a mesma área de segurança que os demais.
+        val removeBgAndShadow =
+            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                .shouldRemoveBackgroundAndShadow(context)
+        val legacyScale = if (removeBgAndShadow) LEGACY_ICON_SCALE_NO_BG else LEGACY_ICON_SCALE
+        return icon as? AdaptiveIconDrawable
             ?: AdaptiveIconDrawable(
                     ColorDrawable(
-                        if (
-                            com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
-                                .shouldRemoveBackgroundAndShadow(context)
-                        )
-                            Color.TRANSPARENT
+                        if (removeBgAndShadow) Color.TRANSPARENT
                         else options?.wrapperBackgroundColor ?: DEFAULT_WRAPPER_BACKGROUND
                     ),
-                    icon.wrapIntoSquareDrawable(LEGACY_ICON_SCALE),
+                    icon.wrapIntoSquareDrawable(legacyScale),
                 )
                 .apply { setBounds(0, 0, 1, 1) }
+    }
 
     private fun drawableToBitmap(
         icon: Drawable,
@@ -537,6 +551,15 @@ constructor(
         private val LEGACY_ICON_SCALE =
             sqrt(MAX_SQUARE_AREA_FACTOR).toFloat() *
                 .7f *
+                (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
+
+        // XaulinXs: mesma base de LEGACY_ICON_SCALE, mas sem o fator .7f
+        // de recuo extra — usado quando o fundo/sombra sintéticos do
+        // ícone legado foram removidos (ver wrapToAdaptiveIcon), já que
+        // esse recuo só existia para o ícone "flutuar" com folga dentro
+        // do prato branco + sombra que não existem mais nesse modo.
+        private val LEGACY_ICON_SCALE_NO_BG =
+            sqrt(MAX_SQUARE_AREA_FACTOR).toFloat() *
                 (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
 
         const val MODE_DEFAULT: Int = 0

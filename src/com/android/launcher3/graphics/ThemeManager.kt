@@ -101,12 +101,29 @@ constructor(
         lifecycle.addCloseable(overlayChangeHandler.addCallback { verifyIconState() })
 
         val prefListener = LauncherPrefChangeListener {
-            if (it == PREF_ICON_SHAPE.sharedPrefKey) verifyIconState()
+            if (
+                it == PREF_ICON_SHAPE.sharedPrefKey ||
+                    it == com.xaulinxs.customizations.theme.XaulinXsManualColor
+                        .MANUAL_COLOR_ENABLED
+                        .sharedPrefKey
+            )
+                verifyIconState()
         }
-        prefs.addListener(prefListener, PREF_ICON_SHAPE)
+        // XaulinXs fix: precisa reavaliar o themeController (ver
+        // parseIconState acima) assim que a cor manual for ligada/
+        // desligada nas settings, não só quando o shape do ícone muda.
+        prefs.addListener(
+            prefListener,
+            PREF_ICON_SHAPE,
+            com.xaulinxs.customizations.theme.XaulinXsManualColor.MANUAL_COLOR_ENABLED,
+        )
         lifecycle.addCloseable(themePreference.forEach(mainExecutor) { verifyIconState() })
         lifecycle.addCloseable {
-            prefs.removeListener(prefListener, PREF_ICON_SHAPE)
+            prefs.removeListener(
+                prefListener,
+                PREF_ICON_SHAPE,
+                com.xaulinxs.customizations.theme.XaulinXsManualColor.MANUAL_COLOR_ENABLED,
+            )
             iconState.closeController()
         }
     }
@@ -181,7 +198,28 @@ constructor(
                     ShapeDelegate.GenericPathShape(path)
                 }
 
-        val themeKey = themePreference.value
+        // XaulinXs fix (cor manual de ícones parou de funcionar com
+        // ícones temáticos desligados): a cor manual (Feature 5,
+        // XaulinXsManualColor) só é aplicada de fato através do pipeline
+        // de ícones "mono-icons" (XaulinXsMonoIconThemeFactory ->
+        // XaulinXsThemedIconColors), que só roda quando existe um
+        // themeController != null. Sem essa mudança, desligar "ícones
+        // temáticos" zera themeKey/themeController e a cor manual nunca
+        // chega a ser lida, mesmo com o interruptor dela ligado — bug
+        // relatado pelo usuário. Como o pedido é que a cor manual
+        // funcione justamente QUANDO ícones temáticos está desligado,
+        // força aqui o mesmo themeKey do modo temático (MONO_THEME_VALUE)
+        // sempre que a cor manual estiver ativada e o usuário não tiver
+        // escolhido nenhum tema de ícone por conta própria — se o usuário
+        // ligar "ícones temáticos" de verdade, a preferência dele
+        // (themePreference.value) continua tendo prioridade normalmente.
+        val themeKey =
+            themePreference.value
+                ?: if (com.xaulinxs.customizations.theme.XaulinXsManualColor
+                        .getBaseColorIfEnabled(context) != null
+                )
+                    MONO_THEME_VALUE
+                else null
         val themeCode = themeKey?.toString() ?: "no-theme"
 
         val iconControllerFactory =

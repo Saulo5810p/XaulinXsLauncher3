@@ -252,6 +252,13 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/xaulinxs_change_wallpaper_title"
             android:exported="false" />
+        <!-- XaulinXs Customizations: Activity ponte pro seletor de imagem do ícone
+             customizado de app, aberta pelo popup de app (mesmo padrão de
+             WallpaperPickerActivity acima). -->
+        <activity
+            android:name="com.xaulinxs.customizations.apps.AppIconPickerActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false" />
         <activity
             android:name="com.xaulinxs.customizations.settings.GridSizePickerActivity"
             android:theme="@style/HomeSettings.Theme"

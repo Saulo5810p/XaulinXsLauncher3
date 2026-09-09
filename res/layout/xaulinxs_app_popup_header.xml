@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations (novo popup de app).
+
+     Cabeçalho inserido como PRIMEIRO filho do popup de app (mesmo
+     popup usado na área de trabalho, na hotseat e no menu de
+     aplicativos - PopupControllerForAppIcon é o ponto único dos três).
+     Os atalhos/apps existentes (system shortcuts + deep shortcuts)
+     continuam sendo adicionados normalmente pelo código original
+     logo abaixo deste cabeçalho.
+
+     - Ícone grande no meio: clicável, abre o seletor de imagem/galeria
+       (AppIconPickerActivity) pra trocar por uma imagem própria.
+     - Nome do app num retângulo contornado: EditText editável de
+       verdade - salva a renomeação ao perder o foco ou apertar
+       "concluído" no teclado.
+     - Interruptor "esconder do menu de aplicativos": persiste a
+       escolha e filtra a lista de apps (AlphabeticalAppsList).
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xaulinxs_app_popup_header"
+    android:layout_width="@dimen/xaulinxs_app_popup_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="@dimen/xaulinxs_app_popup_padding"
+    android:paddingStart="@dimen/xaulinxs_app_popup_padding"
+    android:paddingEnd="@dimen/xaulinxs_app_popup_padding"
+    android:paddingBottom="@dimen/xaulinxs_option_row_padding">
+
+    <ImageView
+        android:id="@+id/xaulinxs_app_popup_icon"
+        android:layout_width="@dimen/xaulinxs_app_popup_icon_size"
+        android:layout_height="@dimen/xaulinxs_app_popup_icon_size"
+        android:background="@drawable/xaulinxs_app_popup_icon_bg"
+        android:padding="@dimen/xaulinxs_option_stroke_width"
+        android:contentDescription="@string/xaulinxs_app_popup_icon_desc"
+        android:scaleType="fitCenter" />
+
+    <EditText
+        android:id="@+id/xaulinxs_app_popup_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xaulinxs_option_row_padding"
+        android:background="@drawable/xaulinxs_app_popup_field_bg"
+        android:paddingTop="@dimen/xaulinxs_option_stroke_padding"
+        android:paddingBottom="@dimen/xaulinxs_option_stroke_padding"
+        android:paddingStart="@dimen/xaulinxs_option_row_padding"
+        android:paddingEnd="@dimen/xaulinxs_option_row_padding"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:textColor="?attr/popupTextColor"
+        android:textColorHint="?attr/popupTextColor"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xaulinxs_option_row_padding"
+        android:background="@drawable/xaulinxs_app_popup_field_bg"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/xaulinxs_option_row_padding"
+        android:paddingEnd="@dimen/xaulinxs_option_stroke_padding"
+        android:paddingTop="@dimen/xaulinxs_option_stroke_padding"
+        android:paddingBottom="@dimen/xaulinxs_option_stroke_padding"
+        android:minHeight="@dimen/xaulinxs_option_row_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/xaulinxs_app_popup_hide_label"
+            android:textSize="14sp"
+            android:textColor="?attr/popupTextColor" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/xaulinxs_app_popup_hide_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+
+    </LinearLayout>
+
+</LinearLayout>

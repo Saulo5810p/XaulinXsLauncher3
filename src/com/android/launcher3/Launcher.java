@@ -196,6 +196,7 @@ import com.android.launcher3.popup.PopupContainer;
 import com.android.launcher3.popup.PopupController;
 import com.android.launcher3.popup.SystemShortcut;
 import com.android.launcher3.popup.WorkspaceLongPressOptions;
+import com.xaulinxs.customizations.popup.XaulinXsOptionsSheet;
 import com.android.launcher3.statemanager.StateManager;
 import com.android.launcher3.statemanager.StateManager.StateHandler;
 import com.android.launcher3.statemanager.StatefulActivity;
@@ -1248,6 +1249,9 @@ public class Launcher extends StatefulActivity<LauncherState>
         // Setup Apps
         mAppsView = findViewById(R.id.apps_view);
         mAppsView.setAllAppsTransitionController(mAllAppsController);
+        // XaulinXs Customizations - liga o popup de app (nome/ícone customizado,
+        // esconder do menu de aplicativos) ao refresh ao vivo da UI.
+        com.xaulinxs.customizations.apps.XaulinXsAppOverrideRefresher.register(this);
 
         // Setup Scrim
         mScrimView = findViewById(R.id.scrim_view);
@@ -2464,15 +2468,11 @@ public class Launcher extends StatefulActivity<LauncherState>
      * Shows the default options popup
      */
     public void showDefaultOptions(float x, float y) {
-        Rect pos = new Rect();
-        pos.offsetTo((int) x, (int) y);
-        pos.inset(-20, -20);
-        PopupContainer.Companion.showForMenuItems(
-                this,
-                getRootView(),
-                WorkspaceLongPressOptions.getAll(this),
-                pos
-        );
+        // XaulinXs Customizations - o popup de área vazia da tela inicial agora é um
+        // bottom sheet de verdade (com barrinha de arrastar pra fechar, igual ao menu
+        // de aplicativos), em vez do balão ancorado no ponto tocado. Por isso x/y não
+        // são mais usados aqui - o sheet sempre abre encostado na parte de baixo da tela.
+        XaulinXsOptionsSheet.show(this, getRootView(), WorkspaceLongPressOptions.getAll(this));
     }
 
     @Override

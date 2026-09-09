@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.android.launcher3.Flags;
 import com.android.launcher3.R;
+import com.xaulinxs.customizations.apps.XaulinXsAppOverrides;
 import com.android.launcher3.allapps.BaseAllAppsAdapter.AdapterItem;
 import com.android.launcher3.model.data.AppInfo;
 import com.android.launcher3.model.data.ItemInfo;
@@ -248,6 +249,12 @@ public class AlphabeticalAppsList implements AllAppsStore.OnUpdateListener {
         Stream<AppInfo> appSteam = Stream.of(mAllAppsStore.getApps()).filter(
                 info -> !isPrivateSpaceApp(info));
         Stream<AppInfo> privateAppStream = Stream.of(mAllAppsStore.getApps());
+
+        // XaulinXs Customizations - filtra apps que o usuário marcou como "esconder do
+        // menu de aplicativos" no popup do app. Continuam instalados e utilizáveis
+        // (atalho na tela inicial, busca externa etc.), só não aparecem nesta lista.
+        appSteam = appSteam.filter(info -> info.componentName == null
+                || !XaulinXsAppOverrides.isHidden(mActivityContext.asContext(), info.componentName));
 
         if (!hasSearchResults() && mItemFilter != null) {
             appSteam = appSteam.filter(mItemFilter);

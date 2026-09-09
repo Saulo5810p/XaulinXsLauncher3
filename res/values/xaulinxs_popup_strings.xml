@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Strings novas desta feature, isoladas do strings.xml do AOSP
+     (que é sobrescrito por atualizações/traduções automáticas).
+-->
+<resources>
+    <string name="xaulinxs_app_popup_icon_desc">Ícone do app. Em breve: toque para trocar por uma imagem própria.</string>
+    <string name="xaulinxs_app_popup_hide_label">Esconder do menu de aplicativos</string>
+</resources>

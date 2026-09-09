@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Container das 4 opções do popup de área vazia da tela inicial
+     (Plano de fundo e estilo / Widgets / Lista de apps / Configurações).
+
+     Propositalmente SEM o tag "popup_container_iterate_children": isso
+     impede que ArrowPopup#assignMarginsAndBackgrounds mexa nos filhos
+     deste container (que normalmente funde os itens em formato de
+     "pílula" - cantos arredondados só no primeiro/último item). Assim
+     cada retângulo definido em xaulinxs_option_shortcut.xml controla o
+     próprio fundo e margem, ficando com os 4 cantos arredondados e um
+     espaço visível entre eles.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xaulinxs_option_rows_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/deep_shortcuts_elevation"
+    android:orientation="vertical" />

@@ -70,6 +70,7 @@ import com.android.launcher3.shortcuts.ShortcutRequest
 import com.android.launcher3.util.ApplicationInfoWrapper
 import com.android.launcher3.util.CancellableTask
 import com.android.launcher3.util.ComponentKey
+import com.xaulinxs.customizations.apps.XaulinXsAppOverrides
 import com.android.launcher3.util.DaggerSingletonTracker
 import com.android.launcher3.util.Executors
 import com.android.launcher3.util.Executors.MAIN_EXECUTOR
@@ -593,16 +594,43 @@ constructor(
         }
 
         // apply package override
-        if (!Flags.enableSupportForArchiving() || !info.isArchived) return
+        if (!Flags.enableSupportForArchiving() || !info.isArchived) {
+            applyXaulinXsOverride(info)
+            return
+        }
 
         val targetPackage = info.targetPackage ?: return
         val packageEntry = getInMemoryPackageEntryLocked(targetPackage, info.user)
-        if (packageEntry == null || packageEntry.bitmap.isLowRes) return
+        if (packageEntry == null || packageEntry.bitmap.isLowRes) {
+            applyXaulinXsOverride(info)
+            return
+        }
 
         info.appTitle = Utilities.trim(info.title)
         info.title = Utilities.trim(packageEntry.title)
         info.contentDescription = packageEntry.contentDescription
         info.bitmap = packageEntry.bitmap
+        applyXaulinXsOverride(info)
+    }
+
+    /**
+     * XaulinXs Customizations.
+     *
+     * Sobrepõe nome/ícone customizados definidos pelo usuário no popup do app, se
+     * existirem, por cima do que acabou de ser resolvido do sistema/cache normal.
+     * Roda por último de propósito, depois de toda a lógica original (inclusive o
+     * override de archiving acima) - assim funciona igual não importa qual caminho
+     * o item seguiu antes de chegar aqui.
+     */
+    private fun applyXaulinXsOverride(info: ItemInfoWithIcon) {
+        val componentName = info.targetComponent ?: return
+        val override = XaulinXsAppOverrides.get(context, componentName) ?: return
+        override.customName?.let { info.title = Utilities.trim(it) }
+        override.customIconFile?.let { fileName ->
+            XaulinXsAppOverrides.loadCustomIconBitmap(context, fileName)?.let { bmp ->
+                info.bitmap = BitmapInfo.fromBitmap(bmp)
+            }
+        }
     }
 
     fun updateSessionCache(key: PackageUserKey, info: SessionInfo) =

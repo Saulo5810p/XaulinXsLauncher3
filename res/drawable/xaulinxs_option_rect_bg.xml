@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Retângulo contornado com cantos arredondados usado pelos 4 botões
+     do popup de área vazia. A cor segue o mesmo pipeline dinâmico
+     (baseado no wallpaper) que o resto dos balões já usa, via os
+     atributos ?attr/popupColorPrimary e ?attr/popupColorTertiary.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFFFF"/>
+            <corners android:radius="@dimen/xaulinxs_option_corner_radius" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/popupColorPrimary"/>
+            <stroke
+                android:width="@dimen/xaulinxs_option_stroke_width"
+                android:color="?attr/popupColorTertiary"/>
+            <corners android:radius="@dimen/xaulinxs_option_corner_radius" />
+        </shape>
+    </item>
+</ripple>

@@ -242,6 +242,34 @@ public class AllAppsStore {
         return Unit.INSTANCE;
     }
 
+    /**
+     * XaulinXs Customizations.
+     *
+     * Reaplica o ícone/nome de um {@link AppInfo} já mutado (ex.: nome renomeado ou
+     * ícone customizado escolhido na galeria pelo popup do app) em toda BubbleTextView
+     * visível que aponte pra ele - sem precisar de um reload completo do LauncherModel.
+     * Mesmo padrão de {@link #updateProgressBar}: identidade do objeto (==), porque
+     * queremos exatamente a mesma instância que já está na tela.
+     */
+    public void xaulinXsReapplyIcon(AppInfo app) {
+        updateAllIcons((child) -> {
+            if (child.getTag() == app) {
+                child.applyFromApplicationInfo(app);
+            }
+        });
+    }
+
+    /**
+     * XaulinXs Customizations.
+     *
+     * Força os listeners (em especial AlphabeticalAppsList.onAppsUpdated()) a
+     * recalcular a lista visível sem recarregar dados do zero - usado depois que o
+     * interruptor "esconder do menu de aplicativos" muda no popup do app.
+     */
+    public void xaulinXsRefreshFilters() {
+        notifyUpdate();
+    }
+
     private void updateAllIcons(Consumer<BubbleTextView> action) {
         for (int i = mIconContainers.size() - 1; i >= 0; i--) {
             ViewGroup parent = mIconContainers.get(i);

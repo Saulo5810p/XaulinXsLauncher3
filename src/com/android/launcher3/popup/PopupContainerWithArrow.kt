@@ -23,10 +23,12 @@ import android.content.Context
 import android.graphics.PointF
 import android.graphics.Typeface
 import android.os.Handler
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -131,6 +133,43 @@ private constructor(
     override fun requestFocusOnOpened(): Boolean {
         return true
     }
+
+    // XaulinXs Customizations - Fase 1: o popup de app deixou de ser um balão com seta
+    // apontando pro ícone - agora é um retângulo grande e contornado, então a seta não
+    // faz mais sentido visualmente.
+    override fun shouldAddArrow(): Boolean {
+        return false
+    }
+
+    // XaulinXs Customizations - Fase 2: em vez de ancorar perto do ícone tocado
+    // (comportamento original de balão), o popup agora sempre abre encostado na parte
+    // de baixo da tela, centralizado horizontalmente - do tamanho que o conteúdo
+    // precisar (wrap_content em altura, já era assim antes; só a POSIÇÃO muda aqui,
+    // não o cálculo de tamanho). Mesmo espírito do XaulinXsOptionsSheet (Fase 1.5),
+    // mas sem virar bottom sheet de verdade: continua sendo um ArrowPopup simples,
+    // só que sempre ancorado embaixo.
+    override fun orientAboutObject() {
+        measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        val dragLayer = popupContainer
+        val insets = dragLayer.insets
+        val width = measuredWidth
+        val height = measuredHeight
+
+        mIsLeftAligned = true
+        mIsAboveIcon = false
+        mGravity = 0
+
+        val x = (dragLayer.width - width) / 2 - insets.left
+        setX(x.toFloat())
+
+        val lp = layoutParams as android.widget.FrameLayout.LayoutParams
+        lp.gravity = Gravity.BOTTOM
+        lp.bottomMargin = insets.bottom + xaulinXsBottomAnchorMargin
+        lp.topMargin = 0
+    }
+
+    private val xaulinXsBottomAnchorMargin: Int
+        get() = resources.getDimensionPixelSize(R.dimen.xaulinxs_app_popup_bottom_margin)
 
     /**
      * Populates and shows the popup container with only the provided system shortcuts.
@@ -524,7 +563,108 @@ private constructor(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                 )
+            // XaulinXs Customizations - Fase 1: cabeçalho novo (ícone grande, nome, interruptor
+            // de esconder do menu de aplicativos) como primeiro filho do popup. Os atalhos do
+            // app (deep shortcuts / system shortcuts) continuam sendo adicionados depois disso,
+            // pelo código original, sem nenhuma mudança de comportamento.
+            bindXaulinXsAppPopupHeader(container, itemInfo)
             return container
+        }
+
+        /**
+         * Infla o cabeçalho [R.layout.xaulinxs_app_popup_header] como primeiro filho do popup e
+         * preenche o ícone e o nome do item. O campo de nome, o ícone e o interruptor de
+         * "esconder do menu de aplicativos" persistem a escolha do usuário via
+         * [XaulinXsAppOverrides] e refletem na UI em tempo real através de
+         * [XaulinXsAppOverrideRefresher] (registrado uma vez em Launcher.onCreate).
+         */
+        private fun bindXaulinXsAppPopupHeader(
+            container: PopupContainerWithArrow<*>,
+            itemInfo: ItemInfo,
+        ) {
+            val header =
+                container.inflateAndAdd<ViewGroup>(
+                    R.layout.xaulinxs_app_popup_header,
+                    container,
+                    0,
+                )
+            val context = container.context
+            // Renomear/trocar ícone/esconder só fazem sentido pra apps de verdade
+            // (têm um componentName único e estável) - não pra deep shortcuts de
+            // dentro de um app, que não têm identidade própria pra guardar overrides.
+            val componentName =
+                (itemInfo as? ItemInfoWithIcon)?.targetComponent?.takeIf {
+                    itemInfo.itemType != com.android.launcher3.LauncherSettings.Favorites
+                        .ITEM_TYPE_DEEP_SHORTCUT
+                }
+            val override = componentName?.let { XaulinXsAppOverrides.get(context, it) }
+
+            val iconView = header.findViewById<ImageView>(R.id.xaulinxs_app_popup_icon)
+            if (itemInfo is ItemInfoWithIcon) {
+                iconView.setImageDrawable(itemInfo.newIcon(context))
+            } else {
+                iconView.visibility = View.GONE
+            }
+            if (componentName != null) {
+                iconView.isClickable = true
+                iconView.isFocusable = true
+                iconView.setOnClickListener {
+                    val intent =
+                        android.content.Intent(
+                                context,
+                                com.xaulinxs.customizations.apps.AppIconPickerActivity::class
+                                    .java,
+                            )
+                            .putExtra(
+                                com.xaulinxs.customizations.apps.EXTRA_TARGET_COMPONENT,
+                                componentName,
+                            )
+                    context.startActivity(intent)
+                    container.close(true)
+                }
+            }
+
+            val nameView = header.findViewById<EditText>(R.id.xaulinxs_app_popup_name)
+            nameView.setText(override?.customName ?: itemInfo.title ?: "")
+            if (componentName != null) {
+                val saveName = {
+                    val typed = nameView.text?.toString().orEmpty()
+                    // Nome vazio = volta pro nome original do app (mesmo espírito de
+                    // renomear pra "" em outros launchers: reseta em vez de ficar em branco).
+                    val newValue = typed.ifBlank { null }
+                    XaulinXsAppOverrides.setCustomName(context, componentName, newValue)
+                }
+                nameView.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) saveName() }
+                nameView.setOnEditorActionListener { _, actionId, event ->
+                    if (
+                        actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
+                            (event?.keyCode == android.view.KeyEvent.KEYCODE_ENTER &&
+                                event.action == android.view.KeyEvent.ACTION_DOWN)
+                    ) {
+                        saveName()
+                        nameView.clearFocus()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            } else {
+                nameView.isEnabled = false
+                nameView.isFocusable = false
+            }
+
+            val hideSwitch =
+                header.findViewById<androidx.appcompat.widget.SwitchCompat>(
+                    R.id.xaulinxs_app_popup_hide_switch
+                )
+            if (componentName != null) {
+                hideSwitch.isChecked = override?.hidden == true
+                hideSwitch.setOnCheckedChangeListener { _, isChecked ->
+                    XaulinXsAppOverrides.setHidden(context, componentName, isChecked)
+                }
+            } else {
+                hideSwitch.isEnabled = false
+            }
         }
     }
 }

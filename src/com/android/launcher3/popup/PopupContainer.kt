@@ -137,10 +137,17 @@ open class PopupContainer<T : ActivityContext>(
                     }
             )
         } else {
-            systemShortcutContainer = inflateAndAdd(R.layout.system_shortcut_rows_container, this)
+            // XaulinXs Customizations - as opções da área vazia da tela inicial (Plano de
+            // fundo e estilo / Widgets / Lista de apps / Configurações) agora usam
+            // retângulos grandes e contornados em vez da lista fina original. Layouts
+            // próprios (xaulinxs_option_rows_container / xaulinxs_option_shortcut), não
+            // usados por mais ninguém, então isso não muda a aparência dos atalhos de um
+            // app individual.
+            systemShortcutContainer =
+                inflateAndAdd(R.layout.xaulinxs_option_rows_container, this)
             systemShortcuts.forEach { systemShortcut ->
                 val view: DeepShortcutView =
-                    inflateAndAdd(R.layout.system_shortcut, systemShortcutContainer)
+                    inflateAndAdd(R.layout.xaulinxs_option_shortcut, systemShortcutContainer)
 
                 view.iconView.setBackgroundResource(systemShortcut.iconResId)
                 view.bubbleText.setText(systemShortcut.labelResId)

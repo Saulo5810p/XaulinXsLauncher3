@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Um dos 4 retângulos grandes do popup de área vazia (Plano de fundo
+     e estilo / Widgets / Lista de apps / Configurações). Precisa
+     continuar sendo um com.android.launcher3.shortcuts.DeepShortcutView
+     porque PopupContainer.showForSystemShortcuts faz
+     "inflateAndAdd<DeepShortcutView>" nesse layout.
+-->
+<com.android.launcher3.shortcuts.DeepShortcutView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/xaulinxs_option_row_width"
+    android:layout_height="wrap_content"
+    android:id="@+id/xaulinxs_option_shortcut"
+    android:minHeight="@dimen/xaulinxs_option_row_height"
+    android:layout_marginBottom="@dimen/xaulinxs_option_row_gap"
+    android:elevation="@dimen/deep_shortcuts_elevation"
+    android:background="@drawable/xaulinxs_option_rect_bg"
+    android:theme="@style/PopupItem" >
+
+    <include layout="@layout/xaulinxs_option_shortcut_content" />
+
+</com.android.launcher3.shortcuts.DeepShortcutView>

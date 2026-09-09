@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (novo popup de app).
+     Retângulo contornado com cantos arredondados usado pelo campo de
+     nome e pela linha do interruptor "esconder do menu de aplicativos"
+     no topo do novo popup de app.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/popupColorPrimary"/>
+    <stroke
+        android:width="@dimen/xaulinxs_option_stroke_width"
+        android:color="?attr/popupColorTertiary"/>
+    <corners android:radius="@dimen/xaulinxs_app_popup_field_radius" />
+</shape>

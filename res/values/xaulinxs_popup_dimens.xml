@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Arquivo isolado de propósito: mantém todas as dimensões novas
+     desta feature juntas, sem mexer em res/values/dimens.xml (do
+     AOSP), pra ficar fácil de revisar e de remover se precisar
+     reverter só essa feature.
+-->
+<resources>
+    <!-- Popup de área vazia: os 4 retângulos (Plano de fundo e estilo,
+         Widgets, Lista de apps, Configurações da tela inicial). -->
+    <dimen name="xaulinxs_option_row_width">300dp</dimen>
+    <dimen name="xaulinxs_option_row_height">76dp</dimen>
+    <dimen name="xaulinxs_option_row_gap">14dp</dimen>
+    <dimen name="xaulinxs_option_row_padding">16dp</dimen>
+    <dimen name="xaulinxs_option_text_padding_start">64dp</dimen>
+    <dimen name="xaulinxs_option_icon_size">32dp</dimen>
+    <dimen name="xaulinxs_option_corner_radius">24dp</dimen>
+    <dimen name="xaulinxs_option_stroke_width">1.5dp</dimen>
+    <dimen name="xaulinxs_option_stroke_padding">10dp</dimen>
+
+    <!-- Popup de app (workspace, hotseat e menu de aplicativos):
+         cabeçalho com ícone, nome e interruptor de esconder. -->
+    <dimen name="xaulinxs_app_popup_width">280dp</dimen>
+    <dimen name="xaulinxs_app_popup_padding">20dp</dimen>
+    <dimen name="xaulinxs_app_popup_icon_size">88dp</dimen>
+    <dimen name="xaulinxs_app_popup_field_radius">20dp</dimen>
+
+    <!-- Fase 1.5: bottom sheet do popup de área vazia. -->
+    <dimen name="xaulinxs_sheet_corner_radius">28dp</dimen>
+    <dimen name="xaulinxs_sheet_bottom_padding">24dp</dimen>
+
+    <!-- Fase 2: distância entre o popup de app (ancorado embaixo) e a borda inferior
+         da tela / gesto de navegação. -->
+    <dimen name="xaulinxs_app_popup_bottom_margin">16dp</dimen>
+</resources>

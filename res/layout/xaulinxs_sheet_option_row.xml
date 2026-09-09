@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1.5.
+     Igual a xaulinxs_option_shortcut.xml, mas com largura total (match_parent) em
+     vez da largura fixa - esta versão é usada dentro do bottom sheet
+     (xaulinxs_workspace_options_sheet.xml), que já ocupa a largura da tela; a outra
+     continua sendo usada pelo popup ancorado de itens extras da tela inicial
+     (pastas, widgets, par de apps), que não virou bottom sheet nesta etapa.
+-->
+<com.android.launcher3.shortcuts.DeepShortcutView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/xaulinxs_option_row_height"
+    android:layout_marginBottom="@dimen/xaulinxs_option_row_gap"
+    android:elevation="@dimen/deep_shortcuts_elevation"
+    android:background="@drawable/xaulinxs_option_rect_bg"
+    android:theme="@style/PopupItem" >
+
+    <include layout="@layout/xaulinxs_option_shortcut_content" />
+
+</com.android.launcher3.shortcuts.DeepShortcutView>

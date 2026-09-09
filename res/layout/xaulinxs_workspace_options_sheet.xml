@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1.5.
+     Bottom sheet real (mesma família de componente do menu de aplicativos em modo
+     bottom sheet: com.android.launcher3.views.AbstractSlideInView) para o popup de
+     área vazia da tela inicial. Ocupa a tela inteira para capturar o toque fora do
+     conteúdo (fecha) e o gesto de arrastar pra baixo (a barrinha reaproveita os
+     mesmos drawable/dimens do menu de aplicativos: bg_rounded_corner_bottom_sheet_handle).
+-->
+<com.xaulinxs.customizations.popup.XaulinXsOptionsSheet
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xaulinxs_options_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:id="@+id/xaulinxs_sheet_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/xaulinxs_sheet_background"
+        android:paddingBottom="@dimen/xaulinxs_sheet_bottom_padding">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_handle_area_height">
+
+            <View
+                android:layout_width="@dimen/bottom_sheet_handle_width"
+                android:layout_height="@dimen/bottom_sheet_handle_height"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_rounded_corner_bottom_sheet_handle" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/xaulinxs_sheet_rows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/xaulinxs_option_row_padding"
+            android:paddingEnd="@dimen/xaulinxs_option_row_padding" />
+
+    </LinearLayout>
+
+</com.xaulinxs.customizations.popup.XaulinXsOptionsSheet>

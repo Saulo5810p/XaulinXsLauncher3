@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 1 (redesenho dos balões).
+     Conteúdo interno de cada um dos 4 retângulos do popup de área vazia
+     (ícone maior + rótulo maior que o system_shortcut_content.xml
+     original, para caber num botão bem maior e mais visível).
+-->
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:launcher="http://schemas.android.com/apk/res-auto" >
+
+    <View
+        android:id="@+id/icon"
+        android:layout_width="@dimen/xaulinxs_option_icon_size"
+        android:layout_height="@dimen/xaulinxs_option_icon_size"
+        android:layout_marginStart="@dimen/xaulinxs_option_row_padding"
+        android:layout_gravity="start|center_vertical"
+        android:backgroundTint="?attr/popupTextColor"/>
+
+    <com.android.launcher3.BubbleTextView
+        style="@style/BaseIconUnBounded"
+        android:id="@+id/bubble_text"
+        android:background="@null"
+        android:gravity="start|center_vertical"
+        android:minHeight="@dimen/xaulinxs_option_row_height"
+        android:textAlignment="viewStart"
+        android:paddingStart="@dimen/xaulinxs_option_text_padding_start"
+        android:paddingEnd="@dimen/xaulinxs_option_row_padding"
+        android:textSize="16sp"
+        android:lines="1"
+        android:ellipsize="end"
+        android:hyphenationFrequency="full"
+        android:textColor="?attr/popupTextColor"
+        launcher:iconDisplay="shortcut_popup"
+        launcher:layoutHorizontal="true"
+        android:focusable="false" />
+
+</merge>

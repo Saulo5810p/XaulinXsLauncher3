@@ -29,16 +29,22 @@ import com.android.launcher3.model.data.ItemInfo
 import com.android.launcher3.popup.PopupData
 import com.android.launcher3.shortcuts.DeepShortcutView
 import com.android.launcher3.util.Themes
+import com.android.launcher3.Launcher
 import com.android.launcher3.views.AbstractSlideInView
 import com.android.launcher3.views.ActivityContext
 
 /**
  * Bottom sheet com barrinha de arrastar para as opções da área vazia da tela inicial.
+ *
+ * O parâmetro genérico de [AbstractSlideInView] exige um tipo que seja Context E
+ * ActivityContext ao mesmo tempo (`T extends Context & ActivityContext`). A interface
+ * ActivityContext sozinha não satisfaz esse bound - é preciso a classe concreta real
+ * usada em runtime, que no launcher-phone é sempre [Launcher].
  */
 class XaulinXsOptionsSheet
 @JvmOverloads
 constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    AbstractSlideInView<ActivityContext>(context, attrs, defStyleAttr) {
+    AbstractSlideInView<Launcher>(context, attrs, defStyleAttr) {
 
     companion object {
         private const val OPEN_CLOSE_DURATION_MS = 250L

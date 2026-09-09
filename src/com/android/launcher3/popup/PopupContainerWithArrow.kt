@@ -47,6 +47,7 @@ import com.android.launcher3.shortcuts.DeepShortcutView
 import com.android.launcher3.util.Executors
 import com.android.launcher3.util.ShortcutUtil
 import com.android.launcher3.views.ActivityContext
+import com.xaulinxs.customizations.apps.XaulinXsAppOverrides
 import java.util.Optional
 import java.util.stream.Collectors
 import kotlin.math.max

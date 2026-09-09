@@ -1,0 +1,131 @@
+diff --git a/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt b/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
+index 53888a2..6b08409 100644
+--- a/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
++++ b/iconloader/src/com/android/launcher3/icons/BaseIconFactory.kt
+@@ -188,7 +188,7 @@ constructor(
+             tempIcon = wrapToAdaptiveIcon(tempIcon, options)
+         }
+ 
+-        // XaulinXs fix (info.txt: "Fundo dos ícones não foi removido. Em
++        // XaulinXs fix #2 (info.txt: "Fundo dos ícones não foi removido. Em
+         // vez de restringir a alguns, aplicar a remoção do fundo para
+         // todo e qualquer ícone que tiver um"):
+         //
+@@ -203,33 +203,40 @@ constructor(
+         // transparente. Esse ícone tecnicamente "tem" um fundo mesmo sem
+         // passar pelo wrapper sintético.
+         //
+-        // Fix genérico: depois que tempIcon já está resolvido (embrulhado
+-        // ou não), se a opção estiver ligada e ele for um
+-        // AdaptiveIconDrawable cujo background é um ColorDrawable OPACO
+-        // (alpha 255 — não mexe em fundos já parcialmente/totalmente
+-        // transparentes, que não são o problema relatado), substitui o
+-        // background por transparente. Cobre tanto o caso já embrulhado
+-        // (branco sintético de wrapToAdaptiveIcon) quanto o ícone
+-        // adaptativo real de terceiros com fundo opaco próprio — "todo e
+-        // qualquer ícone que tiver um fundo", como pedido.
++        // XaulinXs fix #3 (relatado pelo usuário: "fundo branco não
++        // removido de vários ícones, e alguns ficaram com um fundo preto
++        // ao remover"): a condição anterior só substituía o background
++        // quando ele era um ColorDrawable OPACO (alpha 255). Isso deixava
++        // passar praticamente todo o resto — background nulo, background
++        // com gradiente/bitmap/drawable customizado, ou parcialmente
++        // transparente — que são exatamente os casos mais comuns em apps
++        // reais (com.android.contacts, com.android.email etc. não usam
++        // um ColorDrawable puro). Nesses casos o fundo NUNCA era trocado
++        // por transparente ("fundo branco não removido") E,  pior, a
++        // flag xaulinxsLegacyIconWrapped nunca era marcada como true —
++        // então a sombra sintética (shadowGenerator.addPathShadow, mais
++        // abaixo em drawableToBitmap) continuava sendo desenhada em volta
++        // da máscara do ícone mesmo com a feature ligada, aparecendo como
++        // uma mancha/halo escuro por trás de um ícone que devia estar sem
++        // fundo nenhum ("fundo preto transparente" relatado).
++        //
++        // Fix definitivo: ignora completamente o tipo/alpha do background
++        // atual — se a opção estiver ligada e o ícone for um
++        // AdaptiveIconDrawable (embrulhado ou nativo), o background vira
++        // SEMPRE transparente e a flag de "sem sombra" é SEMPRE marcada.
++        // Cobre "todo e qualquer ícone que tiver um fundo", como pedido,
++        // sem exceção por tipo de Drawable.
+         if (tempIcon is AdaptiveIconDrawable &&
+             com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                 .shouldRemoveBackgroundAndShadow(context)
+         ) {
+-            val bg = tempIcon.background
+-            if (bg is ColorDrawable && Color.alpha(bg.color) == 255) {
+-                tempIcon = AdaptiveIconDrawable(ColorDrawable(Color.TRANSPARENT), tempIcon.foreground)
+-                    .apply { bounds = icon.bounds }
+-                // Ícone adaptativo real com fundo próprio removido aqui —
+-                // ainda pode ter sombra sintética desenhada em
+-                // drawableToBitmap (que só pula a sombra quando
+-                // xaulinxsLegacyIconWrapped é true, ou seja, só para o
+-                // caso do wrap sintético). Marca também este caso como
+-                // "legado" para fins de sombra: um ícone que teve seu
+-                // fundo removido não deve manter uma sombra desenhada em
+-                // torno de uma máscara que já não tem fundo visível atrás.
+-                options.xaulinxsLegacyIconWrapped = true
+-            }
++            tempIcon = AdaptiveIconDrawable(ColorDrawable(Color.TRANSPARENT), tempIcon.foreground)
++                .apply { bounds = icon.bounds }
++            // Ícone sem fundo não deve manter uma sombra desenhada em
++            // torno de uma máscara que já não tem fundo visível atrás —
++            // ver drawableToBitmap, que só pula addPathShadow quando esta
++            // flag está true.
++            options.xaulinxsLegacyIconWrapped = true
+         }
+ 
+         val drawFullBleed = options.drawFullBleed ?: drawFullBleedIcons
+@@ -335,15 +342,31 @@ constructor(
+         // — margem que só faz sentido visualmente com esse fundo
+         // presente. Sem fundo nem sombra, essa folga extra só faz o
+         // ícone parecer pequeno/perdido comparado aos ícones adaptativos
+-        // reais vizinhos (que preenchem toda a área visível de segurança
+-        // do próprio formato). Quando a opção está ligada, usa
+-        // LEGACY_ICON_SCALE_NO_BG (mesma base de proporção da área
+-        // visível do ícone, mas sem o fator 0.7 de recuo) — ícone maior,
+-        // ocupando a mesma área de segurança que os demais.
++        // reais vizinhos.
++        //
++        // Correção (relatado pelo usuário: com.android.contacts/
++        // com.android.email continuavam minúsculos mesmo depois do fix
++        // anterior): a margem "segura" universal (offset calculado a
++        // partir de options.iconScale, em drawableToBitmap) já é aplicada
++        // por igual a TODOS os AdaptiveIconDrawable — legados ou reais —
++        // antes mesmo de chegar aqui; é ela que reproduz o "espaço de
++        // segurança" padrão que faz os ícones parecerem consistentes
++        // entre si. Um ícone adaptativo real de terceiros normalmente NÃO
++        // aplica nenhum recuo adicional dentro da própria camada de
++        // foreground (o desenho preenche a camada inteira, ponta a
++        // ponta; é o artista quem decide desenhar só dentro da área
++        // visível). Aplicar ainda um LEGACY_ICON_SCALE_NO_BG < 1 aqui
++        // encolhia o ícone legado DUAS vezes (margem universal + este
++        // recuo extra), continuando visivelmente menor que os vizinhos.
++        // Sem fundo/sombra, não sobra nenhuma razão pra manter recuo
++        // interno nenhum — usa escala 1 (preenche a própria camada de
++        // ponta a ponta, exatamente como um ícone adaptativo real faria),
++        // deixando só a margem universal (igual para todos) determinar o
++        // tamanho final.
+         val removeBgAndShadow =
+             com.xaulinxs.customizations.icons.XaulinXsLegacyIconAppearance
+                 .shouldRemoveBackgroundAndShadow(context)
+-        val legacyScale = if (removeBgAndShadow) LEGACY_ICON_SCALE_NO_BG else LEGACY_ICON_SCALE
++        val legacyScale = if (removeBgAndShadow) 1f else LEGACY_ICON_SCALE
+         return icon as? AdaptiveIconDrawable
+             ?: AdaptiveIconDrawable(
+                     ColorDrawable(
+@@ -553,15 +576,6 @@ constructor(
+                 .7f *
+                 (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
+ 
+-        // XaulinXs: mesma base de LEGACY_ICON_SCALE, mas sem o fator .7f
+-        // de recuo extra — usado quando o fundo/sombra sintéticos do
+-        // ícone legado foram removidos (ver wrapToAdaptiveIcon), já que
+-        // esse recuo só existia para o ícone "flutuar" com folga dentro
+-        // do prato branco + sombra que não existem mais nesse modo.
+-        private val LEGACY_ICON_SCALE_NO_BG =
+-            sqrt(MAX_SQUARE_AREA_FACTOR).toFloat() *
+-                (1f / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction()))
+-
+         const val MODE_DEFAULT: Int = 0
+         const val MODE_WITH_SHADOW: Int = 1
+         const val MODE_HARDWARE: Int = 1 shl 1

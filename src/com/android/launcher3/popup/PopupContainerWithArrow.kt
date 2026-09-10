@@ -48,6 +48,8 @@ import com.android.launcher3.util.Executors
 import com.android.launcher3.util.ShortcutUtil
 import com.android.launcher3.views.ActivityContext
 import com.xaulinxs.customizations.apps.XaulinXsAppOverrides
+import com.xaulinxs.customizations.theme.XaulinXsBalloonColor
+import android.graphics.drawable.GradientDrawable
 import java.util.Optional
 import java.util.stream.Collectors
 import kotlin.math.max
@@ -80,7 +82,7 @@ private constructor(
             mActivityContext?.itemOnClickListener?.onClick(view)
         }
 
-    private var containerWidth: Int = resources.getDimensionPixelSize(R.dimen.bg_popup_item_width)
+    private var containerWidth: Int = resources.getDimensionPixelSize(R.dimen.xaulinxs_app_popup_sheet_width)
     private var deepShortcutContainer: ViewGroup? = null
     private var currentHeight = 0f
 
@@ -142,6 +144,16 @@ private constructor(
         return false
     }
 
+    // XaulinXs Customizations - Fase 3 (popup de app: retângulo real): assignMarginsAndBackgrounds()
+    // (chamado por show()) reatribuiria o fundo de cada barra (inclusive
+    // single_item_primary quando só há 1 atalho visível), desfazendo o fundo
+    // transparente das novas barras (xaulinxs_app_popup_row_bg) - o retângulo
+    // único (xaulinxs_app_popup_sheet_background) já é o único fundo visível
+    // agora, então nenhuma DeepShortcutView deve mais ganhar fundo próprio.
+    override fun isShortcutOrWrapper(view: View): Boolean {
+        return false
+    }
+
     // XaulinXs Customizations - Fase 2: em vez de ancorar perto do ícone tocado
     // (comportamento original de balão), o popup agora sempre abre encostado na parte
     // de baixo da tela, centralizado horizontalmente - do tamanho que o conteúdo
@@ -181,11 +193,11 @@ private constructor(
         if (systemShortcuts.isEmpty()) {
             return
         }
-        containerWidth = resources.getDimensionPixelSize(R.dimen.bg_popup_item_width)
+        containerWidth = resources.getDimensionPixelSize(R.dimen.xaulinxs_app_popup_sheet_width)
         addSystemShortcuts(
             systemShortcuts,
-            R.layout.system_shortcut_rows_container,
-            R.layout.system_shortcut,
+            R.layout.xaulinxs_app_popup_system_shortcut_container,
+            R.layout.xaulinxs_app_popup_system_shortcut,
         )
         show()
     }
@@ -214,15 +226,15 @@ private constructor(
         deepShortcutCount: Int,
         systemShortcuts: List<SystemShortcut<*>>,
     ) {
-        containerWidth = resources.getDimensionPixelSize(R.dimen.bg_popup_item_width)
+        containerWidth = resources.getDimensionPixelSize(R.dimen.xaulinxs_app_popup_sheet_width)
 
         if (deepShortcutCount > 0) {
             addAllShortcuts(deepShortcutCount, systemShortcuts)
         } else if (systemShortcuts.isNotEmpty()) {
             addSystemShortcuts(
                 systemShortcuts,
-                R.layout.system_shortcut_rows_container,
-                R.layout.system_shortcut,
+                R.layout.xaulinxs_app_popup_system_shortcut_container,
+                R.layout.xaulinxs_app_popup_system_shortcut,
             )
         }
         show()
@@ -271,8 +283,8 @@ private constructor(
             // add all system shortcuts including widgets shortcut to same container
             addSystemShortcuts(
                 systemShortcuts,
-                R.layout.system_shortcut_rows_container,
-                R.layout.system_shortcut,
+                R.layout.xaulinxs_app_popup_system_shortcut_container,
+                R.layout.xaulinxs_app_popup_system_shortcut,
             )
             val startingHeight = ((shortcutHeight * systemShortcuts.size) + mChildContainerMargin)
             addDeepShortcuts(deepShortcutCount, startingHeight)
@@ -316,8 +328,8 @@ private constructor(
         if (nonCollapsibleSystemShortcuts.isNotEmpty()) {
             addSystemShortcuts(
                 nonCollapsibleSystemShortcuts,
-                R.layout.system_shortcut_rows_container,
-                R.layout.system_shortcut,
+                R.layout.xaulinxs_app_popup_system_shortcut_container,
+                R.layout.xaulinxs_app_popup_system_shortcut,
             )
             currentHeight +=
                 ((shortcutHeight * nonCollapsibleSystemShortcuts.size) + mChildContainerMargin)
@@ -357,7 +369,7 @@ private constructor(
             return
         }
 
-        systemShortcutContainer = inflateAndAdd(R.layout.system_shortcut_icons_container, this)
+        systemShortcutContainer = inflateAndAdd(R.layout.xaulinxs_app_popup_system_shortcut_icons_container, this)
 
         for (i in systemShortcuts.indices) {
             @LayoutRes var shortcutIconLayout = R.layout.system_shortcut_icon_only
@@ -386,7 +398,7 @@ private constructor(
      */
     private fun addDeepShortcuts(deepShortcutCount: Int, startingHeight: Float) {
         var height = startingHeight
-        deepShortcutContainer = inflateAndAdd(R.layout.deep_shortcut_container, this)
+        deepShortcutContainer = inflateAndAdd(R.layout.xaulinxs_app_popup_deep_shortcut_container, this)
         for (i in deepShortcutCount downTo 1) {
             height += shortcutHeight
             // when there is limited vertical screen space, limit total popup rows to fit
@@ -395,7 +407,7 @@ private constructor(
                     (mActivityContext?.deviceProfile?.deviceProperties?.availableHeightPx ?: 0)
             )
                 break
-            val v = inflateAndAdd<DeepShortcutView>(R.layout.deep_shortcut, deepShortcutContainer)
+            val v = inflateAndAdd<DeepShortcutView>(R.layout.xaulinxs_app_popup_deep_shortcut, deepShortcutContainer)
             v.layoutParams.width = containerWidth
             deepShortcuts.add(v)
         }
@@ -411,7 +423,7 @@ private constructor(
     }
 
     fun initializeWidgetShortcut(container: ViewGroup?, info: SystemShortcut<*>) {
-        val view = initializeSystemShortcut(R.layout.system_shortcut, container, info, false)
+        val view = initializeSystemShortcut(R.layout.xaulinxs_app_popup_system_shortcut, container, info, false)
         view.layoutParams.width = containerWidth
     }
 
@@ -569,7 +581,32 @@ private constructor(
             // app (deep shortcuts / system shortcuts) continuam sendo adicionados depois disso,
             // pelo código original, sem nenhuma mudança de comportamento.
             bindXaulinXsAppPopupHeader(container, itemInfo)
+            // XaulinXs Customizations - Fase 3 (popup de app: retângulo real): o balão de seta virou um retângulo real -
+            // fundo próprio (não mais herdado do container pai) + cor conectada à
+            // mesma feature de cor manual/extração de wallpaper que já pinta os
+            // itens individuais (XaulinXsBalloonColor, ver ArrowPopup.java mColors).
+            container.applyXaulinXsSheetBackground()
             return container
+        }
+
+        /**
+         * Define o fundo do retângulo do popup
+         * ([R.drawable.xaulinxs_app_popup_sheet_background]) e, em seguida, aplica em
+         * cima dele a mesma cor que [XaulinXsBalloonColor] já usa para os itens
+         * individuais - override manual (se ligado) ou extração do wallpaper; se
+         * nenhuma das duas estiver disponível, mantém a cor estática original do
+         * drawable (materialColorSurfaceContainer), sem quebrar nada.
+         */
+        private fun PopupContainerWithArrow<*>.applyXaulinXsSheetBackground() {
+            val sheetBackground =
+                context.getDrawable(R.drawable.xaulinxs_app_popup_sheet_background)
+                    ?.mutate()
+            background = sheetBackground
+            val overrideColor =
+                XaulinXsBalloonColor.getBalloonColorOverride(context) ?: return
+            if (sheetBackground is GradientDrawable) {
+                sheetBackground.setColor(overrideColor)
+            }
         }
 
         /**

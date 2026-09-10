@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (Balões -> Barras).
+     Equivalente a system_shortcut_icons_container.xml (modo colapsado
+     "ícones-apenas", usado quando o app tem mais de
+     SHORTCUT_COLLAPSE_THRESHOLD = 6 atalhos+opções no total), mas SEM
+     android:background e SEM elevação - mesmo raciocínio dos outros
+     containers desta fase. Os ícones individuais
+     (system_shortcut_icon_only/_start/_end, reaproveitados sem
+     alteração) já não tinham fundo sólido próprio, só ripple via
+     PopupItemIconOnly - por isso não precisaram de layout novo.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/system_shortcuts_container"
+    android:tag="@string/popup_container_iterate_children"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/system_shortcut_header_height"
+    android:orientation="horizontal"
+    android:gravity="end|center_vertical" />

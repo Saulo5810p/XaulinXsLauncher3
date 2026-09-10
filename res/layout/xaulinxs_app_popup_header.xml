@@ -16,17 +16,36 @@
        "concluído" no teclado.
      - Interruptor "esconder do menu de aplicativos": persiste a
        escolha e filtra a lista de apps (AlphabeticalAppsList).
+
+     XaulinXs Customizations - Fase 3: o interruptor era um
+     androidx.appcompat.widget.SwitchCompat sem nenhum switchStyle do
+     AppCompat disponível no tema deste popup (o tema do app só define
+     android:switchStyle para o Switch NATIVO, usado pelas
+     Configurações - ver res/values/styles.xml, SwitchStyle) - por isso
+     desenhava sem trilho/thumb, parecendo "só um retângulo que não faz
+     nada" mesmo com o listener de clique funcionando por trás. Trocado
+     para android.widget.Switch com o MESMO estilo usado nas
+     Configurações (style="@style/SwitchStyle"), aplicado direto na
+     view em vez de depender do tema herdado - fica visualmente
+     idêntico ao interruptor de "Esconder da gaveta de aplicativos" já
+     usado no editor de ícone do Lawnchair/Configurações.
+
+     Largura trocada de xaulinxs_app_popup_width (280dp) para
+     xaulinxs_app_popup_sheet_width (320dp) - mesma largura agora usada
+     pelas barras de atalhos/opções abaixo dele, unificando o retângulo
+     inteiro numa única largura (antes o cabeçalho e os itens tinham
+     larguras diferentes, uma das causas do popup parecer "bagunçado").
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/xaulinxs_app_popup_header"
-    android:layout_width="@dimen/xaulinxs_app_popup_width"
+    android:layout_width="@dimen/xaulinxs_app_popup_sheet_width"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:paddingTop="@dimen/xaulinxs_app_popup_padding"
-    android:paddingStart="@dimen/xaulinxs_app_popup_padding"
-    android:paddingEnd="@dimen/xaulinxs_app_popup_padding"
+    android:paddingTop="@dimen/xaulinxs_option_row_padding"
+    android:paddingStart="@dimen/xaulinxs_option_row_padding"
+    android:paddingEnd="@dimen/xaulinxs_option_row_padding"
     android:paddingBottom="@dimen/xaulinxs_option_row_padding">
 
     <ImageView
@@ -79,11 +98,13 @@
             android:textSize="14sp"
             android:textColor="?attr/popupTextColor" />
 
-        <androidx.appcompat.widget.SwitchCompat
+        <Switch
             android:id="@+id/xaulinxs_app_popup_hide_switch"
+            style="@style/SwitchStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
+            android:text=""
             android:textOn=""
             android:textOff="" />
 

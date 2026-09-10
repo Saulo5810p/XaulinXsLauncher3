@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3.
+     Linha fina entre as barras do popup de app (mesmo espírito de
+     xaulinxs_option_stroke_width usado na borda dos campos do
+     cabeçalho), pra separar visualmente as opções sem precisar de
+     fundo/sombra por item.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/popupColorTertiary"/>
+</shape>

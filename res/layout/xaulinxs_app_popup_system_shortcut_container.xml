@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (Balões -> Barras).
+     Equivalente a system_shortcut_rows_container.xml, mas SEM
+     android:background e SEM elevação - mesmo raciocínio de
+     xaulinxs_app_popup_deep_shortcut_container.xml.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/system_shortcuts_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:tag="@string/popup_container_iterate_children"
+    android:orientation="vertical"
+    android:divider="@drawable/xaulinxs_app_popup_row_divider"
+    android:showDividers="middle"
+    android:dividerPadding="@dimen/xaulinxs_option_row_padding" />

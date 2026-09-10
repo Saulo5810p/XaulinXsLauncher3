@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (Balões -> Barras).
+     Equivalente a system_shortcut.xml, mas usado só dentro do
+     retângulo único do popup de app: "Widgets", "Adicionar à tela
+     inicial" e "Informações do app" (as opções que ainda eram balões
+     originais) agora usam este mesmo padrão de barra transparente,
+     em vez de middle_item_primary.
+-->
+<com.android.launcher3.shortcuts.DeepShortcutView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/system_shortcut"
+    android:minHeight="@dimen/bg_popup_item_height"
+    android:background="@drawable/xaulinxs_app_popup_row_bg"
+    android:theme="@style/PopupItem" >
+
+    <include layout="@layout/system_shortcut_content" />
+
+</com.android.launcher3.shortcuts.DeepShortcutView>

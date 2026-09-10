@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (Balões -> Barras).
+     Equivalente a deep_shortcut.xml, mas usado só dentro do retângulo
+     único do popup de app: fundo transparente
+     (xaulinxs_app_popup_row_bg) e sem elevação própria - a cor visível
+     vem do retângulo por trás, não mais de um balão individual.
+     Reaproveita a mesma view/conteúdo interno do original (ícone +
+     texto + botão de adicionar), então nenhum código de população
+     (PopupPopulator/LauncherPopupLiveUpdateHandler) precisa mudar.
+-->
+<com.android.launcher3.shortcuts.DeepShortcutView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:launcher="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/deep_shortcut_material"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bg_popup_item_height"
+    android:background="@drawable/xaulinxs_app_popup_row_bg"
+    android:theme="@style/PopupItem" >
+
+    <com.android.launcher3.shortcuts.DeepShortcutTextView
+        style="@style/BaseIcon"
+        android:id="@+id/bubble_text"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="start|center_vertical"
+        android:textAlignment="viewStart"
+        android:paddingStart="@dimen/deep_shortcuts_text_padding_start"
+        android:paddingEnd="@dimen/popup_padding_end"
+        android:drawablePadding="@dimen/deep_shortcut_drawable_padding"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:textColor="?attr/popupTextColor"
+        launcher:layoutHorizontal="true"
+        launcher:iconDisplay="shortcut_popup"
+        launcher:iconSizeOverride="@dimen/deep_shortcut_icon_size" />
+
+    <View
+        android:id="@+id/icon"
+        android:layout_width="@dimen/deep_shortcut_icon_size"
+        android:layout_height="@dimen/deep_shortcut_icon_size"
+        android:layout_marginStart="@dimen/popup_padding_start"
+        android:layout_gravity="start|center_vertical"
+        android:background="@drawable/ic_deepshortcut_placeholder"/>
+
+    <ImageView
+        android:id="@+id/deep_shortcut_add_button"
+        android:layout_width="@dimen/deep_shortcut_add_button_size"
+        android:layout_height="@dimen/deep_shortcut_add_button_size"
+        android:layout_gravity="end|center_vertical"
+        android:visibility="gone"
+        android:contentDescription="@string/action_add_to_workspace"
+        android:src="@drawable/ic_add_circle_filled"
+        android:scaleType="center"/>
+
+</com.android.launcher3.shortcuts.DeepShortcutView>

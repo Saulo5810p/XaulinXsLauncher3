@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (Balões -> Barras dentro do
+     retângulo do popup de app).
+     Usado nas linhas de atalho (deep shortcuts) e nas linhas de opção
+     do sistema (Widgets/Adicionar à tela inicial/Informações do app).
+     Sem "solid" próprio (transparente): a cor visível é a do retângulo
+     único por trás (xaulinxs_app_popup_sheet_background), não mais uma
+     cor por item - é isso que faz virarem barras dentro de um único
+     retângulo em vez de balões/blocos soltos com sombra própria.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight">
+    <item android:drawable="@android:color/transparent" />
+</ripple>

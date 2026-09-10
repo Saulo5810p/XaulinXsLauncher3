@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 3 (popup de app como retângulo real).
+     Fundo do retângulo único do popup de app (mesmo padrão visual do
+     xaulinxs_sheet_background usado pelo popup de área vazia): cantos
+     arredondados nos 4 lados (aqui NÃO é bottom sheet ancorado na borda
+     da tela, então não faz sentido achatar a base). Cor de base = mesma
+     cor estática usada no popup de área vazia antes da extração em
+     runtime (materialColorSurfaceContainer) - a extração real (wallpaper
+     ou cor manual) é aplicada em cima disso via
+     PopupContainerWithArrow.applyXaulinXsSheetBackground(), o mesmo
+     mecanismo já usado por XaulinXsOptionsSheet.applyBalloonColorBackground().
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/materialColorSurfaceContainer"/>
+    <corners android:radius="@dimen/xaulinxs_app_popup_sheet_corner_radius" />
+</shape>

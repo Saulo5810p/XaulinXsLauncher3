@@ -33,4 +33,8 @@
     <!-- Fase 2: distância entre o popup de app (ancorado embaixo) e a borda inferior
          da tela / gesto de navegação. -->
     <dimen name="xaulinxs_app_popup_bottom_margin">16dp</dimen>
+    <!-- Fase 3: retângulo único do popup de app (fundo real conectado à
+         cor manual dos balões + largura unificada com o cabeçalho). -->
+    <dimen name="xaulinxs_app_popup_sheet_width">320dp</dimen>
+    <dimen name="xaulinxs_app_popup_sheet_corner_radius">28dp</dimen>
 </resources>

@@ -692,7 +692,7 @@ private constructor(
             }
 
             val hideSwitch =
-                header.findViewById<androidx.appcompat.widget.SwitchCompat>(
+                header.findViewById<android.widget.Switch>(
                     R.id.xaulinxs_app_popup_hide_switch
                 )
             if (componentName != null) {

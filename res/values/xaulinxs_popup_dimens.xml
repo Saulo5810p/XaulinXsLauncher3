@@ -37,4 +37,13 @@
          cor manual dos balões + largura unificada com o cabeçalho). -->
     <dimen name="xaulinxs_app_popup_sheet_width">320dp</dimen>
     <dimen name="xaulinxs_app_popup_sheet_corner_radius">28dp</dimen>
+    <!-- Fase 4: retângulo próprio por item (Informações do app, Widgets,
+         Remover, Configurar barra de busca, atalhos). Raio um pouco menor
+         que o do cabeçalho (xaulinxs_app_popup_field_radius, 20dp) pra
+         manter hierarquia visual sem destoar. Gap substitui a antiga
+         linha divisória fina, já que cada item agora tem contorno
+         próprio - duas bordas coladas ficavam poluídas. -->
+    <dimen name="xaulinxs_app_popup_row_radius">16dp</dimen>
+    <dimen name="xaulinxs_app_popup_row_gap">8dp</dimen>
 </resources>
+

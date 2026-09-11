@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations - Fase 4.
+     Espaçador transparente usado como android:divider nos containers
+     de shortcut/system-shortcut do popup de app, no lugar da antiga
+     linha fina (xaulinxs_app_popup_row_divider). Agora que cada item
+     (xaulinxs_app_popup_row_bg) tem seu próprio retângulo contornado,
+     uma linha divisória ficaria colada nas bordas - isto aqui é só
+     respiro vazio de altura fixa entre um retângulo e o próximo.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@android:color/transparent"/>
+    <size android:height="@dimen/xaulinxs_app_popup_row_gap" />
+</shape>

@@ -5,9 +5,12 @@
      android:background (nenhuma cor própria - o fundo visível é o do
      retângulo único xaulinxs_app_popup_sheet_background, atrás de
      tudo) e SEM elevação (não é mais um bloco flutuante próprio).
-     showDividers desenha uma linha fina (xaulinxs_app_popup_row_divider)
-     entre cada barra, no lugar da antiga separação por sombra/canto
-     arredondado entre balões.
+
+     Fase 4: cada item (xaulinxs_app_popup_row_bg) agora tem contorno e
+     fundo próprios, então a antiga linha fina divisória
+     (xaulinxs_app_popup_row_divider) ficaria colada nas bordas dos
+     retângulos - trocada por um espaço vazio real
+     (xaulinxs_app_popup_row_gap) entre as barras.
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,6 +19,5 @@
     android:layout_height="wrap_content"
     android:tag="@string/popup_container_iterate_children"
     android:orientation="vertical"
-    android:divider="@drawable/xaulinxs_app_popup_row_divider"
-    android:showDividers="middle"
-    android:dividerPadding="@dimen/xaulinxs_option_row_padding" />
+    android:divider="@drawable/xaulinxs_app_popup_row_gap"
+    android:showDividers="middle" />

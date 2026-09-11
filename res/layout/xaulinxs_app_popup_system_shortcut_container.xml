@@ -4,6 +4,9 @@
      Equivalente a system_shortcut_rows_container.xml, mas SEM
      android:background e SEM elevação - mesmo raciocínio de
      xaulinxs_app_popup_deep_shortcut_container.xml.
+
+     Fase 4: mesma troca de divider por gap vazio (ver comentário
+     completo em xaulinxs_app_popup_deep_shortcut_container.xml).
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,6 +15,5 @@
     android:layout_height="wrap_content"
     android:tag="@string/popup_container_iterate_children"
     android:orientation="vertical"
-    android:divider="@drawable/xaulinxs_app_popup_row_divider"
-    android:showDividers="middle"
-    android:dividerPadding="@dimen/xaulinxs_option_row_padding" />
+    android:divider="@drawable/xaulinxs_app_popup_row_gap"
+    android:showDividers="middle" />

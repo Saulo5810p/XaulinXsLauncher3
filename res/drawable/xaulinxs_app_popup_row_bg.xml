@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     XaulinXs Customizations - Fase 3 (Balões -> Barras dentro do
-     retângulo do popup de app).
+     XaulinXs Customizations - Fase 4 (retângulo próprio por item).
      Usado nas linhas de atalho (deep shortcuts) e nas linhas de opção
-     do sistema (Widgets/Adicionar à tela inicial/Informações do app).
-     Sem "solid" próprio (transparente): a cor visível é a do retângulo
-     único por trás (xaulinxs_app_popup_sheet_background), não mais uma
-     cor por item - é isso que faz virarem barras dentro de um único
-     retângulo em vez de balões/blocos soltos com sombra própria.
+     do sistema (Widgets/Adicionar à tela inicial/Informações do app/
+     Remover/Configurar barra de busca).
+     Antes (Fase 3) era transparente - a cor visível vinha só do
+     retângulo único por trás (xaulinxs_app_popup_sheet_background),
+     sem feedback de toque visível e sem o mesmo peso visual do
+     cabeçalho. Agora usa o MESMO padrão do campo de nome/interruptor
+     do cabeçalho (xaulinxs_app_popup_field_bg): fundo
+     ?attr/popupColorPrimary + contorno ?attr/popupColorTertiary,
+     cantos arredondados menores (xaulinxs_app_popup_row_radius) pra
+     diferenciar levemente do raio maior do cabeçalho sem destoar.
+     O ripple continua por cima como state, então o feedback de toque
+     não se perde.
 -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:attr/colorControlHighlight">
-    <item android:drawable="@android:color/transparent" />
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/popupColorPrimary"/>
+            <stroke
+                android:width="@dimen/xaulinxs_option_stroke_width"
+                android:color="?attr/popupColorTertiary"/>
+            <corners android:radius="@dimen/xaulinxs_app_popup_row_radius" />
+        </shape>
+    </item>
 </ripple>

@@ -123,6 +123,12 @@
                 android:summary="@string/xaulinxs_legacy_icon_bg_shadow_summary"
                 android:persistent="false" />
 
+            <com.xaulinxs.customizations.settings.IconShapeSelectorPreference
+                android:key="xaulinxs_icon_shape"
+                android:title="@string/xaulinxs_icon_shape_title"
+                android:summary="@string/xaulinxs_icon_shape_summary"
+                android:persistent="false" />
+
         </PreferenceScreen>
 
         <!-- Menu de aplicativo (all-apps): cores, transparência, desfoque -->

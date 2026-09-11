@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     XaulinXs Customizations — barra de formato de ícone.
+     Arquivo isolado, mesmo padrão de xaulinxs_popup_dimens.xml: fácil de
+     revisar/remover essa feature específica sem mexer em outras dimens.
+-->
+<resources>
+    <dimen name="xaulinxs_icon_shape_row_top_margin">10dp</dimen>
+</resources>

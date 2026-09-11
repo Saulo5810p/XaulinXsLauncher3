@@ -24,13 +24,13 @@ public final class Flags {
     public static boolean enableCursorDrivenWorkflows() { return false; }
     public static boolean enableDragStartEndMultiDispatch() { return false; }
     public static boolean enableExpandingPauseWorkButton() { return false; }
-    public static boolean enableExpressiveFolderExpansion() { return false; }
+    public static boolean enableExpressiveFolderExpansion() { return true; } // XaulinXs: animação elástica de pasta + habilita seletor de formato de ícone junto com enableLauncherIconShapes
     public static boolean enableFallbackOverviewInWindow() { return false; }
     public static boolean enableFileSystemFoldersAsDropTargets() { return false; }
     public static boolean enableFocusOutline() { return false; }
     public static boolean enableGsf() { return false; }
     public static boolean enableLaterIsLockedCheck() { return false; }
-    public static boolean enableLauncherIconShapes() { return false; }
+    public static boolean enableLauncherIconShapes() { return true; } // XaulinXs: 5 formatos de ícone (círculo/quadrado/cookie4/cookie7/arco) via ShapesProvider + muda DatabaseHelper.SCHEMA_VERSION 32->34
     public static boolean enableLauncherOverviewInWindow() { return false; }
     public static boolean enableMouseInteractionChanges() { return false; }
     public static boolean enableOverviewDesktopTileWallpaperBackground() { return false; }

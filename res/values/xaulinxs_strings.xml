@@ -60,7 +60,11 @@
          formato (círculo) ou 5, dependendo da flag, sem precisar tocar
          nesta string/preference quando a flag mudar de novo no futuro. -->
     <string name="xaulinxs_icon_shape_title">Formato do ícone</string>
-    <string name="xaulinxs_icon_shape_summary">Toque num formato pra aplicar a todos os ícones e pastas. O primeiro (círculo) é o padrão</string>
+    <string name="xaulinxs_icon_shape_summary">Toque em PAD para usar o formato original do sistema, ou escolha um formato customizado para aplicar a todos os ícones e pastas</string>
+    <!-- Descrição de acessibilidade do quadradinho "PAD" (primeira opção da
+         barra de formatos) — não é um IconShapeModel, então não tem
+         titleId próprio como os outros; ver IconShapeSelectorPreference. -->
+    <string name="xaulinxs_icon_shape_pad_description">PAD: formato original do sistema (desativa o formato customizado)</string>
     <string name="xaulinxs_balloon_color_enabled_title">Cor customizada dos balões</string>
     <string name="xaulinxs_balloon_color_enabled_summary">Desligado (padrão): a cor dos balões segue a cor extraída do papel de parede. Ligado: usa a cor escolhida abaixo</string>
     <string name="xaulinxs_balloon_color_picker_title">Cor dos balões (hex)</string>

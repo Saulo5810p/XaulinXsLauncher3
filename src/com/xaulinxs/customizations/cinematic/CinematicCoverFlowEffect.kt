@@ -27,10 +27,22 @@ object CinematicCoverFlowEffect {
 
     private const val ROTATION_MULTIPLIER = -58f
     private const val ROTATION_MAX = 75f
-    private const val SCALE_BASE = 1.18f
     private const val SCALE_FALLOFF = 0.28f
     private const val SCALE_MIN = 0.60f
-    private const val SCALE_MAX = 1.25f
+
+    // XAULINXS_ZOOM_GATED_BY_GYRO: o zoom (escala acima de 100% na página
+    // central) só é liberado quando o interruptor de giroscópio está
+    // LIGADO. Com o giroscópio desligado, a página central fica travada em
+    // 100% (SCALE_BASE_NO_TILT/SCALE_MAX_NO_TILT = 1.0) — o coverflow
+    // continua rodando (rotação + perspectiva + alpha), só o componente de
+    // escala >100% que desaparece. Isso não depende de tiltX/tiltY em si
+    // (que já zeram corretamente ao desligar), e sim do próprio zoom base
+    // do efeito, que antes era aplicado sempre, incondicionalmente.
+    private const val SCALE_BASE_WITH_TILT = 1.18f
+    private const val SCALE_MAX_WITH_TILT = 1.25f
+    private const val SCALE_BASE_NO_TILT = 1.0f
+    private const val SCALE_MAX_NO_TILT = 1.0f
+
     private const val ALPHA_FALLOFF = 0.32f
     private const val ALPHA_MIN = 0.35f
     // Mesmo princípio do cameraDistance = 18.dp * density do Compose:
@@ -71,7 +83,17 @@ object CinematicCoverFlowEffect {
 
         val rotationY = (pageOffset * ROTATION_MULTIPLIER)
             .coerceIn(-ROTATION_MAX, ROTATION_MAX) + (GyroTiltProvider.tiltX * 0.55f)
-        val scale = (SCALE_BASE - (absOffset * SCALE_FALLOFF)).coerceIn(SCALE_MIN, SCALE_MAX)
+
+        // XAULINXS_ZOOM_GATED_BY_GYRO_APPLY: zoom (base/teto >100%) só entra
+        // com o giroscópio ligado. Checa o interruptor diretamente (não
+        // tiltX/tiltY, que podem estar momentaneamente em 0 mesmo ligado,
+        // ex. aparelho perfeitamente nivelado) para a decisão ser sobre o
+        // estado da feature, não sobre a leitura instantânea do sensor.
+        val gyroEnabled = XaulinXsGyroTiltSetting.isEnabled(page.context)
+        val scaleBase = if (gyroEnabled) SCALE_BASE_WITH_TILT else SCALE_BASE_NO_TILT
+        val scaleMax = if (gyroEnabled) SCALE_MAX_WITH_TILT else SCALE_MAX_NO_TILT
+        val scale = (scaleBase - (absOffset * SCALE_FALLOFF)).coerceIn(SCALE_MIN, scaleMax)
+
         val alpha = (1f - (absOffset * ALPHA_FALLOFF)).coerceIn(ALPHA_MIN, 1f)
 
         // Segunda guarda: cameraDistance depende de resources/displayMetrics,

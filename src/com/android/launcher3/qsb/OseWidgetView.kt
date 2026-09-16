@@ -79,6 +79,24 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     internal var autoUpdateTag = true
 
     init {
+        // XaulinXs Customizations — XAULINXS_QSB_SIZE_SLIDER_CLIP_FIX:
+        // applyXaulinXsQsbAppearance() escala o BubbleTextView filho
+        // (view.scaleX/scaleY) conforme o slider "Tamanho" da
+        // QsbConfigActivity. Abaixo de 100% funcionava (o filho encolhe
+        // PARA DENTRO dos bounds fixos deste host, nada precisa ser
+        // cortado); acima de 100% parecia "travado" no slider — na
+        // verdade o filho estava crescendo normalmente, só que o AOSP
+        // AppWidgetHostView (ancestral deste ViewGroup, via
+        // NavigableAppWidgetHostView) é um ViewGroup comum com
+        // clipChildren=true por padrão, então tudo que passava dos
+        // bounds originais da célula da hotseat era cortado
+        // silenciosamente no draw — visualmente indistinguível de "não
+        // mudou nada" acima de 100%. Fix: desliga o clip neste host, o
+        // mesmo padrão já usado em PendingItemDragHelper para o preview
+        // de widget arrastado (mAppWidgetHostViewPreview.setClipChildren/
+        // setClipToPadding(false)).
+        clipChildren = false
+        clipToPadding = false
         activityContext.appWidgetHolder?.onViewCreationCallback?.accept(this)
         setOnLongClickListener {
             PopupContainer.showForMenuItems(

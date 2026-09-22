@@ -840,8 +840,20 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
         // por isso a transparência não tinha efeito nenhum visualmente
         // mesmo com o valor correto sendo calculado em outro lugar. Aqui é
         // o ponto real que precisa respeitar o slider.
+        //
+        // XAULINXS_ALLAPPS_COLOR_HOOK: cor manual (paleta/sliders/hex) tem
+        // prioridade sobre mBottomSheetBackgroundColorBlurFallback quando
+        // ativada — condicionada a este mesmo bloco (fundo desfocado já
+        // desligado), atendendo ao pedido do usuário de só valer com o
+        // blur desativado. A transparência abaixo continua sendo aplicada
+        // por cima em qualquer um dos dois casos.
+        Integer colorOverride = com.xaulinxs.customizations.theme.XaulinXsAllAppsColor
+                .getColorOverrideIfEnabled(getContext());
+        int fallbackColor = colorOverride != null
+                ? colorOverride
+                : mBottomSheetBackgroundColorBlurFallback;
         return com.xaulinxs.customizations.theme.WallpaperScrimHelperKt.applyAllAppsTransparency(
-                getContext(), mBottomSheetBackgroundColorBlurFallback);
+                getContext(), fallbackColor);
     }
     // XAULINXS_ALLAPPS_TRANSPARENCY_REAL_HOOK
 

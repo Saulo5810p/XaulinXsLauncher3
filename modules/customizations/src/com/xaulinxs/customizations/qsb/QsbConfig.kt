@@ -26,8 +26,13 @@ object QsbConfig {
     const val MAX_SIZE_PERCENT = 200
     const val DEFAULT_SIZE_PERCENT = 100
 
+    // XaulinXs Customizations: alinhado ao teto de 200% do slider "Tamanho"
+    // (MAX_SIZE_PERCENT acima) — não fazia sentido Tamanho ir até 200% e
+    // Largura travar em 100%. Ver XAULINXS_QSB_WIDTH_SCALEX_FIX em
+    // OseWidgetView.kt: agora ambos os sliders escalam via scaleX/scaleY,
+    // então a mesma faixa máxima se aplica igualmente aos dois.
     const val MIN_WIDTH_PERCENT = 50
-    const val MAX_WIDTH_PERCENT = 100
+    const val MAX_WIDTH_PERCENT = 200
     const val DEFAULT_WIDTH_PERCENT = 100
 
     const val MIN_TRANSPARENCY_PERCENT = 0

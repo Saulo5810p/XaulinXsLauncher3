@@ -273,22 +273,37 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     /**
      * XaulinXs Customizations: aplica os 4 sliders da QsbConfigActivity
      * (Tamanho, Largura, Transparência, Cor) na view inflada da QSB.
-     * Tamanho e Largura são independentes (por isso dois sliders
-     * separados em vez de uma única "escala"): Tamanho escala a view
-     * inteira (scaleX/scaleY, mantém proporção); Largura reduz só a
-     * largura via layout_weight fracionário, então dá pra ter uma QSB
-     * mais estreita sem achatar o texto/ícone.
+     *
+     * XAULINXS_QSB_WIDTH_SCALEX_FIX: a implementação original de Largura
+     * usava `(view.layoutParams as? LinearLayout.LayoutParams)?.let { ... }`
+     * — nunca tinha efeito nenhum, com o slider em qualquer valor. Causa
+     * raiz: este BubbleTextView é inflado via
+     * `View.inflate(context, R.layout.ose_default_bubbletext_layout, null)`
+     * com root=null (ver getErrorView() acima) — os atributos
+     * `layout_width="0dp"`/`layout_weight="1"` do XML nunca viram um
+     * `LinearLayout.LayoutParams` de verdade nesse caminho, e o pai real
+     * deste host (OseWidgetView) dentro da Hotseat é um CellLayout
+     * (Hotseat.addView(mQsb) sem LayoutParams explícito), cujo
+     * generateLayoutParams produz CellLayoutLayoutParams — nunca
+     * LinearLayout.LayoutParams. O cast falhava silenciosamente sempre, e
+     * o `?.let` nunca executava.
+     *
+     * Fix: Largura agora usa o mesmo mecanismo que já funciona pro
+     * Tamanho (scaleX/scaleY), mas só no eixo X, combinando os dois
+     * fatores — Tamanho aplica a ambos eixos, Largura aplica só ao X por
+     * cima. Isso mantém "Tamanho" controlando a escala uniforme
+     * (ícone+texto+altura da barra) e "Largura" controlando só a
+     * largura, sem achatar a altura nem esticar o ícone/texto
+     * verticalmente. clipChildren/clipToPadding já estão desligados
+     * neste host (ver XAULINXS_QSB_SIZE_SLIDER_CLIP_FIX no init acima),
+     * então crescer acima de 100% em X não é cortado.
      */
     private fun applyXaulinXsQsbAppearance(view: BubbleTextView) {
         val sizeFraction = QsbConfig.getSizePercent(context) / 100f
-        view.scaleX = sizeFraction
-        view.scaleY = sizeFraction
-
         val widthFraction = QsbConfig.getWidthPercent(context) / 100f
-        (view.layoutParams as? LinearLayout.LayoutParams)?.let { params ->
-            params.weight = widthFraction
-            view.layoutParams = params
-        }
+
+        view.scaleX = sizeFraction * widthFraction
+        view.scaleY = sizeFraction
 
         val transparencyPercent = QsbConfig.getTransparencyPercent(context)
         view.alpha = 1f - (transparencyPercent / 100f)

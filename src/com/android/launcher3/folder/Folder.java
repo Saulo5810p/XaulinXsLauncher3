@@ -43,7 +43,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Insets;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Trace;
@@ -320,6 +319,24 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
         return mBackground;
     }
 
+    /**
+     * XaulinXs Customizations: aplica a cor manual (se ligada) + a
+     * transparência configuradas pelo usuário ao fundo da pasta aberta,
+     * usando o mesmo resolvedor já usado pelo ícone de pasta fechado
+     * ({@link com.android.launcher3.folder.PreviewBackground#getBgColor()}).
+     * ?attr/folderBackgroundColor é passado como [baseColor] — mesmo
+     * comportamento neutro por padrão: cor customizada desligada = usa
+     * a cor de tema original sem mudança; transparência 100% = opaco.
+     */
+    private void applyXaulinXsFolderBackground() {
+        int themeColor = mBackground.getColor() != null
+                ? mBackground.getColor().getDefaultColor()
+                : 0;
+        int resolved = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
+                .resolveBackgroundColor(getContext(), themeColor);
+        mBackground.setColor(resolved);
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -339,7 +356,13 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
         mFooter = findViewById(R.id.folder_footer);
         mFooterHeight = dp.getFolderProfile().getFooterHeightPx();
         mFolderName = findViewById(R.id.folder_name);
-        mFolderName.setTypeface(Typeface.create("google-sans-flex", Typeface.NORMAL));
+        // XaulinXs fix: o AOSP original forçava aqui a fonte de sistema
+        // "google-sans-flex" por cima de qualquer typeface já aplicado
+        // na inflação (via XaulinXsGlobalFontInflaterFactory), fazendo o
+        // nome da pasta sempre ignorar a fonte customizada importada
+        // pelo usuário. Removido: o EditText já sai da inflação com o
+        // typeface certo (customizado, se houver; padrão do tema, senão)
+        // e não precisa ser sobrescrito aqui.
         mFolderName.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 dp.getFolderProfile().getLabelTextSizePx());
         mFolderName.setOnBackKeyListener(this);
@@ -754,6 +777,19 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
         }
         Folder openFolder = getOpen(mActivityContext);
         closeOpenFolder(openFolder);
+
+        // XaulinXs fix: mBackground (o fundo da FOLHA aberta, distinto do
+        // ícone de pasta fechado na tela inicial, que já usava
+        // XaulinXsFolderAppearance corretamente via PreviewBackground)
+        // era inflado uma única vez no construtor direto de
+        // ?attr/folderBackgroundColor (tema), sem nunca passar pela cor
+        // manual/transparência configuradas pelo usuário — por isso
+        // sempre aparecia preto (fallback do tema) ao abrir a pasta,
+        // ignorando os sliders. Reaplicamos aqui, a cada abertura, para
+        // também refletir mudanças feitas na configuração desde a
+        // última vez que a pasta foi aberta, sem precisar de listener
+        // permanente.
+        applyXaulinXsFolderBackground();
 
         if (blurOnMoreSurfaces()) {
             mBlurBackgroundHelper.prepareToOpenFolder(this);

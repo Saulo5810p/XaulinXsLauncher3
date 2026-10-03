@@ -97,6 +97,28 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         // setClipToPadding(false)).
         clipChildren = false
         clipToPadding = false
+        // XaulinXs fix — XAULINXS_QSB_SIZE_SLIDER_OUTLINE_CLIP_FIX: o fix
+        // acima (clipChildren/clipToPadding) não era suficiente sozinho.
+        // BaseLauncherAppWidgetHostView (classe-base deste host) chama
+        // setClipToOutline(true) no construtor e nunca desliga — o
+        // ViewOutlineProvider padrão (VIEW_OUTLINE_PROVIDER, usado
+        // sempre que o launcher não está aplicando cantos arredondados
+        // neste widget) define o outline como exatamente
+        // outline.setRect(0, 0, view.getWidth(), view.getHeight()), ou
+        // seja: um retângulo travado nos bounds MEDIDOS deste host
+        // (Hotseat.onMeasure faz mQsb.measure(EXACTLY, EXACTLY)).
+        // setClipToOutline corta pelo outline INDEPENDENTE de
+        // clipChildren/clipToPadding — são dois mecanismos de recorte
+        // diferentes no Android. O BubbleTextView filho escalado via
+        // scaleX/scaleY continua desenhando normalmente por cima/além
+        // dos bounds (nada muda no measure/layout, só na transformação
+        // visual), mas era cortado por este outline sempre que a escala
+        // passava de 100% — abaixo de 100% o conteúdo encolhe PARA
+        // DENTRO do outline, por isso "funcionava". Fix: desliga o
+        // clip-por-outline neste host específico (a QSB não usa cantos
+        // arredondados via este mecanismo, então não há regressão
+        // visual esperada).
+        clipToOutline = false
         activityContext.appWidgetHolder?.onViewCreationCallback?.accept(this)
         setOnLongClickListener {
             PopupContainer.showForMenuItems(

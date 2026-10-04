@@ -728,6 +728,42 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
     public void bindAndInitFirstWorkspaceScreen() {
         // Add the first page
         insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, getChildCount());
+        // XaulinXs R's Misc: página fixa de música como SEGUNDA página (índice 1).
+        xaulinXsInsertMusicPageIfEnabled();
+    }
+
+    /**
+     * XaulinXs R's Misc — não faz parte do AOSP original.
+     * Cria a página fixa de música (widget de lista + mini player 4x2) logo depois
+     * da primeira tela. O id é negativo, então nunca é removida como "página vazia"
+     * (canRemoveEmptyScreen exige id > FIRST_SCREEN_ID), e a grade inteira fica
+     * ocupada pelo widget, então nenhum item pode ser solto nela.
+     */
+    private void xaulinXsInsertMusicPageIfEnabled() {
+        if (!com.xaulinxs.customizations.misc.XaulinXsMiscSettings
+                .isMusicPageEnabled(getContext())) {
+            return;
+        }
+        final int id = com.xaulinxs.customizations.misc.XaulinXsMiscSettings.MUSIC_SCREEN_ID;
+        if (mWorkspaceScreens.containsKey(id)) return;
+        CellLayout page = insertNewWorkspaceScreen(id, getChildCount());
+        com.xaulinxs.customizations.misc.music.XaulinXsMusicPageView content =
+                new com.xaulinxs.customizations.misc.music.XaulinXsMusicPageView(getContext());
+        CellLayoutLayoutParams lp = new CellLayoutLayoutParams(
+                0, 0, page.getCountX(), page.getCountY());
+        lp.canReorder = false;
+        page.addViewToCellLayout(content, -1, R.id.xaulinxs_music_page, lp, true);
+    }
+
+    /**
+     * XaulinXs R's Misc: 1 quando a primeira página está centralizada, 0 quando já
+     * rolou uma página inteira para o lado. Usado para esconder o widget de clima.
+     */
+    public float xaulinXsFirstPageFraction() {
+        int w = getMeasuredWidth();
+        if (w <= 0 || getChildCount() == 0) return 1f;
+        float dist = Math.abs(getScrollX() - getScrollForPage(0));
+        return Math.max(0f, Math.min(1f, 1f - dist / (float) w));
     }
 
     public void removeAllWorkspaceScreens() {

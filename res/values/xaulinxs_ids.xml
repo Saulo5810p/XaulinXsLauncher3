@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XaulinXs R's Misc — não faz parte do AOSP original. -->
+<resources>
+    <item name="xaulinxs_music_page" type="id" />
+</resources>

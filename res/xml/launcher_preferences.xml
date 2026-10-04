@@ -318,6 +318,26 @@
 
         </PreferenceScreen>
 
+        <!-- R\'s Misc: página fixa de música e widget de clima -->
+        <PreferenceScreen
+            android:key="xaulinxs_cat_misc"
+            android:title="@string/xaulinxs_cat_misc_title"
+            android:summary="@string/xaulinxs_cat_misc_summary">
+
+            <com.xaulinxs.customizations.settings.MusicPageEnabledPreference
+                android:key="xaulinxs_music_page_enabled"
+                android:title="@string/xaulinxs_music_page_title"
+                android:summary="@string/xaulinxs_music_page_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.WeatherEnabledPreference
+                android:key="xaulinxs_weather_enabled"
+                android:title="@string/xaulinxs_weather_title"
+                android:summary="@string/xaulinxs_weather_summary"
+                android:persistent="false" />
+
+        </PreferenceScreen>
+
     </PreferenceScreen>
     <!-- ============ R\'s Home3 — fim ============ -->
 </androidx.preference.PreferenceScreen>

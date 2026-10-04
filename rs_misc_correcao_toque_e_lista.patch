@@ -1,0 +1,181 @@
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt
+index 0bba203..1fe2418 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt
+@@ -29,7 +29,7 @@ import java.util.concurrent.Executors
+ class XaulinXsMusicListWidget(context: Context) : LinearLayout(context), XaulinXsPlayer.Listener {
+ 
+     private val search = EditText(context)
+-    private val recycler = RecyclerView(context)
++    private val recycler = XaulinXsNestedRecyclerView(context)
+     private val empty = TextView(context)
+     private val permissionButton = Button(context)
+     private val adapter = TrackAdapter()
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsNestedRecyclerView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsNestedRecyclerView.kt
+new file mode 100644
+index 0000000..0231be2
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsNestedRecyclerView.kt
+@@ -0,0 +1,47 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * RecyclerView para dentro do Workspace. O DragLayer tem um AllAppsSwipeController que
++ * intercepta qualquer arrasto vertical na tela inicial (para abrir o menu de apps) ANTES
++ * de o RecyclerView ver o movimento — por isso a lista não rolava.
++ *
++ * No ACTION_DOWN pedimos aos pais que não interceptem; assim o gesto vertical é da lista.
++ * Se o dedo for mais na horizontal que na vertical, devolvemos o controle aos pais, para
++ * o usuário continuar trocando de página do Workspace arrastando para os lados.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.view.MotionEvent
++import android.view.ViewConfiguration
++import androidx.recyclerview.widget.RecyclerView
++import kotlin.math.abs
++
++class XaulinXsNestedRecyclerView(context: Context) : RecyclerView(context) {
++
++    private val slop = ViewConfiguration.get(context).scaledTouchSlop
++    private var startX = 0f
++    private var startY = 0f
++    private var decided = false
++
++    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
++        when (ev.actionMasked) {
++            MotionEvent.ACTION_DOWN -> {
++                startX = ev.x
++                startY = ev.y
++                decided = false
++                parent?.requestDisallowInterceptTouchEvent(true)
++            }
++            MotionEvent.ACTION_MOVE -> if (!decided) {
++                val dx = abs(ev.x - startX)
++                val dy = abs(ev.y - startY)
++                if (dx > slop || dy > slop) {
++                    decided = true
++                    // Horizontal: o Workspace (PagedView) volta a poder interceptar e paginar.
++                    if (dx > dy) parent?.requestDisallowInterceptTouchEvent(false)
++                }
++            }
++        }
++        return super.dispatchTouchEvent(ev)
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+index 0af1d13..3907a9b 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+@@ -8,13 +8,11 @@
+  */
+ package com.xaulinxs.customizations.misc.weather
+ 
+-import android.content.Intent
+ import android.view.Gravity
+ import android.view.View
+ import com.android.launcher3.InsettableFrameLayout
+ import com.android.launcher3.Launcher
+ import com.android.launcher3.LauncherPrefs
+-import com.android.launcher3.settings.SettingsActivity
+ import com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity
+ import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
+ import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
+@@ -41,7 +39,11 @@ class XaulinXsWeatherHost(private val launcher: Launcher) {
+             syncVisuals()
+             true
+         }
+-        view.setOnClickListener { onTap() }
++        // O widget é só visual: sem clique, para NUNCA roubar o toque da doca nem abrir nada.
++        view.isClickable = false
++        view.isLongClickable = false
++        view.isFocusable = false
++        view.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+         XaulinXsMiscPermissions.addListener(permListener)
+         reposition()
+         syncVisuals()
+@@ -72,17 +74,28 @@ class XaulinXsWeatherHost(private val launcher: Launcher) {
+         XaulinXsWeatherRepository.refresh(launcher, force) { view.state = it }
+     }
+ 
+-    private fun onTap() {
+-        when (view.state) {
+-            is XaulinXsWeatherState.NoLocationPermission ->
+-                XaulinXsMiscPermissionActivity.request(launcher, XaulinXsMiscPermissions.LOCATION)
+-            is XaulinXsWeatherState.NoApiKey ->
+-                launcher.startActivity(Intent(launcher, SettingsActivity::class.java))
+-            else -> refresh(true)
++    /**
++     * Topo (em coordenadas do DragLayer) da parte de cima do Hotseat: o menor entre
++     * o QSB e a fileira de ícones da doca. Nesta build os ícones ficam ACIMA do QSB,
++     * então ancorar só no QSB colocava o widget por cima dos ícones.
++     */
++    private fun hotseatContentTop(): Int {
++        val hotseat = launcher.hotseat
++        val qsb = hotseat.qsb
++        var top = hotseat.top + if (qsb != null && qsb.visibility != View.GONE && qsb.height > 0) qsb.top else hotseat.height
++        val icons = hotseat.shortcutsAndWidgets
++        for (i in 0 until icons.childCount) {
++            val c = icons.getChildAt(i)
++            if (c.visibility == View.GONE) continue
++            top = minOf(top, hotseat.top + icons.top + c.top)
+         }
++        return top
+     }
+ 
+-    /** Largura e posição X/Y iguais às do QSB. Só roda em mudança de layout. */
++    private fun targetTranslationY(): Float =
++        (hotseatContentTop() - heightPx - gapPx).toFloat() + launcher.hotseat.translationY
++
++    /** Largura e posição X iguais às do QSB. Só roda em mudança de layout. */
+     private fun reposition() {
+         val hotseat = launcher.hotseat
+         val qsb = hotseat.qsb ?: return
+@@ -93,18 +106,17 @@ class XaulinXsWeatherHost(private val launcher: Launcher) {
+             view.layoutParams = lp
+         }
+         view.translationX = (hotseat.left + qsb.left).toFloat()
+-        view.translationY = (hotseat.top + qsb.top - heightPx - gapPx).toFloat() + hotseat.translationY
++        view.translationY = targetTranslationY()
+     }
+ 
+     /** Roda a cada frame: só alpha e translação, nada que dispare novo layout. */
+     private fun syncVisuals() {
+         if (view.visibility != View.VISIBLE) return
+         val hotseat = launcher.hotseat
+-        val qsb = hotseat.qsb
+         val pageFraction = launcher.workspace.xaulinXsFirstPageFraction()
+-        val a = pageFraction * hotseat.alpha * (qsb?.alpha ?: 1f)
++        val a = pageFraction * hotseat.alpha * (hotseat.qsb?.alpha ?: 1f)
+         if (view.alpha != a) view.alpha = a
+-        val ty = (hotseat.top + (qsb?.top ?: 0) - heightPx - gapPx).toFloat() + hotseat.translationY
++        val ty = targetTranslationY()
+         if (view.translationY != ty) view.translationY = ty
+     }
+ }
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+index d97b69f..acfe6a6 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+@@ -42,6 +42,11 @@ class XaulinXsWeatherView(context: Context) : View(context) {
+         color = Color.argb(215, 255, 255, 255); textSize = 12 * d
+     }
+ 
++    init {
++        isClickable = false
++        isFocusable = false
++    }
++
+     private var t = 0f // 0..1 em loop
+     private val animator = ValueAnimator.ofFloat(0f, 1f).apply {
+         duration = 6000
+@@ -63,7 +68,7 @@ class XaulinXsWeatherView(context: Context) : View(context) {
+             val msg = when (s) {
+                 is XaulinXsWeatherState.Loading -> "Buscando o clima…"
+                 is XaulinXsWeatherState.NoApiKey -> "Defina a chave do AccuWeather\nem R's Misc"
+-                is XaulinXsWeatherState.NoLocationPermission -> "Toque para permitir a localização"
++                is XaulinXsWeatherState.NoLocationPermission -> "Permita a localização\n(R's Misc > Widget de clima)"
+                 is XaulinXsWeatherState.NoLocation -> "Não foi possível obter a localização"
+                 is XaulinXsWeatherState.Error -> s.message
+                 else -> ""

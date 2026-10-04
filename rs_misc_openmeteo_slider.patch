@@ -1,0 +1,584 @@
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt
+index abf64ad..de4ff76 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt
+@@ -2,8 +2,7 @@
+  * XaulinXs Customizations — não faz parte do AOSP original.
+  *
+  * Preferências da categoria "R's Misc": interruptores da página fixa de
+- * música (widget de lista + mini player 4x2) e do widget de clima, mais a
+- * chave da API do AccuWeather.
++ * música (widget de lista + mini player 4x2) e do widget de clima.
+  */
+ package com.xaulinxs.customizations.misc
+ 
+@@ -29,10 +28,6 @@ object XaulinXsMiscSettings {
+     @JvmField
+     val WEATHER_ENABLED = backedUpItem("xaulinxs_weather_enabled", true)
+ 
+-    // Chave pessoal da API — não vai para backup/restauração.
+-    @JvmField
+-    val ACCUWEATHER_API_KEY = nonRestorableItem("xaulinxs_accuweather_api_key", "")
+-
+     // O popup de localização é mostrado automaticamente só uma vez.
+     @JvmField
+     val LOCATION_PROMPT_SHOWN = nonRestorableItem("xaulinxs_location_prompt_shown", false)
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt
+index 2ec48f7..3f195c2 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt
+@@ -19,7 +19,7 @@ import android.view.Gravity
+ import android.view.ViewGroup
+ import android.widget.ImageView
+ import android.widget.LinearLayout
+-import android.widget.ProgressBar
++import android.widget.SeekBar
+ import android.widget.TextView
+ import java.util.concurrent.Executors
+ 
+@@ -30,7 +30,8 @@ class XaulinXsMiniPlayerWidget(context: Context) : LinearLayout(context), Xaulin
+     private val artist = TextView(context)
+     private val albumFolder = TextView(context)
+     private val time = TextView(context)
+-    private val progress = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
++    private val progress = XaulinXsSeekBar(context)
++    private var dragging = false
+     private val btnPrev = TextView(context)
+     private val btnPlay = TextView(context)
+     private val btnNext = TextView(context)
+@@ -78,7 +79,29 @@ class XaulinXsMiniPlayerWidget(context: Context) : LinearLayout(context), Xaulin
+         styleText(albumFolder, 11f, false); styleText(time, 11f, false)
+         col.addView(title); col.addView(artist); col.addView(albumFolder)
+         progress.max = 1000
+-        col.addView(progress, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10)))
++        progress.thumbTintList = android.content.res.ColorStateList.valueOf(Color.WHITE)
++        progress.progressTintList = android.content.res.ColorStateList.valueOf(Color.WHITE)
++        progress.progressBackgroundTintList =
++            android.content.res.ColorStateList.valueOf(Color.argb(90, 255, 255, 255))
++        progress.setPadding(dp(8), 0, dp(8), 0)
++        progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
++            override fun onProgressChanged(sb: SeekBar, value: Int, fromUser: Boolean) {
++                // Enquanto arrasta, só atualiza o tempo mostrado; o seek real é ao soltar.
++                val t = XaulinXsPlayer.current ?: return
++                if (fromUser) time.text = "${fmt(value * t.durationMs / 1000)} / ${fmt(t.durationMs)}"
++            }
++
++            override fun onStartTrackingTouch(sb: SeekBar) {
++                dragging = true
++            }
++
++            override fun onStopTrackingTouch(sb: SeekBar) {
++                dragging = false
++                val t = XaulinXsPlayer.current ?: return
++                XaulinXsPlayer.seekTo((sb.progress * t.durationMs / 1000).toInt())
++            }
++        })
++        col.addView(progress, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(28)))
+         col.addView(time)
+ 
+         val controls = LinearLayout(context).apply { gravity = Gravity.CENTER_VERTICAL }
+@@ -133,11 +156,13 @@ class XaulinXsMiniPlayerWidget(context: Context) : LinearLayout(context), Xaulin
+             title.text = "Nenhuma faixa tocando"
+             artist.text = "Escolha uma música na lista"
+             albumFolder.text = ""; time.text = ""; progress.progress = 0
++            progress.isEnabled = false
+             cover.setImageDrawable(null); shownCoverId = -1L
+         } else {
+             title.text = t.title
+             artist.text = t.artist
+             albumFolder.text = "${t.album} • ${t.folder}"
++            progress.isEnabled = true
+             loadCover(t)
+             updateProgress()
+         }
+@@ -149,6 +174,7 @@ class XaulinXsMiniPlayerWidget(context: Context) : LinearLayout(context), Xaulin
+     }
+ 
+     private fun updateProgress() {
++        if (dragging) return // não brigar com o dedo do usuário
+         val t = XaulinXsPlayer.current ?: return
+         val pos = XaulinXsPlayer.positionMs().toLong()
+         progress.progress = if (t.durationMs > 0) (pos * 1000 / t.durationMs).toInt() else 0
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt
+index 9086781..5d077c9 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt
+@@ -25,7 +25,7 @@ class XaulinXsMusicPageView(context: Context) : LinearLayout(context) {
+         val mini = XaulinXsMiniPlayerWidget(context)
+         addView(
+             mini,
+-            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (132 * resources.displayMetrics.density).toInt())
++            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (150 * resources.displayMetrics.density).toInt())
+                 .apply { topMargin = gap },
+         )
+ 
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt
+index 5fa512b..736845d 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt
+@@ -182,6 +182,15 @@ class XaulinXsMusicService : Service() {
+         if (prepared) player?.currentPosition ?: 0 else 0
+     } catch (_: IllegalStateException) { 0 }
+ 
++    fun seekToMs(ms: Int) {
++        val mp = player ?: return
++        if (!prepared) return
++        try {
++            mp.seekTo(ms.coerceIn(0, mp.duration))
++        } catch (_: IllegalStateException) {
++        }
++    }
++
+     private fun releasePlayer() {
+         player?.let {
+             it.setOnCompletionListener(null)
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt
+index b422ba0..be4afbd 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt
+@@ -53,6 +53,11 @@ object XaulinXsPlayer {
+     fun next(context: Context) = send(context, XaulinXsMusicService.ACTION_NEXT)
+     fun previous(context: Context) = send(context, XaulinXsMusicService.ACTION_PREV)
+ 
++    /** Seek direto: o serviço roda no mesmo processo, não precisa de intent. */
++    fun seekTo(positionMs: Int) {
++        service?.seekToMs(positionMs)
++    }
++
+     // Repetição é só estado: não precisa acordar o serviço.
+     fun toggleRepeatOne() {
+         repeatOne = !repeatOne
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsSeekBar.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsSeekBar.kt
+new file mode 100644
+index 0000000..4fb5e07
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsSeekBar.kt
+@@ -0,0 +1,22 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * SeekBar para dentro do Workspace. Sem isso, o PagedView (troca de página na horizontal)
++ * e o AllAppsSwipeController (vertical) interceptam o arrasto antes do slider reagir.
++ * No toque inicial pedimos aos pais que não interceptem; o slider é dono do gesto até soltar.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.view.MotionEvent
++import android.widget.SeekBar
++
++class XaulinXsSeekBar(context: Context) : SeekBar(context) {
++
++    override fun onTouchEvent(event: MotionEvent): Boolean {
++        if (event.actionMasked == MotionEvent.ACTION_DOWN) {
++            parent?.requestDisallowInterceptTouchEvent(true)
++        }
++        return super.onTouchEvent(event)
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt
+index 1adaf24..61b34d3 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt
+@@ -4,6 +4,7 @@
+ package com.xaulinxs.customizations.misc.weather
+ 
+ data class XaulinXsWeatherData(
++    /** Pode vir vazio se o aparelho não tiver geocodificador; o widget só omite o nome. */
+     val city: String,
+     val temperatureC: Double,
+     val conditionText: String,
+@@ -11,13 +12,12 @@ data class XaulinXsWeatherData(
+     /** 0..100, ou -1 se a API não informou. */
+     val rainChancePercent: Int,
+     val isDay: Boolean,
+-    /** Código de ícone do AccuWeather (1..44). */
+-    val iconCode: Int,
++    /** Código WMO do Open-Meteo (0 = céu limpo ... 99 = trovoada com granizo). */
++    val weatherCode: Int,
+ )
+ 
+ sealed class XaulinXsWeatherState {
+     object Loading : XaulinXsWeatherState()
+-    object NoApiKey : XaulinXsWeatherState()
+     object NoLocationPermission : XaulinXsWeatherState()
+     object NoLocation : XaulinXsWeatherState()
+     data class Error(val message: String) : XaulinXsWeatherState()
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+index 3907a9b..9c53797 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+@@ -21,7 +21,7 @@ class XaulinXsWeatherHost(private val launcher: Launcher) {
+ 
+     private val view = XaulinXsWeatherView(launcher)
+     private val d = launcher.resources.displayMetrics.density
+-    private val heightPx = (104 * d).toInt()
++    private val heightPx = (116 * d).toInt()
+     private val gapPx = (8 * d).toInt()
+     private val permListener = Runnable { refresh(true) }
+ 
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt
+index b9b8df1..e8e5b66 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt
+@@ -1,30 +1,26 @@
+ /*
+  * XaulinXs Customizations — não faz parte do AOSP original.
+  *
+- * Busca clima no AccuWeather (dataservice.accuweather.com):
+- *   1) /locations/v1/cities/geoposition/search  -> chave + nome da cidade
+- *   2) /currentconditions/v1/{key}?details=true -> temperatura, umidade, ícone
+- *   3) /forecasts/v1/hourly/1hour/{key}         -> probabilidade de chuva
+- * A API exige chave própria (plano gratuito: ~50 chamadas/dia), por isso há
+- * cache de 30 min e a chave é configurada em R's Misc.
++ * Clima via Open-Meteo (https://open-meteo.com): gratuito para uso não comercial,
++ * sem chave de API, aceita latitude/longitude direto. Uma única requisição traz
++ * temperatura, umidade, código do tempo (WMO) e chance de chuva por hora.
++ * O nome da cidade vem do Geocoder do próprio aparelho (a Open-Meteo não faz
++ * geocodificação reversa). Cache de 30 min.
+  */
+ package com.xaulinxs.customizations.misc.weather
+ 
+ import android.annotation.SuppressLint
+ import android.content.Context
++import android.location.Geocoder
+ import android.location.Location
+ import android.location.LocationManager
+ import android.os.Build
+ import android.os.Handler
+ import android.os.Looper
+-import com.android.launcher3.LauncherPrefs
+ import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
+-import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
+-import org.json.JSONArray
+ import org.json.JSONObject
+ import java.net.HttpURLConnection
+ import java.net.URL
+-import java.net.URLEncoder
+ import java.util.Locale
+ import java.util.concurrent.CountDownLatch
+ import java.util.concurrent.Executors
+@@ -32,7 +28,6 @@ import java.util.concurrent.TimeUnit
+ 
+ object XaulinXsWeatherRepository {
+ 
+-    private const val BASE = "https://dataservice.accuweather.com"
+     private const val CACHE_MS = 30 * 60 * 1000L
+ 
+     private val io = Executors.newSingleThreadExecutor()
+@@ -43,8 +38,6 @@ object XaulinXsWeatherRepository {
+ 
+     fun refresh(context: Context, force: Boolean, callback: (XaulinXsWeatherState) -> Unit) {
+         val app = context.applicationContext
+-        val key = LauncherPrefs.get(app).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY).trim()
+-        if (key.isEmpty()) { callback(XaulinXsWeatherState.NoApiKey); return }
+         if (!XaulinXsMiscPermissions.hasLocation(app)) {
+             callback(XaulinXsWeatherState.NoLocationPermission); return
+         }
+@@ -58,14 +51,14 @@ object XaulinXsWeatherRepository {
+                 val loc = findLocation(app)
+                 if (loc == null) XaulinXsWeatherState.NoLocation
+                 else {
+-                    val data = fetch(key, loc)
++                    val data = fetch(app, loc)
+                     cached = data; cachedAt = System.currentTimeMillis()
+                     XaulinXsWeatherState.Ready(data)
+                 }
+             } catch (e: Exception) {
+-                // Em falha de rede, mostra o último dado bom se existir.
++                // Falha de rede: mantém o último dado bom, se houver.
+                 cached?.let { XaulinXsWeatherState.Ready(it) }
+-                    ?: XaulinXsWeatherState.Error(e.message ?: "Falha ao buscar o clima")
++                    ?: XaulinXsWeatherState.Error("Sem conexão com o clima")
+             }
+             main.post { callback(result) }
+         }
+@@ -83,7 +76,6 @@ object XaulinXsWeatherRepository {
+             if (best == null || l.time > best.time) best = l
+         }
+         if (best != null) return best
+-        // Sem última posição conhecida: pede uma leitura única (API 30+).
+         if (Build.VERSION.SDK_INT >= 30) {
+             val provider = providers.firstOrNull { it != LocationManager.PASSIVE_PROVIDER } ?: return null
+             val latch = CountDownLatch(1)
+@@ -95,36 +87,54 @@ object XaulinXsWeatherRepository {
+         return null
+     }
+ 
+-    // ---- AccuWeather ----
+-
+-    private fun fetch(key: String, loc: Location): XaulinXsWeatherData {
+-        val lang = if (Locale.getDefault().language == "pt") "pt-br" else Locale.getDefault().toLanguageTag()
+-        val k = URLEncoder.encode(key, "UTF-8")
+-        val q = URLEncoder.encode("${loc.latitude},${loc.longitude}", "UTF-8")
++    @Suppress("DEPRECATION")
++    private fun cityName(ctx: Context, loc: Location): String {
++        if (!Geocoder.isPresent()) return ""
++        return try {
++            val a = Geocoder(ctx, Locale.getDefault()).getFromLocation(loc.latitude, loc.longitude, 1)
++                ?.firstOrNull()
++            a?.locality ?: a?.subAdminArea ?: a?.adminArea ?: ""
++        } catch (_: Exception) { "" }
++    }
+ 
+-        val geo = JSONObject(get("$BASE/locations/v1/cities/geoposition/search?apikey=$k&q=$q&language=$lang"))
+-        val locKey = geo.getString("Key")
+-        val city = geo.optString("LocalizedName", "")
++    // ---- Open-Meteo ----
+ 
+-        val cur = JSONArray(get("$BASE/currentconditions/v1/$locKey?apikey=$k&details=true&language=$lang"))
+-            .getJSONObject(0)
++    private fun fetch(ctx: Context, loc: Location): XaulinXsWeatherData {
++        val url = "https://api.open-meteo.com/v1/forecast" +
++            "?latitude=${"%.4f".format(Locale.US, loc.latitude)}" +
++            "&longitude=${"%.4f".format(Locale.US, loc.longitude)}" +
++            "&current=temperature_2m,relative_humidity_2m,is_day,weather_code" +
++            "&hourly=precipitation_probability" +
++            "&forecast_days=1&timezone=auto"
++        val json = JSONObject(get(url))
++        val cur = json.getJSONObject("current")
+ 
++        // Chance de chuva da hora atual: casa "2026-10-04T14:15" com "2026-10-04T14:00".
+         var rain = -1
+         try {
+-            val h = JSONArray(get("$BASE/forecasts/v1/hourly/1hour/$locKey?apikey=$k&details=true&metric=true&language=$lang"))
+-            if (h.length() > 0) rain = h.getJSONObject(0).optInt("PrecipitationProbability", -1)
++            val hourly = json.getJSONObject("hourly")
++            val times = hourly.getJSONArray("time")
++            val probs = hourly.getJSONArray("precipitation_probability")
++            val hourKey = cur.getString("time").take(13)
++            for (i in 0 until times.length()) {
++                if (times.getString(i).startsWith(hourKey)) {
++                    if (!probs.isNull(i)) rain = probs.getInt(i)
++                    break
++                }
++            }
+         } catch (_: Exception) {
+-            // Previsão é opcional; o resto do widget continua funcionando.
++            // Chance de chuva é opcional.
+         }
+ 
++        val code = cur.optInt("weather_code", 0)
+         return XaulinXsWeatherData(
+-            city = city,
+-            temperatureC = cur.getJSONObject("Temperature").getJSONObject("Metric").getDouble("Value"),
+-            conditionText = cur.optString("WeatherText", ""),
+-            humidityPercent = cur.optInt("RelativeHumidity", -1),
++            city = cityName(ctx, loc),
++            temperatureC = cur.getDouble("temperature_2m"),
++            conditionText = describe(code),
++            humidityPercent = cur.optInt("relative_humidity_2m", -1),
+             rainChancePercent = rain,
+-            isDay = cur.optBoolean("IsDayTime", true),
+-            iconCode = cur.optInt("WeatherIcon", 1),
++            isDay = cur.optInt("is_day", 1) == 1,
++            weatherCode = code,
+         )
+     }
+ 
+@@ -133,12 +143,34 @@ object XaulinXsWeatherRepository {
+         conn.connectTimeout = 10_000
+         conn.readTimeout = 10_000
+         try {
+-            val code = conn.responseCode
+-            if (code == 401 || code == 403) throw IllegalStateException("Chave do AccuWeather inválida ou sem cota")
+-            if (code != 200) throw IllegalStateException("AccuWeather respondeu $code")
++            if (conn.responseCode != 200) throw IllegalStateException("Open-Meteo respondeu ${conn.responseCode}")
+             return conn.inputStream.bufferedReader().use { it.readText() }
+         } finally {
+             conn.disconnect()
+         }
+     }
++
++    /** Códigos WMO usados pelo Open-Meteo. */
++    fun describe(code: Int): String = when (code) {
++        0 -> "Céu limpo"
++        1 -> "Predomínio de sol"
++        2 -> "Parcialmente nublado"
++        3 -> "Nublado"
++        45, 48 -> "Neblina"
++        51, 53, 55 -> "Garoa"
++        56, 57 -> "Garoa congelante"
++        61 -> "Chuva fraca"
++        63 -> "Chuva"
++        65 -> "Chuva forte"
++        66, 67 -> "Chuva congelante"
++        71, 73, 75, 77 -> "Neve"
++        80, 81 -> "Pancadas de chuva"
++        82 -> "Pancadas fortes"
++        85, 86 -> "Pancadas de neve"
++        95 -> "Trovoada"
++        96, 99 -> "Trovoada com granizo"
++        else -> "Tempo variável"
++    }
++
++    fun isRainy(code: Int) = code in 51..67 || code in 80..82 || code in 95..99
+ }
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+index acfe6a6..f11e011 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+@@ -67,7 +67,6 @@ class XaulinXsWeatherView(context: Context) : View(context) {
+             drawIcon(canvas, RectF(12 * d, 12 * d, h - 12 * d, h - 12 * d), sun = true, moon = false, cloud = true, drops = 0)
+             val msg = when (s) {
+                 is XaulinXsWeatherState.Loading -> "Buscando o clima…"
+-                is XaulinXsWeatherState.NoApiKey -> "Defina a chave do AccuWeather\nem R's Misc"
+                 is XaulinXsWeatherState.NoLocationPermission -> "Permita a localização\n(R's Misc > Widget de clima)"
+                 is XaulinXsWeatherState.NoLocation -> "Não foi possível obter a localização"
+                 is XaulinXsWeatherState.Error -> s.message
+@@ -80,23 +79,53 @@ class XaulinXsWeatherView(context: Context) : View(context) {
+ 
+         val data = s.data
+         val iconBox = RectF(12 * d, 12 * d, h - 12 * d, h - 12 * d)
+-        val code = data.iconCode
+-        val clearSky = code in intArrayOf(1, 2, 30, 33, 34)
+-        val hasCloud = !clearSky
+-        val drops = if (data.rainChancePercent >= 20) (data.rainChancePercent / 18).coerceIn(1, 6) else 0
+-        drawIcon(canvas, iconBox, sun = data.isDay && (clearSky || code in 3..5), moon = !data.isDay && (clearSky || code in 35..38),
+-            cloud = hasCloud || code in 3..5, drops = drops)
++        val code = data.weatherCode
++        val sunny = code in 0..2
++        val cloudy = code >= 2
++        val raining = XaulinXsWeatherRepository.isRainy(code)
++        val drops = when {
++            data.rainChancePercent >= 20 -> (data.rainChancePercent / 18).coerceIn(1, 6)
++            raining -> 3
++            else -> 0
++        }
++        drawIcon(
++            canvas, iconBox,
++            sun = data.isDay && sunny, moon = !data.isDay && code in 0..1,
++            cloud = cloudy || drops > 0, drops = drops,
++        )
+ 
+         val x = h
++        val maxW = w - x - 12 * d
+         canvas.drawText("${Math.round(data.temperatureC)}°", x, 12 * d + big.textSize * 0.85f, big)
+-        canvas.drawText(data.conditionText, x + 70 * d, 12 * d + 17 * d, mid)
+-        if (data.city.isNotEmpty()) canvas.drawText(data.city, x + 70 * d, 12 * d + 34 * d, small)
+-        var y = h - 14 * d
++        canvas.drawText(fit(data.conditionText, mid, maxW - 70 * d), x + 70 * d, 12 * d + 17 * d, mid)
++        if (data.city.isNotEmpty()) {
++            canvas.drawText(fit(data.city, small, maxW - 70 * d), x + 70 * d, 12 * d + 34 * d, small)
++        }
++
++        // linhas de baixo, de baixo para cima: data (subtítulo), chuva, umidade
++        val dateY = h - 12 * d
++        val rainY = dateY - 17 * d
++        val humY = rainY - 17 * d
+         val humidity = if (data.humidityPercent >= 0) "Umidade ${data.humidityPercent}%" else "Umidade --"
+-        canvas.drawText(humidity, x, y - 16 * d, small)
++        canvas.drawText(humidity, x, humY, small)
+         val rain = if (data.rainChancePercent >= 0) "Chuva ${data.rainChancePercent}%" else "Chuva --"
+-        drawDrop(canvas, x + 4 * d, y - 10 * d, 5 * d)
+-        canvas.drawText(rain, x + 14 * d, y, small)
++        drawDrop(canvas, x + 4 * d, rainY - 5 * d, 5 * d)
++        canvas.drawText(rain, x + 14 * d, rainY, small)
++        canvas.drawText(todayText(), x, dateY, small)
++    }
++
++    /** Dia, mês e ano de hoje no idioma do aparelho, ex.: "4 de outubro de 2026". */
++    private fun todayText(): String {
++        val locale = java.util.Locale.getDefault()
++        val pattern = android.text.format.DateFormat.getBestDateTimePattern(locale, "dMMMMyyyy")
++        return java.text.SimpleDateFormat(pattern, locale).format(java.util.Date())
++    }
++
++    private fun fit(text: String, p: Paint, maxW: Float): String {
++        if (maxW <= 0 || p.measureText(text) <= maxW) return text
++        var end = text.length
++        while (end > 1 && p.measureText(text, 0, end) + p.measureText("…") > maxW) end--
++        return text.substring(0, end) + "…"
+     }
+ 
+     private fun drawIcon(c: Canvas, box: RectF, sun: Boolean, moon: Boolean, cloud: Boolean, drops: Int) {
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt b/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt
+index e98ff93..e2db7e0 100644
+--- a/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt
++++ b/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt
+@@ -1,17 +1,13 @@
+ /*
+  * XaulinXs R's Misc — não faz parte do AOSP original.
+  *
+- * Interruptores da categoria "R's Misc" e a chave do AccuWeather.
++ * Interruptores da categoria "R's Misc".
+  */
+ package com.xaulinxs.customizations.settings
+ 
+ import android.app.Activity
+ import android.content.Context
+-import android.text.InputType
+ import android.util.AttributeSet
+-import android.widget.EditText
+-import android.app.AlertDialog
+-import androidx.preference.Preference
+ import androidx.preference.SwitchPreference
+ import com.android.launcher3.LauncherPrefs
+ import com.xaulinxs.customizations.XaulinXsAppRestarter
+@@ -60,38 +56,3 @@ class WeatherEnabledPreference @JvmOverloads constructor(
+         }
+     }
+ }
+-
+-/** Chave da API do AccuWeather (cada usuário usa a sua; plano gratuito serve). */
+-class AccuWeatherKeyPreference @JvmOverloads constructor(
+-    context: Context,
+-    attrs: AttributeSet? = null,
+-) : Preference(context, attrs) {
+-
+-    init {
+-        isPersistent = false
+-        updateSummary()
+-    }
+-
+-    private fun updateSummary() {
+-        val key = LauncherPrefs.get(context).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY)
+-        summary = if (key.isBlank()) "Não definida" else "Definida (••••${key.takeLast(4)})"
+-    }
+-
+-    override fun onClick() {
+-        val input = EditText(context).apply {
+-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+-            setText(LauncherPrefs.get(context).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY))
+-        }
+-        AlertDialog.Builder(context)
+-            .setTitle(title)
+-            .setView(input)
+-            .setPositiveButton(android.R.string.ok) { _, _ ->
+-                LauncherPrefs.get(context).put(
+-                    XaulinXsMiscSettings.ACCUWEATHER_API_KEY, input.text.toString().trim(),
+-                )
+-                updateSummary()
+-            }
+-            .setNegativeButton(android.R.string.cancel, null)
+-            .show()
+-    }
+-}
+diff --git a/res/values/xaulinxs_strings.xml b/res/values/xaulinxs_strings.xml
+index e27c40c..f65e28b 100644
+--- a/res/values/xaulinxs_strings.xml
++++ b/res/values/xaulinxs_strings.xml
+@@ -140,6 +140,5 @@
+     <string name="xaulinxs_music_page_title">Página de música</string>
+     <string name="xaulinxs_music_page_summary">Segunda página fixa da tela inicial com lista de áudios e mini player (reinicia o launcher)</string>
+     <string name="xaulinxs_weather_title">Widget de clima</string>
+-    <string name="xaulinxs_weather_summary">Clima fixo acima da barra de busca na página principal (pede permissão de localização)</string>
+-    <string name="xaulinxs_accuweather_key_title">Chave da API do AccuWeather</string>
++    <string name="xaulinxs_weather_summary">Clima fixo acima da doca na página principal, com a data de hoje (pede localização; dados do Open-Meteo.com)</string>
+ </resources>
+diff --git a/res/xml/launcher_preferences.xml b/res/xml/launcher_preferences.xml
+index b657bda..cef0733 100644
+--- a/res/xml/launcher_preferences.xml
++++ b/res/xml/launcher_preferences.xml
+@@ -336,11 +336,6 @@
+                 android:summary="@string/xaulinxs_weather_summary"
+                 android:persistent="false" />
+ 
+-            <com.xaulinxs.customizations.settings.AccuWeatherKeyPreference
+-                android:key="xaulinxs_accuweather_api_key"
+-                android:title="@string/xaulinxs_accuweather_key_title"
+-                android:persistent="false" />
+-
+         </PreferenceScreen>
+ 
+     </PreferenceScreen>

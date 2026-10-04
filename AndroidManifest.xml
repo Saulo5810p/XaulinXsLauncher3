@@ -35,6 +35,15 @@
          pro João") e enviar SMS. Ambas pedidas em runtime, nunca
          concedidas por padrão; ver XaulinXsQsbPermissionActivity. -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- XaulinXs R's Misc: clima (AccuWeather + localização) e player de música
+         (áudios via MediaStore, serviço em primeiro plano de mídia). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
@@ -268,6 +277,16 @@
              permissão de Contatos em nome da QSB Inteligente (Modo
              Texto) e devolve o resultado — ver comentário no arquivo
              para o motivo de existir separada do Launcher principal. -->
+        <!-- XaulinXs R's Misc: popup de permissão (localização / áudio) e serviço do player. -->
+        <activity
+            android:name="com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity"
+            android:theme="@style/ProxyActivityStarterTheme"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+        <service
+            android:name="com.xaulinxs.customizations.misc.music.XaulinXsMusicService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
         <activity
             android:name="com.xaulinxs.customizations.qsb.XaulinXsQsbPermissionActivity"
             android:theme="@style/ProxyActivityStarterTheme"

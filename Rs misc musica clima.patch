@@ -1,0 +1,1792 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 026ddae..960b76e 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -35,6 +35,15 @@
+          pro João") e enviar SMS. Ambas pedidas em runtime, nunca
+          concedidas por padrão; ver XaulinXsQsbPermissionActivity. -->
+     <uses-permission android:name="android.permission.READ_CONTACTS" />
++    <!-- XaulinXs R's Misc: clima (AccuWeather + localização) e player de música
++         (áudios via MediaStore, serviço em primeiro plano de mídia). -->
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
++    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
++    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
++    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
++    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
++    <uses-permission android:name="android.permission.WAKE_LOCK" />
+     <uses-permission android:name="android.permission.SEND_SMS" />
+     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+@@ -268,6 +277,16 @@
+              permissão de Contatos em nome da QSB Inteligente (Modo
+              Texto) e devolve o resultado — ver comentário no arquivo
+              para o motivo de existir separada do Launcher principal. -->
++        <!-- XaulinXs R's Misc: popup de permissão (localização / áudio) e serviço do player. -->
++        <activity
++            android:name="com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity"
++            android:theme="@style/ProxyActivityStarterTheme"
++            android:excludeFromRecents="true"
++            android:exported="false" />
++        <service
++            android:name="com.xaulinxs.customizations.misc.music.XaulinXsMusicService"
++            android:foregroundServiceType="mediaPlayback"
++            android:exported="false" />
+         <activity
+             android:name="com.xaulinxs.customizations.qsb.XaulinXsQsbPermissionActivity"
+             android:theme="@style/ProxyActivityStarterTheme"
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscPermissionActivity.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscPermissionActivity.kt
+new file mode 100644
+index 0000000..82e90be
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscPermissionActivity.kt
+@@ -0,0 +1,93 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Activity transparente que mostra o popup de permissão de runtime
++ * (localização para o clima, áudio para o player). Mesmo motivo da
++ * XaulinXsQsbPermissionActivity: Launcher.java não implementa
++ * onRequestPermissionsResult e não vamos mexer nisso.
++ */
++package com.xaulinxs.customizations.misc
++
++import android.app.Activity
++import android.content.Context
++import android.content.Intent
++import android.content.pm.PackageManager
++import android.os.Build
++import android.os.Bundle
++import android.os.Handler
++import android.os.Looper
++import androidx.core.app.ActivityCompat
++import androidx.core.content.ContextCompat
++
++class XaulinXsMiscPermissionActivity : Activity() {
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        val perms = intent.getStringArrayExtra(EXTRA_PERMISSIONS)
++        if (perms.isNullOrEmpty()) {
++            finish()
++            return
++        }
++        ActivityCompat.requestPermissions(this, perms, REQUEST_CODE)
++    }
++
++    override fun onRequestPermissionsResult(
++        requestCode: Int,
++        permissions: Array<out String>,
++        grantResults: IntArray,
++    ) {
++        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
++        finish()
++        XaulinXsMiscPermissions.dispatchChanged()
++    }
++
++    companion object {
++        private const val REQUEST_CODE = 7301
++        private const val EXTRA_PERMISSIONS = "xaulinxs_permissions"
++
++        @JvmStatic
++        fun request(context: Context, permissions: Array<String>) {
++            val missing = permissions.filter {
++                ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
++            }
++            if (missing.isEmpty()) return
++            context.startActivity(
++                Intent(context, XaulinXsMiscPermissionActivity::class.java)
++                    .putExtra(EXTRA_PERMISSIONS, missing.toTypedArray())
++                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
++            )
++        }
++    }
++}
++
++/** Permissões usadas pelos widgets + aviso de "mudou" para quem estiver escutando. */
++object XaulinXsMiscPermissions {
++
++    @JvmStatic
++    val LOCATION = arrayOf(
++        android.Manifest.permission.ACCESS_COARSE_LOCATION,
++        android.Manifest.permission.ACCESS_FINE_LOCATION,
++    )
++
++    @JvmStatic
++    val AUDIO: Array<String> =
++        if (Build.VERSION.SDK_INT >= 33) arrayOf(android.Manifest.permission.READ_MEDIA_AUDIO)
++        else arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
++
++    private val listeners = java.util.concurrent.CopyOnWriteArrayList<Runnable>()
++    private val main = Handler(Looper.getMainLooper())
++
++    fun addListener(r: Runnable) { listeners.addIfAbsent(r) }
++    fun removeListener(r: Runnable) { listeners.remove(r) }
++    fun dispatchChanged() { main.post { listeners.forEach { it.run() } } }
++
++    @JvmStatic
++    fun hasLocation(c: Context) = LOCATION.any {
++        ContextCompat.checkSelfPermission(c, it) == PackageManager.PERMISSION_GRANTED
++    }
++
++    @JvmStatic
++    fun hasAudio(c: Context) = AUDIO.all {
++        ContextCompat.checkSelfPermission(c, it) == PackageManager.PERMISSION_GRANTED
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt
+new file mode 100644
+index 0000000..abf64ad
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/XaulinXsMiscSettings.kt
+@@ -0,0 +1,47 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Preferências da categoria "R's Misc": interruptores da página fixa de
++ * música (widget de lista + mini player 4x2) e do widget de clima, mais a
++ * chave da API do AccuWeather.
++ */
++package com.xaulinxs.customizations.misc
++
++import android.content.Context
++import com.android.launcher3.LauncherPrefs
++import com.android.launcher3.LauncherPrefs.Companion.backedUpItem
++import com.android.launcher3.LauncherPrefs.Companion.nonRestorableItem
++
++object XaulinXsMiscSettings {
++
++    /**
++     * Id de "screen" reservado da página de música. É NEGATIVO de propósito:
++     * Workspace.canRemoveEmptyScreen() só remove páginas com id > FIRST_SCREEN_ID,
++     * então a página nunca é apagada como "página vazia". Não colide com
++     * EXTRA_EMPTY_SCREEN_ID (-201) nem EXTRA_EMPTY_SCREEN_SECOND_ID (-200).
++     */
++    const val MUSIC_SCREEN_ID = -300
++
++    // Ligados por padrão: o pedido é que só dê para desativar pelas configurações.
++    @JvmField
++    val MUSIC_PAGE_ENABLED = backedUpItem("xaulinxs_music_page_enabled", true)
++
++    @JvmField
++    val WEATHER_ENABLED = backedUpItem("xaulinxs_weather_enabled", true)
++
++    // Chave pessoal da API — não vai para backup/restauração.
++    @JvmField
++    val ACCUWEATHER_API_KEY = nonRestorableItem("xaulinxs_accuweather_api_key", "")
++
++    // O popup de localização é mostrado automaticamente só uma vez.
++    @JvmField
++    val LOCATION_PROMPT_SHOWN = nonRestorableItem("xaulinxs_location_prompt_shown", false)
++
++    @JvmStatic
++    fun isMusicPageEnabled(context: Context): Boolean =
++        LauncherPrefs.get(context).get(MUSIC_PAGE_ENABLED)
++
++    @JvmStatic
++    fun isWeatherEnabled(context: Context): Boolean =
++        LauncherPrefs.get(context).get(WEATHER_ENABLED)
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsAudioTrack.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsAudioTrack.kt
+new file mode 100644
+index 0000000..18c5087
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsAudioTrack.kt
+@@ -0,0 +1,27 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.ContentUris
++import android.net.Uri
++import android.provider.MediaStore
++
++data class XaulinXsAudioTrack(
++    val id: Long,
++    val title: String,
++    val artist: String,
++    val album: String,
++    val albumId: Long,
++    val folder: String,
++    val durationMs: Long,
++    /** Nomes das playlists (MediaStore) em que a faixa está — usado só na busca. */
++    val playlists: List<String>,
++) {
++    val uri: Uri
++        get() = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
++
++    /** Texto único, já em minúsculas, para a busca global. */
++    val searchBlob: String =
++        "$title\n$artist\n$album\n$folder\n${playlists.joinToString("\n")}".lowercase()
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt
+new file mode 100644
+index 0000000..2ec48f7
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMiniPlayerWidget.kt
+@@ -0,0 +1,175 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Widget 4x2 pequeno: capa, informações da faixa (nome, artista, álbum, pasta,
++ * duração), anterior / play-pause / próxima e repetir atual / repetir todas.
++ * Acompanha o serviço de reprodução via XaulinXsPlayer (mesmo processo), com
++ * um tick de 500 ms só para a barra de progresso enquanto está tocando.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.graphics.Bitmap
++import android.graphics.Color
++import android.graphics.drawable.GradientDrawable
++import android.os.Build
++import android.util.Size
++import android.util.TypedValue
++import android.view.Gravity
++import android.view.ViewGroup
++import android.widget.ImageView
++import android.widget.LinearLayout
++import android.widget.ProgressBar
++import android.widget.TextView
++import java.util.concurrent.Executors
++
++class XaulinXsMiniPlayerWidget(context: Context) : LinearLayout(context), XaulinXsPlayer.Listener {
++
++    private val cover = ImageView(context)
++    private val title = TextView(context)
++    private val artist = TextView(context)
++    private val albumFolder = TextView(context)
++    private val time = TextView(context)
++    private val progress = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
++    private val btnPrev = TextView(context)
++    private val btnPlay = TextView(context)
++    private val btnNext = TextView(context)
++    private val btnRepeatOne = TextView(context)
++    private val btnRepeatAll = TextView(context)
++
++    private val io = Executors.newSingleThreadExecutor()
++    private var shownCoverId = -1L
++
++    private val ticker = object : Runnable {
++        override fun run() {
++            updateProgress()
++            if (XaulinXsPlayer.isPlaying) postDelayed(this, 500)
++        }
++    }
++
++    private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
++
++    private fun fmt(ms: Long): String {
++        val s = ms / 1000
++        return "%d:%02d".format(s / 60, s % 60)
++    }
++
++    init {
++        orientation = HORIZONTAL
++        gravity = Gravity.CENTER_VERTICAL
++        setPadding(dp(12), dp(10), dp(12), dp(10))
++        background = GradientDrawable().apply {
++            setColor(Color.argb(170, 20, 20, 24))
++            cornerRadius = dp(24).toFloat()
++        }
++
++        cover.scaleType = ImageView.ScaleType.CENTER_CROP
++        cover.setBackgroundColor(Color.argb(60, 255, 255, 255))
++        cover.clipToOutline = true
++        cover.outlineProvider = object : android.view.ViewOutlineProvider() {
++            override fun getOutline(v: android.view.View, o: android.graphics.Outline) {
++                o.setRoundRect(0, 0, v.width, v.height, dp(14).toFloat())
++            }
++        }
++        addView(cover, LayoutParams(dp(96), dp(96)))
++
++        val col = LinearLayout(context).apply { orientation = VERTICAL }
++        styleText(title, 15f, true); styleText(artist, 13f, false)
++        styleText(albumFolder, 11f, false); styleText(time, 11f, false)
++        col.addView(title); col.addView(artist); col.addView(albumFolder)
++        progress.max = 1000
++        col.addView(progress, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10)))
++        col.addView(time)
++
++        val controls = LinearLayout(context).apply { gravity = Gravity.CENTER_VERTICAL }
++        setupButton(btnRepeatOne, "🔂") { XaulinXsPlayer.toggleRepeatOne() }
++        setupButton(btnPrev, "⏮") { XaulinXsPlayer.previous(context) }
++        setupButton(btnPlay, "▶") { XaulinXsPlayer.togglePlayPause(context) }
++        setupButton(btnNext, "⏭") { XaulinXsPlayer.next(context) }
++        setupButton(btnRepeatAll, "🔁") { XaulinXsPlayer.toggleRepeatAll() }
++        listOf(btnRepeatOne, btnPrev, btnPlay, btnNext, btnRepeatAll).forEach {
++            controls.addView(it, LayoutParams(0, dp(36), 1f))
++        }
++        col.addView(controls)
++
++        val lp = LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
++        lp.marginStart = dp(12)
++        addView(col, lp)
++        render()
++    }
++
++    private fun styleText(tv: TextView, sp: Float, bold: Boolean) {
++        tv.setTextColor(Color.WHITE); tv.setSingleLine()
++        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp)
++        tv.ellipsize = android.text.TextUtils.TruncateAt.END
++        if (bold) tv.setTypeface(tv.typeface, android.graphics.Typeface.BOLD)
++    }
++
++    private fun setupButton(b: TextView, label: String, onClick: () -> Unit) {
++        b.text = label
++        b.gravity = Gravity.CENTER
++        b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
++        b.setTextColor(Color.WHITE)
++        b.setOnClickListener { onClick() }
++    }
++
++    override fun onAttachedToWindow() {
++        super.onAttachedToWindow()
++        XaulinXsPlayer.addListener(this)
++        render()
++    }
++
++    override fun onDetachedFromWindow() {
++        XaulinXsPlayer.removeListener(this)
++        removeCallbacks(ticker)
++        super.onDetachedFromWindow()
++    }
++
++    override fun onPlayerStateChanged() = render()
++
++    private fun render() {
++        val t = XaulinXsPlayer.current
++        if (t == null) {
++            title.text = "Nenhuma faixa tocando"
++            artist.text = "Escolha uma música na lista"
++            albumFolder.text = ""; time.text = ""; progress.progress = 0
++            cover.setImageDrawable(null); shownCoverId = -1L
++        } else {
++            title.text = t.title
++            artist.text = t.artist
++            albumFolder.text = "${t.album} • ${t.folder}"
++            loadCover(t)
++            updateProgress()
++        }
++        btnPlay.text = if (XaulinXsPlayer.isPlaying) "⏸" else "▶"
++        btnRepeatOne.alpha = if (XaulinXsPlayer.repeatOne) 1f else 0.4f
++        btnRepeatAll.alpha = if (XaulinXsPlayer.repeatAll) 1f else 0.4f
++        removeCallbacks(ticker)
++        if (XaulinXsPlayer.isPlaying) post(ticker)
++    }
++
++    private fun updateProgress() {
++        val t = XaulinXsPlayer.current ?: return
++        val pos = XaulinXsPlayer.positionMs().toLong()
++        progress.progress = if (t.durationMs > 0) (pos * 1000 / t.durationMs).toInt() else 0
++        time.text = "${fmt(pos)} / ${fmt(t.durationMs)}"
++    }
++
++    private fun loadCover(t: XaulinXsAudioTrack) {
++        if (shownCoverId == t.id) return
++        shownCoverId = t.id
++        cover.setImageDrawable(null)
++        io.execute {
++            val bmp: Bitmap? = try {
++                if (Build.VERSION.SDK_INT >= 29) {
++                    context.contentResolver.loadThumbnail(t.uri, Size(256, 256), null)
++                } else {
++                    context.contentResolver
++                        .openInputStream(XaulinXsMusicRepository.albumArtUri(t.albumId))
++                        ?.use { android.graphics.BitmapFactory.decodeStream(it) }
++                }
++            } catch (_: Exception) { null }
++            post { if (shownCoverId == t.id) cover.setImageBitmap(bmp) }
++        }
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt
+new file mode 100644
+index 0000000..0bba203
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicListWidget.kt
+@@ -0,0 +1,175 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Widget grande: barra de pesquisa global no topo (faixa, artista, álbum,
++ * pasta, playlist) + lista única, rolável na vertical, de todos os áudios.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.graphics.Color
++import android.graphics.Typeface
++import android.graphics.drawable.GradientDrawable
++import android.text.Editable
++import android.text.TextWatcher
++import android.util.TypedValue
++import android.view.Gravity
++import android.view.View
++import android.view.ViewGroup
++import android.widget.Button
++import android.widget.EditText
++import android.widget.LinearLayout
++import android.widget.TextView
++import androidx.recyclerview.widget.LinearLayoutManager
++import androidx.recyclerview.widget.RecyclerView
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
++import java.util.concurrent.Executors
++
++class XaulinXsMusicListWidget(context: Context) : LinearLayout(context), XaulinXsPlayer.Listener {
++
++    private val search = EditText(context)
++    private val recycler = RecyclerView(context)
++    private val empty = TextView(context)
++    private val permissionButton = Button(context)
++    private val adapter = TrackAdapter()
++
++    private var all: List<XaulinXsAudioTrack> = emptyList()
++    private var filtered: List<XaulinXsAudioTrack> = emptyList()
++    private val io = Executors.newSingleThreadExecutor()
++    private val permListener = Runnable { reload() }
++
++    private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
++
++    init {
++        orientation = VERTICAL
++        background = GradientDrawable().apply {
++            setColor(Color.argb(150, 20, 20, 24))
++            cornerRadius = dp(24).toFloat()
++        }
++        setPadding(dp(12), dp(12), dp(12), dp(8))
++
++        search.apply {
++            hint = "Pesquisar faixa, artista, álbum, pasta ou playlist"
++            setSingleLine()
++            setTextColor(Color.WHITE)
++            setHintTextColor(Color.argb(160, 255, 255, 255))
++            setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
++            setPadding(dp(16), dp(10), dp(16), dp(10))
++            background = GradientDrawable().apply {
++                setColor(Color.argb(70, 255, 255, 255))
++                cornerRadius = dp(22).toFloat()
++            }
++            addTextChangedListener(object : TextWatcher {
++                override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
++                override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
++                override fun afterTextChanged(s: Editable?) = applyFilter()
++            })
++        }
++        addView(search, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
++
++        empty.apply {
++            setTextColor(Color.WHITE)
++            gravity = Gravity.CENTER
++            visibility = GONE
++        }
++        permissionButton.apply {
++            text = "Permitir acesso aos áudios"
++            visibility = GONE
++            setOnClickListener {
++                XaulinXsMiscPermissionActivity.request(context, XaulinXsMiscPermissions.AUDIO)
++            }
++        }
++
++        recycler.layoutManager = LinearLayoutManager(context)
++        recycler.adapter = adapter
++        recycler.overScrollMode = OVER_SCROLL_NEVER
++        val lp = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
++        lp.topMargin = dp(8)
++        addView(recycler, lp)
++        addView(empty, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
++        addView(permissionButton, LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
++            .apply { gravity = Gravity.CENTER_HORIZONTAL })
++    }
++
++    override fun onAttachedToWindow() {
++        super.onAttachedToWindow()
++        XaulinXsPlayer.addListener(this)
++        XaulinXsMiscPermissions.addListener(permListener)
++        reload()
++    }
++
++    override fun onDetachedFromWindow() {
++        XaulinXsPlayer.removeListener(this)
++        XaulinXsMiscPermissions.removeListener(permListener)
++        super.onDetachedFromWindow()
++    }
++
++    private fun reload() {
++        if (!XaulinXsMiscPermissions.hasAudio(context)) {
++            all = emptyList(); filtered = emptyList(); adapter.notifyDataSetChanged()
++            empty.text = "Sem acesso aos áudios do aparelho."
++            empty.visibility = VISIBLE
++            permissionButton.visibility = VISIBLE
++            return
++        }
++        permissionButton.visibility = GONE
++        io.execute {
++            val loaded = XaulinXsMusicRepository.loadAll(context.applicationContext)
++            post { all = loaded; applyFilter() }
++        }
++    }
++
++    private fun applyFilter() {
++        val q = search.text.toString().trim().lowercase()
++        filtered = if (q.isEmpty()) all else all.filter { it.searchBlob.contains(q) }
++        adapter.notifyDataSetChanged()
++        val showEmpty = filtered.isEmpty() && XaulinXsMiscPermissions.hasAudio(context)
++        empty.text = if (all.isEmpty()) "Nenhum áudio encontrado." else "Nada encontrado para a pesquisa."
++        empty.visibility = if (showEmpty) VISIBLE else GONE
++    }
++
++    override fun onPlayerStateChanged() {
++        adapter.notifyDataSetChanged()
++    }
++
++    private inner class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
++        override fun getItemCount() = filtered.size
++
++        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
++            val row = LinearLayout(parent.context).apply {
++                orientation = VERTICAL
++                setPadding(dp(12), dp(8), dp(12), dp(8))
++                layoutParams = RecyclerView.LayoutParams(
++                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
++                )
++            }
++            val title = TextView(parent.context).apply {
++                setTextColor(Color.WHITE); setSingleLine(); setTypeface(typeface, Typeface.BOLD)
++                setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
++                ellipsize = android.text.TextUtils.TruncateAt.END
++            }
++            val sub = TextView(parent.context).apply {
++                setTextColor(Color.argb(190, 255, 255, 255)); setSingleLine()
++                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
++                ellipsize = android.text.TextUtils.TruncateAt.END
++            }
++            row.addView(title); row.addView(sub)
++            return object : RecyclerView.ViewHolder(row) {}
++        }
++
++        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
++            val t = filtered[position]
++            val row = holder.itemView as LinearLayout
++            val title = row.getChildAt(0) as TextView
++            val sub = row.getChildAt(1) as TextView
++            val playing = XaulinXsPlayer.current?.id == t.id
++            title.text = (if (playing) "▶ " else "") + t.title
++            sub.text = "${t.artist} • ${t.album}"
++            row.setOnClickListener {
++                // A fila é a lista filtrada atual: "próxima" respeita a pesquisa.
++                XaulinXsPlayer.playQueue(context, filtered, position)
++            }
++        }
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt
+new file mode 100644
+index 0000000..9086781
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicPageView.kt
+@@ -0,0 +1,44 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Conteúdo da página fixa de música: widget grande de lista em cima e o
++ * mini player 4x2 logo abaixo. É inserido num CellLayout do Workspace,
++ * ocupando a grade inteira (por isso nada pode ser solto nela).
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.view.ViewGroup
++import android.widget.LinearLayout
++import com.android.launcher3.LauncherSettings
++import com.android.launcher3.model.data.ItemInfo
++import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
++
++class XaulinXsMusicPageView(context: Context) : LinearLayout(context) {
++
++    init {
++        orientation = VERTICAL
++        val gap = (8 * resources.displayMetrics.density).toInt()
++        super.setPadding(gap, gap, gap, gap)
++
++        addView(XaulinXsMusicListWidget(context), LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
++        val mini = XaulinXsMiniPlayerWidget(context)
++        addView(
++            mini,
++            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (132 * resources.displayMetrics.density).toInt())
++                .apply { topMargin = gap },
++        )
++
++        // Alguns operadores do Workspace (mapOverItems) fazem cast de getTag() para ItemInfo
++        // sem checar null; esta etiqueta "não acionável" evita NPE. Nunca é gravada no banco.
++        tag = ItemInfo().apply {
++            itemType = LauncherSettings.Favorites.ITEM_TYPE_NON_ACTIONABLE
++            container = LauncherSettings.Favorites.CONTAINER_DESKTOP
++            screenId = XaulinXsMiscSettings.MUSIC_SCREEN_ID
++        }
++        setOnLongClickListener { true }
++    }
++
++    // CellLayout.measureChild() aplica padding de ícone em qualquer filho; ignoramos.
++    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) = Unit
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicRepository.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicRepository.kt
+new file mode 100644
+index 0000000..472b9b4
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicRepository.kt
+@@ -0,0 +1,130 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Lê TODOS os áudios do armazenamento via MediaStore. Não filtra por extensão:
++ * o que o MediaStore indexa (wav, flac, mp3, m4a, opus, alac, ogg, webm, ...)
++ * é o que o Android sabe tocar, então a lista acompanha o suporte do aparelho.
++ * Só descarta entradas pendentes/sem duração.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.ContentUris
++import android.content.Context
++import android.net.Uri
++import android.os.Build
++import android.provider.MediaStore
++import java.io.File
++
++object XaulinXsMusicRepository {
++
++    fun loadAll(context: Context): List<XaulinXsAudioTrack> {
++        val playlistsByAudio = loadPlaylistMembership(context)
++        val out = ArrayList<XaulinXsAudioTrack>()
++
++        val projection = buildList {
++            add(MediaStore.Audio.Media._ID)
++            add(MediaStore.Audio.Media.TITLE)
++            add(MediaStore.Audio.Media.ARTIST)
++            add(MediaStore.Audio.Media.ALBUM)
++            add(MediaStore.Audio.Media.ALBUM_ID)
++            add(MediaStore.Audio.Media.DURATION)
++            add(MediaStore.Audio.Media.DISPLAY_NAME)
++            add(MediaStore.Audio.Media.DATA)
++            if (Build.VERSION.SDK_INT >= 29) add(MediaStore.Audio.Media.RELATIVE_PATH)
++        }.toTypedArray()
++
++        val sel = if (Build.VERSION.SDK_INT >= 29) "${MediaStore.Audio.Media.IS_PENDING}=0" else null
++
++        try {
++            context.contentResolver.query(
++                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
++                projection,
++                sel,
++                null,
++                "${MediaStore.Audio.Media.TITLE} COLLATE NOCASE ASC",
++            )?.use { c ->
++                val iId = c.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
++                val iTitle = c.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
++                val iArtist = c.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
++                val iAlbum = c.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
++                val iAlbumId = c.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)
++                val iDur = c.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
++                val iName = c.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
++                val iData = c.getColumnIndex(MediaStore.Audio.Media.DATA)
++                val iRel = if (Build.VERSION.SDK_INT >= 29)
++                    c.getColumnIndex(MediaStore.Audio.Media.RELATIVE_PATH) else -1
++
++                while (c.moveToNext()) {
++                    val id = c.getLong(iId)
++                    val duration = c.getLong(iDur)
++                    if (duration <= 0L) continue
++                    val rawTitle = c.getString(iTitle)
++                    val title = if (rawTitle.isNullOrBlank())
++                        c.getString(iName)?.substringBeforeLast('.') ?: "?" else rawTitle
++                    val artist = c.getString(iArtist).cleanUnknown("Artista desconhecido")
++                    val album = c.getString(iAlbum).cleanUnknown("Álbum desconhecido")
++                    val folder = folderOf(
++                        if (iRel >= 0) c.getString(iRel) else null,
++                        if (iData >= 0) c.getString(iData) else null,
++                    )
++                    out.add(
++                        XaulinXsAudioTrack(
++                            id, title, artist, album, c.getLong(iAlbumId),
++                            folder, duration, playlistsByAudio[id] ?: emptyList(),
++                        ),
++                    )
++                }
++            }
++        } catch (_: SecurityException) {
++            // Sem permissão de áudio ainda: devolve lista vazia, a UI mostra o botão de permitir.
++        }
++        return out
++    }
++
++    private fun String?.cleanUnknown(fallback: String): String =
++        if (isNullOrBlank() || this == "<unknown>") fallback else this
++
++    private fun folderOf(relativePath: String?, data: String?): String {
++        if (!relativePath.isNullOrBlank()) {
++            return relativePath.trimEnd('/').substringAfterLast('/')
++        }
++        if (!data.isNullOrBlank()) return File(data).parentFile?.name ?: ""
++        return ""
++    }
++
++    /** audioId -> nomes das playlists. Best-effort: playlists são APIs antigas do MediaStore. */
++    @Suppress("DEPRECATION")
++    private fun loadPlaylistMembership(context: Context): Map<Long, List<String>> {
++        val map = HashMap<Long, MutableList<String>>()
++        try {
++            val resolver = context.contentResolver
++            resolver.query(
++                MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
++                arrayOf(MediaStore.Audio.Playlists._ID, MediaStore.Audio.Playlists.NAME),
++                null, null, null,
++            )?.use { pl ->
++                while (pl.moveToNext()) {
++                    val plId = pl.getLong(0)
++                    val plName = pl.getString(1) ?: continue
++                    val membersUri: Uri = MediaStore.Audio.Playlists.Members
++                        .getContentUri("external", plId)
++                    resolver.query(
++                        membersUri,
++                        arrayOf(MediaStore.Audio.Playlists.Members.AUDIO_ID),
++                        null, null, null,
++                    )?.use { m ->
++                        while (m.moveToNext()) {
++                            map.getOrPut(m.getLong(0)) { ArrayList() }.add(plName)
++                        }
++                    }
++                }
++            }
++        } catch (_: Exception) {
++            // Sem acesso a playlists: a busca por playlist simplesmente não acha nada.
++        }
++        return map
++    }
++
++    fun albumArtUri(albumId: Long): Uri =
++        ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), albumId)
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt
+new file mode 100644
+index 0000000..5fa512b
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsMusicService.kt
+@@ -0,0 +1,232 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Serviço em primeiro plano de reprodução. Usa android.media.MediaPlayer, que
++ * toca qualquer formato que o próprio Android suporte (wav, flac, mp3, m4a,
++ * opus, ogg, webm, alac em aparelhos com codec...). A notificação é
++ * propositalmente simples: só "Reprodução Iniciada!".
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.app.Notification
++import android.app.NotificationChannel
++import android.app.NotificationManager
++import android.app.Service
++import android.content.BroadcastReceiver
++import android.content.Context
++import android.content.Intent
++import android.content.IntentFilter
++import android.content.pm.ServiceInfo
++import android.media.AudioAttributes
++import android.media.AudioFocusRequest
++import android.media.AudioManager
++import android.media.MediaPlayer
++import android.os.Build
++import android.os.IBinder
++import android.os.PowerManager
++
++class XaulinXsMusicService : Service() {
++
++    private var player: MediaPlayer? = null
++    private var prepared = false
++    private lateinit var audioManager: AudioManager
++    private var focusRequest: AudioFocusRequest? = null
++
++    private val noisyReceiver = object : BroadcastReceiver() {
++        override fun onReceive(context: Context?, intent: Intent?) {
++            if (intent?.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY) pausePlayback()
++        }
++    }
++
++    private val focusListener = AudioManager.OnAudioFocusChangeListener { change ->
++        when (change) {
++            AudioManager.AUDIOFOCUS_LOSS,
++            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> pausePlayback()
++            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> player?.setVolume(0.3f, 0.3f)
++            AudioManager.AUDIOFOCUS_GAIN -> player?.setVolume(1f, 1f)
++        }
++    }
++
++    override fun onCreate() {
++        super.onCreate()
++        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
++        XaulinXsPlayer.service = this
++        registerReceiver(noisyReceiver, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
++    }
++
++    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
++        // startForegroundService() exige startForeground() em até 5s, em TODA chamada.
++        startAsForeground()
++        when (intent?.action) {
++            ACTION_PLAY_INDEX -> playIndex(XaulinXsPlayer.index)
++            ACTION_TOGGLE -> togglePlayPause()
++            ACTION_NEXT -> skipNext(userInitiated = true)
++            ACTION_PREV -> skipPrevious()
++        }
++        return START_NOT_STICKY
++    }
++
++    private fun startAsForeground() {
++        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
++        nm.createNotificationChannel(
++            NotificationChannel(CHANNEL_ID, "Player de música", NotificationManager.IMPORTANCE_LOW),
++        )
++        val notification = Notification.Builder(this, CHANNEL_ID)
++            .setSmallIcon(android.R.drawable.ic_media_play)
++            .setContentTitle("Reprodução Iniciada!")
++            .setOngoing(true)
++            .build()
++        if (Build.VERSION.SDK_INT >= 29) {
++            startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
++        } else {
++            startForeground(NOTIFICATION_ID, notification)
++        }
++    }
++
++    // ---- reprodução ----
++
++    private fun playIndex(i: Int) {
++        val track = XaulinXsPlayer.queue.getOrNull(i)
++        if (track == null) { stopAll(); return }
++        XaulinXsPlayer.index = i
++        releasePlayer()
++        if (!requestFocus()) { setPlaying(false); return }
++
++        val mp = MediaPlayer()
++        player = mp
++        prepared = false
++        try {
++            mp.setAudioAttributes(
++                AudioAttributes.Builder()
++                    .setUsage(AudioAttributes.USAGE_MEDIA)
++                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
++                    .build(),
++            )
++            mp.setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
++            mp.setDataSource(applicationContext, track.uri)
++            mp.setOnPreparedListener {
++                prepared = true
++                it.start()
++                setPlaying(true)
++            }
++            mp.setOnCompletionListener { onTrackCompleted() }
++            mp.setOnErrorListener { _, _, _ ->
++                // Faixa ilegível (codec não suportado etc.): pula para a próxima em vez de travar.
++                skipNext(userInitiated = false)
++                true
++            }
++            mp.prepareAsync()
++            XaulinXsPlayer.notifyChanged()
++        } catch (e: Exception) {
++            skipNext(userInitiated = false)
++        }
++    }
++
++    private fun onTrackCompleted() {
++        if (XaulinXsPlayer.repeatOne) {
++            player?.seekTo(0)
++            player?.start()
++            return
++        }
++        val last = XaulinXsPlayer.queue.size - 1
++        when {
++            XaulinXsPlayer.index < last -> playIndex(XaulinXsPlayer.index + 1)
++            XaulinXsPlayer.repeatAll -> playIndex(0)
++            else -> stopAll()
++        }
++    }
++
++    private fun skipNext(userInitiated: Boolean) {
++        val size = XaulinXsPlayer.queue.size
++        if (size == 0) { stopAll(); return }
++        val next = XaulinXsPlayer.index + 1
++        when {
++            next < size -> playIndex(next)
++            XaulinXsPlayer.repeatAll || userInitiated -> playIndex(0)
++            else -> stopAll()
++        }
++    }
++
++    private fun skipPrevious() {
++        if (positionMs() > 3000) { player?.seekTo(0); return }
++        val prev = XaulinXsPlayer.index - 1
++        playIndex(if (prev >= 0) prev else (XaulinXsPlayer.queue.size - 1).coerceAtLeast(0))
++    }
++
++    private fun togglePlayPause() {
++        val mp = player
++        if (mp == null || !prepared) { playIndex(XaulinXsPlayer.index.coerceAtLeast(0)); return }
++        if (mp.isPlaying) pausePlayback()
++        else if (requestFocus()) { mp.start(); setPlaying(true) }
++    }
++
++    private fun pausePlayback() {
++        player?.takeIf { prepared && it.isPlaying }?.pause()
++        setPlaying(false)
++    }
++
++    private fun setPlaying(playing: Boolean) {
++        XaulinXsPlayer.isPlaying = playing
++        XaulinXsPlayer.notifyChanged()
++    }
++
++    private fun stopAll() {
++        releasePlayer()
++        abandonFocus()
++        setPlaying(false)
++        stopForeground(STOP_FOREGROUND_REMOVE)
++        stopSelf()
++    }
++
++    fun positionMs(): Int = try {
++        if (prepared) player?.currentPosition ?: 0 else 0
++    } catch (_: IllegalStateException) { 0 }
++
++    private fun releasePlayer() {
++        player?.let {
++            it.setOnCompletionListener(null)
++            it.setOnErrorListener(null)
++            it.release()
++        }
++        player = null
++        prepared = false
++    }
++
++    private fun requestFocus(): Boolean {
++        val req = focusRequest ?: AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
++            .setAudioAttributes(
++                AudioAttributes.Builder()
++                    .setUsage(AudioAttributes.USAGE_MEDIA)
++                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
++                    .build(),
++            )
++            .setOnAudioFocusChangeListener(focusListener)
++            .build().also { focusRequest = it }
++        return audioManager.requestAudioFocus(req) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
++    }
++
++    private fun abandonFocus() {
++        focusRequest?.let { audioManager.abandonAudioFocusRequest(it) }
++    }
++
++    override fun onDestroy() {
++        releasePlayer()
++        abandonFocus()
++        try { unregisterReceiver(noisyReceiver) } catch (_: Exception) {}
++        if (XaulinXsPlayer.service === this) XaulinXsPlayer.service = null
++        XaulinXsPlayer.isPlaying = false
++        XaulinXsPlayer.notifyChanged()
++        super.onDestroy()
++    }
++
++    override fun onBind(intent: Intent?): IBinder? = null
++
++    companion object {
++        const val ACTION_PLAY_INDEX = "r.home3.music.PLAY_INDEX"
++        const val ACTION_TOGGLE = "r.home3.music.TOGGLE"
++        const val ACTION_NEXT = "r.home3.music.NEXT"
++        const val ACTION_PREV = "r.home3.music.PREV"
++        private const val CHANNEL_ID = "xaulinxs_music"
++        private const val NOTIFICATION_ID = 7302
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt
+new file mode 100644
+index 0000000..b422ba0
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/music/XaulinXsPlayer.kt
+@@ -0,0 +1,77 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Estado compartilhado do player. Os dois widgets (lista e mini player) vivem
++ * no MESMO processo do serviço de reprodução, então "acompanhar o serviço
++ * constantemente" é simplesmente escutar este objeto: o serviço escreve o
++ * estado aqui e avisa os listeners; os widgets só leem e mandam comandos.
++ * Tudo roda na main thread.
++ */
++package com.xaulinxs.customizations.misc.music
++
++import android.content.Context
++import android.content.Intent
++import androidx.core.content.ContextCompat
++
++object XaulinXsPlayer {
++
++    interface Listener { fun onPlayerStateChanged() }
++
++    @JvmStatic var queue: List<XaulinXsAudioTrack> = emptyList()
++        internal set
++    @JvmStatic var index: Int = -1
++        internal set
++    @JvmStatic var isPlaying: Boolean = false
++        internal set
++    @JvmStatic var repeatOne: Boolean = false
++        internal set
++    @JvmStatic var repeatAll: Boolean = false
++        internal set
++
++    internal var service: XaulinXsMusicService? = null
++
++    private val listeners = java.util.concurrent.CopyOnWriteArrayList<Listener>()
++
++    val current: XaulinXsAudioTrack?
++        get() = queue.getOrNull(index)
++
++    fun positionMs(): Int = service?.positionMs() ?: 0
++
++    fun addListener(l: Listener) { listeners.addIfAbsent(l) }
++    fun removeListener(l: Listener) { listeners.remove(l) }
++    internal fun notifyChanged() { listeners.forEach { it.onPlayerStateChanged() } }
++
++    // ---- comandos (viram intents para o serviço em primeiro plano) ----
++
++    fun playQueue(context: Context, tracks: List<XaulinXsAudioTrack>, startIndex: Int) {
++        queue = tracks
++        index = startIndex
++        send(context, XaulinXsMusicService.ACTION_PLAY_INDEX)
++    }
++
++    fun togglePlayPause(context: Context) = send(context, XaulinXsMusicService.ACTION_TOGGLE)
++    fun next(context: Context) = send(context, XaulinXsMusicService.ACTION_NEXT)
++    fun previous(context: Context) = send(context, XaulinXsMusicService.ACTION_PREV)
++
++    // Repetição é só estado: não precisa acordar o serviço.
++    fun toggleRepeatOne() {
++        repeatOne = !repeatOne
++        if (repeatOne) repeatAll = false
++        notifyChanged()
++    }
++
++    fun toggleRepeatAll() {
++        repeatAll = !repeatAll
++        if (repeatAll) repeatOne = false
++        notifyChanged()
++    }
++
++    private fun send(context: Context, action: String) {
++        // Sem faixa carregada, play/next/prev não têm o que fazer.
++        if (action != XaulinXsMusicService.ACTION_PLAY_INDEX && queue.isEmpty()) return
++        ContextCompat.startForegroundService(
++            context.applicationContext,
++            Intent(context.applicationContext, XaulinXsMusicService::class.java).setAction(action),
++        )
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt
+new file mode 100644
+index 0000000..1adaf24
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherData.kt
+@@ -0,0 +1,25 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ */
++package com.xaulinxs.customizations.misc.weather
++
++data class XaulinXsWeatherData(
++    val city: String,
++    val temperatureC: Double,
++    val conditionText: String,
++    val humidityPercent: Int,
++    /** 0..100, ou -1 se a API não informou. */
++    val rainChancePercent: Int,
++    val isDay: Boolean,
++    /** Código de ícone do AccuWeather (1..44). */
++    val iconCode: Int,
++)
++
++sealed class XaulinXsWeatherState {
++    object Loading : XaulinXsWeatherState()
++    object NoApiKey : XaulinXsWeatherState()
++    object NoLocationPermission : XaulinXsWeatherState()
++    object NoLocation : XaulinXsWeatherState()
++    data class Error(val message: String) : XaulinXsWeatherState()
++    data class Ready(val data: XaulinXsWeatherData) : XaulinXsWeatherState()
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+new file mode 100644
+index 0000000..0af1d13
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherHost.kt
+@@ -0,0 +1,110 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Mantém o widget de clima FIXO logo acima da barra inteligente (QSB do
++ * Hotseat), só visível na página principal. Fica no DragLayer, entre o Hotseat
++ * e o resto, e acompanha: posição do QSB, rolagem do Workspace (some ao ir
++ * para outras páginas) e o alpha do QSB/Hotseat (some ao abrir o menu de apps).
++ */
++package com.xaulinxs.customizations.misc.weather
++
++import android.content.Intent
++import android.view.Gravity
++import android.view.View
++import com.android.launcher3.InsettableFrameLayout
++import com.android.launcher3.Launcher
++import com.android.launcher3.LauncherPrefs
++import com.android.launcher3.settings.SettingsActivity
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
++import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
++
++class XaulinXsWeatherHost(private val launcher: Launcher) {
++
++    private val view = XaulinXsWeatherView(launcher)
++    private val d = launcher.resources.displayMetrics.density
++    private val heightPx = (104 * d).toInt()
++    private val gapPx = (8 * d).toInt()
++    private val permListener = Runnable { refresh(true) }
++
++    fun attach() {
++        val drag = launcher.dragLayer
++        val hotseat = launcher.hotseat
++        val lp = InsettableFrameLayout.LayoutParams(0, heightPx).apply {
++            gravity = Gravity.TOP or Gravity.START
++            ignoreInsets = true // posicionamos por coordenadas absolutas do Hotseat
++        }
++        drag.addView(view, drag.indexOfChild(hotseat) + 1, lp)
++
++        hotseat.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> reposition() }
++        view.viewTreeObserver.addOnPreDrawListener {
++            syncVisuals()
++            true
++        }
++        view.setOnClickListener { onTap() }
++        XaulinXsMiscPermissions.addListener(permListener)
++        reposition()
++        syncVisuals()
++    }
++
++    fun onResume() {
++        val enabled = XaulinXsMiscSettings.isWeatherEnabled(launcher)
++        view.visibility = if (enabled) View.VISIBLE else View.GONE
++        if (!enabled) return
++
++        val prefs = LauncherPrefs.get(launcher)
++        // Popup de ativação: uma única vez, o resto fica por conta do toque no widget.
++        if (!XaulinXsMiscPermissions.hasLocation(launcher) &&
++            !prefs.get(XaulinXsMiscSettings.LOCATION_PROMPT_SHOWN)
++        ) {
++            prefs.put(XaulinXsMiscSettings.LOCATION_PROMPT_SHOWN, true)
++            XaulinXsMiscPermissionActivity.request(launcher, XaulinXsMiscPermissions.LOCATION)
++        }
++        refresh(false)
++    }
++
++    fun onDestroy() {
++        XaulinXsMiscPermissions.removeListener(permListener)
++    }
++
++    private fun refresh(force: Boolean) {
++        if (!XaulinXsMiscSettings.isWeatherEnabled(launcher)) return
++        XaulinXsWeatherRepository.refresh(launcher, force) { view.state = it }
++    }
++
++    private fun onTap() {
++        when (view.state) {
++            is XaulinXsWeatherState.NoLocationPermission ->
++                XaulinXsMiscPermissionActivity.request(launcher, XaulinXsMiscPermissions.LOCATION)
++            is XaulinXsWeatherState.NoApiKey ->
++                launcher.startActivity(Intent(launcher, SettingsActivity::class.java))
++            else -> refresh(true)
++        }
++    }
++
++    /** Largura e posição X/Y iguais às do QSB. Só roda em mudança de layout. */
++    private fun reposition() {
++        val hotseat = launcher.hotseat
++        val qsb = hotseat.qsb ?: return
++        if (qsb.width <= 0) return
++        val lp = view.layoutParams
++        if (lp.width != qsb.width) {
++            lp.width = qsb.width
++            view.layoutParams = lp
++        }
++        view.translationX = (hotseat.left + qsb.left).toFloat()
++        view.translationY = (hotseat.top + qsb.top - heightPx - gapPx).toFloat() + hotseat.translationY
++    }
++
++    /** Roda a cada frame: só alpha e translação, nada que dispare novo layout. */
++    private fun syncVisuals() {
++        if (view.visibility != View.VISIBLE) return
++        val hotseat = launcher.hotseat
++        val qsb = hotseat.qsb
++        val pageFraction = launcher.workspace.xaulinXsFirstPageFraction()
++        val a = pageFraction * hotseat.alpha * (qsb?.alpha ?: 1f)
++        if (view.alpha != a) view.alpha = a
++        val ty = (hotseat.top + (qsb?.top ?: 0) - heightPx - gapPx).toFloat() + hotseat.translationY
++        if (view.translationY != ty) view.translationY = ty
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt
+new file mode 100644
+index 0000000..b9b8df1
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherRepository.kt
+@@ -0,0 +1,144 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Busca clima no AccuWeather (dataservice.accuweather.com):
++ *   1) /locations/v1/cities/geoposition/search  -> chave + nome da cidade
++ *   2) /currentconditions/v1/{key}?details=true -> temperatura, umidade, ícone
++ *   3) /forecasts/v1/hourly/1hour/{key}         -> probabilidade de chuva
++ * A API exige chave própria (plano gratuito: ~50 chamadas/dia), por isso há
++ * cache de 30 min e a chave é configurada em R's Misc.
++ */
++package com.xaulinxs.customizations.misc.weather
++
++import android.annotation.SuppressLint
++import android.content.Context
++import android.location.Location
++import android.location.LocationManager
++import android.os.Build
++import android.os.Handler
++import android.os.Looper
++import com.android.launcher3.LauncherPrefs
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
++import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
++import org.json.JSONArray
++import org.json.JSONObject
++import java.net.HttpURLConnection
++import java.net.URL
++import java.net.URLEncoder
++import java.util.Locale
++import java.util.concurrent.CountDownLatch
++import java.util.concurrent.Executors
++import java.util.concurrent.TimeUnit
++
++object XaulinXsWeatherRepository {
++
++    private const val BASE = "https://dataservice.accuweather.com"
++    private const val CACHE_MS = 30 * 60 * 1000L
++
++    private val io = Executors.newSingleThreadExecutor()
++    private val main = Handler(Looper.getMainLooper())
++
++    private var cached: XaulinXsWeatherData? = null
++    private var cachedAt = 0L
++
++    fun refresh(context: Context, force: Boolean, callback: (XaulinXsWeatherState) -> Unit) {
++        val app = context.applicationContext
++        val key = LauncherPrefs.get(app).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY).trim()
++        if (key.isEmpty()) { callback(XaulinXsWeatherState.NoApiKey); return }
++        if (!XaulinXsMiscPermissions.hasLocation(app)) {
++            callback(XaulinXsWeatherState.NoLocationPermission); return
++        }
++        val c = cached
++        if (!force && c != null && System.currentTimeMillis() - cachedAt < CACHE_MS) {
++            callback(XaulinXsWeatherState.Ready(c)); return
++        }
++        callback(XaulinXsWeatherState.Loading)
++        io.execute {
++            val result: XaulinXsWeatherState = try {
++                val loc = findLocation(app)
++                if (loc == null) XaulinXsWeatherState.NoLocation
++                else {
++                    val data = fetch(key, loc)
++                    cached = data; cachedAt = System.currentTimeMillis()
++                    XaulinXsWeatherState.Ready(data)
++                }
++            } catch (e: Exception) {
++                // Em falha de rede, mostra o último dado bom se existir.
++                cached?.let { XaulinXsWeatherState.Ready(it) }
++                    ?: XaulinXsWeatherState.Error(e.message ?: "Falha ao buscar o clima")
++            }
++            main.post { callback(result) }
++        }
++    }
++
++    // ---- localização ----
++
++    @SuppressLint("MissingPermission")
++    private fun findLocation(ctx: Context): Location? {
++        val lm = ctx.getSystemService(Context.LOCATION_SERVICE) as LocationManager
++        val providers = try { lm.getProviders(true) } catch (_: Exception) { emptyList() }
++        var best: Location? = null
++        for (p in providers) {
++            val l = try { lm.getLastKnownLocation(p) } catch (_: Exception) { null } ?: continue
++            if (best == null || l.time > best.time) best = l
++        }
++        if (best != null) return best
++        // Sem última posição conhecida: pede uma leitura única (API 30+).
++        if (Build.VERSION.SDK_INT >= 30) {
++            val provider = providers.firstOrNull { it != LocationManager.PASSIVE_PROVIDER } ?: return null
++            val latch = CountDownLatch(1)
++            var out: Location? = null
++            lm.getCurrentLocation(provider, null, io) { out = it; latch.countDown() }
++            latch.await(10, TimeUnit.SECONDS)
++            return out
++        }
++        return null
++    }
++
++    // ---- AccuWeather ----
++
++    private fun fetch(key: String, loc: Location): XaulinXsWeatherData {
++        val lang = if (Locale.getDefault().language == "pt") "pt-br" else Locale.getDefault().toLanguageTag()
++        val k = URLEncoder.encode(key, "UTF-8")
++        val q = URLEncoder.encode("${loc.latitude},${loc.longitude}", "UTF-8")
++
++        val geo = JSONObject(get("$BASE/locations/v1/cities/geoposition/search?apikey=$k&q=$q&language=$lang"))
++        val locKey = geo.getString("Key")
++        val city = geo.optString("LocalizedName", "")
++
++        val cur = JSONArray(get("$BASE/currentconditions/v1/$locKey?apikey=$k&details=true&language=$lang"))
++            .getJSONObject(0)
++
++        var rain = -1
++        try {
++            val h = JSONArray(get("$BASE/forecasts/v1/hourly/1hour/$locKey?apikey=$k&details=true&metric=true&language=$lang"))
++            if (h.length() > 0) rain = h.getJSONObject(0).optInt("PrecipitationProbability", -1)
++        } catch (_: Exception) {
++            // Previsão é opcional; o resto do widget continua funcionando.
++        }
++
++        return XaulinXsWeatherData(
++            city = city,
++            temperatureC = cur.getJSONObject("Temperature").getJSONObject("Metric").getDouble("Value"),
++            conditionText = cur.optString("WeatherText", ""),
++            humidityPercent = cur.optInt("RelativeHumidity", -1),
++            rainChancePercent = rain,
++            isDay = cur.optBoolean("IsDayTime", true),
++            iconCode = cur.optInt("WeatherIcon", 1),
++        )
++    }
++
++    private fun get(url: String): String {
++        val conn = URL(url).openConnection() as HttpURLConnection
++        conn.connectTimeout = 10_000
++        conn.readTimeout = 10_000
++        try {
++            val code = conn.responseCode
++            if (code == 401 || code == 403) throw IllegalStateException("Chave do AccuWeather inválida ou sem cota")
++            if (code != 200) throw IllegalStateException("AccuWeather respondeu $code")
++            return conn.inputStream.bufferedReader().use { it.readText() }
++        } finally {
++            conn.disconnect()
++        }
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+new file mode 100644
+index 0000000..d97b69f
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/misc/weather/XaulinXsWeatherView.kt
+@@ -0,0 +1,144 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Widget de clima desenhado 100% em Canvas (sem imagens): sol com raios
++ * girando, lua, nuvens à deriva e gotículas caindo na proporção da chance de
++ * chuva. Textos: temperatura, condição, umidade, chance de chuva e cidade.
++ */
++package com.xaulinxs.customizations.misc.weather
++
++import android.animation.ValueAnimator
++import android.content.Context
++import android.graphics.Canvas
++import android.graphics.Color
++import android.graphics.Paint
++import android.graphics.Path
++import android.graphics.RectF
++import android.view.View
++import android.view.animation.LinearInterpolator
++import kotlin.math.PI
++import kotlin.math.cos
++import kotlin.math.sin
++
++class XaulinXsWeatherView(context: Context) : View(context) {
++
++    var state: XaulinXsWeatherState = XaulinXsWeatherState.Loading
++        set(value) { field = value; invalidate() }
++
++    private val d = resources.displayMetrics.density
++    private val bg = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.argb(150, 20, 28, 48) }
++    private val sunPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(255, 196, 40) }
++    private val rayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
++        color = Color.rgb(255, 214, 90); strokeWidth = 3 * d; strokeCap = Paint.Cap.ROUND
++    }
++    private val moonPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(235, 238, 250) }
++    private val cloudPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.argb(235, 245, 248, 255) }
++    private val dropPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(110, 185, 255) }
++    private val big = Paint(Paint.ANTI_ALIAS_FLAG).apply {
++        color = Color.WHITE; textSize = 34 * d; isFakeBoldText = true
++    }
++    private val mid = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = 14 * d }
++    private val small = Paint(Paint.ANTI_ALIAS_FLAG).apply {
++        color = Color.argb(215, 255, 255, 255); textSize = 12 * d
++    }
++
++    private var t = 0f // 0..1 em loop
++    private val animator = ValueAnimator.ofFloat(0f, 1f).apply {
++        duration = 6000
++        repeatCount = ValueAnimator.INFINITE
++        interpolator = LinearInterpolator()
++        addUpdateListener { t = it.animatedValue as Float; invalidate() }
++    }
++
++    override fun onAttachedToWindow() { super.onAttachedToWindow(); animator.start() }
++    override fun onDetachedFromWindow() { animator.cancel(); super.onDetachedFromWindow() }
++
++    override fun onDraw(canvas: Canvas) {
++        val w = width.toFloat(); val h = height.toFloat()
++        canvas.drawRoundRect(RectF(0f, 0f, w, h), 24 * d, 24 * d, bg)
++
++        val s = state
++        if (s !is XaulinXsWeatherState.Ready) {
++            drawIcon(canvas, RectF(12 * d, 12 * d, h - 12 * d, h - 12 * d), sun = true, moon = false, cloud = true, drops = 0)
++            val msg = when (s) {
++                is XaulinXsWeatherState.Loading -> "Buscando o clima…"
++                is XaulinXsWeatherState.NoApiKey -> "Defina a chave do AccuWeather\nem R's Misc"
++                is XaulinXsWeatherState.NoLocationPermission -> "Toque para permitir a localização"
++                is XaulinXsWeatherState.NoLocation -> "Não foi possível obter a localização"
++                is XaulinXsWeatherState.Error -> s.message
++                else -> ""
++            }
++            var y = h / 2f - ((msg.count { it == '\n' }) * 9 * d)
++            msg.split('\n').forEach { canvas.drawText(it, h, y, mid); y += 18 * d }
++            return
++        }
++
++        val data = s.data
++        val iconBox = RectF(12 * d, 12 * d, h - 12 * d, h - 12 * d)
++        val code = data.iconCode
++        val clearSky = code in intArrayOf(1, 2, 30, 33, 34)
++        val hasCloud = !clearSky
++        val drops = if (data.rainChancePercent >= 20) (data.rainChancePercent / 18).coerceIn(1, 6) else 0
++        drawIcon(canvas, iconBox, sun = data.isDay && (clearSky || code in 3..5), moon = !data.isDay && (clearSky || code in 35..38),
++            cloud = hasCloud || code in 3..5, drops = drops)
++
++        val x = h
++        canvas.drawText("${Math.round(data.temperatureC)}°", x, 12 * d + big.textSize * 0.85f, big)
++        canvas.drawText(data.conditionText, x + 70 * d, 12 * d + 17 * d, mid)
++        if (data.city.isNotEmpty()) canvas.drawText(data.city, x + 70 * d, 12 * d + 34 * d, small)
++        var y = h - 14 * d
++        val humidity = if (data.humidityPercent >= 0) "Umidade ${data.humidityPercent}%" else "Umidade --"
++        canvas.drawText(humidity, x, y - 16 * d, small)
++        val rain = if (data.rainChancePercent >= 0) "Chuva ${data.rainChancePercent}%" else "Chuva --"
++        drawDrop(canvas, x + 4 * d, y - 10 * d, 5 * d)
++        canvas.drawText(rain, x + 14 * d, y, small)
++    }
++
++    private fun drawIcon(c: Canvas, box: RectF, sun: Boolean, moon: Boolean, cloud: Boolean, drops: Int) {
++        val cx = box.centerX(); val cy = box.centerY(); val r = box.width() * 0.5f
++        if (sun) {
++            val sx = cx - r * 0.15f; val sy = cy - r * 0.2f; val sr = r * 0.32f
++            for (i in 0 until 10) {
++                val a = (t * 2 * PI + i * 2 * PI / 10).toFloat()
++                c.drawLine(sx + cos(a) * sr * 1.35f, sy + sin(a) * sr * 1.35f,
++                    sx + cos(a) * sr * 1.75f, sy + sin(a) * sr * 1.75f, rayPaint)
++            }
++            c.drawCircle(sx, sy, sr, sunPaint)
++        }
++        if (moon) {
++            val mr = r * 0.34f; val mx = cx - r * 0.1f; val my = cy - r * 0.15f
++            val p = Path().apply { addCircle(mx, my, mr, Path.Direction.CW) }
++            val cut = Path().apply { addCircle(mx + mr * 0.5f, my - mr * 0.2f, mr * 0.9f, Path.Direction.CW) }
++            p.op(cut, Path.Op.DIFFERENCE)
++            c.drawPath(p, moonPaint)
++        }
++        if (cloud) {
++            val drift = sin(t * 2 * PI).toFloat() * r * 0.06f
++            val base = cy + r * 0.12f
++            val x0 = cx - r * 0.5f + drift
++            c.drawCircle(x0 + r * 0.30f, base, r * 0.24f, cloudPaint)
++            c.drawCircle(x0 + r * 0.58f, base - r * 0.16f, r * 0.30f, cloudPaint)
++            c.drawCircle(x0 + r * 0.86f, base, r * 0.22f, cloudPaint)
++            c.drawRoundRect(RectF(x0 + r * 0.18f, base, x0 + r * 0.98f, base + r * 0.24f), r * 0.12f, r * 0.12f, cloudPaint)
++        }
++        // gotículas caindo da nuvem; cada uma com fase própria
++        for (i in 0 until drops) {
++            val phase = (t + i / 6f) % 1f
++            val x = cx - r * 0.35f + i * r * 0.14f
++            val y = cy + r * 0.38f + phase * r * 0.5f
++            dropPaint.alpha = (255 * (1f - phase)).toInt().coerceIn(0, 255)
++            drawDrop(c, x, y, r * 0.06f)
++        }
++        dropPaint.alpha = 255
++    }
++
++    private fun drawDrop(c: Canvas, x: Float, y: Float, r: Float) {
++        val p = Path().apply {
++            moveTo(x, y - r * 1.8f)
++            quadTo(x + r * 1.4f, y, x, y + r)
++            quadTo(x - r * 1.4f, y, x, y - r * 1.8f)
++            close()
++        }
++        c.drawPath(p, dropPaint)
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt b/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt
+new file mode 100644
+index 0000000..e98ff93
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/settings/MiscToggles.kt
+@@ -0,0 +1,97 @@
++/*
++ * XaulinXs R's Misc — não faz parte do AOSP original.
++ *
++ * Interruptores da categoria "R's Misc" e a chave do AccuWeather.
++ */
++package com.xaulinxs.customizations.settings
++
++import android.app.Activity
++import android.content.Context
++import android.text.InputType
++import android.util.AttributeSet
++import android.widget.EditText
++import android.app.AlertDialog
++import androidx.preference.Preference
++import androidx.preference.SwitchPreference
++import com.android.launcher3.LauncherPrefs
++import com.xaulinxs.customizations.XaulinXsAppRestarter
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissionActivity
++import com.xaulinxs.customizations.misc.XaulinXsMiscPermissions
++import com.xaulinxs.customizations.misc.XaulinXsMiscSettings
++
++/** Liga/desliga a página fixa de música. A página nasce no bind do Workspace, então reinicia o app. */
++class MusicPageEnabledPreference @JvmOverloads constructor(
++    context: Context,
++    attrs: AttributeSet? = null,
++) : SwitchPreference(context, attrs) {
++
++    init {
++        isPersistent = false
++        isChecked = XaulinXsMiscSettings.isMusicPageEnabled(context)
++        setOnPreferenceChangeListener { _, newValue ->
++            val enabled = newValue as Boolean
++            LauncherPrefs.get(context).put(XaulinXsMiscSettings.MUSIC_PAGE_ENABLED, enabled)
++            if (enabled) {
++                XaulinXsMiscPermissionActivity.request(context, XaulinXsMiscPermissions.AUDIO)
++            }
++            (context as? Activity)?.let { XaulinXsAppRestarter.restart(it) }
++            true
++        }
++    }
++}
++
++/** Liga/desliga o clima; ao ativar, mostra o popup de localização. */
++class WeatherEnabledPreference @JvmOverloads constructor(
++    context: Context,
++    attrs: AttributeSet? = null,
++) : SwitchPreference(context, attrs) {
++
++    init {
++        isPersistent = false
++        isChecked = XaulinXsMiscSettings.isWeatherEnabled(context)
++        setOnPreferenceChangeListener { _, newValue ->
++            val enabled = newValue as Boolean
++            LauncherPrefs.get(context).put(XaulinXsMiscSettings.WEATHER_ENABLED, enabled)
++            if (enabled) {
++                XaulinXsMiscPermissionActivity.request(context, XaulinXsMiscPermissions.LOCATION)
++            }
++            // O Launcher relê o interruptor no onResume ao voltar para a tela inicial.
++            true
++        }
++    }
++}
++
++/** Chave da API do AccuWeather (cada usuário usa a sua; plano gratuito serve). */
++class AccuWeatherKeyPreference @JvmOverloads constructor(
++    context: Context,
++    attrs: AttributeSet? = null,
++) : Preference(context, attrs) {
++
++    init {
++        isPersistent = false
++        updateSummary()
++    }
++
++    private fun updateSummary() {
++        val key = LauncherPrefs.get(context).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY)
++        summary = if (key.isBlank()) "Não definida" else "Definida (••••${key.takeLast(4)})"
++    }
++
++    override fun onClick() {
++        val input = EditText(context).apply {
++            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
++            setText(LauncherPrefs.get(context).get(XaulinXsMiscSettings.ACCUWEATHER_API_KEY))
++        }
++        AlertDialog.Builder(context)
++            .setTitle(title)
++            .setView(input)
++            .setPositiveButton(android.R.string.ok) { _, _ ->
++                LauncherPrefs.get(context).put(
++                    XaulinXsMiscSettings.ACCUWEATHER_API_KEY, input.text.toString().trim(),
++                )
++                updateSummary()
++            }
++            .setNegativeButton(android.R.string.cancel, null)
++            .show()
++    }
++}
+diff --git a/res/values/xaulinxs_ids.xml b/res/values/xaulinxs_ids.xml
+new file mode 100644
+index 0000000..e97dfda
+--- /dev/null
++++ b/res/values/xaulinxs_ids.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!-- XaulinXs R's Misc — não faz parte do AOSP original. -->
++<resources>
++    <item name="xaulinxs_music_page" type="id" />
++</resources>
+diff --git a/res/values/xaulinxs_strings.xml b/res/values/xaulinxs_strings.xml
+index f183c45..e27c40c 100644
+--- a/res/values/xaulinxs_strings.xml
++++ b/res/values/xaulinxs_strings.xml
+@@ -134,4 +134,12 @@
+     <string name="xaulinxs_icon_blur_percent_summary">0% a 200% (100% = intensidade padrão)</string>
+     <string name="xaulinxs_drawer_wallpaper_blur_title">Intensidade do desfoque do papel de parede</string>
+     <string name="xaulinxs_drawer_wallpaper_blur_summary">0 a 320 px — o quanto o papel de parede desfoca com o menu de apps aberto (wallpaper do launcher ou do sistema)</string>
++    <!-- R's Misc -->
++    <string name="xaulinxs_cat_misc_title">R\'s Misc</string>
++    <string name="xaulinxs_cat_misc_summary">Player de música e widget de clima</string>
++    <string name="xaulinxs_music_page_title">Página de música</string>
++    <string name="xaulinxs_music_page_summary">Segunda página fixa da tela inicial com lista de áudios e mini player (reinicia o launcher)</string>
++    <string name="xaulinxs_weather_title">Widget de clima</string>
++    <string name="xaulinxs_weather_summary">Clima fixo acima da barra de busca na página principal (pede permissão de localização)</string>
++    <string name="xaulinxs_accuweather_key_title">Chave da API do AccuWeather</string>
+ </resources>
+diff --git a/res/xml/launcher_preferences.xml b/res/xml/launcher_preferences.xml
+index b0added..b657bda 100644
+--- a/res/xml/launcher_preferences.xml
++++ b/res/xml/launcher_preferences.xml
+@@ -318,6 +318,31 @@
+ 
+         </PreferenceScreen>
+ 
++        <!-- R\'s Misc: página fixa de música e widget de clima -->
++        <PreferenceScreen
++            android:key="xaulinxs_cat_misc"
++            android:title="@string/xaulinxs_cat_misc_title"
++            android:summary="@string/xaulinxs_cat_misc_summary">
++
++            <com.xaulinxs.customizations.settings.MusicPageEnabledPreference
++                android:key="xaulinxs_music_page_enabled"
++                android:title="@string/xaulinxs_music_page_title"
++                android:summary="@string/xaulinxs_music_page_summary"
++                android:persistent="false" />
++
++            <com.xaulinxs.customizations.settings.WeatherEnabledPreference
++                android:key="xaulinxs_weather_enabled"
++                android:title="@string/xaulinxs_weather_title"
++                android:summary="@string/xaulinxs_weather_summary"
++                android:persistent="false" />
++
++            <com.xaulinxs.customizations.settings.AccuWeatherKeyPreference
++                android:key="xaulinxs_accuweather_api_key"
++                android:title="@string/xaulinxs_accuweather_key_title"
++                android:persistent="false" />
++
++        </PreferenceScreen>
++
+     </PreferenceScreen>
+     <!-- ============ R\'s Home3 — fim ============ -->
+ </androidx.preference.PreferenceScreen>
+diff --git a/src/com/android/launcher3/Launcher.java b/src/com/android/launcher3/Launcher.java
+index 36ad7e5..c1563ef 100644
+--- a/src/com/android/launcher3/Launcher.java
++++ b/src/com/android/launcher3/Launcher.java
+@@ -475,6 +475,9 @@ public class Launcher extends StatefulActivity<LauncherState>
+                 appWidgetId -> getWorkspace().removeWidget(appWidgetId));
+ 
+         setupViews();
++        // XaulinXs R's Misc: clima fixo acima do QSB (a página de música nasce no Workspace).
++        mXaulinXsWeatherHost = new com.xaulinxs.customizations.misc.weather.XaulinXsWeatherHost(this);
++        mXaulinXsWeatherHost.attach();
+         updateDisallowBack();
+ 
+         mAppWidgetHolder.startListening();
+@@ -1151,6 +1154,7 @@ public class Launcher extends StatefulActivity<LauncherState>
+         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
+         super.onResume();
+         mLauncherUiState.setIsResumedActivity(true);
++        if (mXaulinXsWeatherHost != null) mXaulinXsWeatherHost.onResume();
+         DragView.removeAllViews(this);
+         // XaulinXs Customizations: reaplica a fonte customizada nos ícones
+         // já existentes na tela se ela mudou desde o último resume (fix do
+@@ -1216,6 +1220,9 @@ public class Launcher extends StatefulActivity<LauncherState>
+         mPendingActivityResult = savedState.getParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT);
+     }
+ 
++    // XaulinXs R's Misc: widget de clima fixo acima da barra inteligente.
++    private com.xaulinxs.customizations.misc.weather.XaulinXsWeatherHost mXaulinXsWeatherHost;
++
+     /**
+      * Finds all the views we need and configure them properly.
+      */
+@@ -1632,6 +1639,7 @@ public class Launcher extends StatefulActivity<LauncherState>
+ 
+     @Override
+     public void onDestroy() {
++        if (mXaulinXsWeatherHost != null) mXaulinXsWeatherHost.onDestroy();
+         super.onDestroy();
+         ACTIVITY_TRACKER.onContextDestroyed(this);
+ 
+diff --git a/src/com/android/launcher3/Workspace.java b/src/com/android/launcher3/Workspace.java
+index 23fd074..913cdbc 100644
+--- a/src/com/android/launcher3/Workspace.java
++++ b/src/com/android/launcher3/Workspace.java
+@@ -728,6 +728,42 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
+     public void bindAndInitFirstWorkspaceScreen() {
+         // Add the first page
+         insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, getChildCount());
++        // XaulinXs R's Misc: página fixa de música como SEGUNDA página (índice 1).
++        xaulinXsInsertMusicPageIfEnabled();
++    }
++
++    /**
++     * XaulinXs R's Misc — não faz parte do AOSP original.
++     * Cria a página fixa de música (widget de lista + mini player 4x2) logo depois
++     * da primeira tela. O id é negativo, então nunca é removida como "página vazia"
++     * (canRemoveEmptyScreen exige id > FIRST_SCREEN_ID), e a grade inteira fica
++     * ocupada pelo widget, então nenhum item pode ser solto nela.
++     */
++    private void xaulinXsInsertMusicPageIfEnabled() {
++        if (!com.xaulinxs.customizations.misc.XaulinXsMiscSettings
++                .isMusicPageEnabled(getContext())) {
++            return;
++        }
++        final int id = com.xaulinxs.customizations.misc.XaulinXsMiscSettings.MUSIC_SCREEN_ID;
++        if (mWorkspaceScreens.containsKey(id)) return;
++        CellLayout page = insertNewWorkspaceScreen(id, getChildCount());
++        com.xaulinxs.customizations.misc.music.XaulinXsMusicPageView content =
++                new com.xaulinxs.customizations.misc.music.XaulinXsMusicPageView(getContext());
++        CellLayoutLayoutParams lp = new CellLayoutLayoutParams(
++                0, 0, page.getCountX(), page.getCountY());
++        lp.canReorder = false;
++        page.addViewToCellLayout(content, -1, R.id.xaulinxs_music_page, lp, true);
++    }
++
++    /**
++     * XaulinXs R's Misc: 1 quando a primeira página está centralizada, 0 quando já
++     * rolou uma página inteira para o lado. Usado para esconder o widget de clima.
++     */
++    public float xaulinXsFirstPageFraction() {
++        int w = getMeasuredWidth();
++        if (w <= 0 || getChildCount() == 0) return 1f;
++        float dist = Math.abs(getScrollX() - getScrollForPage(0));
++        return Math.max(0f, Math.min(1f, 1f - dist / (float) w));
+     }
+ 
+     public void removeAllWorkspaceScreens() {

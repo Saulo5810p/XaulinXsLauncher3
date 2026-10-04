@@ -475,6 +475,9 @@ public class Launcher extends StatefulActivity<LauncherState>
                 appWidgetId -> getWorkspace().removeWidget(appWidgetId));
 
         setupViews();
+        // XaulinXs R's Misc: clima fixo acima do QSB (a página de música nasce no Workspace).
+        mXaulinXsWeatherHost = new com.xaulinxs.customizations.misc.weather.XaulinXsWeatherHost(this);
+        mXaulinXsWeatherHost.attach();
         updateDisallowBack();
 
         mAppWidgetHolder.startListening();
@@ -1151,6 +1154,7 @@ public class Launcher extends StatefulActivity<LauncherState>
         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
         super.onResume();
         mLauncherUiState.setIsResumedActivity(true);
+        if (mXaulinXsWeatherHost != null) mXaulinXsWeatherHost.onResume();
         DragView.removeAllViews(this);
         // XaulinXs Customizations: reaplica a fonte customizada nos ícones
         // já existentes na tela se ela mudou desde o último resume (fix do
@@ -1215,6 +1219,9 @@ public class Launcher extends StatefulActivity<LauncherState>
 
         mPendingActivityResult = savedState.getParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT);
     }
+
+    // XaulinXs R's Misc: widget de clima fixo acima da barra inteligente.
+    private com.xaulinxs.customizations.misc.weather.XaulinXsWeatherHost mXaulinXsWeatherHost;
 
     /**
      * Finds all the views we need and configure them properly.
@@ -1632,6 +1639,7 @@ public class Launcher extends StatefulActivity<LauncherState>
 
     @Override
     public void onDestroy() {
+        if (mXaulinXsWeatherHost != null) mXaulinXsWeatherHost.onDestroy();
         super.onDestroy();
         ACTIVITY_TRACKER.onContextDestroyed(this);
 

@@ -28,7 +28,7 @@
     <string name="xaulinxs_themed_icons_title">Ícones temáticos</string>
     <string name="xaulinxs_themed_icons_summary">Colorir os ícones com base no papel de parede (Material You)</string>
     <string name="xaulinxs_themed_scrim_title">Fundo desfocado no menu de apps</string>
-    <string name="xaulinxs_themed_scrim_summary">Aplica um efeito de vidro fosco temático ao papel de parede na tela de apps</string>
+    <string name="xaulinxs_themed_scrim_summary">Desfoca o papel de parede ao abrir/fechar o menu de apps, com o mesmo efeito de desfoque do arrasto</string>
     <string name="xaulinxs_icon_scale_title">Tamanho dos ícones</string>
     <string name="xaulinxs_icon_scale_summary">Aumenta o tamanho dos ícones até 200% (valores altos podem sobrepor ícones vizinhos)</string>
     <string name="xaulinxs_icon_labels_title">Ocultar labels dos ícones</string>
@@ -128,4 +128,10 @@
     <string name="xaulinxs_qsb_smart_permission_error">Não foi possível pedir a permissão de contatos</string>
     <string name="xaulinxs_qsb_smart_app_not_found">Não encontrei esse app instalado</string>
     <string name="xaulinxs_qsb_smart_contact_not_found">Não encontrei esse contato</string>
+    <string name="xaulinxs_icon_blur_enabled_title">Ícones desfocados</string>
+    <string name="xaulinxs_icon_blur_enabled_summary">Desfoca os ícones na tela inicial e no menu de apps</string>
+    <string name="xaulinxs_icon_blur_percent_title">Intensidade do desfoque dos ícones</string>
+    <string name="xaulinxs_icon_blur_percent_summary">0% a 200% (100% = intensidade padrão)</string>
+    <string name="xaulinxs_drawer_wallpaper_blur_title">Intensidade do desfoque do papel de parede</string>
+    <string name="xaulinxs_drawer_wallpaper_blur_summary">0 a 320 px — o quanto o papel de parede desfoca com o menu de apps aberto (wallpaper do launcher ou do sistema)</string>
 </resources>

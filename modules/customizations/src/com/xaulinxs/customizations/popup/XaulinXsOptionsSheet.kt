@@ -32,6 +32,7 @@ import com.android.launcher3.shortcuts.DeepShortcutView
 import com.android.launcher3.Launcher
 import com.android.launcher3.views.AbstractSlideInView
 import com.android.launcher3.views.ActivityContext
+import com.xaulinxs.customizations.blur.XaulinXsPopupBlurHelper
 import com.xaulinxs.customizations.theme.XaulinXsBalloonColor
 
 /**
@@ -112,6 +113,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private fun openAnimated() {
         mIsOpen = true
         attachToContainer()
+        // XAULINXS_POPUPS_V4: este sheet não passa por ArrowPopup.show(), onde o desfoque era
+        // acionado. Borra workspace inteira (wallpaper + ícones + widgets) enquanto aberto.
+        XaulinXsPopupBlurHelper.onPopupShown(mActivityContext)
         setUpOpenAnimation(OPEN_CLOSE_DURATION_MS).animationPlayer.start()
     }
 
@@ -142,6 +146,12 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
     override fun handleClose(animate: Boolean) {
         handleClose(animate, OPEN_CLOSE_DURATION_MS)
+    }
+
+    // XAULINXS_POPUPS_V4: desliga o desfoque quando o sheet termina de fechar (com ou sem animação).
+    override fun onCloseComplete() {
+        super.onCloseComplete()
+        XaulinXsPopupBlurHelper.onPopupClosed(mActivityContext)
     }
 
     /*

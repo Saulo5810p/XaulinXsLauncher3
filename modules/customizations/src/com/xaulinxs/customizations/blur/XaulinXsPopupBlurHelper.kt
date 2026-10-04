@@ -13,6 +13,7 @@
 package com.xaulinxs.customizations.blur
 
 import com.android.launcher3.Launcher
+import com.android.launcher3.LauncherState
 import com.android.launcher3.views.ActivityContext
 
 object XaulinXsPopupBlurHelper {
@@ -21,6 +22,9 @@ object XaulinXsPopupBlurHelper {
     fun onPopupShown(activityContext: ActivityContext?) {
         val launcher = activityContext as? Launcher ?: return
         if (!com.xaulinxs.customizations.blur.XaulinXsPopupBlur.isEnabled(launcher)) return
+        // XAULINXS_POPUPS_V4: só desfoca com a workspace visível. Popup aberto no menu de aplicativos
+        // (estado ALL_APPS) não desfoca nada — o drawer já tem a função de desfoque própria.
+        if (!launcher.isInState(LauncherState.NORMAL)) return
         launcher.xaulinXsDepthController?.setPopupBlurActive(true)
     }
 

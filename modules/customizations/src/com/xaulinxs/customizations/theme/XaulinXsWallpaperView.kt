@@ -38,6 +38,8 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import com.android.launcher3.LauncherPrefs
+import com.xaulinxs.customizations.blur.XaulinXsPopupBlur
+import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
 
 class XaulinXsWallpaperView @JvmOverloads constructor(
     context: Context,
@@ -48,7 +50,15 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
     private val matrix = Matrix()
     private val onWallpaperChanged: () -> Unit = { post { invalidate() } }
     private val onBlurPrefChanged: () -> Unit = { post { applyBlurEffect() } }
-    private val onEnabledPrefChanged: () -> Unit = { post { applyBlurEffect(); invalidate() } }
+    private val onEnabledPrefChanged: () -> Unit =
+        { post { applyBlurEffect(); preloadSystemWallpaperIfNeeded(); invalidate() } }
+
+    // XAULINXS_BLUR_V3: pincel da cópia do wallpaper do sistema (alpha varia no fade-in).
+    private val systemPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+
+    // XAULINXS_BLUR_V2: raio vindo do arrasto do app drawer (XaulinXsDepthController).
+    // O raio final é o MAIOR entre o desfoque fixo da tela inicial e este.
+    private var depthBlurRadiusPx = 0f
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -56,6 +66,7 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
         XaulinXsWorkspaceBlur.addOnChangedListener(onBlurPrefChanged)
         XaulinXsInAppWallpaperSetting.addOnChangedListener(onEnabledPrefChanged)
         applyBlurEffect()
+        preloadSystemWallpaperIfNeeded()
     }
 
     override fun onDetachedFromWindow() {
@@ -79,16 +90,64 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
      */
     private fun applyBlurEffect() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
-        if (!isInAppWallpaperEnabled()) {
-            setRenderEffect(null)
-            return
+        // XAULINXS_BLUR_V3: com o wallpaper do app desligado, o desfoque do drawer continua valendo —
+        // aplicado à cópia do wallpaper do sistema (ver onDraw). O desfoque fixo da tela inicial
+        // segue valendo só para o wallpaper do app.
+        val radiusPx = if (isInAppWallpaperEnabled()) {
+            maxOf(XaulinXsWorkspaceBlur.getBlurRadiusPx(context), depthBlurRadiusPx)
+        } else {
+            depthBlurRadiusPx
         }
-        val radiusPx = XaulinXsWorkspaceBlur.getBlurRadiusPx(context)
         setRenderEffect(
             if (radiusPx > 0f)
                 RenderEffect.createBlurEffect(radiusPx, radiusPx, Shader.TileMode.CLAMP)
             else null
         )
+    }
+
+    /** Chamado pelo XaulinXsDepthController a cada frame do arrasto do app drawer. */
+    fun setDepthBlurRadiusPx(radiusPx: Float) {
+        if (radiusPx == depthBlurRadiusPx) return
+        depthBlurRadiusPx = radiusPx
+        applyBlurEffect()
+        if (!isInAppWallpaperEnabled()) {
+            if (radiusPx > 0f) preloadSystemWallpaperIfNeeded()
+            invalidate() // o fade-in da cópia depende do raio, então redesenha
+        }
+    }
+
+    /** XAULINXS_BLUR_V3: carrega (em background) a cópia do wallpaper do sistema, se for preciso. */
+    private fun preloadSystemWallpaperIfNeeded() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+        if (isInAppWallpaperEnabled()) return
+        // XAULINXS_POPUPS_V4: a cópia também serve ao desfoque dos popups (balões), não só ao do drawer.
+        val prefs = LauncherPrefs.get(context)
+        if (!prefs.get(THEMED_SCRIM_ENABLED) && !XaulinXsPopupBlur.isEnabled(context)) return
+        XaulinXsSystemWallpaperSnapshot.ensureLoaded(context) { invalidate() }
+    }
+
+    /**
+     * XAULINXS_BLUR_V3: só enquanto o drawer está sendo aberto/arrastado desenha a cópia do wallpaper
+     * do sistema (center-crop) por cima do wallpaper real, que passa a ser borrada pelo
+     * RenderEffect desta view. Com o drawer fechado (raio 0) não desenha nada.
+     */
+    private fun drawSystemWallpaperSnapshot(canvas: Canvas) {
+        val radius = depthBlurRadiusPx
+        if (radius < 1f) return
+        val bitmap = XaulinXsSystemWallpaperSnapshot.peek() ?: return
+        val viewW = width.toFloat()
+        val viewH = height.toFloat()
+        if (viewW <= 0f || viewH <= 0f) return
+        val bmpW = bitmap.width.toFloat()
+        val bmpH = bitmap.height.toFloat()
+        val scale = maxOf(viewW / bmpW, viewH / bmpH)
+        matrix.reset()
+        matrix.setScale(scale, scale)
+        matrix.postTranslate((viewW - bmpW * scale) / 2f, (viewH - bmpH * scale) / 2f)
+        // Fade-in nos primeiros pixels de raio: esconde qualquer diferença de enquadramento
+        // entre a cópia e o wallpaper real no instante em que a cópia aparece.
+        systemPaint.alpha = (255f * (radius / SNAPSHOT_FADE_IN_PX).coerceIn(0f, 1f)).toInt()
+        canvas.drawBitmap(bitmap, matrix, systemPaint)
     }
 
     private fun isInAppWallpaperEnabled(): Boolean =
@@ -98,8 +157,10 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         if (!isInAppWallpaperEnabled()) {
-            // Interruptor desligado: não pintar nada, de propósito — o
-            // wallpaper real do sistema (por trás desta janela) aparece.
+            // Interruptor desligado: não pintar nada, de propósito — o wallpaper real do
+            // sistema (por trás desta janela) aparece. Única exceção: durante o desfoque do
+            // drawer, desenha a cópia borrada do wallpaper do sistema (XAULINXS_BLUR_V3).
+            drawSystemWallpaperSnapshot(canvas)
             return
         }
 
@@ -132,5 +193,6 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
 
     private companion object {
         const val FALLBACK_COLOR = Color.BLACK
+        const val SNAPSHOT_FADE_IN_PX = 48f
     }
 }

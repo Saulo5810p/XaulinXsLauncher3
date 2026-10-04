@@ -29,7 +29,10 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.android.launcher3.BubbleTextView
@@ -48,6 +51,7 @@ import com.android.launcher3.util.Executors
 import com.android.launcher3.util.ShortcutUtil
 import com.android.launcher3.views.ActivityContext
 import com.xaulinxs.customizations.apps.XaulinXsAppOverrides
+import com.xaulinxs.customizations.popup.XaulinXsMaxHeightScrollView
 import com.xaulinxs.customizations.theme.XaulinXsBalloonColor
 import android.graphics.drawable.GradientDrawable
 import java.util.Optional
@@ -86,6 +90,10 @@ private constructor(
     private var deepShortcutContainer: ViewGroup? = null
     private var currentHeight = 0f
 
+    // XAULINXS_POPUPS_V4: só existe quando o conteúdo era mais alto que a tela e foi colocado
+    // dentro de um ScrollView (ver makeScrollableIfTooTall).
+    private var scrollWrapper: ScrollView? = null
+
     var itemDragHandler: PopupItemDragHandler? = null
         private set
 
@@ -95,6 +103,8 @@ private constructor(
         if (ev.action == MotionEvent.ACTION_DOWN) {
             interceptTouchDown[ev.x] = ev.y
         }
+        // XAULINXS_POPUPS_V4: com rolagem ativa o gesto de arrastar é do ScrollView, não do popup.
+        if (scrollWrapper != null) return false
         // Stop sending touch events to deep shortcut views if user moved beyond touch slop.
         return (Utilities.squaredHypot(interceptTouchDown.x - ev.x, interceptTouchDown.y - ev.y) >
             Utilities.squaredTouchSlop(context))
@@ -165,6 +175,10 @@ private constructor(
         measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         val dragLayer = popupContainer
         val insets = dragLayer.insets
+        // XAULINXS_POPUPS_V4: se não couber na tela, passa a rolar (e re-mede).
+        makeScrollableIfTooTall(
+            dragLayer.height - insets.top - insets.bottom - 2 * xaulinXsBottomAnchorMargin
+        )
         val width = measuredWidth
         val height = measuredHeight
 
@@ -183,6 +197,49 @@ private constructor(
 
     private val xaulinXsBottomAnchorMargin: Int
         get() = resources.getDimensionPixelSize(R.dimen.xaulinxs_app_popup_bottom_margin)
+
+    /**
+     * XAULINXS_POPUPS_V4: se o popup (cabeçalho + opções + atalhos) for mais alto que o espaço
+     * disponível, move todos os filhos para um ScrollView com altura máxima. Rolando para
+     * baixo as opções de cima saem de vista; rolando para cima voltam. Se couber, não faz nada.
+     * Roda uma vez, antes de o popup ser exibido (o LayoutTransition só é ligado depois).
+     */
+    private fun makeScrollableIfTooTall(availablePx: Int) {
+        if (scrollWrapper != null) return
+        val chromePx = paddingTop + paddingBottom
+        if (measuredHeight <= availablePx || availablePx <= chromePx) return
+
+        val kids = ArrayList<View>(childCount)
+        for (i in 0 until childCount) kids.add(getChildAt(i))
+
+        val savedTransition = layoutTransition
+        layoutTransition = null
+        removeAllViews()
+
+        val content = LinearLayout(context).apply { orientation = LinearLayout.VERTICAL }
+        kids.forEach { content.addView(it) }
+        // Mesmas margens entre blocos que o ArrowPopup aplicaria direto nos filhos.
+        assignMarginsAndBackgrounds(content)
+
+        val scroller = XaulinXsMaxHeightScrollView(context, availablePx - chromePx)
+        scroller.addView(
+            content,
+            FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            ),
+        )
+        addView(
+            scroller,
+            LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            ),
+        )
+        layoutTransition = savedTransition
+        scrollWrapper = scroller
+        measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+    }
 
     /**
      * Populates and shows the popup container with only the provided system shortcuts.

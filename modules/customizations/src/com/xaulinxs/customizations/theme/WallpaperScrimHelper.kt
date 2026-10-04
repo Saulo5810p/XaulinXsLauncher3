@@ -82,7 +82,9 @@ object WallpaperScrimHelper {
     @JvmStatic
     fun getScrimColorIfEnabled(context: Context): Int? {
         val prefs = LauncherPrefs.get(context)
-        if (prefs.get(THEMED_SCRIM_ENABLED)) return getScrimColor(context)
+        // XAULINXS_BLUR_V2: sem véu temático. Com o desfoque ligado o fundo fica transparente
+        // para o wallpaper desfocado (XaulinXsDepthController) aparecer por trás do drawer.
+        if (prefs.get(THEMED_SCRIM_ENABLED)) return android.graphics.Color.TRANSPARENT
         // Blur desligado: se a nova transparência estiver ativada, ela
         // assume o fundo do drawer no lugar do véu temático do wallpaper —
         // cor sólida de fundo do tema, com alpha controlado pelo slider,

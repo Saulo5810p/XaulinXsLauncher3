@@ -106,6 +106,19 @@
                 android:summary="@string/xaulinxs_icon_opacity_summary"
                 android:persistent="false" />
 
+            <com.xaulinxs.customizations.settings.IconBlurEnabledPreference
+                android:key="xaulinxs_icon_blur_enabled"
+                android:title="@string/xaulinxs_icon_blur_enabled_title"
+                android:summary="@string/xaulinxs_icon_blur_enabled_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.IconBlurPercentPreference
+                android:key="xaulinxs_icon_blur_percent"
+                android:title="@string/xaulinxs_icon_blur_percent_title"
+                android:summary="@string/xaulinxs_icon_blur_percent_summary"
+                android:dependency="xaulinxs_icon_blur_enabled"
+                android:persistent="false" />
+
             <com.xaulinxs.customizations.settings.ManualColorEnabledPreference
                 android:key="xaulinxs_manual_color_enabled"
                 android:title="@string/xaulinxs_manual_color_enabled_title"
@@ -143,10 +156,11 @@
                 android:summary="@string/xaulinxs_themed_scrim_summary"
                 android:persistent="false" />
 
-            <com.xaulinxs.customizations.settings.ScrimOpacityPreference
-                android:key="xaulinxs_scrim_opacity"
-                android:title="@string/xaulinxs_scrim_opacity_title"
-                android:summary="@string/xaulinxs_scrim_opacity_summary"
+            <com.xaulinxs.customizations.settings.DrawerWallpaperBlurPreference
+                android:key="xaulinxs_drawer_wallpaper_blur"
+                android:title="@string/xaulinxs_drawer_wallpaper_blur_title"
+                android:summary="@string/xaulinxs_drawer_wallpaper_blur_summary"
+                android:dependency="xaulinxs_themed_scrim"
                 android:persistent="false" />
 
             <com.xaulinxs.customizations.settings.AllAppsTransparencyEnabledPreference

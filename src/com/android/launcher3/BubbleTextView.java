@@ -1469,7 +1469,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         // XaulinXs Customizations: aplica a opacidade de ícone escolhida pelo usuário
         icon.setAlpha(com.xaulinxs.customizations.icons.XaulinXsIconOpacity.getAlpha(getContext()));
 
-        updateIcon(icon);
+        // XAULINXS_BLUR_V2: "Ícones desfocados" (estático, independente do arrasto do drawer).
+        // Desligado/0% devolve o próprio ícone, sem nenhuma mudança.
+        updateIcon(com.xaulinxs.customizations.icons.XaulinXsIconBlur.wrapIfNeeded(
+                getContext(), icon));
 
         // If the current icon is a placeholder color, animate its update.
         if (mIcon != null

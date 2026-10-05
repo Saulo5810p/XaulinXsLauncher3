@@ -187,8 +187,14 @@ public class FolderAnimationManager implements FolderAnimationCreator {
         final float yDistance = initialY - lp.y;
 
         // Set up the Folder background.
-        final int initialColor = Themes.getAttrColor(mContext, R.attr.folderPreviewColor);
-        final int finalColor = Themes.getAttrColor(mContext, R.attr.folderBackgroundColor);
+        // XaulinXs fix: a animação sobrescrevia o fundo com as cores cruas do tema, então a pasta
+        // aberta terminava cinza opaca. Agora passa pela cor customizada + transparência.
+        final int initialColor = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
+                .resolveBackgroundColor(mContext,
+                        Themes.getAttrColor(mContext, R.attr.folderPreviewColor));
+        final int finalColor = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
+                .resolveBackgroundColor(mContext,
+                        Themes.getAttrColor(mContext, R.attr.folderBackgroundColor));
 
         mFolderBackground.mutate();
         mFolderBackground.setColor(mIsOpening ? initialColor : finalColor);

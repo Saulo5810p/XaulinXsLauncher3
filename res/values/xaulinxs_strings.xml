@@ -141,4 +141,8 @@
     <string name="xaulinxs_music_page_summary">Segunda página fixa da tela inicial com lista de áudios e mini player (reinicia o launcher)</string>
     <string name="xaulinxs_weather_title">Widget de clima</string>
     <string name="xaulinxs_weather_summary">Clima fixo acima da doca na página principal, com a data de hoje (pede localização; dados do Open-Meteo.com)</string>
+    <string name="xaulinxs_folder_blur_enabled_title">Pastas desfocadas</string>
+    <string name="xaulinxs_folder_blur_enabled_summary">Desfoca as pastas na tela inicial, igual aos ícones desfocados</string>
+    <string name="xaulinxs_folder_blur_percent_title">Intensidade do desfoque das pastas</string>
+    <string name="xaulinxs_folder_blur_percent_summary">0% a 200% (100% = intensidade padrão)</string>
 </resources>

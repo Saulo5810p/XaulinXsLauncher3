@@ -310,6 +310,19 @@
                 android:summary="@string/xaulinxs_folder_transparency_summary"
                 android:persistent="false" />
 
+            <com.xaulinxs.customizations.settings.FolderBlurEnabledPreference
+                android:key="xaulinxs_folder_blur_enabled"
+                android:title="@string/xaulinxs_folder_blur_enabled_title"
+                android:summary="@string/xaulinxs_folder_blur_enabled_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.FolderBlurPercentPreference
+                android:key="xaulinxs_folder_blur_percent"
+                android:title="@string/xaulinxs_folder_blur_percent_title"
+                android:summary="@string/xaulinxs_folder_blur_percent_summary"
+                android:dependency="xaulinxs_folder_blur_enabled"
+                android:persistent="false" />
+
             <com.xaulinxs.customizations.settings.FolderSizePreference
                 android:key="xaulinxs_folder_size_percent"
                 android:title="@string/xaulinxs_folder_size_title"

@@ -1,0 +1,267 @@
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/folder/XaulinXsFolderBlur.kt b/modules/customizations/src/com/xaulinxs/customizations/folder/XaulinXsFolderBlur.kt
+new file mode 100644
+index 0000000..49f68e2
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/folder/XaulinXsFolderBlur.kt
+@@ -0,0 +1,73 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * "Pastas desfocadas": o MESMO desfoque estático dos ícones (XaulinXsIconBlur) aplicado ao
++ * ícone de pasta da tela inicial/hotseat — fundo, ícones em miniatura e borda. O nome da
++ * pasta e a bolinha de notificação continuam nítidos. Mesmos valores: raio base de 6dp a
++ * 100%, slider de 0 a 200%. Desligado por padrão; abaixo do Android 12 não faz nada.
++ */
++package com.xaulinxs.customizations.folder
++
++import android.content.Context
++import android.graphics.Canvas
++import android.graphics.RenderEffect
++import android.graphics.RenderNode
++import android.graphics.Shader
++import android.os.Build
++import androidx.annotation.RequiresApi
++import com.android.launcher3.LauncherPrefs
++import com.android.launcher3.LauncherPrefs.Companion.backedUpItem
++import com.xaulinxs.customizations.icons.XaulinXsIconBlur
++import java.util.function.Consumer
++
++object XaulinXsFolderBlur {
++    const val MIN_PERCENT = XaulinXsIconBlur.MIN_PERCENT
++    const val MAX_PERCENT = XaulinXsIconBlur.MAX_PERCENT
++    const val DEFAULT_PERCENT = XaulinXsIconBlur.DEFAULT_PERCENT
++
++    @JvmField
++    val FOLDER_BLUR_ENABLED = backedUpItem("xaulinxs_folder_blur_enabled", false)
++
++    @JvmField
++    val FOLDER_BLUR_PERCENT = backedUpItem("xaulinxs_folder_blur_percent", DEFAULT_PERCENT)
++
++    /** Raio atual em px; 0 se desligado, 0%, ou Android < 12. Mesma fórmula dos ícones. */
++    @JvmStatic
++    fun getRadiusPx(context: Context): Float {
++        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return 0f
++        val prefs = LauncherPrefs.get(context)
++        if (!prefs.get(FOLDER_BLUR_ENABLED)) return 0f
++        val percent = prefs.get(FOLDER_BLUR_PERCENT).coerceIn(MIN_PERCENT, MAX_PERCENT)
++        return XaulinXsIconBlur.BASE_RADIUS_DP * context.resources.displayMetrics.density * percent / 100f
++    }
++}
++
++/** Desenha um trecho de conteúdo dentro de um RenderNode com RenderEffect de blur. */
++@RequiresApi(Build.VERSION_CODES.S)
++class XaulinXsFolderBlurLayer {
++    private val node = RenderNode("xaulinxs_folder_blur")
++    private var appliedRadius = -1f
++
++    fun draw(canvas: Canvas, width: Int, height: Int, radiusPx: Float, content: Consumer<Canvas>) {
++        if (radiusPx != appliedRadius) {
++            node.setRenderEffect(RenderEffect.createBlurEffect(radiusPx, radiusPx, Shader.TileMode.CLAMP))
++            appliedRadius = radiusPx
++        }
++        // O node é maior que a view (pad de cada lado) para o blur não ser cortado nas bordas.
++        val pad = Math.ceil((radiusPx * 3f).toDouble()).toInt()
++        val w = width + 2 * pad
++        val h = height + 2 * pad
++        node.setPosition(0, 0, w, h)
++        val rc = node.beginRecording(w, h)
++        try {
++            rc.translate(pad.toFloat(), pad.toFloat())
++            content.accept(rc)
++        } finally {
++            node.endRecording()
++        }
++        val count = canvas.save()
++        canvas.translate(-pad.toFloat(), -pad.toFloat())
++        canvas.drawRenderNode(node)
++        canvas.restoreToCount(count)
++    }
++}
+diff --git a/modules/customizations/src/com/xaulinxs/customizations/settings/FolderBlurPreferences.kt b/modules/customizations/src/com/xaulinxs/customizations/settings/FolderBlurPreferences.kt
+new file mode 100644
+index 0000000..e3242a8
+--- /dev/null
++++ b/modules/customizations/src/com/xaulinxs/customizations/settings/FolderBlurPreferences.kt
+@@ -0,0 +1,49 @@
++/*
++ * XaulinXs Customizations — não faz parte do AOSP original.
++ *
++ * Categoria Pastas: interruptor + slider 0-200% do desfoque das pastas (mesmos valores dos ícones).
++ */
++package com.xaulinxs.customizations.settings
++
++import android.content.Context
++import android.util.AttributeSet
++import androidx.preference.SeekBarPreference
++import androidx.preference.SwitchPreference
++import com.android.launcher3.LauncherAppState
++import com.android.launcher3.LauncherPrefs
++import com.xaulinxs.customizations.folder.XaulinXsFolderBlur
++
++class FolderBlurEnabledPreference @JvmOverloads constructor(
++    context: Context,
++    attrs: AttributeSet? = null,
++) : SwitchPreference(context, attrs) {
++
++    init {
++        isPersistent = false
++        isChecked = LauncherPrefs.get(context).get(XaulinXsFolderBlur.FOLDER_BLUR_ENABLED)
++        setOnPreferenceChangeListener { _, newValue ->
++            LauncherPrefs.get(context).put(XaulinXsFolderBlur.FOLDER_BLUR_ENABLED, newValue as Boolean)
++            LauncherAppState.getInstance(context).model.forceReload("xaulinxs_folder_blur_toggle")
++            true
++        }
++    }
++}
++
++class FolderBlurPercentPreference @JvmOverloads constructor(
++    context: Context,
++    attrs: AttributeSet? = null,
++) : SeekBarPreference(context, attrs) {
++
++    init {
++        isPersistent = false
++        min = XaulinXsFolderBlur.MIN_PERCENT
++        max = XaulinXsFolderBlur.MAX_PERCENT
++        showSeekBarValue = true
++        value = LauncherPrefs.get(context).get(XaulinXsFolderBlur.FOLDER_BLUR_PERCENT)
++        setOnPreferenceChangeListener { _, newValue ->
++            LauncherPrefs.get(context).put(XaulinXsFolderBlur.FOLDER_BLUR_PERCENT, newValue as Int)
++            LauncherAppState.getInstance(context).model.forceReload("xaulinxs_folder_blur_percent")
++            true
++        }
++    }
++}
+diff --git a/res/values/xaulinxs_strings.xml b/res/values/xaulinxs_strings.xml
+index f65e28b..76b86b9 100644
+--- a/res/values/xaulinxs_strings.xml
++++ b/res/values/xaulinxs_strings.xml
+@@ -141,4 +141,8 @@
+     <string name="xaulinxs_music_page_summary">Segunda página fixa da tela inicial com lista de áudios e mini player (reinicia o launcher)</string>
+     <string name="xaulinxs_weather_title">Widget de clima</string>
+     <string name="xaulinxs_weather_summary">Clima fixo acima da doca na página principal, com a data de hoje (pede localização; dados do Open-Meteo.com)</string>
++    <string name="xaulinxs_folder_blur_enabled_title">Pastas desfocadas</string>
++    <string name="xaulinxs_folder_blur_enabled_summary">Desfoca as pastas na tela inicial, igual aos ícones desfocados</string>
++    <string name="xaulinxs_folder_blur_percent_title">Intensidade do desfoque das pastas</string>
++    <string name="xaulinxs_folder_blur_percent_summary">0% a 200% (100% = intensidade padrão)</string>
+ </resources>
+diff --git a/res/xml/launcher_preferences.xml b/res/xml/launcher_preferences.xml
+index cef0733..aaed88b 100644
+--- a/res/xml/launcher_preferences.xml
++++ b/res/xml/launcher_preferences.xml
+@@ -310,6 +310,19 @@
+                 android:summary="@string/xaulinxs_folder_transparency_summary"
+                 android:persistent="false" />
+ 
++            <com.xaulinxs.customizations.settings.FolderBlurEnabledPreference
++                android:key="xaulinxs_folder_blur_enabled"
++                android:title="@string/xaulinxs_folder_blur_enabled_title"
++                android:summary="@string/xaulinxs_folder_blur_enabled_summary"
++                android:persistent="false" />
++
++            <com.xaulinxs.customizations.settings.FolderBlurPercentPreference
++                android:key="xaulinxs_folder_blur_percent"
++                android:title="@string/xaulinxs_folder_blur_percent_title"
++                android:summary="@string/xaulinxs_folder_blur_percent_summary"
++                android:dependency="xaulinxs_folder_blur_enabled"
++                android:persistent="false" />
++
+             <com.xaulinxs.customizations.settings.FolderSizePreference
+                 android:key="xaulinxs_folder_size_percent"
+                 android:title="@string/xaulinxs_folder_size_title"
+diff --git a/src/com/android/launcher3/folder/FolderAnimationManager.java b/src/com/android/launcher3/folder/FolderAnimationManager.java
+index 5110876..33900b6 100644
+--- a/src/com/android/launcher3/folder/FolderAnimationManager.java
++++ b/src/com/android/launcher3/folder/FolderAnimationManager.java
+@@ -187,8 +187,14 @@ public class FolderAnimationManager implements FolderAnimationCreator {
+         final float yDistance = initialY - lp.y;
+ 
+         // Set up the Folder background.
+-        final int initialColor = Themes.getAttrColor(mContext, R.attr.folderPreviewColor);
+-        final int finalColor = Themes.getAttrColor(mContext, R.attr.folderBackgroundColor);
++        // XaulinXs fix: a animação sobrescrevia o fundo com as cores cruas do tema, então a pasta
++        // aberta terminava cinza opaca. Agora passa pela cor customizada + transparência.
++        final int initialColor = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
++                .resolveBackgroundColor(mContext,
++                        Themes.getAttrColor(mContext, R.attr.folderPreviewColor));
++        final int finalColor = com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
++                .resolveBackgroundColor(mContext,
++                        Themes.getAttrColor(mContext, R.attr.folderBackgroundColor));
+ 
+         mFolderBackground.mutate();
+         mFolderBackground.setColor(mIsOpening ? initialColor : finalColor);
+diff --git a/src/com/android/launcher3/folder/FolderIcon.java b/src/com/android/launcher3/folder/FolderIcon.java
+index f7f44a2..5a60bdd 100644
+--- a/src/com/android/launcher3/folder/FolderIcon.java
++++ b/src/com/android/launcher3/folder/FolderIcon.java
+@@ -620,19 +620,41 @@ public class FolderIcon extends FrameLayout implements FloatingIconViewCompanion
+ 
+         mPreviewItemManager.recomputePreviewDrawingParams();
+ 
++        final boolean hasItems = !(mCurrentPreviewItems.isEmpty() && !mAnimating);
++
++        // XaulinXs: desfoque das pastas (mesmo dos ícones). Fundo + miniaturas + borda entram na
++        // camada desfocada; título e bolinha de notificação ficam nítidos.
++        final float blurRadius =
++                com.xaulinxs.customizations.folder.XaulinXsFolderBlur.getRadiusPx(getContext());
++        if (blurRadius >= 1f && canvas.isHardwareAccelerated()) {
++            if (mXaulinXsBlurLayer == null) {
++                mXaulinXsBlurLayer = new com.xaulinxs.customizations.folder.XaulinXsFolderBlurLayer();
++            }
++            mXaulinXsBlurLayer.draw(canvas, getWidth(), getHeight(), blurRadius,
++                    c -> drawFolderPreview(c, hasItems));
++        } else {
++            drawFolderPreview(canvas, hasItems);
++        }
++
++        if (hasItems) {
++            drawDot(canvas);
++        }
++    }
++
++    private com.xaulinxs.customizations.folder.XaulinXsFolderBlurLayer mXaulinXsBlurLayer;
++
++    private void drawFolderPreview(Canvas canvas, boolean hasItems) {
+         if (!mBackground.drawingDelegated()) {
+             mBackground.drawBackground(canvas);
+         }
+ 
+-        if (mCurrentPreviewItems.isEmpty() && !mAnimating) return;
++        if (!hasItems) return;
+ 
+         mPreviewItemManager.draw(canvas);
+ 
+         if (!mBackground.drawingDelegated()) {
+             mBackground.drawBackgroundStroke(canvas);
+         }
+-
+-        drawDot(canvas);
+     }
+ 
+     public void drawDot(Canvas canvas) {
+diff --git a/src/com/android/launcher3/folder/FolderSpringAnimatorSet.kt b/src/com/android/launcher3/folder/FolderSpringAnimatorSet.kt
+index cc7a624..539f6d4 100644
+--- a/src/com/android/launcher3/folder/FolderSpringAnimatorSet.kt
++++ b/src/com/android/launcher3/folder/FolderSpringAnimatorSet.kt
+@@ -261,8 +261,19 @@ class FolderSpringAnimatorSet(val animatorSet: AnimatorSet) {
+                 val folderBackground = folder.background as GradientDrawable
+                 // Set up the Folder background.
+                 val isOpening = animationData.isOpening
+-                val initialColor = Themes.getAttrColor(context, R.attr.folderPreviewColor)
+-                val finalColor = Themes.getAttrColor(context, R.attr.folderBackgroundColor)
++                // XaulinXs fix: cor customizada + transparência também na pasta aberta.
++                val initialColor =
++                    com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
++                        .resolveBackgroundColor(
++                            context,
++                            Themes.getAttrColor(context, R.attr.folderPreviewColor),
++                        )
++                val finalColor =
++                    com.xaulinxs.customizations.folder.XaulinXsFolderAppearance
++                        .resolveBackgroundColor(
++                            context,
++                            Themes.getAttrColor(context, R.attr.folderBackgroundColor),
++                        )
+                 folderBackground.mutate()
+                 folderBackground.setColor(if (isOpening) initialColor else finalColor)
+                 // TODO: convert to spring animation?

@@ -620,19 +620,41 @@ public class FolderIcon extends FrameLayout implements FloatingIconViewCompanion
 
         mPreviewItemManager.recomputePreviewDrawingParams();
 
+        final boolean hasItems = !(mCurrentPreviewItems.isEmpty() && !mAnimating);
+
+        // XaulinXs: desfoque das pastas (mesmo dos ícones). Fundo + miniaturas + borda entram na
+        // camada desfocada; título e bolinha de notificação ficam nítidos.
+        final float blurRadius =
+                com.xaulinxs.customizations.folder.XaulinXsFolderBlur.getRadiusPx(getContext());
+        if (blurRadius >= 1f && canvas.isHardwareAccelerated()) {
+            if (mXaulinXsBlurLayer == null) {
+                mXaulinXsBlurLayer = new com.xaulinxs.customizations.folder.XaulinXsFolderBlurLayer();
+            }
+            mXaulinXsBlurLayer.draw(canvas, getWidth(), getHeight(), blurRadius,
+                    c -> drawFolderPreview(c, hasItems));
+        } else {
+            drawFolderPreview(canvas, hasItems);
+        }
+
+        if (hasItems) {
+            drawDot(canvas);
+        }
+    }
+
+    private com.xaulinxs.customizations.folder.XaulinXsFolderBlurLayer mXaulinXsBlurLayer;
+
+    private void drawFolderPreview(Canvas canvas, boolean hasItems) {
         if (!mBackground.drawingDelegated()) {
             mBackground.drawBackground(canvas);
         }
 
-        if (mCurrentPreviewItems.isEmpty() && !mAnimating) return;
+        if (!hasItems) return;
 
         mPreviewItemManager.draw(canvas);
 
         if (!mBackground.drawingDelegated()) {
             mBackground.drawBackgroundStroke(canvas);
         }
-
-        drawDot(canvas);
     }
 
     public void drawDot(Canvas canvas) {

@@ -26,10 +26,11 @@ class MusicPageEnabledPreference @JvmOverloads constructor(
         isChecked = XaulinXsMiscSettings.isMusicPageEnabled(context)
         setOnPreferenceChangeListener { _, newValue ->
             val enabled = newValue as Boolean
-            LauncherPrefs.get(context).put(XaulinXsMiscSettings.MUSIC_PAGE_ENABLED, enabled)
-            if (enabled) {
-                XaulinXsMiscPermissionActivity.request(context, XaulinXsMiscPermissions.AUDIO)
-            }
+            // putSync (commit): o app e morto logo abaixo por XaulinXsAppRestarter.restart();
+            // com put() (apply, assincrono) o valor nao chegava ao disco e a pagina voltava.
+            // A permissao de audio e pedida pela propria lista de musica apos o restart.
+            LauncherPrefs.get(context)
+                .putSync(XaulinXsMiscSettings.MUSIC_PAGE_ENABLED.to(enabled))
             (context as? Activity)?.let { XaulinXsAppRestarter.restart(it) }
             true
         }
@@ -68,7 +69,9 @@ class IdeaPageEnabledPreference @JvmOverloads constructor(
         isChecked = XaulinXsMiscSettings.isIdeaPageEnabled(context)
         setOnPreferenceChangeListener { _, newValue ->
             val enabled = newValue as Boolean
-            LauncherPrefs.get(context).put(XaulinXsMiscSettings.IDEA_PAGE_ENABLED, enabled)
+            // putSync (commit): o app e morto logo abaixo; com put() (apply) a gravacao se perdia.
+            LauncherPrefs.get(context)
+                .putSync(XaulinXsMiscSettings.IDEA_PAGE_ENABLED.to(enabled))
             (context as? Activity)?.let { XaulinXsAppRestarter.restart(it) }
             true
         }

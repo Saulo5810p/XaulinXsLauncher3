@@ -2,4 +2,5 @@
 <!-- XaulinXs R's Misc — não faz parte do AOSP original. -->
 <resources>
     <item name="xaulinxs_music_page" type="id" />
+    <item name="xaulinxs_idea_page" type="id" />
 </resources>

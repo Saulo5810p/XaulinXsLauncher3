@@ -56,3 +56,21 @@ class WeatherEnabledPreference @JvmOverloads constructor(
         }
     }
 }
+
+/** Liga/desliga a página "Sua Ideia...". A página nasce no bind do Workspace, então reinicia o app. */
+class IdeaPageEnabledPreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+) : SwitchPreference(context, attrs) {
+
+    init {
+        isPersistent = false
+        isChecked = XaulinXsMiscSettings.isIdeaPageEnabled(context)
+        setOnPreferenceChangeListener { _, newValue ->
+            val enabled = newValue as Boolean
+            LauncherPrefs.get(context).put(XaulinXsMiscSettings.IDEA_PAGE_ENABLED, enabled)
+            (context as? Activity)?.let { XaulinXsAppRestarter.restart(it) }
+            true
+        }
+    }
+}

@@ -27,7 +27,8 @@ import android.view.View
 import com.android.launcher3.LauncherPrefs
 import com.android.launcher3.util.OnColorHintListener
 import com.android.launcher3.util.WallpaperColorHints
-import com.xaulinxs.customizations.settings.ThemedScrimPreference.Companion.THEMED_SCRIM_ENABLED
+import com.android.launcher3.LauncherPrefChangeListener
+import com.xaulinxs.customizations.settings.ThemedVeilPreference.Companion.THEMED_VEIL_ENABLED
 
 private const val BLUR_RADIUS_PX = 220f
 
@@ -37,6 +38,14 @@ class WallpaperGradientView @JvmOverloads constructor(
 ) : View(context, attrs), OnColorHintListener {
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    // XAULINXS_THEMED_VEIL_SEPARATE: o véu (manchas de cor) agora tem interruptor próprio
+    // (ThemedVeilPreference); redesenha na hora quando ele muda.
+    private val veilPrefListener = object : LauncherPrefChangeListener {
+        override fun onPrefChanged(key: String) {
+            post { invalidate() }
+        }
+    }
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -49,11 +58,14 @@ class WallpaperGradientView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         WallpaperColorHints.get(context).registerOnColorHintsChangedListener(this)
+        LauncherPrefs.get(context).addListener(veilPrefListener, THEMED_VEIL_ENABLED)
+        invalidate()
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         WallpaperColorHints.get(context).unregisterOnColorsChangedListener(this)
+        LauncherPrefs.get(context).removeListener(veilPrefListener, THEMED_VEIL_ENABLED)
     }
 
     override fun onColorHintsChanged(colorHints: Int) {
@@ -62,7 +74,8 @@ class WallpaperGradientView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (!LauncherPrefs.get(context).get(THEMED_SCRIM_ENABLED)) return
+        // XAULINXS_THEMED_VEIL_SEPARATE: só desenha as cores do véu se o usuário ativou o véu.
+        if (!LauncherPrefs.get(context).get(THEMED_VEIL_ENABLED)) return
         val colors = WallpaperColorHints.get(context).colors ?: return
         val w = width.toFloat()
         val h = height.toFloat()

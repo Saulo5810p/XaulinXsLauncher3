@@ -156,6 +156,12 @@
                 android:summary="@string/xaulinxs_themed_scrim_summary"
                 android:persistent="false" />
 
+            <com.xaulinxs.customizations.settings.ThemedVeilPreference
+                android:key="xaulinxs_themed_veil"
+                android:title="@string/xaulinxs_themed_veil_title"
+                android:summary="@string/xaulinxs_themed_veil_summary"
+                android:persistent="false" />
+
             <com.xaulinxs.customizations.settings.DrawerWallpaperBlurPreference
                 android:key="xaulinxs_drawer_wallpaper_blur"
                 android:title="@string/xaulinxs_drawer_wallpaper_blur_title"
@@ -347,6 +353,12 @@
                 android:key="xaulinxs_weather_enabled"
                 android:title="@string/xaulinxs_weather_title"
                 android:summary="@string/xaulinxs_weather_summary"
+                android:persistent="false" />
+
+            <com.xaulinxs.customizations.settings.IdeaPageEnabledPreference
+                android:key="xaulinxs_idea_page_enabled"
+                android:title="@string/xaulinxs_idea_page_title"
+                android:summary="@string/xaulinxs_idea_page_summary"
                 android:persistent="false" />
 
         </PreferenceScreen>

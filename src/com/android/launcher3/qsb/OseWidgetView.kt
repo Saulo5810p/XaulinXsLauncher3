@@ -212,10 +212,14 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         // de tela via registerLifecycleTask (mesmo padrão já usado abaixo
         // para o appsStore.addUpdateListener).
         val prefs = com.android.launcher3.LauncherPrefs.get(context)
+        // XAULINXS_QSB_QUICKSEARCHBOX_DESIGN: "Cor da barra" agora também colore o ícone de
+        // busca (além de bordas e texto); quem refaz o ícone é o updateListener abaixo.
+        var refreshQsbIcon: (() -> Unit)? = null
         val qsbAppearanceListener =
             object : com.android.launcher3.LauncherPrefChangeListener {
                 override fun onPrefChanged(key: String) {
                     applyXaulinXsQsbAppearance(view)
+                    refreshQsbIcon?.invoke()
                 }
             }
         view.registerLifecycleTask {
@@ -261,7 +265,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     view.tag = null
                     view.applyIconAndLabel(
                         context.getDrawable(R.drawable.ic_allapps_search)!!.mutate().apply {
-                            setTint(context.getColor(R.color.materialColorOnSurface))
+                            setTint(QsbConfig.getBarColor(context))
                         },
                         title,
                         null,
@@ -285,6 +289,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             }
 
         updateListener.onAppsUpdated()
+        refreshQsbIcon = { updateListener.onAppsUpdated() }
         view.registerLifecycleTask {
             appsStore.addUpdateListener(updateListener)
             SafeCloseable { appsStore.removeUpdateListener(updateListener) }
@@ -330,7 +335,12 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         val transparencyPercent = QsbConfig.getTransparencyPercent(context)
         view.alpha = 1f - (transparencyPercent / 100f)
 
-        view.backgroundTintList = ColorStateList.valueOf(QsbConfig.getBarColor(context))
+        // XAULINXS_QSB_QUICKSEARCHBOX_DESIGN: o fundo agora é só borda branca (placa/campo/botão de
+        // voz, ver xaulinxs_qsb_quicksearchbox_bg.xml) — a cor escolhida tinge bordas, microfone e
+        // texto; o interior continua 100% transparente (SRC_IN preserva o alpha do desenho).
+        val barColor = QsbConfig.getBarColor(context)
+        view.backgroundTintList = ColorStateList.valueOf(barColor)
+        view.setTextColor(barColor)
     }
 
     fun View.setOnClickIntent(intent: Intent) = setOnClickListener {

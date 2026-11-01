@@ -74,6 +74,10 @@ object XaulinXsMiscPermissions {
         if (Build.VERSION.SDK_INT >= 33) arrayOf(android.Manifest.permission.READ_MEDIA_AUDIO)
         else arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
+    // Página "Sua Ideia...": ditado por voz (SpeechRecognizer).
+    @JvmStatic
+    val MIC = arrayOf(android.Manifest.permission.RECORD_AUDIO)
+
     private val listeners = java.util.concurrent.CopyOnWriteArrayList<Runnable>()
     private val main = Handler(Looper.getMainLooper())
 
@@ -88,6 +92,11 @@ object XaulinXsMiscPermissions {
 
     @JvmStatic
     fun hasAudio(c: Context) = AUDIO.all {
+        ContextCompat.checkSelfPermission(c, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @JvmStatic
+    fun hasMic(c: Context) = MIC.all {
         ContextCompat.checkSelfPermission(c, it) == PackageManager.PERMISSION_GRANTED
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  XaulinXs Customizations — não faz parte do AOSP original.
+
+  Design da barra de busca no estilo da QuickSearchBox do AOSP (search_widget.xml):
+      [ placa externa ]  ->  [ ícone de busca ] [ campo ] [ botão de voz com microfone ]
+  Em vez da placa branca do original: 100% transparente por dentro, só as bordas
+  brancas (estilo da barra do Android 4). Branco puro de propósito — o app tinge
+  tudo via backgroundTintList com "Cor da barra" (QsbConfig.BAR_COLOR).
+
+  Medidas conferem com ose_default_bubbletext_layout.xml: ícone 24dp começando em 12dp,
+  texto começando em 54dp (dentro do campo, que começa em 44dp), 72dp livres no fim.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight">
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="#FFFFFFFF" />
+        </shape>
+    </item>
+
+    <item>
+        <layer-list>
+
+            <!-- Placa externa (search_floater) -->
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="12dp" />
+                    <solid android:color="#00FFFFFF" />
+                    <stroke android:width="2dp" android:color="#FFFFFFFF" />
+                </shape>
+            </item>
+
+            <!-- Campo de texto (textfield_search_empty) -->
+            <item
+                android:left="44dp"
+                android:top="7dp"
+                android:right="62dp"
+                android:bottom="7dp">
+                <shape android:shape="rectangle">
+                    <corners android:radius="8dp" />
+                    <solid android:color="#00FFFFFF" />
+                    <stroke android:width="1dp" android:color="#99FFFFFF" />
+                </shape>
+            </item>
+
+            <!-- Botão de voz (btn_search_dialog_voice) -->
+            <item
+                android:gravity="end|center_vertical"
+                android:width="44dp"
+                android:height="38dp"
+                android:right="8dp">
+                <shape android:shape="rectangle">
+                    <corners android:radius="8dp" />
+                    <solid android:color="#00FFFFFF" />
+                    <stroke android:width="1dp" android:color="#99FFFFFF" />
+                </shape>
+            </item>
+
+            <!-- Microfone (ic_btn_speak_now) centralizado no botão de voz -->
+            <item
+                android:gravity="end|center_vertical"
+                android:width="22dp"
+                android:height="22dp"
+                android:right="19dp"
+                android:drawable="@drawable/ic_xaulinxs_qsb_mic" />
+
+        </layer-list>
+    </item>
+</ripple>

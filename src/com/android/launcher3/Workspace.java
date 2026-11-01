@@ -730,6 +730,8 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
         insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, getChildCount());
         // XaulinXs R's Misc: página fixa de música como SEGUNDA página (índice 1).
         xaulinXsInsertMusicPageIfEnabled();
+        // XaulinXs R's Misc: página "Sua Ideia..." como ÚLTIMA página (sempre depois das demais).
+        xaulinXsInsertIdeaPageIfEnabled();
     }
 
     /**
@@ -753,6 +755,47 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
                 0, 0, page.getCountX(), page.getCountY());
         lp.canReorder = false;
         page.addViewToCellLayout(content, -1, R.id.xaulinxs_music_page, lp, true);
+    }
+
+    /**
+     * XaulinXs R's Misc — não faz parte do AOSP original.
+     * Cria a página fixa "Sua Ideia..." (ditado por voz + campo de texto) como ÚLTIMA página.
+     * Mesmo esquema da página de música: id negativo (nunca removida como "página vazia") e
+     * grade inteira ocupada pelo conteúdo (nenhum item pode ser solto nela). Ela nasce aqui, no
+     * início do bind, e é mantida por último por insertNewWorkspaceScreen() e
+     * xaulinXsAddToScreenOrder(): toda página criada depois (páginas do usuário vindas do banco,
+     * página vazia extra do arrasto) entra ANTES dela.
+     */
+    private void xaulinXsInsertIdeaPageIfEnabled() {
+        if (!com.xaulinxs.customizations.misc.XaulinXsMiscSettings
+                .isIdeaPageEnabled(getContext())) {
+            return;
+        }
+        final int id = com.xaulinxs.customizations.misc.XaulinXsMiscSettings.IDEA_SCREEN_ID;
+        if (mWorkspaceScreens.containsKey(id)) return;
+        CellLayout page = insertNewWorkspaceScreen(id, getChildCount());
+        com.xaulinxs.customizations.misc.idea.XaulinXsIdeaPageView content =
+                new com.xaulinxs.customizations.misc.idea.XaulinXsIdeaPageView(getContext());
+        CellLayoutLayoutParams lp = new CellLayoutLayoutParams(
+                0, 0, page.getCountX(), page.getCountY());
+        lp.canReorder = false;
+        page.addViewToCellLayout(content, -1, R.id.xaulinxs_idea_page, lp, true);
+    }
+
+    /**
+     * XaulinXs R's Misc: limita o índice de inserção para que nada fique DEPOIS da página
+     * "Sua Ideia..." (quando ela existe).
+     */
+    private int xaulinXsClampBeforeIdeaPage(int screenId, int insertIndex) {
+        final int ideaId = com.xaulinxs.customizations.misc.XaulinXsMiscSettings.IDEA_SCREEN_ID;
+        if (screenId == ideaId) return insertIndex;
+        final int ideaIndex = mScreenOrder.indexOf(ideaId);
+        return (ideaIndex >= 0 && insertIndex > ideaIndex) ? ideaIndex : insertIndex;
+    }
+
+    /** XaulinXs R's Misc: mScreenOrder.add(screenId) que respeita "Sua Ideia..." como última. */
+    private void xaulinXsAddToScreenOrder(int screenId) {
+        mScreenOrder.add(xaulinXsClampBeforeIdeaPage(screenId, mScreenOrder.size()), screenId);
     }
 
     /**
@@ -801,6 +844,8 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
         if (mWorkspaceScreens.containsKey(screenId)) {
             throw new RuntimeException("Screen id " + screenId + " already exists!");
         }
+        // XaulinXs R's Misc: "Sua Ideia..." é sempre a última página — novas páginas entram antes.
+        insertIndex = xaulinXsClampBeforeIdeaPage(screenId, insertIndex);
 
         // Inflate the cell layout, but do not add it automatically so that we can get the newly
         // created CellLayout.
@@ -953,7 +998,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
             int newScreenId = mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)
                     ? EXTRA_EMPTY_SCREEN_SECOND_ID : EXTRA_EMPTY_SCREEN_ID;
             mWorkspaceScreens.put(newScreenId, screen);
-            mScreenOrder.add(newScreenId);
+            xaulinXsAddToScreenOrder(newScreenId);
         }
     }
 
@@ -1078,7 +1123,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
         }
 
         mWorkspaceScreens.put(newScreenId, cl);
-        mScreenOrder.add(newScreenId);
+        xaulinXsAddToScreenOrder(newScreenId);
 
         return newScreenId;
     }
@@ -1233,7 +1278,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
                         // in a two panel scenario when there are only two empty pages left
                         : EXTRA_EMPTY_SCREEN_ID;
                 mWorkspaceScreens.put(extraScreenId, cl);
-                mScreenOrder.add(extraScreenId);
+                xaulinXsAddToScreenOrder(extraScreenId);
             }
         }
 

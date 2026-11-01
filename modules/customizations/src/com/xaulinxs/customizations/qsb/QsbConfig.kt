@@ -39,9 +39,10 @@ object QsbConfig {
     const val MAX_TRANSPARENCY_PERCENT = 100
     const val DEFAULT_TRANSPARENCY_PERCENT = 0
 
-    // Mesmo roxo Material usado como default em XaulinXsManualColor, por
-    // consistência visual entre as duas telas de personalização.
-    private const val DEFAULT_BAR_COLOR = 0xFF6750A4.toInt()
+    // XAULINXS_QSB_QUICKSEARCHBOX_DESIGN: a barra agora é transparente com bordas
+    // brancas (estilo QuickSearchBox/Android 4); a "Cor da barra" tinge bordas, ícone
+    // e texto, então o padrão é branco (antes era o roxo Material do fundo sólido).
+    private const val DEFAULT_BAR_COLOR = 0xFFFFFFFF.toInt()
 
     val SIZE_PERCENT = backedUpItem("xaulinxs_qsb_size_percent", DEFAULT_SIZE_PERCENT)
     val WIDTH_PERCENT = backedUpItem("xaulinxs_qsb_width_percent", DEFAULT_WIDTH_PERCENT)

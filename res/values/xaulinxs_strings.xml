@@ -29,6 +29,8 @@
     <string name="xaulinxs_themed_icons_summary">Colorir os ícones com base no papel de parede (Material You)</string>
     <string name="xaulinxs_themed_scrim_title">Fundo desfocado no menu de apps</string>
     <string name="xaulinxs_themed_scrim_summary">Desfoca o papel de parede ao abrir/fechar o menu de apps, com o mesmo efeito de desfoque do arrasto</string>
+    <string name="xaulinxs_themed_veil_title">Véu temático no menu de apps</string>
+    <string name="xaulinxs_themed_veil_summary">Mostra as cores do papel de parede (véu colorido) atrás do menu de apps. Independente do desfoque; desativado por padrão</string>
     <string name="xaulinxs_icon_scale_title">Tamanho dos ícones</string>
     <string name="xaulinxs_icon_scale_summary">Aumenta o tamanho dos ícones até 200% (valores altos podem sobrepor ícones vizinhos)</string>
     <string name="xaulinxs_icon_labels_title">Ocultar labels dos ícones</string>
@@ -111,7 +113,7 @@
     <string name="xaulinxs_qsb_config_size_label">Tamanho: %1$d%%</string>
     <string name="xaulinxs_qsb_config_width_label">Largura: %1$d%%</string>
     <string name="xaulinxs_qsb_config_transparency_label">Transparência: %1$d%%</string>
-    <string name="xaulinxs_qsb_config_color_label">Cor da barra</string>
+    <string name="xaulinxs_qsb_config_color_label">Cor da barra (bordas, ícone e texto)</string>
     <string name="xaulinxs_qsb_config_color_button">Escolher cor</string>
     <string name="xaulinxs_qsb_config_color_picker_title">Escolher cor (hex/RGB)</string>
     <string name="xaulinxs_qsb_config_mode_web_title">Modo Web</string>
@@ -136,7 +138,9 @@
     <string name="xaulinxs_drawer_wallpaper_blur_summary">0 a 320 px — o quanto o papel de parede desfoca com o menu de apps aberto (wallpaper do launcher ou do sistema)</string>
     <!-- R's Misc -->
     <string name="xaulinxs_cat_misc_title">R\'s Misc</string>
-    <string name="xaulinxs_cat_misc_summary">Player de música e widget de clima</string>
+    <string name="xaulinxs_cat_misc_summary">Player de música, widget de clima e página Sua Ideia...</string>
+    <string name="xaulinxs_idea_page_title">Página Sua Ideia...</string>
+    <string name="xaulinxs_idea_page_summary">Última página fixa da tela inicial: ditado por voz (reconhecimento nativo do Android) e campo de texto que nunca é apagado (reinicia o launcher)</string>
     <string name="xaulinxs_music_page_title">Página de música</string>
     <string name="xaulinxs_music_page_summary">Segunda página fixa da tela inicial com lista de áudios e mini player (reinicia o launcher)</string>
     <string name="xaulinxs_weather_title">Widget de clima</string>

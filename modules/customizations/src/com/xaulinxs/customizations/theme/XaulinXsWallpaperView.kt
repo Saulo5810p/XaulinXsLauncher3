@@ -49,7 +49,8 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
     private val matrix = Matrix()
     private val onWallpaperChanged: () -> Unit = { post { invalidate() } }
-    private val onBlurPrefChanged: () -> Unit = { post { applyBlurEffect() } }
+    private val onBlurPrefChanged: () -> Unit =
+        { post { applyBlurEffect(); preloadSystemWallpaperIfNeeded(); invalidate() } }
     private val onEnabledPrefChanged: () -> Unit =
         { post { applyBlurEffect(); preloadSystemWallpaperIfNeeded(); invalidate() } }
 
@@ -90,14 +91,11 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
      */
     private fun applyBlurEffect() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
-        // XAULINXS_BLUR_V3: com o wallpaper do app desligado, o desfoque do drawer continua valendo —
-        // aplicado à cópia do wallpaper do sistema (ver onDraw). O desfoque fixo da tela inicial
-        // segue valendo só para o wallpaper do app.
-        val radiusPx = if (isInAppWallpaperEnabled()) {
-            maxOf(XaulinXsWorkspaceBlur.getBlurRadiusPx(context), depthBlurRadiusPx)
-        } else {
-            depthBlurRadiusPx
-        }
+        // XAULINXS_HOME_BLUR_SYSTEM_WALLPAPER: com o wallpaper do app desligado, tanto o desfoque
+        // do drawer quanto o desfoque FIXO da tela inicial passam a valer — ambos aplicados à
+        // cópia do wallpaper do sistema (ver drawSystemWallpaperSnapshot). Antes o desfoque da
+        // tela inicial só valia para o wallpaper do app.
+        val radiusPx = maxOf(XaulinXsWorkspaceBlur.getBlurRadiusPx(context), depthBlurRadiusPx)
         setRenderEffect(
             if (radiusPx > 0f)
                 RenderEffect.createBlurEffect(radiusPx, radiusPx, Shader.TileMode.CLAMP)
@@ -122,7 +120,11 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
         if (isInAppWallpaperEnabled()) return
         // XAULINXS_POPUPS_V4: a cópia também serve ao desfoque dos popups (balões), não só ao do drawer.
         val prefs = LauncherPrefs.get(context)
-        if (!prefs.get(THEMED_SCRIM_ENABLED) && !XaulinXsPopupBlur.isEnabled(context)) return
+        // XAULINXS_HOME_BLUR_SYSTEM_WALLPAPER: o desfoque da tela inicial também precisa da cópia.
+        if (!prefs.get(THEMED_SCRIM_ENABLED) &&
+            !XaulinXsPopupBlur.isEnabled(context) &&
+            XaulinXsWorkspaceBlur.getBlurRadiusPx(context) <= 0f
+        ) return
         XaulinXsSystemWallpaperSnapshot.ensureLoaded(context) { invalidate() }
     }
 
@@ -132,7 +134,10 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
      * RenderEffect desta view. Com o drawer fechado (raio 0) não desenha nada.
      */
     private fun drawSystemWallpaperSnapshot(canvas: Canvas) {
-        val radius = depthBlurRadiusPx
+        // XAULINXS_HOME_BLUR_SYSTEM_WALLPAPER: raio efetivo = maior entre o desfoque fixo da tela
+        // inicial e o do arrasto do drawer (mesma regra de applyBlurEffect).
+        val workspaceRadius = XaulinXsWorkspaceBlur.getBlurRadiusPx(context)
+        val radius = maxOf(workspaceRadius, depthBlurRadiusPx)
         if (radius < 1f) return
         val bitmap = XaulinXsSystemWallpaperSnapshot.peek() ?: return
         val viewW = width.toFloat()
@@ -146,7 +151,13 @@ class XaulinXsWallpaperView @JvmOverloads constructor(
         matrix.postTranslate((viewW - bmpW * scale) / 2f, (viewH - bmpH * scale) / 2f)
         // Fade-in nos primeiros pixels de raio: esconde qualquer diferença de enquadramento
         // entre a cópia e o wallpaper real no instante em que a cópia aparece.
-        systemPaint.alpha = (255f * (radius / SNAPSHOT_FADE_IN_PX).coerceIn(0f, 1f)).toInt()
+        // Desfoque fixo da tela inicial: cópia sempre opaca (não há transição a esconder). Só o
+        // arrasto do drawer usa o fade-in por raio.
+        systemPaint.alpha = if (workspaceRadius >= 1f) {
+            255
+        } else {
+            (255f * (radius / SNAPSHOT_FADE_IN_PX).coerceIn(0f, 1f)).toInt()
+        }
         canvas.drawBitmap(bitmap, matrix, systemPaint)
     }
 
